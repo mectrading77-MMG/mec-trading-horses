@@ -1,0 +1,43 @@
+# Continuous integration: type-check and production-build the Next.js app on
+# every push and pull request. Vercel deploys `main` to production on its own;
+# this check gives GitHub a green/red status so a broken build is visible
+# before (or right after) it lands.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    working-directory: mec-trading-horses/mec-trading
+
+jobs:
+  build:
+    name: Type-check & build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: mec-trading-horses/mec-trading/package-lock.json
+
+      - name: Install
+        run: npm ci --no-audit --no-fund
+
+      - name: Type-check
+        run: npx tsc --noEmit -p tsconfig.json
+
+      - name: Build
+        run: npm run build
+        env:
+          NEXT_TELEMETRY_DISABLED: "1"
