@@ -87,7 +87,7 @@ export default function SelectionExplorer({
                   {b.label}
                 </span>
                 <span className="ms-auto font-mono text-[10px] uppercase tracking-eyebrow text-ivory/35">
-                  {dict.bands.count.replace("{count}", String(count))}
+                  {(count === 1 ? dict.bands.countOne : dict.bands.count).replace("{count}", String(count))}
                 </span>
               </Link>
             </li>
@@ -136,15 +136,15 @@ export default function SelectionExplorer({
               <p className="mt-1 text-[13px] text-charcoal/60">
                 {horse.breed} · {dict.horse.sexLabel[horse.sex]} · {ageFromDob(horse.dateOfBirth)} {dict.horse.years}
               </p>
-              <div className="mt-4 flex gap-7">
+              <div className="mt-4 flex flex-wrap gap-x-7 gap-y-3">
                 <div>
                   <div className="font-mono text-[9px] uppercase tracking-eyebrow text-charcoal/40">{dict.horse.level}</div>
-                  <div className="text-sm">{formatJumpHeight(horse.jumpHeightCm)}</div>
+                  <div className="whitespace-nowrap text-sm">{formatJumpHeight(horse.jumpHeightCm)}</div>
                 </div>
                 {horse.maxHeightJumpedCm && (
                   <div>
                     <div className="font-mono text-[9px] uppercase tracking-eyebrow text-charcoal/40">{dict.horse.maxHeight}</div>
-                    <div className="text-sm">{formatJumpHeight(horse.maxHeightJumpedCm)}</div>
+                    <div className="whitespace-nowrap text-sm">{formatJumpHeight(horse.maxHeightJumpedCm)}</div>
                   </div>
                 )}
                 <div>

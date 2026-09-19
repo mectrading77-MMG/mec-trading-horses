@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import type { MediaItem } from "@/types/horse";
+import { useSwipe } from "@/lib/useSwipe";
 
 export default function HorseGallery({
   media,
@@ -16,12 +17,13 @@ export default function HorseGallery({
   const photos = media.filter((m) => m.type === "PHOTO");
   const [active, setActive] = useState(0);
   const current = photos[active] ?? photos[0];
+  const swipe = useSwipe((d) => setActive((a) => (a + d + photos.length) % photos.length));
 
   if (!current) return null;
 
   return (
     <div>
-      <div className="relative aspect-[16/9] w-full overflow-hidden bg-charcoal-soft sm:aspect-[21/9]">
+      <div className="relative aspect-[16/9] w-full touch-pan-y overflow-hidden bg-charcoal-soft sm:aspect-[21/9]" {...swipe}>
         <Image
           src={current.url}
           alt={current.alt ?? name}

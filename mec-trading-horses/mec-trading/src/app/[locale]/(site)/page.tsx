@@ -19,7 +19,7 @@ export default async function HomePage({ params }: { params: { locale: Locale } 
   return (
     <>
       {/* Hero — silent looping film */}
-      <section className="relative flex h-[92vh] min-h-[560px] items-end overflow-hidden bg-charcoal">
+      <section className="relative flex h-[92vh] min-h-[560px] items-end overflow-hidden bg-charcoal supports-[height:92dvh]:h-[92dvh]">
         <HeroVideo src="/video/hero.mp4" poster="/video/hero-poster.jpg" />
         <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/45 to-charcoal/20" />
         <div className="relative z-10 mx-auto w-full max-w-editorial px-6 pb-16 lg:px-10 lg:pb-24">

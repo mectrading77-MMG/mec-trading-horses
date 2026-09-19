@@ -30,7 +30,7 @@
     "internationalText": "Nous accompagnons nos clients internationaux de bout en bout, de la première sélection jusqu'à l'arrivée du cheval.",
     "closingTitle": "Vous cherchez votre prochain cheval ?",
     "closingCta": "Nous contacter",
-    "selectionHint": "Survolez une hauteur pour découvrir les chevaux disponibles à ce niveau"
+    "selectionHint": "Survolez ou touchez une hauteur pour découvrir les chevaux de ce niveau"
   },
   "why": {
     "selected": {
@@ -246,7 +246,8 @@
   "bands": {
     "eyebrow": "Saut d'obstacles",
     "count": "{count} chevaux",
-    "empty": "Aucun cheval à cette hauteur pour le moment — contactez-nous et nous vous préviendrons."
+    "empty": "Aucun cheval à cette hauteur pour le moment — contactez-nous et nous vous préviendrons.",
+    "countOne": "{count} cheval"
   },
   "site": {
     "demoNotice": "Données de démonstration — chevaux réels issus de registres publics ; prix et disponibilités fictifs."

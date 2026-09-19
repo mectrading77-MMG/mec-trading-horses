@@ -30,7 +30,7 @@
     "internationalText": "We assist international clients end to end — from first selection to the horse arriving home.",
     "closingTitle": "Looking for Your Next Horse?",
     "closingCta": "Contact Us",
-    "selectionHint": "Hover a height to preview the horses available at that level"
+    "selectionHint": "Hover or tap a height to preview the horses at that level"
   },
   "why": {
     "selected": {
@@ -246,7 +246,8 @@
   "bands": {
     "eyebrow": "Show jumping",
     "count": "{count} horses",
-    "empty": "No horses at this height right now — contact us and we'll let you know when one arrives."
+    "empty": "No horses at this height right now — contact us and we'll let you know when one arrives.",
+    "countOne": "{count} horse"
   },
   "site": {
     "demoNotice": "Demonstration data — real horses from public records; prices and availability are placeholders."

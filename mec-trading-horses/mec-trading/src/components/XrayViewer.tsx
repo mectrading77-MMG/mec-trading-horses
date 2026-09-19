@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import type { XraySet } from "@/types/horse";
+import { useSwipe } from "@/lib/useSwipe";
 
 /**
  * Radiograph viewer: one large view on a dark plate, previous/next controls
@@ -16,6 +17,7 @@ export default function XrayViewer({ set, dict, locale }: { set: XraySet; dict: 
   const cur = set.images[i];
 
   const go = (d: number) => setI((k) => (k + d + n) % n);
+  const swipe = useSwipe((d) => go(d));
 
   // Keep the active thumbnail in view.
   useEffect(() => {
@@ -48,7 +50,7 @@ export default function XrayViewer({ set, dict, locale }: { set: XraySet; dict: 
           <a
             href={set.zipUrl}
             download
-            className="inline-flex items-center gap-2 border border-gold px-4 py-2 font-mono text-[10px] uppercase tracking-eyebrow text-gold transition-colors duration-400 hover:bg-gold hover:text-charcoal"
+            className="inline-flex w-full items-center justify-center gap-2 whitespace-nowrap border border-gold px-4 py-2 font-mono sm:w-auto text-[10px] uppercase tracking-eyebrow text-gold transition-colors duration-400 hover:bg-gold hover:text-charcoal"
           >
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
               <path d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v3h16v-3" />
@@ -59,7 +61,7 @@ export default function XrayViewer({ set, dict, locale }: { set: XraySet; dict: 
       </div>
 
       {/* Main plate */}
-      <div className="relative aspect-[4/5] w-full bg-black sm:aspect-[16/10]">
+      <div className="relative aspect-[4/5] w-full touch-pan-y bg-black sm:aspect-[16/10]" {...swipe}>
         <Image
           key={cur.url}
           src={cur.url}
@@ -92,21 +94,21 @@ export default function XrayViewer({ set, dict, locale }: { set: XraySet; dict: 
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><path d="m9 5 7 7-7 7" /></svg>
         </button>
 
-        <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 bg-gradient-to-t from-black/80 to-transparent px-5 pb-4 pt-10">
+        <div className="absolute inset-x-0 bottom-0 flex flex-col gap-2 bg-gradient-to-t from-black/85 to-transparent px-4 pb-3 pt-10 sm:flex-row sm:items-end sm:justify-between sm:gap-4 sm:px-5 sm:pb-4">
           <div>
-            <div className="font-display text-xl italic">{cur.label}</div>
+            <div className="font-display text-lg italic leading-tight sm:text-xl">{cur.label}</div>
             {cur.bodyPart && (
               <div className="mt-0.5 font-mono text-[10px] uppercase tracking-eyebrow text-ivory/50">{cur.bodyPart}</div>
             )}
           </div>
           <div className="flex items-center gap-4">
-            <span className="font-mono text-[11px] tracking-eyebrow text-ivory/70">
+            <span className="whitespace-nowrap font-mono text-[11px] tracking-eyebrow text-ivory/70">
               {String(i + 1).padStart(2, "0")} / {String(n).padStart(2, "0")}
             </span>
             <a
               href={cur.url}
               download
-              className="font-mono text-[10px] uppercase tracking-eyebrow text-gold underline underline-offset-4"
+              className="whitespace-nowrap font-mono text-[10px] uppercase tracking-eyebrow text-gold underline underline-offset-4"
             >
               {dict.detail.xraysDownloadView}
             </a>
