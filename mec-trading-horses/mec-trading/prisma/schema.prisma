@@ -22,17 +22,6 @@ enum HorseSex {
   GELDING
 }
 
-enum Discipline {
-  SHOW_JUMPING
-  DRESSAGE
-  EVENTING
-  BREEDING
-  ARABIAN
-  YOUNG_HORSE
-  COMPETITION
-  PROSPECT
-}
-
 enum InquiryStatus {
   NEW
   CONTACTED
@@ -56,9 +45,11 @@ model Horse {
   breed             String
   sex               HorseSex
   dateOfBirth       DateTime
-  heightCm          Int
+  heightCm          Int?
   color             String
-  discipline        Discipline
+  /// Height the horse is offered at, in cm (e.g. 140) — drives the catalogue bands
+  jumpHeightCm      Int           @default(130)
+  maxHeightJumpedCm Int?
   competitionLevel  String?
   registrationNo    String?
   passportNo        String?

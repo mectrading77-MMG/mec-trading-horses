@@ -4,7 +4,15 @@ import { useState } from "react";
 import Image from "next/image";
 import type { MediaItem } from "@/types/horse";
 
-export default function HorseGallery({ media, name }: { media: MediaItem[]; name: string }) {
+export default function HorseGallery({
+  media,
+  name,
+  representativeNote
+}: {
+  media: MediaItem[];
+  name: string;
+  representativeNote?: string;
+}) {
   const photos = media.filter((m) => m.type === "PHOTO");
   const [active, setActive] = useState(0);
   const current = photos[active] ?? photos[0];
@@ -22,6 +30,11 @@ export default function HorseGallery({ media, name }: { media: MediaItem[]; name
           sizes="100vw"
           className="object-cover"
         />
+        {representativeNote && (
+          <span className="absolute bottom-3 left-3 bg-charcoal/70 px-3 py-1 font-mono text-[10px] uppercase tracking-eyebrow text-ivory/85 backdrop-blur">
+            {representativeNote}
+          </span>
+        )}
       </div>
       {photos.length > 1 && (
         <div className="mt-3 flex gap-2 overflow-x-auto px-1">

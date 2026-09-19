@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter, useParams } from "next/navigation";
+import { HEIGHT_BANDS } from "@/lib/levels";
 
 const inputClass =
   "w-full border border-charcoal-line bg-white px-4 py-2.5 text-sm text-charcoal placeholder:text-charcoal/40 focus:border-gold";
@@ -62,20 +63,19 @@ export default function NewHorsePage() {
           </Field>
           <Field label="Date of Birth"><input required type="date" name="dateOfBirth" className={inputClass} /></Field>
 
-          <Field label="Height (cm)"><input required type="number" name="heightCm" className={inputClass} /></Field>
+          <Field label="Height at withers (cm)"><input type="number" name="heightCm" className={inputClass} /></Field>
           <Field label="Color"><input required name="color" className={inputClass} /></Field>
 
-          <Field label="Discipline">
-            <select required name="discipline" className={inputClass}>
-              {["SHOW_JUMPING", "DRESSAGE", "EVENTING", "BREEDING", "ARABIAN", "YOUNG_HORSE", "COMPETITION", "PROSPECT"].map(
-                (d) => (
-                  <option key={d} value={d}>
-                    {d.replace("_", " ")}
-                  </option>
-                )
-              )}
+          <Field label="Jumping height (level offered at)">
+            <select required name="jumpHeightCm" className={inputClass} defaultValue="130">
+              {HEIGHT_BANDS.map((b) => (
+                <option key={b.id} value={b.id === "150" ? 150 : Number(b.id)}>
+                  {b.label}
+                </option>
+              ))}
             </select>
           </Field>
+          <Field label="Highest height jumped (cm)"><input type="number" name="maxHeightJumpedCm" className={inputClass} /></Field>
           <Field label="Competition Level"><input name="competitionLevel" className={inputClass} /></Field>
 
           <Field label="Price"><input type="number" name="priceAmount" className={inputClass} /></Field>

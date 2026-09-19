@@ -11,6 +11,8 @@ import TrustBadges from "@/components/TrustBadges";
 import ContactForm from "@/components/ContactForm";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import SectionHeading from "@/components/SectionHeading";
+import XrayViewer from "@/components/XrayViewer";
+import { formatJumpHeight } from "@/lib/levels";
 
 export async function generateStaticParams() {
   const horses = await listHorses();
@@ -74,7 +76,7 @@ export default async function HorseDetailPage({
   };
 
   const descriptionFields: Array<{ label: string; value?: string }> = [
-    { label: dict.horse.discipline, value: t.personality },
+    { label: "Personality", value: t.personality },
     { label: "Training", value: t.training },
     { label: "Strengths", value: t.strengths },
     { label: "Experience", value: t.experience },
@@ -90,14 +92,20 @@ export default async function HorseDetailPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <HorseGallery media={horse.media} name={t.name} />
+      <HorseGallery
+        media={horse.media}
+        name={t.name}
+        representativeNote={horse.photosAreRepresentative ? dict.detail.representativeNote : undefined}
+      />
 
       <div className="mx-auto max-w-editorial px-6 py-12 lg:px-10">
-        <div className="grid gap-12 lg:grid-cols-[2fr_1fr]">
-          <div>
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
+          <div className="min-w-0">
             <div className="flex flex-wrap items-start justify-between gap-4">
               <div>
-                <p className="eyebrow">{dict.disciplines[horse.discipline]}</p>
+                <p className="eyebrow">
+                  {dict.horse.discipline} · {formatJumpHeight(horse.jumpHeightCm)}
+                </p>
                 <h1 className="mt-2 font-display text-4xl italic text-charcoal">{t.name}</h1>
                 <p className="mt-3 max-w-xl text-charcoal/70">{t.positioning}</p>
               </div>
@@ -138,10 +146,11 @@ export default async function HorseDetailPage({
                   [dict.horse.sex, dict.horse.sexLabel[horse.sex]],
                   [dict.detail.dateOfBirth, new Date(horse.dateOfBirth).toLocaleDateString(params.locale)],
                   [dict.horse.age, `${ageFromDob(horse.dateOfBirth)} ${dict.horse.years}`],
-                  [dict.horse.height, heightHands(horse.heightCm)],
+                  ...(horse.heightCm ? [[dict.horse.height, heightHands(horse.heightCm)]] : []),
                   [dict.detail.color, horse.color],
                   [dict.horse.location, horse.locationLabel],
-                  [dict.horse.discipline, dict.disciplines[horse.discipline]],
+                  [dict.horse.level, formatJumpHeight(horse.jumpHeightCm)],
+                  ...(horse.maxHeightJumpedCm ? [[dict.horse.maxHeight, formatJumpHeight(horse.maxHeightJumpedCm)]] : []),
                   ...(horse.competitionLevel ? [[dict.detail.competitionLevel, horse.competitionLevel]] : []),
                   ...(horse.registrationNo ? [[dict.detail.registration, horse.registrationNo]] : [])
                 ].map(([label, value]) => (
@@ -199,17 +208,22 @@ export default async function HorseDetailPage({
             {/* Health & documents */}
             <section className="mt-14">
               <SectionHeading eyebrow={dict.detail.healthDocuments} title={t.name} />
+              {horse.xrays && (
+                <div className="mt-8">
+                  <XrayViewer set={horse.xrays} dict={dict} locale={params.locale} />
+                </div>
+              )}
               <ul className="mt-8 divide-y divide-charcoal-line border-y border-charcoal-line">
                 {horse.documents.map((doc) => (
                   <li key={doc.label} className="flex items-center justify-between py-4">
                     <span className="text-charcoal">{doc.label}</span>
                     {doc.downloadable ? (
-                      <a href={doc.url} className="font-mono text-[11px] uppercase tracking-eyebrow text-gold underline underline-offset-4">
+                      <a href={doc.url} download className="font-mono text-[11px] uppercase tracking-eyebrow text-gold underline underline-offset-4">
                         Download
                       </a>
                     ) : (
                       <span className="font-mono text-[11px] uppercase tracking-eyebrow text-charcoal/40">
-                        {dict.detail.downloadNotAvailable}
+                        {doc.type === "XRAY" ? dict.detail.xraysOnRequest : dict.detail.downloadNotAvailable}
                       </span>
                     )}
                   </li>

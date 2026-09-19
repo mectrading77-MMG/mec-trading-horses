@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Locale } from "@/types/horse";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import Logo from "@/components/Logo";
 
 export default function Header({ locale, dict }: { locale: Locale; dict: any }) {
   const nav = [
@@ -14,10 +15,9 @@ export default function Header({ locale, dict }: { locale: Locale; dict: any }) 
 
   return (
     <header className="sticky top-0 z-40 border-b border-charcoal-line bg-ivory/90 backdrop-blur">
-      <div className="mx-auto flex max-w-editorial items-center justify-between px-6 py-4 lg:px-10">
-        <Link href={`/${locale}`} className="flex items-baseline gap-2">
-          <span className="font-display text-2xl italic tracking-tight text-charcoal">MEC</span>
-          <span className="font-mono text-[10px] uppercase tracking-eyebrow text-gold">Trading</span>
+      <div className="mx-auto flex max-w-editorial items-center justify-between gap-6 px-6 py-2.5 lg:px-10">
+        <Link href={`/${locale}`} aria-label={dict.brand.name} className="flex shrink-0 items-center">
+          <Logo variant="compact" priority className="!h-[60px] lg:!h-[68px]" />
         </Link>
 
         <nav className="hidden items-center gap-8 lg:flex">

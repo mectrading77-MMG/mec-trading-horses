@@ -12,6 +12,7 @@ const TABS = [
 ] as const;
 
 export default function MediaTabs({ media, dict }: { media: MediaItem[]; dict: any }) {
+  const credits = Array.from(new Set(media.map((m) => m.credit).filter(Boolean))) as string[];
   const available = TABS.filter((t) => media.some((m) => m.type === t.key));
   const [tab, setTab] = useState(available[0]?.key ?? "PHOTO");
   const items = media.filter((m) => m.type === tab);
@@ -45,6 +46,12 @@ export default function MediaTabs({ media, dict }: { media: MediaItem[]; dict: a
           )
         )}
       </div>
+
+      {credits.length > 0 && (
+        <p className="mt-4 text-[11px] text-charcoal/40">
+          {dict.detail.photoCredits}: {credits.join(" · ")}
+        </p>
+      )}
     </div>
   );
 }

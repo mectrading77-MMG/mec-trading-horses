@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Locale } from "@/types/horse";
 import { getDictionary } from "@/i18n/config";
 import { listHorses, ageFromDob, formatPrice } from "@/lib/horses";
+import { formatJumpHeight } from "@/lib/levels";
 
 export default async function AdminHorsesPage({ params }: { params: { locale: Locale } }) {
   const dict = await getDictionary(params.locale);
@@ -26,7 +27,7 @@ export default async function AdminHorsesPage({ params }: { params: { locale: Lo
               <th className="px-4 py-3 text-left">Name</th>
               <th className="px-4 py-3 text-left">Breed</th>
               <th className="px-4 py-3 text-left">Age</th>
-              <th className="px-4 py-3 text-left">Discipline</th>
+              <th className="px-4 py-3 text-left">Level</th>
               <th className="px-4 py-3 text-left">Price</th>
               <th className="px-4 py-3 text-left">Status</th>
               <th className="px-4 py-3 text-left">Featured</th>
@@ -42,7 +43,7 @@ export default async function AdminHorsesPage({ params }: { params: { locale: Lo
                   <td className="px-4 py-3 font-display italic text-charcoal">{t.name}</td>
                   <td className="px-4 py-3 text-charcoal/70">{horse.breed}</td>
                   <td className="px-4 py-3 text-charcoal/70">{ageFromDob(horse.dateOfBirth)}</td>
-                  <td className="px-4 py-3 text-charcoal/70">{dict.disciplines[horse.discipline]}</td>
+                  <td className="px-4 py-3 text-charcoal/70">{formatJumpHeight(horse.jumpHeightCm)}</td>
                   <td className="px-4 py-3 text-charcoal/70">{price ?? dict.horse.priceOnRequest}</td>
                   <td className="px-4 py-3">
                     <span

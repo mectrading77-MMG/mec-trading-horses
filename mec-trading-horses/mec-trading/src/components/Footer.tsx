@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Locale } from "@/types/horse";
+import Logo from "@/components/Logo";
 
 export default function Footer({ locale, dict }: { locale: Locale; dict: any }) {
   const year = new Date().getFullYear();
@@ -8,9 +9,8 @@ export default function Footer({ locale, dict }: { locale: Locale; dict: any }) 
     <footer className="mt-24 border-t border-charcoal-line bg-charcoal text-ivory">
       <div className="mx-auto grid max-w-editorial gap-10 px-6 py-16 lg:grid-cols-4 lg:px-10">
         <div>
-          <div className="font-display text-2xl italic">MEC</div>
-          <p className="mt-1 font-mono text-[10px] uppercase tracking-eyebrow text-gold">Trading</p>
-          <p className="mt-4 max-w-xs text-sm text-ivory/60">{dict.brand.tagline}</p>
+          <Logo variant="full" onDark className="!h-28" />
+          <p className="mt-5 max-w-xs text-sm text-ivory/60">{dict.brand.tagline}</p>
         </div>
 
         <div>
@@ -43,12 +43,11 @@ export default function Footer({ locale, dict }: { locale: Locale; dict: any }) 
       </div>
 
       <div className="border-t border-ivory/10 px-6 py-6 lg:px-10">
-        <p className="mx-auto max-w-editorial text-xs text-ivory/40">
-          {dict.footer.privateNotice}
-        </p>
+        <p className="mx-auto max-w-editorial text-xs text-ivory/40">{dict.footer.privateNotice}</p>
         <p className="mx-auto mt-2 max-w-editorial text-xs text-ivory/30">
           © {year} MEC Trading SAS. {dict.footer.rights}
         </p>
+        <p className="mx-auto mt-2 max-w-editorial text-[11px] text-ivory/25">{dict.site.demoNotice}</p>
       </div>
     </footer>
   );

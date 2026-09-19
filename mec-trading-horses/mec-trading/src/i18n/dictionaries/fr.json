@@ -16,12 +16,12 @@
   },
   "home": {
     "heroHeadline": "Des chevaux d'exception. Un potentiel d'exception.",
-    "heroSupport": "Découvrez notre sélection de chevaux pour le sport, la compétition et l'élevage.",
+    "heroSupport": "Des chevaux de saut d'obstacles soigneusement sélectionnés, du jeune espoir au cheval de Grand Prix confirmé.",
     "heroCta": "Voir les chevaux à vendre",
     "featuredEyebrow": "Chevaux en vedette",
     "featuredTitle": "Actuellement dans notre sélection",
     "selectionEyebrow": "Notre sélection",
-    "selectionTitle": "Trouver un cheval par discipline",
+    "selectionTitle": "Trouver un cheval selon la hauteur sautée",
     "whyEyebrow": "Pourquoi MEC Trading",
     "whyTitle": "Une exigence privée et professionnelle",
     "storyEyebrow": "Portrait",
@@ -29,15 +29,34 @@
     "internationalTitle": "Acheter depuis l'étranger, en toute simplicité",
     "internationalText": "Nous accompagnons nos clients internationaux de bout en bout, de la première sélection jusqu'à l'arrivée du cheval.",
     "closingTitle": "Vous cherchez votre prochain cheval ?",
-    "closingCta": "Nous contacter"
+    "closingCta": "Nous contacter",
+    "selectionHint": "Survolez une hauteur pour découvrir les chevaux disponibles à ce niveau"
   },
   "why": {
-    "selected": { "title": "Chevaux soigneusement sélectionnés", "text": "Chaque cheval est choisi personnellement, jamais issu d'un simple flux d'annonces." },
-    "evaluation": { "title": "Évaluation professionnelle", "text": "Modèle, tempérament et locomotion évalués avant toute proposition." },
-    "documentation": { "title": "Documentation vérifiée", "text": "Passeports, immatriculation et suivi vétérinaire contrôlés et archivés." },
-    "international": { "title": "Acheteurs internationaux", "text": "Des clients en Europe, dans le Golfe et au-delà, accompagnés dans leur langue." },
-    "assistance": { "title": "Accompagnement personnalisé", "text": "Un seul interlocuteur, de la première demande à l'arrivée du cheval." },
-    "transport": { "title": "Assistance transport", "text": "Transporteurs de confiance et formalités d'export coordonnés pour vous." }
+    "selected": {
+      "title": "Chevaux soigneusement sélectionnés",
+      "text": "Chaque cheval est choisi personnellement, jamais issu d'un simple flux d'annonces."
+    },
+    "evaluation": {
+      "title": "Évaluation professionnelle",
+      "text": "Modèle, tempérament et locomotion évalués avant toute proposition."
+    },
+    "documentation": {
+      "title": "Documentation vérifiée",
+      "text": "Passeports, immatriculation et suivi vétérinaire contrôlés et archivés."
+    },
+    "international": {
+      "title": "Acheteurs internationaux",
+      "text": "Des clients en Europe, dans le Golfe et au-delà, accompagnés dans leur langue."
+    },
+    "assistance": {
+      "title": "Accompagnement personnalisé",
+      "text": "Un seul interlocuteur, de la première demande à l'arrivée du cheval."
+    },
+    "transport": {
+      "title": "Assistance transport",
+      "text": "Transporteurs de confiance et formalités d'export coordonnés pour vous."
+    }
   },
   "international": {
     "selection": "Sélection du cheval",
@@ -48,28 +67,29 @@
     "transport": "Transport",
     "export": "Documents d'exportation"
   },
-  "disciplines": {
-    "SHOW_JUMPING": "Saut d'obstacles",
-    "DRESSAGE": "Dressage",
-    "EVENTING": "Concours complet",
-    "BREEDING": "Élevage",
-    "ARABIAN": "Chevaux arabes",
-    "YOUNG_HORSE": "Jeunes chevaux",
-    "COMPETITION": "Chevaux de compétition",
-    "PROSPECT": "Chevaux d'avenir"
-  },
   "horse": {
     "breed": "Race",
     "age": "Âge",
     "sex": "Sexe",
     "height": "Taille",
-    "discipline": "Discipline",
     "location": "Localisation",
     "priceOnRequest": "Prix sur demande",
     "viewHorse": "Voir le cheval",
     "years": "ans",
-    "sexLabel": { "MARE": "Jument", "STALLION": "Étalon", "GELDING": "Hongre" },
-    "statusLabel": { "AVAILABLE": "Disponible", "RESERVED": "Réservé", "SOLD": "Vendu" }
+    "sexLabel": {
+      "MARE": "Jument",
+      "STALLION": "Étalon",
+      "GELDING": "Hongre"
+    },
+    "statusLabel": {
+      "AVAILABLE": "Disponible",
+      "RESERVED": "Réservé",
+      "SOLD": "Vendu"
+    },
+    "level": "Niveau",
+    "jumpsAt": "Saute à",
+    "maxHeight": "Hauteur maximale sautée",
+    "discipline": "Saut d'obstacles"
   },
   "catalog": {
     "title": "Chevaux à vendre",
@@ -80,7 +100,11 @@
     "sortPriceAsc": "Prix croissant",
     "sortPriceDesc": "Prix décroissant",
     "sortAge": "Âge",
-    "noResults": "Aucun cheval ne correspond à ces filtres pour le moment — contactez-nous, nous vous préviendrons."
+    "noResults": "Aucun cheval ne correspond à ces filtres pour le moment — contactez-nous, nous vous préviendrons.",
+    "allLevels": "Toutes hauteurs",
+    "filterLevel": "Hauteur",
+    "sortHeight": "Hauteur sautée",
+    "showing": "{count} chevaux"
   },
   "detail": {
     "contact": "Nous contacter",
@@ -105,7 +129,26 @@
     "locationTitle": "Localisation",
     "locationNote": "Zone approximative indiquée. Adresse exacte communiquée aux acheteurs sérieux sur demande.",
     "contactFormTitle": "Se renseigner sur ce cheval",
-    "table": { "competition": "Épreuve", "year": "Année", "level": "Niveau", "result": "Résultat", "rider": "Cavalier", "location": "Lieu" }
+    "table": {
+      "competition": "Épreuve",
+      "year": "Année",
+      "level": "Niveau",
+      "result": "Résultat",
+      "rider": "Cavalier",
+      "location": "Lieu"
+    },
+    "xraysTitle": "Radiographies",
+    "xraysViews": "{count} clichés",
+    "xraysTakenOn": "Réalisées le",
+    "xraysBy": "par",
+    "xraysDownloadAll": "Télécharger tous les clichés (ZIP, {size} Mo)",
+    "xraysDownloadView": "Télécharger ce cliché",
+    "xraysPrev": "Cliché précédent",
+    "xraysNext": "Cliché suivant",
+    "xraysOnRequest": "Radiographies disponibles sur demande",
+    "xraysNote": "Radiographies numériques en pleine résolution. Faites défiler chaque cliché ou téléchargez la série complète pour votre vétérinaire.",
+    "representativeNote": "Images représentatives — les photographies de ce cheval suivront.",
+    "photoCredits": "Crédits photo"
   },
   "trust": {
     "vetDocs": "Documentation vétérinaire disponible",
@@ -136,15 +179,42 @@
     "title": "Services",
     "eyebrow": "Notre accompagnement",
     "list": {
-      "selection": { "title": "Sélection de chevaux", "text": "Nous identifions les chevaux correspondant à vos objectifs, votre budget et votre niveau avant tout déplacement." },
-      "sales": { "title": "Vente de chevaux", "text": "Chaque cheval de notre sélection est proposé directement, sans intermédiaire de type marketplace." },
-      "prePurchase": { "title": "Accompagnement pré-achat", "text": "Nous coordonnons la visite vétérinaire indépendante et en expliquons clairement les résultats." },
-      "vetCoordination": { "title": "Coordination vétérinaire", "text": "Cliniques, calendrier et déplacements organisés autour de votre emploi du temps." },
-      "documentation": { "title": "Documentation", "text": "Passeports, immatriculation et changement de propriétaire traités correctement dès la première fois." },
-      "transport": { "title": "Transport international", "text": "Transport routier et aérien organisé de porte à porte." },
-      "export": { "title": "Assistance export", "text": "Douanes, certificats sanitaires et réglementations d'importation gérés pour vous." },
-      "viewing": { "title": "Rendez-vous de visite", "text": "En personne ou par appel vidéo en direct, au moment qui vous convient." },
-      "afterSale": { "title": "Suivi après-vente", "text": "Nous restons disponibles longtemps après l'arrivée du cheval." }
+      "selection": {
+        "title": "Sélection de chevaux",
+        "text": "Nous identifions les chevaux correspondant à vos objectifs, votre budget et votre niveau avant tout déplacement."
+      },
+      "sales": {
+        "title": "Vente de chevaux",
+        "text": "Chaque cheval de notre sélection est proposé directement, sans intermédiaire de type marketplace."
+      },
+      "prePurchase": {
+        "title": "Accompagnement pré-achat",
+        "text": "Nous coordonnons la visite vétérinaire indépendante et en expliquons clairement les résultats."
+      },
+      "vetCoordination": {
+        "title": "Coordination vétérinaire",
+        "text": "Cliniques, calendrier et déplacements organisés autour de votre emploi du temps."
+      },
+      "documentation": {
+        "title": "Documentation",
+        "text": "Passeports, immatriculation et changement de propriétaire traités correctement dès la première fois."
+      },
+      "transport": {
+        "title": "Transport international",
+        "text": "Transport routier et aérien organisé de porte à porte."
+      },
+      "export": {
+        "title": "Assistance export",
+        "text": "Douanes, certificats sanitaires et réglementations d'importation gérés pour vous."
+      },
+      "viewing": {
+        "title": "Rendez-vous de visite",
+        "text": "En personne ou par appel vidéo en direct, au moment qui vous convient."
+      },
+      "afterSale": {
+        "title": "Suivi après-vente",
+        "text": "Nous restons disponibles longtemps après l'arrivée du cheval."
+      }
     }
   },
   "contact": {
@@ -167,5 +237,18 @@
     "settings": "Paramètres",
     "addHorse": "Ajouter un cheval",
     "signOut": "Se déconnecter"
+  },
+  "preview": {
+    "view": "Voir le cheval",
+    "highlights": "Points forts",
+    "more": "Ouvrir la fiche complète"
+  },
+  "bands": {
+    "eyebrow": "Saut d'obstacles",
+    "count": "{count} chevaux",
+    "empty": "Aucun cheval à cette hauteur pour le moment — contactez-nous et nous vous préviendrons."
+  },
+  "site": {
+    "demoNotice": "Données de démonstration — chevaux réels issus de registres publics ; prix et disponibilités fictifs."
   }
 }

@@ -16,12 +16,12 @@
   },
   "home": {
     "heroHeadline": "Exceptional Horses. Exceptional Potential.",
-    "heroSupport": "Discover our carefully selected horses for sport, competition and breeding.",
+    "heroSupport": "Carefully selected show jumpers, from promising young horses to proven Grand Prix campaigners.",
     "heroCta": "View Horses for Sale",
     "featuredEyebrow": "Featured Horses",
     "featuredTitle": "Currently in our selection",
     "selectionEyebrow": "Our Selection",
-    "selectionTitle": "Find a horse by discipline",
+    "selectionTitle": "Find a horse by the height it jumps",
     "whyEyebrow": "Why Choose MEC Trading",
     "whyTitle": "A private, professional standard",
     "storyEyebrow": "Featured Story",
@@ -29,15 +29,34 @@
     "internationalTitle": "Buying from abroad is straightforward",
     "internationalText": "We assist international clients end to end — from first selection to the horse arriving home.",
     "closingTitle": "Looking for Your Next Horse?",
-    "closingCta": "Contact Us"
+    "closingCta": "Contact Us",
+    "selectionHint": "Hover a height to preview the horses available at that level"
   },
   "why": {
-    "selected": { "title": "Carefully Selected Horses", "text": "Every horse is chosen personally, not sourced from a listings feed." },
-    "evaluation": { "title": "Professional Evaluation", "text": "Conformation, temperament and way of going assessed before any horse is offered." },
-    "documentation": { "title": "Verified Documentation", "text": "Passports, registration and veterinary records are checked and kept on file." },
-    "international": { "title": "International Buyers", "text": "Clients across Europe, the Gulf and beyond, in their own language." },
-    "assistance": { "title": "Personalised Assistance", "text": "One point of contact from first enquiry to the horse arriving home." },
-    "transport": { "title": "Transport Assistance", "text": "Trusted transporters and export paperwork coordinated on your behalf." }
+    "selected": {
+      "title": "Carefully Selected Horses",
+      "text": "Every horse is chosen personally, not sourced from a listings feed."
+    },
+    "evaluation": {
+      "title": "Professional Evaluation",
+      "text": "Conformation, temperament and way of going assessed before any horse is offered."
+    },
+    "documentation": {
+      "title": "Verified Documentation",
+      "text": "Passports, registration and veterinary records are checked and kept on file."
+    },
+    "international": {
+      "title": "International Buyers",
+      "text": "Clients across Europe, the Gulf and beyond, in their own language."
+    },
+    "assistance": {
+      "title": "Personalised Assistance",
+      "text": "One point of contact from first enquiry to the horse arriving home."
+    },
+    "transport": {
+      "title": "Transport Assistance",
+      "text": "Trusted transporters and export paperwork coordinated on your behalf."
+    }
   },
   "international": {
     "selection": "Horse selection",
@@ -48,28 +67,29 @@
     "transport": "Transport",
     "export": "Export documentation"
   },
-  "disciplines": {
-    "SHOW_JUMPING": "Show Jumping",
-    "DRESSAGE": "Dressage",
-    "EVENTING": "Eventing",
-    "BREEDING": "Breeding",
-    "ARABIAN": "Arabian Horses",
-    "YOUNG_HORSE": "Young Horses",
-    "COMPETITION": "Competition Horses",
-    "PROSPECT": "Prospect Horses"
-  },
   "horse": {
     "breed": "Breed",
     "age": "Age",
     "sex": "Sex",
     "height": "Height",
-    "discipline": "Discipline",
     "location": "Location",
     "priceOnRequest": "Price on Request",
     "viewHorse": "View Horse",
     "years": "yrs",
-    "sexLabel": { "MARE": "Mare", "STALLION": "Stallion", "GELDING": "Gelding" },
-    "statusLabel": { "AVAILABLE": "Available", "RESERVED": "Reserved", "SOLD": "Sold" }
+    "sexLabel": {
+      "MARE": "Mare",
+      "STALLION": "Stallion",
+      "GELDING": "Gelding"
+    },
+    "statusLabel": {
+      "AVAILABLE": "Available",
+      "RESERVED": "Reserved",
+      "SOLD": "Sold"
+    },
+    "level": "Level",
+    "jumpsAt": "Jumping at",
+    "maxHeight": "Highest height jumped",
+    "discipline": "Show jumping"
   },
   "catalog": {
     "title": "Horses for Sale",
@@ -80,7 +100,11 @@
     "sortPriceAsc": "Price: low to high",
     "sortPriceDesc": "Price: high to low",
     "sortAge": "Age",
-    "noResults": "No horses match these filters right now — contact us and we'll let you know when one does."
+    "noResults": "No horses match these filters right now — contact us and we'll let you know when one does.",
+    "allLevels": "All heights",
+    "filterLevel": "Height",
+    "sortHeight": "Height jumped",
+    "showing": "{count} horses"
   },
   "detail": {
     "contact": "Contact Us",
@@ -105,7 +129,26 @@
     "locationTitle": "Location",
     "locationNote": "Approximate area shown. Exact address provided to serious buyers on request.",
     "contactFormTitle": "Enquire About This Horse",
-    "table": { "competition": "Competition", "year": "Year", "level": "Level", "result": "Result", "rider": "Rider", "location": "Location" }
+    "table": {
+      "competition": "Competition",
+      "year": "Year",
+      "level": "Level",
+      "result": "Result",
+      "rider": "Rider",
+      "location": "Location"
+    },
+    "xraysTitle": "Radiographs",
+    "xraysViews": "{count} views",
+    "xraysTakenOn": "Taken on",
+    "xraysBy": "by",
+    "xraysDownloadAll": "Download all views (ZIP, {size} MB)",
+    "xraysDownloadView": "Download this view",
+    "xraysPrev": "Previous view",
+    "xraysNext": "Next view",
+    "xraysOnRequest": "X-rays available on request",
+    "xraysNote": "Full-resolution digital radiographs. Cycle through every view or download the complete set for your veterinarian.",
+    "representativeNote": "Representative images — photographs of this horse will follow.",
+    "photoCredits": "Photo credits"
   },
   "trust": {
     "vetDocs": "Veterinary Documentation Available",
@@ -136,15 +179,42 @@
     "title": "Services",
     "eyebrow": "How We Help",
     "list": {
-      "selection": { "title": "Horse Selection", "text": "We identify horses matching your goals, budget and level before you ever travel to see one." },
-      "sales": { "title": "Horse Sales", "text": "Every horse in our selection is offered directly, with no intermediary marketplace." },
-      "prePurchase": { "title": "Pre-Purchase Assistance", "text": "We coordinate independent vetting and interpret the results plainly." },
-      "vetCoordination": { "title": "Veterinary Coordination", "text": "Clinics, timing and travel arranged around your schedule." },
-      "documentation": { "title": "Documentation", "text": "Passports, registration and ownership transfer handled correctly the first time." },
-      "transport": { "title": "International Transport", "text": "Ground and air transport organised door to door." },
-      "export": { "title": "Export Assistance", "text": "Customs, health certificates and country-specific import rules managed for you." },
-      "viewing": { "title": "Viewing Appointments", "text": "In person or by live video call, at a time that suits you." },
-      "afterSale": { "title": "After-Sale Support", "text": "We stay reachable long after the horse has arrived home." }
+      "selection": {
+        "title": "Horse Selection",
+        "text": "We identify horses matching your goals, budget and level before you ever travel to see one."
+      },
+      "sales": {
+        "title": "Horse Sales",
+        "text": "Every horse in our selection is offered directly, with no intermediary marketplace."
+      },
+      "prePurchase": {
+        "title": "Pre-Purchase Assistance",
+        "text": "We coordinate independent vetting and interpret the results plainly."
+      },
+      "vetCoordination": {
+        "title": "Veterinary Coordination",
+        "text": "Clinics, timing and travel arranged around your schedule."
+      },
+      "documentation": {
+        "title": "Documentation",
+        "text": "Passports, registration and ownership transfer handled correctly the first time."
+      },
+      "transport": {
+        "title": "International Transport",
+        "text": "Ground and air transport organised door to door."
+      },
+      "export": {
+        "title": "Export Assistance",
+        "text": "Customs, health certificates and country-specific import rules managed for you."
+      },
+      "viewing": {
+        "title": "Viewing Appointments",
+        "text": "In person or by live video call, at a time that suits you."
+      },
+      "afterSale": {
+        "title": "After-Sale Support",
+        "text": "We stay reachable long after the horse has arrived home."
+      }
     }
   },
   "contact": {
@@ -167,5 +237,18 @@
     "settings": "Settings",
     "addHorse": "Add Horse",
     "signOut": "Sign Out"
+  },
+  "preview": {
+    "view": "View horse",
+    "highlights": "Highlights",
+    "more": "Open full profile"
+  },
+  "bands": {
+    "eyebrow": "Show jumping",
+    "count": "{count} horses",
+    "empty": "No horses at this height right now — contact us and we'll let you know when one arrives."
+  },
+  "site": {
+    "demoNotice": "Demonstration data — real horses from public records; prices and availability are placeholders."
   }
 }

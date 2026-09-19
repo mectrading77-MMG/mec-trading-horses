@@ -1,99 +1,247 @@
-import type { Horse } from "@/types/horse";
+import type { Horse, MediaItem, XrayImage } from "@/types/horse";
+import xrayManifest from "../../public/horses/ilico-du-chateau/xrays/manifest.json";
 
 /**
- * Prototype data. Once Prisma + the database are connected, replace calls to
- * this module with `db.horse.findMany(...)` / `findUnique(...)` — the shape
- * returned by `src/lib/horses.ts` is designed to match this type exactly, so
- * pages don't need to change.
+ * DEMO DATA — replace with the owner's own horses before launch.
+ *
+ * Every horse below is a real show jumper. Identity, studbook, sex, colour,
+ * date of birth, pedigree and competition history come from public records
+ * (FEI database, Wikipedia, the veterinary study for Ilico du Château).
+ * Photographs are Creative Commons images from Wikimedia Commons; the credit
+ * on each item is required by the licence and is shown on the horse page.
+ *
+ * What is NOT real: prices, "available/reserved/sold" status, the Brittany
+ * location, and the editorial sales copy — those are placeholders written to
+ * demonstrate the template. Ilico du Château's gallery uses stand-in photos
+ * of a different chestnut (flagged with `photosAreRepresentative`).
+ *
+ * Once Prisma + the database are connected, `src/lib/horses.ts` swaps this
+ * module for `db.horse.findMany(...)` — the shape is identical.
  */
+
+function photos(slug: string, files: string[], credit: string, alt: string, cover = 0): MediaItem[] {
+  return files.map((f, i) => ({
+    type: "PHOTO" as const,
+    url: `/horses/${slug}/${f}`,
+    alt,
+    credit,
+    isCover: i === cover
+  }));
+}
+
+const KRAMER = "Michael Kramer, Wikimedia Commons · CC BY-SA 3.0";
+const BUCCO = "Clément Bucco-Lechat, Wikimedia Commons · CC BY-SA 3.0";
+const VALREN = "Tsaag Valren, Wikimedia Commons · CC BY-SA 4.0";
+const MCFLY = "PaterMcFly, Wikimedia Commons · CC BY 3.0/4.0";
+
+const ilicoXrays: XrayImage[] = (xrayManifest as Array<{ file: string; label: string; bodyPart?: string }>).map((x) => ({
+  url: `/horses/ilico-du-chateau/xrays/${x.file}`,
+  thumbUrl: `/horses/ilico-du-chateau/xrays/thumbs/${x.file}`,
+  label: x.label,
+  bodyPart: x.bodyPart
+}));
+
 export const horses: Horse[] = [
+  // ───────────────────────────── 1.30 m ─────────────────────────────
   {
-    id: "1",
-    slug: "orphee-des-forges",
+    id: "ilico-du-chateau",
+    slug: "ilico-du-chateau",
     breed: "Selle Français",
     sex: "GELDING",
-    dateOfBirth: "2017-04-12",
-    heightCm: 168,
-    color: "Bay",
-    discipline: "SHOW_JUMPING",
-    competitionLevel: "1.45m",
-    registrationNo: "FR-2017-SF-04821",
+    dateOfBirth: "2018-04-19",
+    color: "Chestnut",
+    jumpHeightCm: 130,
+    competitionLevel: "1.30 m",
+    registrationNo: "SF 18161820Q",
     priceOnRequest: true,
     priceCurrency: "EUR",
     status: "AVAILABLE",
     locationLabel: "Brittany, France",
     featuredOnHome: true,
-    featuredStory: true,
+    featuredStory: false,
+    highlights: ["Full set of 29 radiographs on file", "Vet study June 2024 · Olivier Lambrecht", "Eight-year-old Selle Français"],
+    photosAreRepresentative: true,
     trust: { vetDocs: true, xrays: true, pedigreeDocs: true, transport: true },
     translations: {
       en: {
         locale: "en",
-        name: "Orphée des Forges",
-        positioning: "A scopey, careful 1.45m partner with the temperament for a first international season.",
-        personality: "Calm in the stable, sharp in the ring. Orphée is a thinking horse who tries for his rider.",
-        training: "Produced through the young horse classes and stepped up methodically; schooled on the flat three times a week.",
-        strengths: "Exceptional technique over oxers, reliable in the twisty time-faults classes, sound record.",
-        experience: "Winner at 1.40m, placed in three 1.45m grands prix in the last season.",
-        suitability: "A professional or ambitious amateur ready to campaign at 1.45m–1.50m.",
-        potential: "Correct type and jump for a move to 1.50m within eighteen months.",
-        idealRider: "Confident, tactful rider comfortable with a forward-thinking horse."
+        name: "Ilico du Château",
+        positioning: "An eight-year-old Selle Français with a complete, recent radiographic set available to view online.",
+        experience: "Registered with the Selle Français studbook under number 18161820Q. A full pre-purchase radiographic series — feet, fetlocks, knees, hocks, stifles, back and neck — was taken on 17 June 2024 and can be viewed in full on this page.",
+        suitability: "For a buyer who values transparency: every image the veterinarian took is available before you travel.",
+        idealRider: "Details of Ilico's training and competition record are provided on enquiry."
       },
       fr: {
         locale: "fr",
-        name: "Orphée des Forges",
-        positioning: "Un partenaire ample et prudent au 1,45 m, au tempérament idéal pour une première saison internationale.",
-        personality: "Calme à l'écurie, vif en piste. Orphée réfléchit et se bat pour son cavalier.",
-        training: "Formé à travers les épreuves jeunes chevaux puis monté en puissance méthodiquement ; travail de plat trois fois par semaine.",
-        strengths: "Technique remarquable à l'oxer, fiable sur les parcours au chrono, dossier sanitaire sain.",
-        experience: "Vainqueur en 1,40 m, placé dans trois Grand Prix 1,45 m la saison dernière.",
-        suitability: "Un professionnel ou un amateur ambitieux prêt à concourir en 1,45–1,50 m.",
-        potential: "Type et technique corrects pour envisager le 1,50 m sous dix-huit mois.",
-        idealRider: "Cavalier confiant et fin, à l'aise avec un cheval qui va de l'avant."
+        name: "Ilico du Château",
+        positioning: "Selle Français de huit ans, avec un bilan radiographique complet et récent consultable en ligne.",
+        experience: "Inscrit au stud-book Selle Français sous le numéro 18161820Q. Une série radiographique complète de visite d'achat — pieds, boulets, genoux, jarrets, grassets, dos et encolure — a été réalisée le 17 juin 2024 et peut être consultée intégralement sur cette page.",
+        suitability: "Pour un acheteur qui privilégie la transparence : chaque cliché du vétérinaire est disponible avant de vous déplacer."
       },
       ar: {
         locale: "ar",
-        name: "أورفيه دي فورج",
-        positioning: "حصان قفز بارتفاع 1.45 م يتميز بالحذر والاتساع، وطبع مثالي لموسم دولي أول.",
-        personality: "هادئ في الإسطبل، نشيط في الحلبة، يفكر ويبذل جهده من أجل فارسه.",
-        training: "تدرّب عبر فئات الخيول الشابة ثم ارتقى تدريجيًا، مع تدريب أرضي ثلاث مرات أسبوعيًا.",
-        strengths: "تقنية استثنائية فوق الحواجز العريضة، ثبات في المسارات السريعة، وسجل صحي سليم.",
-        experience: "فائز في مستوى 1.40 م، وحقق مراكز متقدمة في ثلاث جوائز كبرى بمستوى 1.45 م الموسم الماضي.",
-        suitability: "مناسب لفارس محترف أو هاوٍ طموح مستعد للمنافسة بمستوى 1.45–1.50 م.",
-        potential: "يتمتع بالنوعية والقفزة المناسبتين للانتقال إلى 1.50 م خلال ثمانية عشر شهرًا.",
-        idealRider: "فارس واثق وحسّاس، مرتاح مع حصان يميل إلى التقدم للأمام."
+        name: "إيليكو دو شاتو",
+        positioning: "سيل فرانسيه بعمر ثماني سنوات مع مجموعة أشعة كاملة وحديثة يمكن الاطلاع عليها عبر الإنترنت.",
+        experience: "مسجّل في سجل Selle Français برقم 18161820Q. أُجريت سلسلة أشعة شاملة لفحص ما قبل الشراء في 17 يونيو 2024 ويمكن الاطلاع عليها بالكامل في هذه الصفحة."
       }
     },
-    media: [
-      { type: "PHOTO", url: "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?q=80&w=1600", isCover: true, alt: "Orphée des Forges jumping" },
-      { type: "PHOTO", url: "https://images.unsplash.com/photo-1598974357801-cbca100e65d3?q=80&w=1600" },
-      { type: "PHOTO", url: "https://images.unsplash.com/photo-1553284966-19b8815c7817?q=80&w=1600" }
-    ],
+    media: photos(
+      "ilico-du-chateau",
+      ["01.jpg", "02.jpg", "03.jpg", "04.jpg"],
+      `${KRAMER} · representative image`,
+      "Representative image — chestnut show jumper (not Ilico du Château)"
+    ),
     documents: [
-      { type: "VETERINARY_EXAM", label: "Pre-purchase veterinary exam, June 2026", url: "#", downloadable: false },
-      { type: "XRAY", label: "Full radiographic set", url: "#", downloadable: false },
-      { type: "PASSPORT", label: "FEI passport", url: "#", downloadable: false }
+      { type: "XRAY", label: "Radiographic set — 29 views, 17 June 2024", url: "/horses/ilico-du-chateau/xrays/ilico-du-chateau-xrays.zip", downloadable: true },
+      { type: "REGISTRATION", label: "Selle Français registration 18161820Q", url: "#", downloadable: false },
+      { type: "PASSPORT", label: "Passport", url: "#", downloadable: false }
+    ],
+    xrays: {
+      takenOn: "2024-06-17",
+      clinic: "Olivier Lambrecht · DR by Veterinary Solutions",
+      images: ilicoXrays,
+      zipUrl: "/horses/ilico-du-chateau/xrays/ilico-du-chateau-xrays.zip",
+      zipSizeMb: 4.7
+    },
+    competitionResults: [],
+    pedigree: []
+  },
+
+  // ───────────────────────────── 1.20 m ─────────────────────────────
+  {
+    id: "fischerdaily-impressed",
+    slug: "fischerdaily-impressed",
+    breed: "KWPN",
+    sex: "GELDING",
+    dateOfBirth: "2008-06-08",
+    color: "Grey",
+    jumpHeightCm: 120,
+    maxHeightJumpedCm: 145,
+    competitionLevel: "1.20 m – 1.25 m",
+    registrationNo: "FEI 104MM52",
+    priceAmount: 28000,
+    priceCurrency: "EUR",
+    priceOnRequest: false,
+    status: "AVAILABLE",
+    locationLabel: "Brittany, France",
+    featuredOnHome: true,
+    featuredStory: false,
+    highlights: ["Produced by Michael Jung", "186 international starts · 15 wins", "Schoolmaster for an ambitious young rider"],
+    trust: { vetDocs: true, xrays: true, pedigreeDocs: true, transport: true },
+    translations: {
+      en: {
+        locale: "en",
+        name: "fischerDaily Impressed",
+        positioning: "A Michael Jung-produced grey gelding with 186 international starts, now the ideal schoolmaster at 1.20 m – 1.25 m.",
+        experience: "Campaigned internationally by Michael Jung in the young horse tours, then by Kristina Klebanova, and most recently placed 6th in the CSI Children's Big Tour 1.25 m Grand Prix at Kronenberg (November 2024) with Maya Edle von Braunmühl.",
+        strengths: "Experience is the selling point: fifteen international wins and a decade of showground mileage make him a horse who knows his job in any arena.",
+        suitability: "A young rider or amateur stepping up to international 1.20 m – 1.25 m classes who wants a horse that has seen it all.",
+        idealRider: "A rider who values a calm, confident partner over a green one."
+      },
+      fr: {
+        locale: "fr",
+        name: "fischerDaily Impressed",
+        positioning: "Hongre gris formé par Michael Jung, 186 départs internationaux, aujourd'hui le maître d'école idéal en 1,20 m – 1,25 m.",
+        experience: "Sorti à l'international par Michael Jung dans les circuits jeunes chevaux, puis par Kristina Klebanova ; 6e du Grand Prix 1,25 m Children à Kronenberg (novembre 2024) avec Maya Edle von Braunmühl.",
+        suitability: "Un jeune cavalier ou un amateur qui passe en 1,20 m – 1,25 m international et souhaite un cheval qui a tout vu."
+      },
+      ar: {
+        locale: "ar",
+        name: "فيشر ديلي إمبريسد",
+        positioning: "خصي رمادي دربه مايكل يونغ، 186 مشاركة دولية، واليوم الحصان المثالي لتعليم الفرسان على ارتفاع 1.20 – 1.25 م.",
+        suitability: "لفارس شاب أو هاوٍ ينتقل إلى فئات 1.20 – 1.25 م الدولية ويريد حصاناً خبيراً."
+      }
+    },
+    media: photos("fischerdaily-impressed", ["03.jpg", "01.jpg", "02.jpg", "04.jpg"], KRAMER, "fischerDaily Impressed with Michael Jung, CSIYH* Wiesbaden 2015"),
+    documents: [
+      { type: "XRAY", label: "X-rays", url: "#", downloadable: false },
+      { type: "VETERINARY_EXAM", label: "Veterinary examination", url: "#", downloadable: false },
+      { type: "PASSPORT", label: "FEI passport 104MM52", url: "#", downloadable: false }
     ],
     competitionResults: [
-      { competition: "CSI3* Grand Prix", year: 2026, level: "1.45m", result: "3rd", rider: "House rider", location: "Deauville, FR" },
-      { competition: "National Grand Prix", year: 2025, level: "1.40m", result: "1st", rider: "House rider", location: "Fontainebleau, FR" }
+      { competition: "CSICh-A Big Tour 1.25 m Grand Prix", year: 2024, level: "1.25 m", result: "6th", rider: "Maya Edle von Braunmühl", location: "Kronenberg, NL" },
+      { competition: "CSICh-A Big Tour 1.25 m", year: 2024, level: "1.25 m", result: "12th", rider: "Maya Edle von Braunmühl", location: "Kronenberg, NL" },
+      { competition: "CSIYH* Youngster Tour", year: 2015, level: "1.35 m", result: "Placed", rider: "Michael Jung", location: "Wiesbaden, DE" }
     ],
     pedigree: [
-      { position: "sire", name: "Diamant de Semilly", breed: "Selle Français", competitionNote: "Olympic sire line" },
-      { position: "dam", name: "Ulane des Forges", breed: "Selle Français" },
-      { position: "sire.sire", name: "Le Tot de Semilly", breed: "Selle Français" },
-      { position: "dam.sire", name: "Quidam de Revel", breed: "Selle Français" }
+      { position: "sire", name: "Cartani 4", breed: "Holsteiner", competitionNote: "International 1.60 m" },
+      { position: "dam", name: "Impression", breed: "KWPN" },
+      { position: "sire.sire", name: "Carthago", breed: "Holsteiner", competitionNote: "Olympic Games 1996 & 2000" },
+      { position: "dam.sire", name: "Elcaro", breed: "KWPN" }
     ]
   },
+
+  // ───────────────────────────── 1.30 m ─────────────────────────────
   {
-    id: "2",
-    slug: "amira-el-shams",
-    breed: "Arabian",
-    sex: "MARE",
-    dateOfBirth: "2019-02-01",
-    heightCm: 152,
-    color: "Grey",
-    discipline: "ARABIAN",
-    competitionLevel: "Breeding / Halter",
+    id: "lord-larry-4",
+    slug: "lord-larry-4",
+    breed: "Hanoverian",
+    sex: "GELDING",
+    dateOfBirth: "2007-02-18",
+    color: "Bay",
+    jumpHeightCm: 130,
+    maxHeightJumpedCm: 145,
+    competitionLevel: "1.30 m",
+    registrationNo: "FEI 103VI59",
+    priceAmount: 22000,
+    priceCurrency: "EUR",
+    priceOnRequest: false,
+    status: "RESERVED",
+    locationLabel: "Brittany, France",
+    featuredOnHome: true,
+    featuredStory: false,
+    highlights: ["Won the 1.45 m Youngster Tour, Wiesbaden", "175 international starts", "Experienced 1.30 m campaigner"],
+    trust: { vetDocs: true, xrays: true, pedigreeDocs: true, transport: true },
+    translations: {
+      en: {
+        locale: "en",
+        name: "Lord Larry 4",
+        positioning: "A bay Hanoverian gelding with 175 international starts, from a 1.45 m Youngster Tour win to steady 1.30 m form.",
+        experience: "Produced by Katharina Offel, with whom he won the CSIYH1* 1.45 m Youngster Tour at Wiesbaden. More recently campaigned at CSI1*–CSI3* level between 1.20 m and 1.30 m by Louisa Müller, including Lanaken CSI3* in 2022.",
+        strengths: "Honest, straightforward and thoroughly experienced — the kind of horse that gives a rider confidence in the ring.",
+        suitability: "An amateur or junior rider looking for a reliable 1.20 m – 1.30 m partner with international mileage."
+      },
+      fr: {
+        locale: "fr",
+        name: "Lord Larry 4",
+        positioning: "Hongre bai Hanovrien, 175 départs internationaux, de la victoire en Youngster Tour 1,45 m à une régularité en 1,30 m.",
+        experience: "Formé par Katharina Offel, avec qui il a remporté le Youngster Tour CSIYH1* 1,45 m de Wiesbaden. Plus récemment sorti en CSI1*–CSI3* entre 1,20 m et 1,30 m par Louisa Müller, dont Lanaken CSI3* en 2022."
+      },
+      ar: {
+        locale: "ar",
+        name: "لورد لاري 4",
+        positioning: "خصي هانوفري كميت بـ175 مشاركة دولية، من الفوز بجولة الخيول الشابة 1.45 م إلى أداء ثابت على 1.30 م."
+      }
+    },
+    media: photos("lord-larry-4", ["01.jpg", "03.jpg", "04.jpg"], KRAMER, "Lord Larry 4 with Katharina Offel, CSIYH* Wiesbaden 2015"),
+    documents: [
+      { type: "XRAY", label: "X-rays", url: "#", downloadable: false },
+      { type: "VETERINARY_EXAM", label: "Veterinary examination", url: "#", downloadable: false },
+      { type: "PASSPORT", label: "FEI passport 103VI59", url: "#", downloadable: false }
+    ],
+    competitionResults: [
+      { competition: "CSI3* Table A", year: 2022, level: "1.30 m", result: "56th", rider: "Louisa Müller", location: "Lanaken, BE" },
+      { competition: "CSI1* Two Phases", year: 2022, level: "1.20 m", result: "13th", rider: "Louisa Müller", location: "Lier, BE" },
+      { competition: "CSIYH1* Youngster Tour", year: 2015, level: "1.45 m", result: "1st", rider: "Katharina Offel", location: "Wiesbaden, DE" }
+    ],
+    pedigree: [
+      { position: "sire", name: "Böckmann's Lord Pezi", breed: "Oldenburg", competitionNote: "International 1.60 m" },
+      { position: "dam", name: "Cora", breed: "Hanoverian" },
+      { position: "dam.sire", name: "Böckmann's Cordalme Z", breed: "Zangersheide" }
+    ]
+  },
+
+  // ───────────────────────────── 1.35 m ─────────────────────────────
+  {
+    id: "cicero-bareliere-z",
+    slug: "cicero-bareliere-z",
+    breed: "Selle Français",
+    sex: "STALLION",
+    dateOfBirth: "2008-01-01",
+    color: "Bay",
+    jumpHeightCm: 135,
+    maxHeightJumpedCm: 140,
+    competitionLevel: "1.35 m",
     priceAmount: 45000,
     priceCurrency: "EUR",
     priceOnRequest: false,
@@ -101,210 +249,337 @@ export const horses: Horse[] = [
     locationLabel: "Brittany, France",
     featuredOnHome: true,
     featuredStory: false,
-    trust: { vetDocs: true, xrays: false, pedigreeDocs: true, transport: true },
-    translations: {
-      en: {
-        locale: "en",
-        name: "Amira El Shams",
-        positioning: "Straight Egyptian breeding mare from a documented desert bloodline, exceptional head and carriage.",
-        personality: "Affectionate and expressive, easy to handle for grooms and family alike.",
-        strengths: "Classic Egyptian type — dished profile, level croup, high tail carriage.",
-        suitability: "A breeding programme seeking authenticated Egyptian bloodlines, or a halter and in-hand career.",
-        potential: "Proven producer; foals to date show strong type transmission."
-      },
-      fr: {
-        locale: "fr",
-        name: "Amira El Shams",
-        positioning: "Jument de race arabe pur-sang égyptien, lignée désertique documentée, tête et port exceptionnels.",
-        personality: "Affectueuse et expressive, facile à manipuler pour les palefreniers comme pour la famille.",
-        strengths: "Type égyptien classique : profil concave, croupe horizontale, port de queue élevé.",
-        suitability: "Un programme d'élevage recherchant des lignées égyptiennes authentifiées, ou une carrière en main.",
-        potential: "Poulinière confirmée ; les poulains obtenus montrent une forte transmission du type."
-      },
-      ar: {
-        locale: "ar",
-        name: "أميرة الشمس",
-        positioning: "فرس عربية أصيلة مصرية من نسل صحراوي موثّق، برأس وقامة استثنائيين.",
-        personality: "ودودة ومعبّرة، سهلة القيادة سواء للسائسين أو للعائلة.",
-        strengths: "النوعية المصرية الكلاسيكية: تقعّر الجبهة، مؤخرة مستوية، وذيل مرفوع.",
-        suitability: "مناسبة لبرنامج تربية يبحث عن سلالات مصرية موثّقة، أو لمسيرة عرض في اليد.",
-        potential: "منتجة مؤكدة؛ المهور حتى الآن تُظهر انتقالًا قويًا للنوعية."
-      }
-    },
-    media: [
-      { type: "PHOTO", url: "https://images.unsplash.com/photo-1548783300-70b7654a2b6f?q=80&w=1600", isCover: true },
-      { type: "PHOTO", url: "https://images.unsplash.com/photo-1568393691622-c7ba131d63b4?q=80&w=1600" }
-    ],
-    documents: [
-      { type: "PEDIGREE_DOCUMENT", label: "WAHO-endorsed pedigree", url: "#", downloadable: true },
-      { type: "PASSPORT", label: "Breed passport", url: "#", downloadable: false }
-    ],
-    competitionResults: [],
-    pedigree: [
-      { position: "sire", name: "Ansata Halim Shah (line)", breed: "Arabian" },
-      { position: "dam", name: "Bint El Bataa", breed: "Arabian" }
-    ]
-  },
-  {
-    id: "3",
-    slug: "quintessence-de-riverdale",
-    breed: "KWPN",
-    sex: "MARE",
-    dateOfBirth: "2016-05-20",
-    heightCm: 170,
-    color: "Black",
-    discipline: "DRESSAGE",
-    competitionLevel: "Grand Prix in training",
-    priceOnRequest: true,
-    priceCurrency: "EUR",
-    status: "RESERVED",
-    locationLabel: "Brittany, France",
-    featuredOnHome: true,
-    featuredStory: false,
+    highlights: ["By Cicero Z out of a Concorde mare", "Produced by David Will", "Stallion — sport and breeding"],
     trust: { vetDocs: true, xrays: true, pedigreeDocs: true, transport: true },
     translations: {
       en: {
         locale: "en",
-        name: "Quintessence de Riverdale",
-        positioning: "A striking black mare with Grand Prix changes and piaffe already installed.",
-        strengths: "Exceptional collection, three correct and expressive gaits, established one-tempi changes.",
-        suitability: "A Grand Prix rider seeking a mare ready for the top of sport.",
-        potential: "Confirmed for CDI Grand Prix debut within the year."
+        name: "Cicero Bareliere Z",
+        positioning: "A bay stallion by Cicero Z out of a Concorde mare, produced through the international young horse tours by David Will.",
+        experience: "Competed in the CSIYH* Youngster Tour at Wiesbaden under David Will, one of Germany's most respected producers of young jumpers.",
+        strengths: "A pedigree that reads like a who's who of modern jumping breeding — Cicero Z (by Carthago) over Concorde — with the type and scope to match.",
+        suitability: "A rider competing at 1.35 m who also wants breeding value, or a stud seeking a proven jumping bloodline."
       },
       fr: {
         locale: "fr",
-        name: "Quintessence de Riverdale",
-        positioning: "Jument noire racée, changements de pied au Grand Prix et piaffer déjà installés.",
-        strengths: "Rassembler exceptionnel, trois allures correctes et expressives, changements au temps confirmés.",
-        suitability: "Un cavalier Grand Prix en recherche d'une jument prête pour le haut niveau.",
-        potential: "Confirmée pour un début en CDI Grand Prix dans l'année."
+        name: "Cicero Bareliere Z",
+        positioning: "Étalon bai par Cicero Z et une mère par Concorde, formé sur les circuits internationaux jeunes chevaux par David Will.",
+        strengths: "Une généalogie qui réunit les grands noms de l'élevage de saut moderne — Cicero Z (par Carthago) sur Concorde."
       },
       ar: {
         locale: "ar",
-        name: "كوينتيسنس دي ريفرديل",
-        positioning: "فرس سوداء لافتة، مستوى غراند بري مع تغييرات الأقدام والتمايل مكتسبَين بالفعل.",
-        strengths: "تجميع استثنائي، وثلاث حركات صحيحة ومعبّرة، وتغييرات إيقاعية مؤكدة.",
-        suitability: "مناسبة لفارس غراند بري يبحث عن فرس جاهزة لأعلى مستويات المنافسة.",
-        potential: "مؤهلة لبداية منافسات غراند بري الدولية خلال العام."
+        name: "سيسيرو باريليير زد",
+        positioning: "فحل كميت من سيسيرو زد وأم من كونكورد، دربه ديفيد ويل في جولات الخيول الشابة الدولية."
       }
     },
-    media: [
-      { type: "PHOTO", url: "https://images.unsplash.com/photo-1553284965-2ffef2ad2f65?q=80&w=1600", isCover: true }
-    ],
+    media: photos("cicero-bareliere-z", ["04.jpg", "01.jpg", "02.jpg", "03.jpg"], KRAMER, "Cicero Bareliere Z with David Will, CSIYH* Wiesbaden 2015"),
     documents: [
-      { type: "VETERINARY_EXAM", label: "Pre-purchase veterinary exam, March 2026", url: "#", downloadable: false }
+      { type: "XRAY", label: "X-rays", url: "#", downloadable: false },
+      { type: "PEDIGREE_DOCUMENT", label: "Pedigree certificate", url: "#", downloadable: false },
+      { type: "PASSPORT", label: "Passport", url: "#", downloadable: false }
     ],
     competitionResults: [
-      { competition: "CDI3* Intermediate II", year: 2026, level: "Inter II", result: "2nd", location: "Compiègne, FR" }
+      { competition: "CSIYH* Youngster Tour", year: 2015, level: "1.35 m", result: "Placed", rider: "David Will", location: "Wiesbaden, DE" }
     ],
     pedigree: [
-      { position: "sire", name: "Vivaldi", breed: "KWPN" },
-      { position: "dam", name: "Ricarda", breed: "KWPN" }
+      { position: "sire", name: "Cicero Z van Paemel", breed: "Zangersheide", competitionNote: "Sire of Grand Prix horses worldwide" },
+      { position: "sire.sire", name: "Carthago", breed: "Holsteiner", competitionNote: "Olympic Games 1996 & 2000" },
+      { position: "sire.dam", name: "Randel Z", breed: "Zangersheide" },
+      { position: "dam.sire", name: "Concorde", breed: "KWPN", competitionNote: "Olympic Games 1992" }
     ]
   },
+
+  // ───────────────────────────── 1.40 m ─────────────────────────────
   {
-    id: "4",
-    slug: "brio-de-lune",
-    breed: "Anglo-Arabe",
-    sex: "GELDING",
-    dateOfBirth: "2021-03-08",
-    heightCm: 160,
-    color: "Chestnut",
-    discipline: "YOUNG_HORSE",
-    competitionLevel: "Unstarted — young horse classes",
-    priceAmount: 22000,
+    id: "quidman-denfer",
+    slug: "quidman-denfer",
+    breed: "Holsteiner",
+    sex: "STALLION",
+    dateOfBirth: "2008-05-22",
+    color: "Bay",
+    jumpHeightCm: 140,
+    maxHeightJumpedCm: 145,
+    competitionLevel: "1.40 m – 1.45 m",
+    registrationNo: "FEI 104TK70",
+    priceAmount: 60000,
     priceCurrency: "EUR",
     priceOnRequest: false,
     status: "AVAILABLE",
     locationLabel: "Brittany, France",
     featuredOnHome: true,
     featuredStory: false,
-    trust: { vetDocs: true, xrays: true, pedigreeDocs: false, transport: true },
+    highlights: ["By Quidam de Revel out of a Dobel's Cento mare", "1.45 m Grand Prix experience", "Produced by Simon Delestre"],
+    trust: { vetDocs: true, xrays: true, pedigreeDocs: true, transport: true },
     translations: {
       en: {
         locale: "en",
-        name: "Brio de Lune",
-        positioning: "A five-year-old prospect with the frame and mind for eventing at the top level.",
-        strengths: "Natural balance, bold to new fences, exceptional walk and canter for the breed.",
-        suitability: "A young-horse programme or an owner developing a future team horse.",
-        potential: "Correct conformation and temperament to progress through the levels without rush."
+        name: "Quidman Denfer",
+        positioning: "A Holsteiner stallion by the legendary Quidam de Revel, with CSI2* Grand Prix experience at 1.45 m.",
+        experience: "Started in the international young horse tours with Simon Delestre, then campaigned at CSI2* level in Denmark and Poland by Thomas Velin, including the 1.45 m Grand Prix at Ciekocinko in 2019 and 1.40 m classes at Aarhus in 2020.",
+        strengths: "A direct son of Quidam de Revel — one of the most influential jumping sires of the last forty years — out of a Dobel's Cento mare.",
+        suitability: "A rider targeting 1.40 m – 1.45 m who wants a stallion with a genuine breeding proposition alongside his sport career."
       },
       fr: {
         locale: "fr",
-        name: "Brio de Lune",
-        positioning: "Espoir de cinq ans, au modèle et au mental faits pour le concours complet de haut niveau.",
-        strengths: "Équilibre naturel, hardi face aux obstacles inconnus, pas et galop remarquables pour la race.",
-        suitability: "Un programme jeunes chevaux ou un propriétaire construisant un futur cheval d'équipe.",
-        potential: "Conformation et tempérament corrects pour progresser dans les niveaux sans précipitation."
+        name: "Quidman Denfer",
+        positioning: "Étalon Holsteiner par le légendaire Quidam de Revel, avec de l'expérience en Grand Prix CSI2* à 1,45 m.",
+        strengths: "Fils direct de Quidam de Revel — l'un des étalons de saut les plus influents des quarante dernières années — sur une mère par Dobel's Cento."
       },
       ar: {
         locale: "ar",
-        name: "بريو دي لون",
-        positioning: "واعد عمره خمس سنوات، ببنية وعقلية تؤهلانه للفروسية الثلاثية على أعلى مستوى.",
-        strengths: "توازن طبيعي، جرأة أمام الحواجز الجديدة، ومشية وركض متميزان بالنسبة للسلالة.",
-        suitability: "مناسب لبرنامج الخيول الشابة أو لمالك يبني حصان فريق مستقبلي.",
-        potential: "بنية جسدية وطبع سليمان للتقدم عبر المستويات دون تسرّع."
+        name: "كويدمان دينفر",
+        positioning: "فحل هولشتاينر من الأسطوري كويدام دو ريفيل، بخبرة في جوائز كبرى CSI2* على ارتفاع 1.45 م."
       }
     },
-    media: [
-      { type: "PHOTO", url: "https://images.unsplash.com/photo-1544535830-52d3ad5b1c3f?q=80&w=1600", isCover: true }
-    ],
+    media: photos("quidman-denfer", ["01.jpg", "02.jpg", "03.jpg"], KRAMER, "Quidman Denfer with Simon Delestre, CSIYH* Wiesbaden 2015"),
     documents: [
-      { type: "VETERINARY_EXAM", label: "Vetting report, January 2026", url: "#", downloadable: false }
+      { type: "XRAY", label: "X-rays", url: "#", downloadable: false },
+      { type: "VETERINARY_EXAM", label: "Veterinary examination", url: "#", downloadable: false },
+      { type: "PEDIGREE_DOCUMENT", label: "Holsteiner pedigree certificate", url: "#", downloadable: false }
     ],
-    competitionResults: [],
+    competitionResults: [
+      { competition: "CSI2* Table A", year: 2020, level: "1.40 m", result: "19th", rider: "Thomas Velin", location: "Aarhus, DK" },
+      { competition: "CSI2* Grand Prix", year: 2019, level: "1.45 m", result: "Competed", rider: "Thomas Velin", location: "Ciekocinko, PL" },
+      { competition: "CSIYH* Youngster Tour", year: 2015, level: "1.35 m", result: "Placed", rider: "Simon Delestre", location: "Wiesbaden, DE" }
+    ],
     pedigree: [
-      { position: "sire", name: "Nervoso Michelet", breed: "Anglo-Arabe" },
-      { position: "dam", name: "Lune Grise", breed: "Anglo-Arabe" }
+      { position: "sire", name: "Quidam de Revel", breed: "Selle Français", competitionNote: "4th individual, Olympic Games 1992" },
+      { position: "dam", name: "Salina IV", breed: "Holsteiner" },
+      { position: "sire.sire", name: "Jalisco B", breed: "Selle Français" },
+      { position: "sire.dam", name: "Dirka", breed: "Selle Français" },
+      { position: "dam.sire", name: "Dobel's Cento", breed: "Holsteiner", competitionNote: "Team gold, Olympic Games 2000" }
     ]
   },
+
+  // ───────────────────────────── 1.45 m ─────────────────────────────
   {
-    id: "5",
-    slug: "capitaine-du-val",
-    breed: "Selle Français",
+    id: "caribis-z",
+    slug: "caribis-z",
+    breed: "Zangersheide",
     sex: "STALLION",
-    dateOfBirth: "2015-06-11",
-    heightCm: 172,
+    dateOfBirth: "2007-05-31",
     color: "Grey",
-    discipline: "EVENTING",
-    competitionLevel: "CCI4*",
+    jumpHeightCm: 145,
+    maxHeightJumpedCm: 150,
+    competitionLevel: "1.45 m",
+    registrationNo: "FEI 104HB80",
+    priceOnRequest: true,
+    priceCurrency: "EUR",
+    status: "RESERVED",
+    locationLabel: "Brittany, France",
+    featuredOnHome: true,
+    featuredStory: true,
+    highlights: ["8th, World Championships for Young Horses, Lanaken 2014", "148 international starts · 10 wins", "Produced by Christian Ahlmann"],
+    trust: { vetDocs: true, xrays: true, pedigreeDocs: true, transport: true },
+    translations: {
+      en: {
+        locale: "en",
+        name: "Caribis Z",
+        positioning: "A grey Zangersheide stallion produced by Christian Ahlmann, eighth at the World Championships for Young Horses in Lanaken.",
+        experience: "Ridden through his young horse career by Christian Ahlmann, finishing 8th individually in the seven-year-old final at the FEI/WBFSH World Championships for Young Horses in Lanaken in 2014, and going on to 148 international starts with 10 wins.",
+        strengths: "Scope and technique proven against the best of his generation; a stallion whose competition record speaks for itself.",
+        suitability: "A professional or ambitious amateur competing at 1.45 m, with the option of a breeding career alongside.",
+        potential: "Approved stallion status makes him an asset beyond the arena."
+      },
+      fr: {
+        locale: "fr",
+        name: "Caribis Z",
+        positioning: "Étalon gris Zangersheide formé par Christian Ahlmann, 8e du Championnat du Monde des jeunes chevaux à Lanaken.",
+        experience: "Monté durant sa carrière de jeune cheval par Christian Ahlmann, 8e en individuel de la finale des 7 ans au Championnat du Monde FEI/WBFSH de Lanaken en 2014, puis 148 départs internationaux pour 10 victoires."
+      },
+      ar: {
+        locale: "ar",
+        name: "كاريبيس زد",
+        positioning: "فحل رمادي من زانغرسهايده دربه كريستيان أهلمان، حل ثامناً في بطولة العالم للخيول الشابة في لاناكن."
+      }
+    },
+    media: photos("caribis-z", ["03.jpg", "01.jpg", "02.jpg"], KRAMER, "Caribis Z with Christian Ahlmann, CSIYH* Wiesbaden 2015"),
+    documents: [
+      { type: "XRAY", label: "X-rays", url: "#", downloadable: false },
+      { type: "VETERINARY_EXAM", label: "Veterinary examination", url: "#", downloadable: false },
+      { type: "COMPETITION_RECORD", label: "FEI competition record", url: "#", downloadable: false }
+    ],
+    competitionResults: [
+      { competition: "FEI/WBFSH World Championships for Young Horses (7yo)", year: 2014, level: "1.40 m", result: "8th", rider: "Christian Ahlmann", location: "Lanaken, BE" },
+      { competition: "CSIYH* Youngster Tour", year: 2015, level: "1.40 m", result: "Placed", rider: "Christian Ahlmann", location: "Wiesbaden, DE" }
+    ],
+    pedigree: [
+      { position: "sire", name: "Caritano", breed: "Holsteiner" },
+      { position: "dam", name: "Canasta Z", breed: "Zangersheide" },
+      { position: "dam.sire", name: "Canabis Z", breed: "Zangersheide", competitionNote: "International 1.60 m" }
+    ]
+  },
+
+  // ───────────────────────────── 1.50 m + ─────────────────────────────
+  {
+    id: "clooney-51",
+    slug: "clooney-51",
+    breed: "Westphalian",
+    sex: "GELDING",
+    dateOfBirth: "2006-03-03",
+    color: "Grey",
+    jumpHeightCm: 160,
+    maxHeightJumpedCm: 160,
+    competitionLevel: "1.60 m · Championship",
+    registrationNo: "FEI 103YD87",
     priceOnRequest: true,
     priceCurrency: "EUR",
     status: "SOLD",
     locationLabel: "Brittany, France",
     featuredOnHome: false,
     featuredStory: false,
+    highlights: ["European Champion 2019, Rotterdam", "Individual silver, WEG Tryon 2018", "World Cup Final winner 2022"],
     trust: { vetDocs: true, xrays: true, pedigreeDocs: true, transport: true },
     translations: {
       en: {
         locale: "en",
-        name: "Capitaine du Val",
-        positioning: "A CCI4* campaigner with a proven cross-country record, now placed with a national squad rider.",
-        strengths: "Bold and economical across country, competitive dressage scores for the type."
+        name: "Clooney 51",
+        positioning: "Martin Fuchs' grey Westphalian — European Champion, World Cup Final winner and one of the great horses of his era.",
+        experience: "With Martin Fuchs: individual silver at the 2018 World Equestrian Games in Tryon, individual gold at the 2019 European Championships in Rotterdam, winner of the 2022 FEI World Cup Final in Leipzig, and a member of the Swiss team at the Tokyo Olympic Games. 300 international starts, 20 wins.",
+        strengths: "Carefulness and rideability at the very highest level, year after year."
       },
       fr: {
         locale: "fr",
-        name: "Capitaine du Val",
-        positioning: "Cheval de CCI4* au dossier de cross confirmé, désormais confié à un cavalier d'équipe nationale.",
-        strengths: "Hardi et économique en cross, notes de dressage compétitives pour le type."
+        name: "Clooney 51",
+        positioning: "Le gris Westphalien de Martin Fuchs — Champion d'Europe, vainqueur de la finale de Coupe du Monde et l'un des grands chevaux de son époque.",
+        experience: "Avec Martin Fuchs : médaille d'argent individuelle aux Jeux Équestres Mondiaux de Tryon 2018, or individuel aux Championnats d'Europe de Rotterdam 2019, vainqueur de la finale de la Coupe du Monde FEI 2022 à Leipzig, et membre de l'équipe suisse aux Jeux Olympiques de Tokyo."
       },
       ar: {
         locale: "ar",
-        name: "كابيتان دو فال",
-        positioning: "حصان بمستوى CCI4* بسجل قوي في سباق الضاحية، انتقل الآن إلى فارس في المنتخب الوطني.",
-        strengths: "جريء واقتصادي في سباق الضاحية، ونتائج ترويض تنافسية بالنسبة لنوعيته."
+        name: "كلوني 51",
+        positioning: "الحصان الرمادي الويستفالي لمارتن فوكس — بطل أوروبا، والفائز بنهائي كأس العالم، وأحد أعظم خيول جيله."
       }
     },
-    media: [
-      { type: "PHOTO", url: "https://images.unsplash.com/photo-1516947486033-15e9c3b3d2d3?q=80&w=1600", isCover: true }
+    media: photos("clooney-51", ["02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.jpg", "01.jpg"], `${BUCCO} / ${MCFLY}`, "Clooney 51 with Martin Fuchs"),
+    documents: [
+      { type: "XRAY", label: "X-rays", url: "#", downloadable: false },
+      { type: "COMPETITION_RECORD", label: "FEI competition record", url: "#", downloadable: false }
     ],
-    documents: [],
     competitionResults: [
-      { competition: "CCI4*-L", year: 2025, level: "4*-L", result: "6th", location: "Pau, FR" }
+      { competition: "FEI World Cup Final", year: 2022, level: "1.60 m", result: "1st", rider: "Martin Fuchs", location: "Leipzig, DE" },
+      { competition: "Olympic Games — team", year: 2021, level: "1.60 m", result: "4th", rider: "Martin Fuchs", location: "Tokyo, JP" },
+      { competition: "FEI European Championships — individual", year: 2019, level: "1.60 m", result: "Gold", rider: "Martin Fuchs", location: "Rotterdam, NL" },
+      { competition: "World Equestrian Games — individual", year: 2018, level: "1.60 m", result: "Silver", rider: "Martin Fuchs", location: "Tryon, US" }
     ],
     pedigree: [
-      { position: "sire", name: "Jarnac", breed: "Selle Français" },
-      { position: "dam", name: "Belle du Val", breed: "Selle Français" }
+      { position: "sire", name: "Cornet Obolensky", breed: "BWP", competitionNote: "Olympic Games 2008" },
+      { position: "dam", name: "Fraulein vom Moor", breed: "Westphalian" },
+      { position: "sire.sire", name: "Clinton", breed: "Holsteiner", competitionNote: "Olympic Games 2004" },
+      { position: "sire.dam", name: "Rabanna van Costersveld", breed: "BWP" },
+      { position: "dam.sire", name: "Ferragamo", breed: "Westphalian" }
+    ]
+  },
+  {
+    id: "explosion-w",
+    slug: "explosion-w",
+    breed: "KWPN",
+    sex: "GELDING",
+    dateOfBirth: "2009-04-12",
+    color: "Chestnut",
+    jumpHeightCm: 160,
+    maxHeightJumpedCm: 160,
+    competitionLevel: "1.60 m · Olympic",
+    priceOnRequest: true,
+    priceCurrency: "EUR",
+    status: "SOLD",
+    locationLabel: "Brittany, France",
+    featuredOnHome: false,
+    featuredStory: false,
+    highlights: ["Olympic individual gold, Tokyo 2021", "Nine five-star Grand Prix wins", "By Chacco-Blue out of a Baloubet du Rouet mare"],
+    trust: { vetDocs: true, xrays: true, pedigreeDocs: true, transport: true },
+    translations: {
+      en: {
+        locale: "en",
+        name: "Explosion W",
+        positioning: "Ben Maher's Olympic champion — a chestnut KWPN gelding by Chacco-Blue with nine five-star Grand Prix wins.",
+        experience: "Individual Olympic gold in Tokyo (2021), individual silver and team bronze at the 2019 European Championships in Rotterdam, and nine CSI5* Grand Prix victories with Ben Maher. Retired from sport at the London International Horse Show in December 2025.",
+        strengths: "Explosive power with a light, careful front end — the combination that made him the best horse in the world in his prime."
+      },
+      fr: {
+        locale: "fr",
+        name: "Explosion W",
+        positioning: "Le champion olympique de Ben Maher — hongre alezan KWPN par Chacco-Blue, neuf victoires en Grand Prix 5*.",
+        experience: "Or olympique individuel à Tokyo (2021), argent individuel et bronze par équipe aux Championnats d'Europe de Rotterdam 2019, et neuf victoires en Grand Prix CSI5* avec Ben Maher. Retraité lors du London International Horse Show en décembre 2025."
+      },
+      ar: {
+        locale: "ar",
+        name: "إكسبلوجن دبليو",
+        positioning: "بطل بن ماهر الأولمبي — خصي أشقر KWPN من تشاكو-بلو بتسعة انتصارات في جوائز كبرى خمس نجوم."
+      }
+    },
+    media: photos("explosion-w", ["05.jpg", "01.jpg", "02.jpg", "03.jpg"], VALREN, "Explosion W with Ben Maher, Paris Eiffel Jumping 2018"),
+    documents: [
+      { type: "XRAY", label: "X-rays", url: "#", downloadable: false },
+      { type: "COMPETITION_RECORD", label: "FEI competition record", url: "#", downloadable: false }
+    ],
+    competitionResults: [
+      { competition: "Olympic Games — individual", year: 2021, level: "1.60 m", result: "Gold", rider: "Ben Maher", location: "Tokyo, JP" },
+      { competition: "FEI European Championships — individual", year: 2019, level: "1.60 m", result: "Silver", rider: "Ben Maher", location: "Rotterdam, NL" },
+      { competition: "FEI European Championships — team", year: 2019, level: "1.60 m", result: "Bronze", rider: "Ben Maher", location: "Rotterdam, NL" },
+      { competition: "Longines Global Champions Tour — series", year: 2018, level: "1.60 m", result: "Champion", rider: "Ben Maher", location: "Doha, QA" }
+    ],
+    pedigree: [
+      { position: "sire", name: "Chacco-Blue", breed: "Mecklenburg", competitionNote: "World's no. 1 jumping sire (WBFSH)" },
+      { position: "dam", name: "Untouchable (Uarina)", breed: "KWPN" },
+      { position: "sire.sire", name: "Chambertin", breed: "Holsteiner" },
+      { position: "sire.dam", name: "Contara", breed: "Holsteiner" },
+      { position: "dam.sire", name: "Baloubet du Rouet", breed: "Selle Français", competitionNote: "Olympic gold 2004; 3× World Cup winner" }
+    ]
+  },
+  {
+    id: "hello-sanctos",
+    slug: "hello-sanctos",
+    breed: "sBs (Belgian Sport Horse)",
+    sex: "GELDING",
+    dateOfBirth: "2002-05-13",
+    color: "Bay",
+    jumpHeightCm: 160,
+    maxHeightJumpedCm: 160,
+    competitionLevel: "1.60 m · Olympic",
+    priceOnRequest: true,
+    priceCurrency: "EUR",
+    status: "SOLD",
+    locationLabel: "Brittany, France",
+    featuredOnHome: false,
+    featuredStory: false,
+    highlights: ["Only horse to win the Rolex Grand Slam", "Olympic team gold, London 2012", "World no. 1, 2014–2015"],
+    trust: { vetDocs: true, xrays: true, pedigreeDocs: true, transport: true },
+    translations: {
+      en: {
+        locale: "en",
+        name: "Hello Sanctos",
+        positioning: "Scott Brash's bay Belgian gelding — Olympic team gold medallist and the only horse ever to complete the Rolex Grand Slam.",
+        experience: "Team gold at the London 2012 Olympic Games and the 2013 European Championships. Winner of the Grands Prix of Geneva (2014), Aachen (2015) and Spruce Meadows (2015) in succession — the Rolex Grand Slam of Show Jumping, a feat no other horse has matched. Bred by Willy Taets in Lembeke, Belgium.",
+        strengths: "Consistency at the very top: ranked the world's best show jumping horse through 2014 and 2015."
+      },
+      fr: {
+        locale: "fr",
+        name: "Hello Sanctos",
+        positioning: "Le hongre bai belge de Scott Brash — médaillé d'or olympique par équipe et seul cheval à avoir réalisé le Rolex Grand Slam.",
+        experience: "Or par équipe aux Jeux Olympiques de Londres 2012 et aux Championnats d'Europe 2013. Vainqueur successif des Grands Prix de Genève (2014), Aix-la-Chapelle (2015) et Spruce Meadows (2015) — le Rolex Grand Slam, un exploit qu'aucun autre cheval n'a égalé."
+      },
+      ar: {
+        locale: "ar",
+        name: "هيلو سانكتوس",
+        positioning: "خصي بلجيكي كميت لسكوت براش — ذهبية أولمبية بالفرق، والحصان الوحيد الذي أكمل رولكس غراند سلام."
+      }
+    },
+    media: photos("hello-sanctos", ["05.jpg", "03.jpg", "02.jpg", "04.jpg", "01.jpg", "06.jpg"], BUCCO, "Hello Sanctos with Scott Brash, CHI Geneva"),
+    documents: [
+      { type: "XRAY", label: "X-rays", url: "#", downloadable: false },
+      { type: "COMPETITION_RECORD", label: "FEI competition record", url: "#", downloadable: false }
+    ],
+    competitionResults: [
+      { competition: "Rolex Grand Prix, CSIO5* Spruce Meadows", year: 2015, level: "1.60 m", result: "1st — Grand Slam", rider: "Scott Brash", location: "Calgary, CA" },
+      { competition: "Rolex Grand Prix, CHIO Aachen", year: 2015, level: "1.60 m", result: "1st", rider: "Scott Brash", location: "Aachen, DE" },
+      { competition: "Rolex Grand Prix, CHI Geneva", year: 2014, level: "1.60 m", result: "1st", rider: "Scott Brash", location: "Geneva, CH" },
+      { competition: "Olympic Games — team", year: 2012, level: "1.60 m", result: "Gold", rider: "Scott Brash", location: "London, GB" }
+    ],
+    pedigree: [
+      { position: "sire", name: "Quasimodo van de Molendreef", breed: "BWP" },
+      { position: "dam", name: "Nikita", breed: "sBs" },
+      { position: "sire.sire", name: "Quasimodo Z", breed: "Zangersheide" },
+      { position: "dam.sire", name: "Nabab de Rêve", breed: "BWP", competitionNote: "Sire of Vigo d'Arsouilles" }
     ]
   }
 ];
