@@ -1,0 +1,666 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&amp;family=Inter:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+  <style>
+    body{margin:0;background:#F7F2E7;color:#17140F;font-family:'Inter','Segoe UI','Helvetica Neue',Arial,sans-serif;font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+    a{color:#B08D57;text-decoration:none}
+    a:hover{color:#C7A468}
+    .display{font-family:'Fraunces',Georgia,'Times New Roman',serif}
+    .mono{font-family:'IBM Plex Mono','Consolas','Courier New',monospace}
+    .eyebrow{font-family:'IBM Plex Mono','Consolas',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.22em;color:#B08D57;font-weight:400}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:13px 26px;font-family:'IBM Plex Mono','Consolas',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;background:transparent;border:1px solid transparent;cursor:pointer;transition:color .4s,border-color .4s}
+    .btn-gold{border-color:#B08D57;color:#C7A468}
+    .btn-gold:hover{border-color:#C7A468;color:#F7F2E7}
+    .btn-ivory{border-color:rgba(247,242,231,.45);color:#F7F2E7}
+    .btn-ivory:hover{border-color:#C7A468;color:#C7A468}
+    .btn-charcoal{border-color:#17140F;color:#17140F}
+    .btn-charcoal:hover{border-color:#B08D57;color:#B08D57}
+    .navlink{font-family:'IBM Plex Mono','Consolas',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:rgba(23,20,15,.7)}
+    .navlink:hover{color:#B08D57}
+    .badge{position:absolute;top:16px;left:16px;padding:4px 12px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase}
+    .badge-av{background:#1F3327;color:#F7F2E7}
+    .badge-res{background:#B08D57;color:#17140F}
+    .ph{position:relative;overflow:hidden;background:#221E17}
+    .ph-1{background:linear-gradient(155deg,#221E17 0%,#453A28 40%,#8A7551 75%,#CBB68C 100%)}
+    .ph-2{background:linear-gradient(150deg,#1F3327 0%,#2A4433 38%,#6E6F4F 72%,#CBB68C 100%)}
+    .ph-3{background:linear-gradient(160deg,#17140F 0%,#3D3628 48%,#77684A 78%,#E4D7BE 100%)}
+    .ph-4{background:linear-gradient(150deg,#2B241A 0%,#5D4C33 52%,#A58C60 82%,#E4D7BE 100%)}
+    .ph-5{background:linear-gradient(165deg,#201C15 0%,#454A3A 45%,#8D8365 76%,#D8C9A8 100%)}
+    .ph-6{background:linear-gradient(145deg,#241F16 0%,#4F4227 50%,#94804F 80%,#CBB68C 100%)}
+    .glow{position:absolute;inset:0;background:radial-gradient(120% 75% at 68% 16%,rgba(247,242,231,.16),rgba(247,242,231,0) 55%)}
+    .k{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(23,20,15,.4)}
+    .selrow{display:flex;align-items:baseline;gap:20px;padding:15px 0;border-bottom:1px solid rgba(247,242,231,.1);cursor:default}
+    .selnum{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.22em;color:rgba(176,141,87,.7)}
+    .selname{font-family:'Fraunces',Georgia,serif;font-style:italic;font-size:29px;line-height:1.2;color:rgba(247,242,231,.55);transition:color .4s}
+    .selrow:hover .selname{color:#F7F2E7}
+    .selmeta{margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(247,242,231,.35)}
+    .sel-card{box-shadow:0 32px 64px rgba(0,0,0,.4)}
+    .dot{width:6px;height:6px;border-radius:50%;background:rgba(23,20,15,.18);display:inline-block}
+    .dot-on{background:#B08D57}
+    .why-icon{color:#B08D57}
+    .footlink{color:rgba(247,242,231,.8);font-size:14px}
+    .footlink:hover{color:#C7A468}
+  </style>
+</helmet>
+<div style="background:#F7F2E7">
+
+  <!-- Header -->
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:24px;padding:16px 40px;background:rgba(247,242,231,.95);border-bottom:1px solid rgba(23,20,15,.12)">
+    <div style="display:flex;align-items:baseline;gap:8px">
+      <span class="display" style="font-style:italic;font-size:24px;letter-spacing:-.02em;color:#17140F">MEC</span>
+      <span class="mono" style="font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#B08D57">Trading</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:32px">
+      <a class="navlink" href="#" style="color:#B08D57">Home</a>
+      <a class="navlink" href="#">Horses for Sale</a>
+      <a class="navlink" href="#">About</a>
+      <a class="navlink" href="#">Services</a>
+      <a class="navlink" href="#">News</a>
+      <a class="navlink" href="#">Contact</a>
+    </div>
+    <div style="display:flex;align-items:center;gap:18px">
+      <div class="mono" style="font-size:11px;letter-spacing:.22em;color:rgba(23,20,15,.45)"><span style="color:#B08D57">EN</span> / FR / AR</div>
+      <a class="btn btn-charcoal" style="padding:9px 20px" href="#">Contact Us</a>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <div class="ph" style="height:716px;background:linear-gradient(160deg,rgba(23,20,15,.62) 0%,rgba(23,20,15,.86) 70%),linear-gradient(155deg,#221E17 0%,#453A28 40%,#8A7551 75%,#CBB68C 100%)">
+    <div class="glow"></div>
+    <div style="position:absolute;left:40px;right:40px;bottom:88px;display:flex;flex-direction:column;align-items:flex-start;gap:24px">
+      <span class="eyebrow">MEC Trading · Brittany, France</span>
+      <h1 class="display" style="margin:0;font-style:italic;font-weight:500;font-size:78px;line-height:1.04;letter-spacing:-.015em;color:#F7F2E7;max-width:900px">Exceptional Horses. Exceptional Potential.</h1>
+      <p style="margin:0;max-width:540px;font-size:18px;line-height:1.6;color:rgba(247,242,231,.7)">Discover our carefully selected horses for sport, competition and breeding.</p>
+      <div style="display:flex;gap:16px;margin-top:8px">
+        <a class="btn btn-gold" href="#">View Horses for Sale</a>
+        <a class="btn btn-ivory" href="#">Contact Us</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Featured Horses -->
+  <div style="padding:96px 40px 88px">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px">
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <span class="eyebrow">Featured Horses</span>
+        <h2 class="display" style="margin:0;font-style:italic;font-weight:500;font-size:44px;line-height:1.1">Currently in our selection</h2>
+      </div>
+      <a class="mono" href="#" style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;text-decoration:underline;text-underline-offset:4px">View all horses</a>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4, minmax(0, 1fr));gap:24px;margin-top:48px">
+
+      <div>
+        <div class="ph ph-1" style="aspect-ratio:4/5"><div class="glow"></div><span class="badge badge-av">Available</span></div>
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-top:16px">
+          <div>
+            <div class="display" style="font-style:italic;font-size:20px;line-height:1.3">Orphée des Forges</div>
+            <div style="margin-top:4px;font-size:13px;color:rgba(23,20,15,.6)">Selle Français · Gelding · 9 yrs</div>
+            <div style="font-size:13px;color:rgba(23,20,15,.6)">168 cm · Show Jumping</div>
+            <div class="mono" style="margin-top:4px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:rgba(23,20,15,.4)">Brittany, France</div>
+          </div>
+          <div class="display" style="flex:none;font-size:17px;color:#B08D57;text-align:right">Price on Request</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="ph ph-3" style="aspect-ratio:4/5"><div class="glow"></div><span class="badge badge-res">Reserved</span></div>
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-top:16px">
+          <div>
+            <div class="display" style="font-style:italic;font-size:20px;line-height:1.3">Quintessence de Riverdale</div>
+            <div style="margin-top:4px;font-size:13px;color:rgba(23,20,15,.6)">KWPN · Mare · 10 yrs</div>
+            <div style="font-size:13px;color:rgba(23,20,15,.6)">170 cm · Dressage</div>
+            <div class="mono" style="margin-top:4px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:rgba(23,20,15,.4)">Brittany, France</div>
+          </div>
+          <div class="display" style="flex:none;font-size:17px;color:#B08D57;text-align:right">Price on Request</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="ph ph-4" style="aspect-ratio:4/5"><div class="glow"></div><span class="badge badge-av">Available</span></div>
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-top:16px">
+          <div>
+            <div class="display" style="font-style:italic;font-size:20px;line-height:1.3">Amira El Shams</div>
+            <div style="margin-top:4px;font-size:13px;color:rgba(23,20,15,.6)">Arabian · Mare · 7 yrs</div>
+            <div style="font-size:13px;color:rgba(23,20,15,.6)">152 cm · Arabian Horses</div>
+            <div class="mono" style="margin-top:4px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:rgba(23,20,15,.4)">Brittany, France</div>
+          </div>
+          <div class="display" style="flex:none;font-size:17px;color:#B08D57;text-align:right">€45,000</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="ph ph-2" style="aspect-ratio:4/5"><div class="glow"></div><span class="badge badge-av">Available</span></div>
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-top:16px">
+          <div>
+            <div class="display" style="font-style:italic;font-size:20px;line-height:1.3">Brio de Lune</div>
+            <div style="margin-top:4px;font-size:13px;color:rgba(23,20,15,.6)">Anglo-Arabe · Gelding · 5 yrs</div>
+            <div style="font-size:13px;color:rgba(23,20,15,.6)">160 cm · Young Horses</div>
+            <div class="mono" style="margin-top:4px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:rgba(23,20,15,.4)">Brittany, France</div>
+          </div>
+          <div class="display" style="flex:none;font-size:17px;color:#B08D57;text-align:right">€22,000</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Our Selection: interactive discipline preview -->
+  <div style="background:#17140F;padding:96px 40px">
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <span class="eyebrow">Our Selection</span>
+      <h2 class="display" style="margin:0;font-style:italic;font-weight:500;font-size:44px;line-height:1.1;color:#F7F2E7">Find a horse by discipline</h2>
+      <p class="mono" style="margin:4px 0 0;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(247,242,231,.35)">Hover a discipline to preview the horses currently available</p>
+    </div>
+    <div style="display:flex;gap:72px;margin-top:48px;align-items:flex-start">
+
+      <div style="flex:1 1 0;min-width:0">
+        <div class="selrow" onMouseEnter="{{hov.jumping}}"><span class="selnum">01</span><span class="selname" style="{{row.jumping}}">Show Jumping</span><span class="selmeta">1.35m – 1.45m</span></div>
+        <div class="selrow" onMouseEnter="{{hov.dressage}}"><span class="selnum">02</span><span class="selname" style="{{row.dressage}}">Dressage</span><span class="selmeta">PSG – Grand Prix</span></div>
+        <div class="selrow" onMouseEnter="{{hov.eventing}}"><span class="selnum">03</span><span class="selname" style="{{row.eventing}}">Eventing</span><span class="selmeta">CCI2* – CCI3*</span></div>
+        <div class="selrow" onMouseEnter="{{hov.breeding}}"><span class="selnum">04</span><span class="selname" style="{{row.breeding}}">Breeding</span><span class="selmeta">Proven dam lines</span></div>
+        <div class="selrow" onMouseEnter="{{hov.arabian}}"><span class="selnum">05</span><span class="selname" style="{{row.arabian}}">Arabian Horses</span><span class="selmeta">Egyptian lines</span></div>
+        <div class="selrow" onMouseEnter="{{hov.young}}"><span class="selnum">06</span><span class="selname" style="{{row.young}}">Young Horses</span><span class="selmeta">3 – 5 yrs</span></div>
+        <div class="selrow" onMouseEnter="{{hov.competition}}"><span class="selnum">07</span><span class="selname" style="{{row.competition}}">Competition Horses</span><span class="selmeta">In sport now</span></div>
+        <div class="selrow" onMouseEnter="{{hov.prospect}}"><span class="selnum">08</span><span class="selname" style="{{row.prospect}}">Prospect Horses</span><span class="selmeta">Future stars</span></div>
+      </div>
+
+      <div style="flex:none;width:440px">
+
+        <div class="sel-card" style="{{v.jumping0}}">
+          <div class="ph ph-1" style="height:225px"><div class="glow"></div><span class="badge badge-av">Available</span></div>
+          <div style="background:#F7F2E7;padding:20px 24px 22px">
+            <div style="display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:2px 12px">
+              <span class="display" style="font-style:italic;font-size:23px">Orphée des Forges</span>
+              <span class="display" style="font-size:16px;color:#B08D57;white-space:nowrap">Price on Request</span>
+            </div>
+            <div style="margin-top:2px;font-size:13px;color:rgba(23,20,15,.6)">Selle Français · Gelding · 9 yrs</div>
+            <div style="display:flex;gap:28px;margin-top:14px">
+              <div><div class="k">Height</div><div style="font-size:14px">168 cm</div></div>
+              <div><div class="k">Level</div><div style="font-size:14px">1.45m</div></div>
+              <div><div class="k">Location</div><div style="font-size:14px">Brittany, FR</div></div>
+            </div>
+            <div style="margin-top:14px;border-left:2px solid #B08D57;padding-left:12px;font-size:13px;color:#1F3327">3rd — CSI3* Grand Prix, Deauville 2026</div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:16px">
+              <a class="mono" href="#" style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;text-decoration:underline;text-underline-offset:4px">View Horse</a>
+              <span style="display:inline-flex;gap:6px"><span class="dot dot-on"></span><span class="dot"></span></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sel-card" style="{{v.jumping1}}">
+          <div class="ph ph-4" style="height:225px"><div class="glow"></div><span class="badge badge-av">Available</span></div>
+          <div style="background:#F7F2E7;padding:20px 24px 22px">
+            <div style="display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:2px 12px">
+              <span class="display" style="font-style:italic;font-size:23px">Cascade du Rozel</span>
+              <span class="display" style="font-size:16px;color:#B08D57;white-space:nowrap">€95,000</span>
+            </div>
+            <div style="margin-top:2px;font-size:13px;color:rgba(23,20,15,.6)">Selle Français · Mare · 8 yrs</div>
+            <div style="display:flex;gap:28px;margin-top:14px">
+              <div><div class="k">Height</div><div style="font-size:14px">165 cm</div></div>
+              <div><div class="k">Level</div><div style="font-size:14px">1.35m</div></div>
+              <div><div class="k">Location</div><div style="font-size:14px">Brittany, FR</div></div>
+            </div>
+            <div style="margin-top:14px;border-left:2px solid #B08D57;padding-left:12px;font-size:13px;color:#1F3327">Double clear — CSI* Dinard 2026</div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:16px">
+              <a class="mono" href="#" style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;text-decoration:underline;text-underline-offset:4px">View Horse</a>
+              <span style="display:inline-flex;gap:6px"><span class="dot"></span><span class="dot dot-on"></span></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sel-card" style="{{v.dressage0}}">
+          <div class="ph ph-3" style="height:225px"><div class="glow"></div><span class="badge badge-res">Reserved</span></div>
+          <div style="background:#F7F2E7;padding:20px 24px 22px">
+            <div style="display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:2px 12px">
+              <span class="display" style="font-style:italic;font-size:23px">Quintessence de Riverdale</span>
+              <span class="display" style="font-size:16px;color:#B08D57;white-space:nowrap">Price on Request</span>
+            </div>
+            <div style="margin-top:2px;font-size:13px;color:rgba(23,20,15,.6)">KWPN · Mare · 10 yrs</div>
+            <div style="display:flex;gap:28px;margin-top:14px">
+              <div><div class="k">Height</div><div style="font-size:14px">170 cm</div></div>
+              <div><div class="k">Level</div><div style="font-size:14px">GP in training</div></div>
+              <div><div class="k">Location</div><div style="font-size:14px">Brittany, FR</div></div>
+            </div>
+            <div style="margin-top:14px;border-left:2px solid #B08D57;padding-left:12px;font-size:13px;color:#1F3327">2nd — CDI3* Inter II, Compiègne 2026</div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:16px">
+              <a class="mono" href="#" style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;text-decoration:underline;text-underline-offset:4px">View Horse</a>
+              <span style="display:inline-flex;gap:6px"><span class="dot dot-on"></span><span class="dot"></span></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sel-card" style="{{v.dressage1}}">
+          <div class="ph ph-5" style="height:225px"><div class="glow"></div><span class="badge badge-av">Available</span></div>
+          <div style="background:#F7F2E7;padding:20px 24px 22px">
+            <div style="display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:2px 12px">
+              <span class="display" style="font-style:italic;font-size:23px">Feodor van de Heide</span>
+              <span class="display" style="font-size:16px;color:#B08D57;white-space:nowrap">€85,000</span>
+            </div>
+            <div style="margin-top:2px;font-size:13px;color:rgba(23,20,15,.6)">KWPN · Gelding · 7 yrs</div>
+            <div style="display:flex;gap:28px;margin-top:14px">
+              <div><div class="k">Height</div><div style="font-size:14px">172 cm</div></div>
+              <div><div class="k">Level</div><div style="font-size:14px">Prix St. Georges</div></div>
+              <div><div class="k">Location</div><div style="font-size:14px">Brittany, FR</div></div>
+            </div>
+            <div style="margin-top:14px;border-left:2px solid #B08D57;padding-left:12px;font-size:13px;color:#1F3327">68.9% — PSG debut, Saumur 2026</div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:16px">
+              <a class="mono" href="#" style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;text-decoration:underline;text-underline-offset:4px">View Horse</a>
+              <span style="display:inline-flex;gap:6px"><span class="dot"></span><span class="dot dot-on"></span></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sel-card" style="{{v.eventing0}}">
+          <div class="ph ph-2" style="height:225px"><div class="glow"></div><span class="badge badge-av">Available</span></div>
+          <div style="background:#F7F2E7;padding:20px 24px 22px">
+            <div style="display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:2px 12px">
+              <span class="display" style="font-style:italic;font-size:23px">Idylle de Kerlann</span>
+              <span class="display" style="font-size:16px;color:#B08D57;white-space:nowrap">€48,000</span>
+            </div>
+            <div style="margin-top:2px;font-size:13px;color:rgba(23,20,15,.6)">Selle Français · Mare · 8 yrs</div>
+            <div style="display:flex;gap:28px;margin-top:14px">
+              <div><div class="k">Height</div><div style="font-size:14px">166 cm</div></div>
+              <div><div class="k">Level</div><div style="font-size:14px">CCI2*-S</div></div>
+              <div><div class="k">Location</div><div style="font-size:14px">Brittany, FR</div></div>
+            </div>
+            <div style="margin-top:14px;border-left:2px solid #B08D57;padding-left:12px;font-size:13px;color:#1F3327">Clear XC — CCI2*-S Le Lion 2026</div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:16px">
+              <a class="mono" href="#" style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;text-decoration:underline;text-underline-offset:4px">View Horse</a>
+              <span style="display:inline-flex;gap:6px"><span class="dot dot-on"></span><span class="dot"></span></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sel-card" style="{{v.eventing1}}">
+          <div class="ph ph-6" style="height:225px"><div class="glow"></div><span class="badge badge-av">Available</span></div>
+          <div style="background:#F7F2E7;padding:20px 24px 22px">
+            <div style="display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:2px 12px">
+              <span class="display" style="font-style:italic;font-size:23px">Vent d'Ouest</span>
+              <span class="display" style="font-size:16px;color:#B08D57;white-space:nowrap">€78,000</span>
+            </div>
+            <div style="margin-top:2px;font-size:13px;color:rgba(23,20,15,.6)">Selle Français · Gelding · 9 yrs</div>
+            <div style="display:flex;gap:28px;margin-top:14px">
+              <div><div class="k">Height</div><div style="font-size:14px">169 cm</div></div>
+              <div><div class="k">Level</div><div style="font-size:14px">CCI3*</div></div>
+              <div><div class="k">Location</div><div style="font-size:14px">Brittany, FR</div></div>
+            </div>
+            <div style="margin-top:14px;border-left:2px solid #B08D57;padding-left:12px;font-size:13px;color:#1F3327">Top-10 — CCI3*-L Lignières 2025</div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:16px">
+              <a class="mono" href="#" style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;text-decoration:underline;text-underline-offset:4px">View Horse</a>
+              <span style="display:inline-flex;gap:6px"><span class="dot"></span><span class="dot dot-on"></span></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sel-card" style="{{v.breeding0}}">
+          <div class="ph ph-4" style="height:225px"><div class="glow"></div><span class="badge badge-av">Available</span></div>
+          <div style="background:#F7F2E7;padding:20px 24px 22px">
+            <div style="display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:2px 12px">
+              <span class="display" style="font-style:italic;font-size:23px">Belle Alliance</span>
+              <span class="display" style="font-size:16px;color:#B08D57;white-space:nowrap">Price on Request</span>
+            </div>
+            <div style="margin-top:2px;font-size:13px;color:rgba(23,20,15,.6)">Selle Français · Mare · 14 yrs</div>
+            <div style="display:flex;gap:28px;margin-top:14px">
+              <div><div class="k">Height</div><div style="font-size:14px">167 cm</div></div>
+              <div><div class="k">Status</div><div style="font-size:14px">Elite broodmare</div></div>
+              <div><div class="k">Location</div><div style="font-size:14px">Brittany, FR</div></div>
+            </div>
+            <div style="margin-top:14px;border-left:2px solid #B08D57;padding-left:12px;font-size:13px;color:#1F3327">In foal to Diamant de Semilly for 2027</div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:16px">
+              <a class="mono" href="#" style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;text-decoration:underline;text-underline-offset:4px">View Horse</a>
+              <span style="display:inline-flex;gap:6px"><span class="dot dot-on"></span><span class="dot"></span></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sel-card" style="{{v.breeding1}}">
+          <div class="ph ph-3" style="height:225px"><div class="glow"></div><span class="badge badge-av">Available</span></div>
+          <div style="background:#F7F2E7;padding:20px 24px 22px">
+            <div style="display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:2px 12px">
+              <span class="display" style="font-style:italic;font-size:23px">Amira El Shams</span>
+              <span class="display" style="font-size:16px;color:#B08D57;white-space:nowrap">€45,000</span>
+            </div>
+            <div style="margin-top:2px;font-size:13px;color:rgba(23,20,15,.6)">Arabian · Mare · 7 yrs</div>
+            <div style="display:flex;gap:28px;margin-top:14px">
+              <div><div class="k">Height</div><div style="font-size:14px">152 cm</div></div>
+              <div><div class="k">Use</div><div style="font-size:14px">Breeding / Halter</div></div>
+              <div><div class="k">Location</div><div style="font-size:14px">Brittany, FR</div></div>
+            </div>
+            <div style="margin-top:14px;border-left:2px solid #B08D57;padding-left:12px;font-size:13px;color:#1F3327">WAHO-documented Egyptian bloodline</div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:16px">
+              <a class="mono" href="#" style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;text-decoration:underline;text-underline-offset:4px">View Horse</a>
+              <span style="display:inline-flex;gap:6px"><span class="dot"></span><span class="dot dot-on"></span></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sel-card" style="{{v.arabian0}}">
+          <div class="ph ph-3" style="height:225px"><div class="glow"></div><span class="badge badge-av">Available</span></div>
+          <div style="background:#F7F2E7;padding:20px 24px 22px">
+            <div style="display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:2px 12px">
+              <span class="display" style="font-style:italic;font-size:23px">Amira El Shams</span>
+              <span class="display" style="font-size:16px;color:#B08D57;white-space:nowrap">€45,000</span>
+            </div>
+            <div style="margin-top:2px;font-size:13px;color:rgba(23,20,15,.6)">Arabian · Mare · 7 yrs</div>
+            <div style="display:flex;gap:28px;margin-top:14px">
+              <div><div class="k">Height</div><div style="font-size:14px">152 cm</div></div>
+              <div><div class="k">Use</div><div style="font-size:14px">Breeding / Halter</div></div>
+              <div><div class="k">Location</div><div style="font-size:14px">Brittany, FR</div></div>
+            </div>
+            <div style="margin-top:14px;border-left:2px solid #B08D57;padding-left:12px;font-size:13px;color:#1F3327">Classic Egyptian type, exceptional head</div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:16px">
+              <a class="mono" href="#" style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;text-decoration:underline;text-underline-offset:4px">View Horse</a>
+              <span style="display:inline-flex;gap:6px"><span class="dot dot-on"></span><span class="dot"></span></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sel-card" style="{{v.arabian1}}">
+          <div class="ph ph-1" style="height:225px"><div class="glow"></div><span class="badge badge-av">Available</span></div>
+          <div style="background:#F7F2E7;padding:20px 24px 22px">
+            <div style="display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:2px 12px">
+              <span class="display" style="font-style:italic;font-size:23px">Saif El Layl</span>
+              <span class="display" style="font-size:16px;color:#B08D57;white-space:nowrap">Price on Request</span>
+            </div>
+            <div style="margin-top:2px;font-size:13px;color:rgba(23,20,15,.6)">Arabian · Stallion · 5 yrs</div>
+            <div style="display:flex;gap:28px;margin-top:14px">
+              <div><div class="k">Height</div><div style="font-size:14px">153 cm</div></div>
+              <div><div class="k">Use</div><div style="font-size:14px">Show / In-hand</div></div>
+              <div><div class="k">Location</div><div style="font-size:14px">Brittany, FR</div></div>
+            </div>
+            <div style="margin-top:14px;border-left:2px solid #B08D57;padding-left:12px;font-size:13px;color:#1F3327">Champion colt — regional show 2024</div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:16px">
+              <a class="mono" href="#" style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;text-decoration:underline;text-underline-offset:4px">View Horse</a>
+              <span style="display:inline-flex;gap:6px"><span class="dot"></span><span class="dot dot-on"></span></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sel-card" style="{{v.young0}}">
+          <div class="ph ph-2" style="height:225px"><div class="glow"></div><span class="badge badge-av">Available</span></div>
+          <div style="background:#F7F2E7;padding:20px 24px 22px">
+            <div style="display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:2px 12px">
+              <span class="display" style="font-style:italic;font-size:23px">Brio de Lune</span>
+              <span class="display" style="font-size:16px;color:#B08D57;white-space:nowrap">€22,000</span>
+            </div>
+            <div style="margin-top:2px;font-size:13px;color:rgba(23,20,15,.6)">Anglo-Arabe · Gelding · 5 yrs</div>
+            <div style="display:flex;gap:28px;margin-top:14px">
+              <div><div class="k">Height</div><div style="font-size:14px">160 cm</div></div>
+              <div><div class="k">Level</div><div style="font-size:14px">Unstarted</div></div>
+              <div><div class="k">Location</div><div style="font-size:14px">Brittany, FR</div></div>
+            </div>
+            <div style="margin-top:14px;border-left:2px solid #B08D57;padding-left:12px;font-size:13px;color:#1F3327">Exceptional walk and canter for the breed</div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:16px">
+              <a class="mono" href="#" style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;text-decoration:underline;text-underline-offset:4px">View Horse</a>
+              <span style="display:inline-flex;gap:6px"><span class="dot dot-on"></span><span class="dot"></span></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sel-card" style="{{v.young1}}">
+          <div class="ph ph-5" style="height:225px"><div class="glow"></div><span class="badge badge-av">Available</span></div>
+          <div style="background:#F7F2E7;padding:20px 24px 22px">
+            <div style="display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:2px 12px">
+              <span class="display" style="font-style:italic;font-size:23px">Nymphe d'Argoat</span>
+              <span class="display" style="font-size:16px;color:#B08D57;white-space:nowrap">€18,000</span>
+            </div>
+            <div style="margin-top:2px;font-size:13px;color:rgba(23,20,15,.6)">Selle Français · Mare · 3 yrs</div>
+            <div style="display:flex;gap:28px;margin-top:14px">
+              <div><div class="k">Height</div><div style="font-size:14px">162 cm</div></div>
+              <div><div class="k">Level</div><div style="font-size:14px">Halter broken</div></div>
+              <div><div class="k">Location</div><div style="font-size:14px">Brittany, FR</div></div>
+            </div>
+            <div style="margin-top:14px;border-left:2px solid #B08D57;padding-left:12px;font-size:13px;color:#1F3327">Dam jumped 1.40m; Quidam de Revel line</div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:16px">
+              <a class="mono" href="#" style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;text-decoration:underline;text-underline-offset:4px">View Horse</a>
+              <span style="display:inline-flex;gap:6px"><span class="dot"></span><span class="dot dot-on"></span></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sel-card" style="{{v.competition0}}">
+          <div class="ph ph-1" style="height:225px"><div class="glow"></div><span class="badge badge-av">Available</span></div>
+          <div style="background:#F7F2E7;padding:20px 24px 22px">
+            <div style="display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:2px 12px">
+              <span class="display" style="font-style:italic;font-size:23px">Orphée des Forges</span>
+              <span class="display" style="font-size:16px;color:#B08D57;white-space:nowrap">Price on Request</span>
+            </div>
+            <div style="margin-top:2px;font-size:13px;color:rgba(23,20,15,.6)">Selle Français · Gelding · 9 yrs</div>
+            <div style="display:flex;gap:28px;margin-top:14px">
+              <div><div class="k">Height</div><div style="font-size:14px">168 cm</div></div>
+              <div><div class="k">Level</div><div style="font-size:14px">1.45m</div></div>
+              <div><div class="k">Location</div><div style="font-size:14px">Brittany, FR</div></div>
+            </div>
+            <div style="margin-top:14px;border-left:2px solid #B08D57;padding-left:12px;font-size:13px;color:#1F3327">Placed in three 1.45m grands prix last season</div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:16px">
+              <a class="mono" href="#" style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;text-decoration:underline;text-underline-offset:4px">View Horse</a>
+              <span style="display:inline-flex;gap:6px"><span class="dot dot-on"></span><span class="dot"></span></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sel-card" style="{{v.competition1}}">
+          <div class="ph ph-3" style="height:225px"><div class="glow"></div><span class="badge badge-res">Reserved</span></div>
+          <div style="background:#F7F2E7;padding:20px 24px 22px">
+            <div style="display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:2px 12px">
+              <span class="display" style="font-style:italic;font-size:23px">Quintessence de Riverdale</span>
+              <span class="display" style="font-size:16px;color:#B08D57;white-space:nowrap">Price on Request</span>
+            </div>
+            <div style="margin-top:2px;font-size:13px;color:rgba(23,20,15,.6)">KWPN · Mare · 10 yrs</div>
+            <div style="display:flex;gap:28px;margin-top:14px">
+              <div><div class="k">Height</div><div style="font-size:14px">170 cm</div></div>
+              <div><div class="k">Level</div><div style="font-size:14px">GP in training</div></div>
+              <div><div class="k">Location</div><div style="font-size:14px">Brittany, FR</div></div>
+            </div>
+            <div style="margin-top:14px;border-left:2px solid #B08D57;padding-left:12px;font-size:13px;color:#1F3327">One-tempi changes and piaffe installed</div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:16px">
+              <a class="mono" href="#" style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;text-decoration:underline;text-underline-offset:4px">View Horse</a>
+              <span style="display:inline-flex;gap:6px"><span class="dot"></span><span class="dot dot-on"></span></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sel-card" style="{{v.prospect0}}">
+          <div class="ph ph-6" style="height:225px"><div class="glow"></div><span class="badge badge-av">Available</span></div>
+          <div style="background:#F7F2E7;padding:20px 24px 22px">
+            <div style="display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:2px 12px">
+              <span class="display" style="font-style:italic;font-size:23px">Ondine du Parc</span>
+              <span class="display" style="font-size:16px;color:#B08D57;white-space:nowrap">€38,000</span>
+            </div>
+            <div style="margin-top:2px;font-size:13px;color:rgba(23,20,15,.6)">Selle Français · Mare · 5 yrs</div>
+            <div style="display:flex;gap:28px;margin-top:14px">
+              <div><div class="k">Height</div><div style="font-size:14px">164 cm</div></div>
+              <div><div class="k">Level</div><div style="font-size:14px">1.20m young classes</div></div>
+              <div><div class="k">Location</div><div style="font-size:14px">Brittany, FR</div></div>
+            </div>
+            <div style="margin-top:14px;border-left:2px solid #B08D57;padding-left:12px;font-size:13px;color:#1F3327">Placed — 5yo Cycle Classique 2026</div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:16px">
+              <a class="mono" href="#" style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;text-decoration:underline;text-underline-offset:4px">View Horse</a>
+              <span style="display:inline-flex;gap:6px"><span class="dot dot-on"></span><span class="dot"></span></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sel-card" style="{{v.prospect1}}">
+          <div class="ph ph-2" style="height:225px"><div class="glow"></div><span class="badge badge-av">Available</span></div>
+          <div style="background:#F7F2E7;padding:20px 24px 22px">
+            <div style="display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:2px 12px">
+              <span class="display" style="font-style:italic;font-size:23px">Brio de Lune</span>
+              <span class="display" style="font-size:16px;color:#B08D57;white-space:nowrap">€22,000</span>
+            </div>
+            <div style="margin-top:2px;font-size:13px;color:rgba(23,20,15,.6)">Anglo-Arabe · Gelding · 5 yrs</div>
+            <div style="display:flex;gap:28px;margin-top:14px">
+              <div><div class="k">Height</div><div style="font-size:14px">160 cm</div></div>
+              <div><div class="k">Level</div><div style="font-size:14px">Unstarted</div></div>
+              <div><div class="k">Location</div><div style="font-size:14px">Brittany, FR</div></div>
+            </div>
+            <div style="margin-top:14px;border-left:2px solid #B08D57;padding-left:12px;font-size:13px;color:#1F3327">Frame and mind for top-level eventing</div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:16px">
+              <a class="mono" href="#" style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;text-decoration:underline;text-underline-offset:4px">View Horse</a>
+              <span style="display:inline-flex;gap:6px"><span class="dot"></span><span class="dot dot-on"></span></span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Why Choose MEC Trading -->
+  <div style="padding:96px 40px 88px">
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <span class="eyebrow">Why Choose MEC Trading</span>
+      <h2 class="display" style="margin:0;font-style:italic;font-weight:500;font-size:44px;line-height:1.1">A private, professional standard</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3, minmax(0, 1fr));gap:48px 40px;margin-top:56px">
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <svg class="why-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"></circle><path d="M16 16 21 21"></path></svg>
+        <div class="display" style="font-style:italic;font-size:21px">Carefully Selected Horses</div>
+        <p style="margin:0;font-size:14px;color:rgba(23,20,15,.6)">Every horse is chosen personally, not sourced from a listings feed.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <svg class="why-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 3h6v4H9z"></path><path d="M15 5h3v16H6V5h3"></path><path d="M9 12l2 2 4-4"></path></svg>
+        <div class="display" style="font-style:italic;font-size:21px">Professional Evaluation</div>
+        <p style="margin:0;font-size:14px;color:rgba(23,20,15,.6)">Conformation, temperament and way of going assessed before any horse is offered.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <svg class="why-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2h9l5 5v15H6z"></path><path d="M15 2v5h5"></path><path d="M9 14l2 2 4-4"></path></svg>
+        <div class="display" style="font-style:italic;font-size:21px">Verified Documentation</div>
+        <p style="margin:0;font-size:14px;color:rgba(23,20,15,.6)">Passports, registration and veterinary records are checked and kept on file.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <svg class="why-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18"></path><path d="M12 3c3 3.5 3 14.5 0 18"></path><path d="M12 3c-3 3.5-3 14.5 0 18"></path></svg>
+        <div class="display" style="font-style:italic;font-size:21px">International Buyers</div>
+        <p style="margin:0;font-size:14px;color:rgba(23,20,15,.6)">Clients across Europe, the Gulf and beyond, in their own language.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <svg class="why-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 12a9 9 0 1 1-9-9"></path><path d="M21 3 12 12"></path><path d="M16 3h5v5"></path></svg>
+        <div class="display" style="font-style:italic;font-size:21px">Personalised Assistance</div>
+        <p style="margin:0;font-size:14px;color:rgba(23,20,15,.6)">One point of contact from first inquiry to the horse arriving home.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <svg class="why-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 8h14v9H1z"></path><path d="M15 11h4l3 3v3h-7"></path><circle cx="6" cy="19" r="1.6"></circle><circle cx="18" cy="19" r="1.6"></circle></svg>
+        <div class="display" style="font-style:italic;font-size:21px">Transport Assistance</div>
+        <p style="margin:0;font-size:14px;color:rgba(23,20,15,.6)">Trusted transporters and export paperwork coordinated on your behalf.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Featured Story -->
+  <div style="background:#EFE8D8;display:flex;align-items:stretch">
+    <div class="ph ph-1" style="flex:none;width:620px;min-height:620px"><div class="glow"></div></div>
+    <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:18px;padding:88px 80px">
+      <span class="eyebrow">Featured Story</span>
+      <h2 class="display" style="margin:0;font-style:italic;font-weight:500;font-size:48px;line-height:1.08">Orphée des Forges</h2>
+      <p style="margin:0;max-width:520px;font-size:17px;line-height:1.7;color:rgba(23,20,15,.75)">A scopey, careful 1.45m partner with the temperament for a first international season.</p>
+      <p style="margin:0;max-width:520px;font-size:15px;line-height:1.7;color:rgba(23,20,15,.6)">Calm in the stable, sharp in the ring — Orphée is a thinking horse who tries for his rider. Winner at 1.40m and placed in three 1.45m grands prix last season, he has the correct type and jump for a move to 1.50m within eighteen months.</p>
+      <a class="mono" href="#" style="margin-top:8px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;text-decoration:underline;text-underline-offset:4px">View Horse</a>
+    </div>
+  </div>
+
+  <!-- International Buyers -->
+  <div style="background:#1F3327;padding:96px 40px">
+    <div style="display:flex;gap:80px;align-items:flex-start">
+      <div style="flex:1;display:flex;flex-direction:column;gap:16px">
+        <span class="eyebrow">International Buyers</span>
+        <h2 class="display" style="margin:0;font-style:italic;font-weight:500;font-size:44px;line-height:1.12;color:#F7F2E7">Buying from abroad is straightforward</h2>
+        <p style="margin:0;max-width:480px;font-size:16px;line-height:1.7;color:rgba(247,242,231,.7)">We assist international clients end to end — from first selection to the horse arriving home.</p>
+      </div>
+      <div style="flex:1;display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));gap:18px 32px;padding-top:12px">
+        <div style="display:flex;align-items:center;gap:12px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(247,242,231,.85)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#C7A468" stroke-width="2.5"><path d="M20 6 9 17l-5-5"></path></svg>Horse selection</div>
+        <div style="display:flex;align-items:center;gap:12px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(247,242,231,.85)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#C7A468" stroke-width="2.5"><path d="M20 6 9 17l-5-5"></path></svg>Additional information</div>
+        <div style="display:flex;align-items:center;gap:12px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(247,242,231,.85)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#C7A468" stroke-width="2.5"><path d="M20 6 9 17l-5-5"></path></svg>Veterinary documentation</div>
+        <div style="display:flex;align-items:center;gap:12px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(247,242,231,.85)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#C7A468" stroke-width="2.5"><path d="M20 6 9 17l-5-5"></path></svg>X-rays</div>
+        <div style="display:flex;align-items:center;gap:12px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(247,242,231,.85)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#C7A468" stroke-width="2.5"><path d="M20 6 9 17l-5-5"></path></svg>Viewing</div>
+        <div style="display:flex;align-items:center;gap:12px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(247,242,231,.85)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#C7A468" stroke-width="2.5"><path d="M20 6 9 17l-5-5"></path></svg>Transport</div>
+        <div style="display:flex;align-items:center;gap:12px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(247,242,231,.85)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#C7A468" stroke-width="2.5"><path d="M20 6 9 17l-5-5"></path></svg>Export documentation</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing CTA -->
+  <div style="display:flex;flex-direction:column;align-items:center;gap:24px;padding:112px 40px;text-align:center">
+    <h2 class="display" style="margin:0;font-style:italic;font-weight:500;font-size:52px;line-height:1.1">Looking for Your Next Horse?</h2>
+    <a class="btn btn-charcoal" href="#">Contact Us</a>
+  </div>
+
+  <!-- Footer -->
+  <div style="background:#17140F;border-top:1px solid rgba(23,20,15,.12)">
+    <div style="display:grid;grid-template-columns:repeat(4, minmax(0, 1fr));gap:40px;padding:64px 40px">
+      <div>
+        <div class="display" style="font-style:italic;font-size:24px;color:#F7F2E7">MEC</div>
+        <div class="mono" style="margin-top:4px;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#B08D57">Trading</div>
+        <p style="margin:16px 0 0;max-width:260px;font-size:14px;color:rgba(247,242,231,.6)">Exceptional Horses. Carefully Selected.</p>
+      </div>
+      <div>
+        <div class="eyebrow">Explore</div>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:16px">
+          <a class="footlink" href="#">Horses for Sale</a>
+          <a class="footlink" href="#">Services</a>
+          <a class="footlink" href="#">About</a>
+        </div>
+      </div>
+      <div>
+        <div class="eyebrow">Contact</div>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:16px;font-size:14px;color:rgba(247,242,231,.8)">
+          <span>La Chapelle-des-Fougeretz, Brittany, France</span>
+          <a class="footlink" href="#">contact@mectrading.com</a>
+          <a class="footlink" href="#">+33 6 00 00 00 00</a>
+        </div>
+      </div>
+      <div>
+        <div class="eyebrow">Social</div>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:16px">
+          <a class="footlink" href="#">Instagram</a>
+          <a class="footlink" href="#">Facebook</a>
+          <a class="footlink" href="#">YouTube</a>
+          <a class="footlink" href="#">TikTok</a>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid rgba(247,242,231,.1);padding:24px 40px">
+      <p style="margin:0;font-size:12px;color:rgba(247,242,231,.4)">MEC Trading is a private horse trading company. All horses shown are owned or represented directly by MEC Trading.</p>
+      <p style="margin:8px 0 0;font-size:12px;color:rgba(247,242,231,.3)">© 2026 MEC Trading SAS. All rights reserved.</p>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+<script data-dc-script data-props='{"$preview":{"width":1440,"height":5500}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { cat: 'jumping', idx: 0 };
+  }
+  componentDidMount() {
+    this.t = setInterval(() => this.setState({ idx: this.state.idx + 1 }), 3200);
+  }
+  componentWillUnmount() {
+    clearInterval(this.t);
+  }
+  renderVals() {
+    const ids = ['jumping', 'dressage', 'eventing', 'breeding', 'arabian', 'young', 'competition', 'prospect'];
+    const hov = {};
+    const v = {};
+    const row = {};
+    const self = this;
+    ids.forEach(function (id) {
+      hov[id] = function () { self.setState({ cat: id, idx: 0 }); };
+      const on = self.state.cat === id;
+      row[id] = on ? 'color:#C7A468' : '';
+      v[id + '0'] = on && self.state.idx % 2 === 0 ? '' : 'display:none';
+      v[id + '1'] = on && self.state.idx % 2 === 1 ? '' : 'display:none';
+    });
+    return { hov: hov, v: v, row: row };
+  }
+}
+</script>
+</body>
+</html>

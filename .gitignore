@@ -1,0 +1,27 @@
+# Dependencies & build output
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+
+# Environment / secrets
+.env
+.env.local
+.env.*.local
+
+# Vercel
+.vercel/
+
+# Generated design canvases (re-seeded from the .dc.html sources)
+design/mec-trading-website.html
+design/logo/mec-trading-logo.html
+
+# Personal screenshots
+WhatsApp Unknown*/
+
+# OS / editor / logs
+.DS_Store
+Thumbs.db
+*.log
+.idea/
+.vscode/

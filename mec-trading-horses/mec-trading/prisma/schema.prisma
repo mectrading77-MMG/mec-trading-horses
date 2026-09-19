@@ -1,0 +1,225 @@
+// MEC Trading — database schema
+// Provider is Postgres; swap to sqlite for local prototyping if preferred.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum HorseStatus {
+  AVAILABLE
+  RESERVED
+  SOLD
+}
+
+enum HorseSex {
+  MARE
+  STALLION
+  GELDING
+}
+
+enum Discipline {
+  SHOW_JUMPING
+  DRESSAGE
+  EVENTING
+  BREEDING
+  ARABIAN
+  YOUNG_HORSE
+  COMPETITION
+  PROSPECT
+}
+
+enum InquiryStatus {
+  NEW
+  CONTACTED
+  QUALIFIED
+  VIEWING_SCHEDULED
+  SOLD
+  CLOSED
+}
+
+enum AdminRole {
+  OWNER
+  EDITOR
+}
+
+/// Every human-facing text field on Horse is stored per-locale in HorseTranslation
+/// so admins can write English, French and Arabic content independently rather
+/// than relying on machine translation of a single source field.
+model Horse {
+  id                String        @id @default(cuid())
+  slug              String        @unique
+  breed             String
+  sex               HorseSex
+  dateOfBirth       DateTime
+  heightCm          Int
+  color             String
+  discipline        Discipline
+  competitionLevel  String?
+  registrationNo    String?
+  passportNo        String?
+  priceAmount       Int?
+  priceCurrency     String        @default("EUR")
+  priceOnRequest    Boolean       @default(false)
+  status            HorseStatus   @default(AVAILABLE)
+  locationLabel     String
+  featuredOnHome    Boolean       @default(false)
+  featuredStory     Boolean       @default(false)
+  documentsPublic   Boolean       @default(false)
+  trustVetDocs      Boolean       @default(false)
+  trustXrays        Boolean       @default(false)
+  trustPedigreeDocs Boolean       @default(false)
+  trustTransport    Boolean       @default(false)
+
+  translations      HorseTranslation[]
+  media             Media[]
+  documents         Document[]
+  competitionResults CompetitionResult[]
+  pedigreeEntries   PedigreeEntry[]
+  inquiries         Inquiry[]
+  seo               SeoEntry?
+
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+}
+
+model HorseTranslation {
+  id             String  @id @default(cuid())
+  horseId        String
+  horse          Horse   @relation(fields: [horseId], references: [id], onDelete: Cascade)
+  locale         String  // "en" | "fr" | "ar"
+  name           String
+  positioning    String  // short one-line hero statement
+  personality    String?
+  training       String?
+  strengths      String?
+  experience     String?
+  suitability    String?
+  potential      String?
+  idealRider     String?
+
+  @@unique([horseId, locale])
+}
+
+/// A single ancestor in the pedigree tree. `position` encodes where it sits,
+/// e.g. "sire", "sire.sire", "dam.dam.sire" — this lets the UI render any
+/// number of generations without a fixed-width schema.
+model PedigreeEntry {
+  id           String  @id @default(cuid())
+  horseId      String
+  horse        Horse   @relation(fields: [horseId], references: [id], onDelete: Cascade)
+  position     String
+  name         String
+  breed        String?
+  photoUrl     String?
+  competitionNote String?
+}
+
+model CompetitionResult {
+  id          String   @id @default(cuid())
+  horseId     String
+  horse       Horse    @relation(fields: [horseId], references: [id], onDelete: Cascade)
+  competition String
+  year        Int
+  level       String
+  result      String
+  rider       String?
+  location    String?
+}
+
+enum MediaType {
+  PHOTO
+  VIDEO_GENERAL
+  VIDEO_COMPETITION
+  VIDEO_TRAINING
+}
+
+model Media {
+  id        String    @id @default(cuid())
+  horseId   String
+  horse     Horse     @relation(fields: [horseId], references: [id], onDelete: Cascade)
+  type      MediaType
+  url       String
+  alt       String?
+  isCover   Boolean   @default(false)
+  sortOrder Int       @default(0)
+}
+
+enum DocumentType {
+  VETERINARY_EXAM
+  XRAY
+  VACCINATION
+  PASSPORT
+  REGISTRATION
+  COMPETITION_RECORD
+  PEDIGREE_DOCUMENT
+}
+
+model Document {
+  id           String       @id @default(cuid())
+  horseId      String
+  horse        Horse        @relation(fields: [horseId], references: [id], onDelete: Cascade)
+  type         DocumentType
+  url          String
+  label        String
+  downloadable Boolean      @default(false)
+}
+
+model SeoEntry {
+  id              String  @id @default(cuid())
+  horseId         String  @unique
+  horse           Horse   @relation(fields: [horseId], references: [id], onDelete: Cascade)
+  titleEn         String
+  titleFr         String
+  titleAr         String
+  descriptionEn   String
+  descriptionFr   String
+  descriptionAr   String
+  canonicalUrl    String
+  ogImageUrl      String?
+}
+
+model Inquiry {
+  id            String        @id @default(cuid())
+  horseId       String?
+  horse         Horse?        @relation(fields: [horseId], references: [id])
+  name          String
+  email         String
+  phone         String?
+  country       String?
+  message       String
+  lookingFor    String?
+  hasTrainer    Boolean?
+  viewingDate   DateTime?
+  status        InquiryStatus @default(NEW)
+  createdAt     DateTime      @default(now())
+}
+
+model AdminUser {
+  id           String    @id @default(cuid())
+  email        String    @unique
+  passwordHash String
+  name         String
+  role         AdminRole @default(EDITOR)
+  createdAt    DateTime  @default(now())
+}
+
+/// Singleton-style settings rows (id is always "main") for global content:
+/// social links, WhatsApp number, homepage story, trust toggles, etc.
+model WebsiteSettings {
+  id              String @id @default("main")
+  whatsappNumber  String
+  phone           String
+  email           String
+  instagramUrl    String?
+  facebookUrl     String?
+  youtubeUrl      String?
+  tiktokUrl       String?
+  aboutEn         String
+  aboutFr         String
+  aboutAr         String
+}

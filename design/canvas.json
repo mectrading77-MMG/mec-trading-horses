@@ -1,0 +1,18 @@
+{
+  "artboards": [
+    { "file": "Main.dc.html", "x": 0, "y": 0, "w": 1440, "h": 5500, "title": "Home", "page": "page-1", "is_interactive": true },
+    { "file": "HorsesForSale.dc.html", "x": 1560, "y": 0, "w": 1440, "h": 4450, "title": "Horses for Sale", "page": "page-1", "is_interactive": true },
+    { "file": "HorseDetail.dc.html", "x": 3120, "y": 0, "w": 1440, "h": 5150, "title": "Horse Detail — Orphée des Forges", "page": "page-1", "is_interactive": true },
+    { "file": "Mobile.dc.html", "x": 4680, "y": 0, "w": 390, "h": 3480, "title": "Mobile Home", "page": "page-1" },
+    { "file": "Admin.dc.html", "x": 0, "y": 0, "w": 1440, "h": 1290, "title": "Admin Dashboard", "page": "page-2" }
+  ],
+  "annotations": [
+    { "id": "build-notes", "x": 0, "y": -700, "w": 460, "page": "page-1", "text": "MEC Trading — design canvas\n\nMatches the built Next.js app pixel-for-pixel: Fraunces italic display, Inter body, IBM Plex Mono labels; charcoal #17140F, ivory #F7F2E7, gold #B08D57, hunter #1F3327; square corners, 4:5 horse cards, mono uppercase eyebrows.\n\nNew on Home: hover a discipline in Our Selection to preview the horses available in it — the card auto-rotates between horses every few seconds, with age, height, level, price and one achievement per card.\n\nCatalog: the discipline chips filter live; horses can belong to more than one discipline (e.g. Competition Horses cross-lists active campaigners).\n\nDetail page: media tabs and the pedigree's Show more generations are clickable.\n\nHorse names, prices and results are sample data from the app's seed file. EN shown; FR / AR reuse the app's field-level translations (AR fully RTL)." },
+    { "id": "admin-notes", "x": 1560, "y": 60, "w": 380, "page": "page-2", "text": "Owner-only admin (single seller — no marketplace features).\n\nSidebar sections: Dashboard, Horses, Inquiries, Media Library, Pedigrees, Site Content, SEO, Settings.\n\nInquiry pipeline: New → Contacted → Qualified → Viewing Scheduled → Sold / Closed.\n\nFeatured toggle controls which horses appear on the homepage." }
+  ],
+  "pages": [
+    { "id": "page-1", "name": "Public Website" },
+    { "id": "page-2", "name": "Admin" }
+  ],
+  "launch": { "view": "canvas", "page": "page-1" }
+}

@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+  <style>
+    body{margin:0;background:#F7F2E7;color:#17140F;font-family:'IBM Plex Mono','Consolas','Courier New',monospace;-webkit-font-smoothing:antialiased}
+    a{color:#B08D57}a:hover{color:#C7A468}
+    .display{font-family:'Fraunces',Georgia,'Times New Roman',serif}
+    .lab{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:rgba(23,20,15,.4)}
+    .lab-d{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:rgba(247,242,231,.35)}
+  </style>
+</helmet>
+<div style="display:flex;flex-direction:column;background:#F7F2E7">
+
+  <div style="height:640px;background:#17140F;position:relative;display:flex;align-items:center;justify-content:center;gap:60px">
+    <span class="lab-d" style="position:absolute;top:24px;left:28px">Sport horse mark — reversed</span>
+    <div style="width:290px;color:#C7A468">
+      <svg viewBox="0 0 300 260">
+        <path fill="currentColor" fill-rule="evenodd" d="M152 14 L140 76 L110 116 L74 152 L62 162 L56 176 L58 190 L70 198 L88 202 L116 214 L146 222 L174 220 L196 206 L204 186 L218 228 L208 260 L292 260 L274 226 L286 212 L262 172 L274 158 L248 122 L258 108 L230 82 L214 72 L204 16 L180 54 L174 58 Z M140 100 L160 96 L166 108 L146 112 Z M68 172 L82 168 L84 180 L70 184 Z"></path>
+        <path fill="#8A6C3E" d="M214 72 L230 82 L258 108 L248 122 L274 158 L262 172 L286 212 L274 226 L292 260 L252 260 L236 200 L220 140 L210 100 Z"></path>
+        <path fill="#8A6C3E" d="M204 186 L196 206 L174 220 L146 222 L116 214 L88 202 L104 198 L130 210 L158 210 L184 198 L198 182 Z"></path>
+      </svg>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <span class="display" style="font-style:italic;font-weight:500;font-size:60px;line-height:1;letter-spacing:-.01em;color:#F7F2E7">MEC</span>
+      <span style="font-size:11px;letter-spacing:.5em;text-transform:uppercase;color:#B08D57;text-indent:.5em">Trading</span>
+    </div>
+  </div>
+
+  <div style="height:400px;display:grid;grid-template-columns:repeat(3, minmax(0, 1fr))">
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;border-right:1px solid rgba(23,20,15,.12)">
+      <div style="display:flex;align-items:center;gap:20px">
+        <div style="width:84px;color:#B08D57;flex:none">
+          <svg viewBox="0 0 300 260">
+            <path fill="currentColor" fill-rule="evenodd" d="M152 14 L140 76 L110 116 L74 152 L62 162 L56 176 L58 190 L70 198 L88 202 L116 214 L146 222 L174 220 L196 206 L204 186 L218 228 L208 260 L292 260 L274 226 L286 212 L262 172 L274 158 L248 122 L258 108 L230 82 L214 72 L204 16 L180 54 L174 58 Z M140 100 L160 96 L166 108 L146 112 Z M68 172 L82 168 L84 180 L70 184 Z"></path>
+          </svg>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <span class="display" style="font-style:italic;font-weight:500;font-size:34px;line-height:1;color:#17140F">MEC</span>
+          <span style="font-size:8px;letter-spacing:.45em;text-transform:uppercase;color:#B08D57;text-indent:.45em">Trading</span>
+        </div>
+      </div>
+      <span class="lab">Horizontal</span>
+    </div>
+
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;border-right:1px solid rgba(23,20,15,.12)">
+      <div style="width:116px;color:#17140F">
+        <svg viewBox="0 0 300 260">
+          <path fill="currentColor" fill-rule="evenodd" d="M152 14 L140 76 L110 116 L74 152 L62 162 L56 176 L58 190 L70 198 L88 202 L116 214 L146 222 L174 220 L196 206 L204 186 L218 228 L208 260 L292 260 L274 226 L286 212 L262 172 L274 158 L248 122 L258 108 L230 82 L214 72 L204 16 L180 54 L174 58 Z M140 100 L160 96 L166 108 L146 112 Z M68 172 L82 168 L84 180 L70 184 Z"></path>
+        </svg>
+      </div>
+      <span class="lab">One colour</span>
+    </div>
+
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px">
+      <div style="display:flex;align-items:flex-end;gap:26px">
+        <div style="width:50px;color:#B08D57">
+          <svg viewBox="0 0 300 260">
+            <path fill="currentColor" fill-rule="evenodd" d="M152 14 L140 76 L110 116 L74 152 L62 162 L56 176 L58 190 L70 198 L88 202 L116 214 L146 222 L174 220 L196 206 L204 186 L218 228 L208 260 L292 260 L274 226 L286 212 L262 172 L274 158 L248 122 L258 108 L230 82 L214 72 L204 16 L180 54 L174 58 Z M140 100 L160 96 L166 108 L146 112 Z"></path>
+          </svg>
+        </div>
+        <div style="width:26px;color:#B08D57">
+          <svg viewBox="0 0 300 260">
+            <path fill="currentColor" fill-rule="evenodd" d="M152 14 L140 76 L110 116 L74 152 L62 162 L56 176 L58 190 L70 198 L88 202 L116 214 L146 222 L174 220 L196 206 L204 186 L218 228 L208 260 L292 260 L274 226 L286 212 L262 172 L274 158 L248 122 L258 108 L230 82 L214 72 L204 16 L180 54 L174 58 Z"></path>
+          </svg>
+        </div>
+        <div style="width:40px;height:40px;background:#17140F;display:flex;align-items:flex-end;justify-content:center">
+          <div style="width:26px;color:#C7A468">
+            <svg viewBox="0 0 300 260">
+              <path fill="currentColor" fill-rule="evenodd" d="M152 14 L140 76 L110 116 L74 152 L62 162 L56 176 L58 190 L70 198 L88 202 L116 214 L146 222 L174 220 L196 206 L204 186 L218 228 L208 260 L292 260 L274 226 L286 212 L262 172 L274 158 L248 122 L258 108 L230 82 L214 72 L204 16 L180 54 L174 58 Z"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <span class="lab">Scale · favicon</span>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>

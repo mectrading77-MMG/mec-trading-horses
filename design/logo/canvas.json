@@ -1,0 +1,65 @@
+{
+  "artboards": [
+    {
+      "file": "Main.dc.html",
+      "x": 0,
+      "y": 0,
+      "w": 1200,
+      "h": 1360,
+      "title": "Option A — Crest (Knight)"
+    },
+    {
+      "file": "OptionB.dc.html",
+      "x": 1320,
+      "y": 0,
+      "w": 900,
+      "h": 720,
+      "title": "Option B — Monogram"
+    },
+    {
+      "file": "OptionC.dc.html",
+      "x": 1320,
+      "y": 840,
+      "w": 900,
+      "h": 720,
+      "title": "Option C — Horseshoe"
+    },
+    {
+      "file": "OptionD.dc.html",
+      "x": 2340,
+      "y": 0,
+      "w": 900,
+      "h": 720,
+      "title": "Option D — Western Stable Badge"
+    },
+    {
+      "file": "OptionE.dc.html",
+      "x": 2340,
+      "y": 840,
+      "w": 1100,
+      "h": 1060,
+      "title": "Option E — Sport Horse Mark"
+    },
+    {
+      "file": "OptionF.dc.html",
+      "x": 0,
+      "y": 1480,
+      "w": 1100,
+      "h": 1120,
+      "title": "Option F — Illustrated Horse Mark"
+    }
+  ],
+  "annotations": [
+    {
+      "id": "logo-directions",
+      "x": 0,
+      "y": -360,
+      "w": 460,
+      "text": "MEC Trading logo — six directions in the brand palette (gold on charcoal / ivory).\n\nF — Illustrated horse mark (newest): a three-quarter horse head drawn in a bold illustrated style — layered mane locks, blaze down the face, pale muzzle, modelled in four tones of the brand gold. Original artwork, not traced from any reference. Full colour plus a one-colour silhouette for small sizes.\n\nE — Sport horse mark: faceted profile head built from crisp straight planes.\n\nA — Crest: chess-knight head in a double ring with the Fraunces italic wordmark.\n\nB — Monogram: pure typography in a double lozenge. Restrained, but says luxury rather than horses.\n\nC — Horseshoe: double-line shoe with nail holes and a star. Clear line of business, least ownable.\n\nD — Western stable badge: an actual stable in a wood-type ranch stamp.\n\nAll vector; every element can be recoloured, retyped or exported on its own."
+    }
+  ],
+  "launch": {
+    "view": "focused",
+    "file": "OptionF.dc.html"
+  }
+}

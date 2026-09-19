@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-ivory text-charcoal font-body antialiased;
+}
+
+::selection {
+  @apply bg-gold/30 text-charcoal;
+}
+
+*:focus-visible {
+  outline: 2px solid theme("colors.gold.DEFAULT");
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.eyebrow {
+  @apply font-mono text-[11px] uppercase tracking-eyebrow text-gold;
+}
+
+.hairline {
+  @apply border-charcoal-line;
+}
+
+[dir="rtl"] .eyebrow {
+  letter-spacing: 0;
+}
+
+/* Pedigree tree connectors — drawn with plain borders so they inherit
+   currentColor and work in both LTR and RTL without mirrored SVG math. */
+.pedigree-branch {
+  position: relative;
+}
+.pedigree-branch::before {
+  content: "";
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  width: 1px;
+  height: 12px;
+  background: theme("colors.charcoal.line");
+}

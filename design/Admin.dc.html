@@ -1,0 +1,196 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&amp;family=Inter:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+  <style>
+    body{margin:0;background:#EFE8D8;color:#17140F;font-family:'Inter','Segoe UI','Helvetica Neue',Arial,sans-serif;font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased}
+    a{color:#B08D57;text-decoration:none}
+    a:hover{color:#C7A468}
+    .display{font-family:'Fraunces',Georgia,'Times New Roman',serif}
+    .mono{font-family:'IBM Plex Mono','Consolas','Courier New',monospace}
+    .eyebrow{font-family:'IBM Plex Mono','Consolas',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.22em;color:#B08D57}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:11px 22px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;background:transparent;border:1px solid transparent;cursor:pointer}
+    .btn-hunter{background:#1F3327;border-color:#1F3327;color:#F7F2E7}
+    .btn-hunter:hover{background:#2A4433}
+    .side{display:flex;align-items:center;gap:12px;padding:12px 24px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:rgba(247,242,231,.55);border-left:2px solid transparent}
+    .side:hover{color:#F7F2E7}
+    .side-on{color:#C7A468;border-left-color:#B08D57}
+    .panel{background:#F7F2E7;border:1px solid rgba(23,20,15,.12)}
+    td,th{text-align:left;padding:13px 16px;font-size:13px;vertical-align:middle}
+    th{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(23,20,15,.4);font-weight:400}
+    tr{border-bottom:1px solid rgba(23,20,15,.08)}
+    .pill{display:inline-block;padding:3px 10px;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;white-space:nowrap}
+    .pill-new{background:#B08D57;color:#17140F}
+    .pill-contacted{background:#E4D7BE;color:#17140F}
+    .pill-qualified{background:#2A4433;color:#F7F2E7}
+    .pill-viewing{background:#17140F;color:#F7F2E7}
+    .pill-sold{background:transparent;border:1px solid #1F3327;color:#1F3327}
+    .pill-closed{background:rgba(23,20,15,.12);color:rgba(23,20,15,.55)}
+    .pill-av{background:#1F3327;color:#F7F2E7}
+    .pill-res{background:#B08D57;color:#17140F}
+    .pill-soldout{background:rgba(23,20,15,.8);color:#F7F2E7}
+    .thumb{width:44px;height:55px;flex:none}
+    .ph-1{background:linear-gradient(155deg,#221E17 0%,#453A28 40%,#8A7551 75%,#CBB68C 100%)}
+    .ph-2{background:linear-gradient(150deg,#1F3327 0%,#2A4433 38%,#6E6F4F 72%,#CBB68C 100%)}
+    .ph-3{background:linear-gradient(160deg,#17140F 0%,#3D3628 48%,#77684A 78%,#E4D7BE 100%)}
+    .ph-4{background:linear-gradient(150deg,#2B241A 0%,#5D4C33 52%,#A58C60 82%,#E4D7BE 100%)}
+    .ph-5{background:linear-gradient(165deg,#201C15 0%,#454A3A 45%,#8D8365 76%,#D8C9A8 100%)}
+    .ph-6{background:linear-gradient(145deg,#241F16 0%,#4F4227 50%,#94804F 80%,#CBB68C 100%)}
+    .act{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase}
+    .togg{width:34px;height:18px;border-radius:9px;position:relative;flex:none}
+    .togg-on{background:#B08D57}
+    .togg-off{background:rgba(23,20,15,.18)}
+    .knob{position:absolute;top:2px;width:14px;height:14px;border-radius:50%;background:#F7F2E7}
+  </style>
+</helmet>
+<div style="display:flex;align-items:stretch;min-height:1290px;background:#EFE8D8">
+
+  <!-- Sidebar -->
+  <div style="flex:none;width:232px;background:#17140F;display:flex;flex-direction:column;padding:24px 0">
+    <div style="display:flex;align-items:baseline;gap:8px;padding:0 24px 24px">
+      <span class="display" style="font-style:italic;font-size:22px;color:#F7F2E7">MEC</span>
+      <span class="mono" style="font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:#B08D57">Admin</span>
+    </div>
+    <a class="side side-on" href="#">Dashboard</a>
+    <a class="side" href="#">Horses</a>
+    <a class="side" href="#">Inquiries <span class="pill pill-new" style="margin-left:auto">1</span></a>
+    <a class="side" href="#">Media Library</a>
+    <a class="side" href="#">Pedigrees</a>
+    <a class="side" href="#">Site Content</a>
+    <a class="side" href="#">SEO</a>
+    <a class="side" href="#">Settings</a>
+    <div style="margin-top:auto;padding:24px;border-top:1px solid rgba(247,242,231,.1)">
+      <div style="font-size:12px;color:rgba(247,242,231,.6)">Owner account</div>
+      <a class="mono" href="#" style="font-size:10px;letter-spacing:.18em;text-transform:uppercase">Sign Out</a>
+    </div>
+  </div>
+
+  <!-- Main -->
+  <div style="flex:1;min-width:0;padding:32px 36px 48px">
+
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:24px">
+      <div>
+        <span class="eyebrow">Owner Dashboard</span>
+        <h1 class="display" style="margin:6px 0 0;font-style:italic;font-weight:500;font-size:32px;line-height:1.1">Dashboard</h1>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span class="mono" style="display:inline-flex;align-items:center;gap:10px;border:1px solid rgba(23,20,15,.18);padding:10px 14px;font-size:11px;letter-spacing:.14em;color:rgba(23,20,15,.4)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"></circle><path d="M16 16 21 21"></path></svg>Search horses, inquiries...</span>
+        <a class="btn btn-hunter" href="#">+ Add Horse</a>
+      </div>
+    </div>
+
+    <!-- Inquiries -->
+    <div class="panel" style="margin-top:28px">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:18px 20px;border-bottom:1px solid rgba(23,20,15,.12)">
+        <span class="eyebrow">Recent Inquiries</span>
+        <a class="mono" href="#" style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;text-decoration:underline;text-underline-offset:4px">View all</a>
+      </div>
+      <table style="width:100%;border-collapse:collapse">
+        <thead>
+          <tr><th>Contact</th><th>Country</th><th>Horse Requested</th><th>Contact Details</th><th>Date</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="font-weight:500">Sarah Whitfield</td><td>United Kingdom</td>
+            <td class="display" style="font-style:italic;font-size:15px">Orphée des Forges</td>
+            <td class="mono" style="font-size:11px;color:rgba(23,20,15,.55)">s.whitfield@… · +44 7…</td>
+            <td>27 Aug 2026</td><td><span class="pill pill-new">New</span></td>
+          </tr>
+          <tr>
+            <td style="font-weight:500">Fatima Al Rashid</td><td>United Arab Emirates</td>
+            <td class="display" style="font-style:italic;font-size:15px">Amira El Shams</td>
+            <td class="mono" style="font-size:11px;color:rgba(23,20,15,.55)">f.alrashid@… · +971 5…</td>
+            <td>26 Aug 2026</td><td><span class="pill pill-viewing">Viewing Scheduled</span></td>
+          </tr>
+          <tr>
+            <td style="font-weight:500">Jean-Marc Aubert</td><td>France</td>
+            <td class="display" style="font-style:italic;font-size:15px">Feodor van de Heide</td>
+            <td class="mono" style="font-size:11px;color:rgba(23,20,15,.55)">jm.aubert@… · +33 6…</td>
+            <td>25 Aug 2026</td><td><span class="pill pill-contacted">Contacted</span></td>
+          </tr>
+          <tr>
+            <td style="font-weight:500">Ingrid Halvorsen</td><td>Norway</td>
+            <td class="display" style="font-style:italic;font-size:15px">Idylle de Kerlann</td>
+            <td class="mono" style="font-size:11px;color:rgba(23,20,15,.55)">i.halvorsen@… · +47 9…</td>
+            <td>24 Aug 2026</td><td><span class="pill pill-qualified">Qualified</span></td>
+          </tr>
+          <tr>
+            <td style="font-weight:500">Marco Bellini</td><td>Italy</td>
+            <td class="display" style="font-style:italic;font-size:15px">Capitaine du Val</td>
+            <td class="mono" style="font-size:11px;color:rgba(23,20,15,.55)">m.bellini@… · +39 3…</td>
+            <td>19 Aug 2026</td><td><span class="pill pill-sold">Sold</span></td>
+          </tr>
+          <tr style="border-bottom:none">
+            <td style="font-weight:500">Tomás Herrera</td><td>Spain</td>
+            <td class="display" style="font-style:italic;font-size:15px">Brio de Lune</td>
+            <td class="mono" style="font-size:11px;color:rgba(23,20,15,.55)">t.herrera@… · +34 6…</td>
+            <td>12 Aug 2026</td><td><span class="pill pill-closed">Closed</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Horses -->
+    <div class="panel" style="margin-top:28px">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:18px 20px;border-bottom:1px solid rgba(23,20,15,.12)">
+        <span class="eyebrow">Horses</span>
+        <a class="mono" href="#" style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;text-decoration:underline;text-underline-offset:4px">Manage all</a>
+      </div>
+      <table style="width:100%;border-collapse:collapse">
+        <thead>
+          <tr><th>Horse</th><th>Discipline</th><th>Price</th><th>Status</th><th>Featured</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div style="display:flex;align-items:center;gap:12px"><span class="thumb ph-1"></span><div><div class="display" style="font-style:italic;font-size:15px">Orphée des Forges</div><div class="mono" style="font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(23,20,15,.4)">Selle Français · Gelding · 9 yrs</div></div></div></td>
+            <td>Show Jumping</td><td>On request</td><td><span class="pill pill-av">Available</span></td>
+            <td><span class="togg togg-on"><span class="knob" style="right:2px"></span></span></td>
+            <td><a class="act" href="#">Edit</a> · <a class="act" href="#">Media</a> · <a class="act" href="#">Mark Sold</a></td>
+          </tr>
+          <tr>
+            <td><div style="display:flex;align-items:center;gap:12px"><span class="thumb ph-4"></span><div><div class="display" style="font-style:italic;font-size:15px">Cascade du Rozel</div><div class="mono" style="font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(23,20,15,.4)">Selle Français · Mare · 8 yrs</div></div></div></td>
+            <td>Show Jumping</td><td>€95,000</td><td><span class="pill pill-av">Available</span></td>
+            <td><span class="togg togg-off"><span class="knob" style="left:2px"></span></span></td>
+            <td><a class="act" href="#">Edit</a> · <a class="act" href="#">Media</a> · <a class="act" href="#">Mark Sold</a></td>
+          </tr>
+          <tr>
+            <td><div style="display:flex;align-items:center;gap:12px"><span class="thumb ph-3"></span><div><div class="display" style="font-style:italic;font-size:15px">Quintessence de Riverdale</div><div class="mono" style="font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(23,20,15,.4)">KWPN · Mare · 10 yrs</div></div></div></td>
+            <td>Dressage</td><td>On request</td><td><span class="pill pill-res">Reserved</span></td>
+            <td><span class="togg togg-on"><span class="knob" style="right:2px"></span></span></td>
+            <td><a class="act" href="#">Edit</a> · <a class="act" href="#">Media</a> · <a class="act" href="#">Mark Sold</a></td>
+          </tr>
+          <tr>
+            <td><div style="display:flex;align-items:center;gap:12px"><span class="thumb ph-2"></span><div><div class="display" style="font-style:italic;font-size:15px">Brio de Lune</div><div class="mono" style="font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(23,20,15,.4)">Anglo-Arabe · Gelding · 5 yrs</div></div></div></td>
+            <td>Young Horses</td><td>€22,000</td><td><span class="pill pill-av">Available</span></td>
+            <td><span class="togg togg-on"><span class="knob" style="right:2px"></span></span></td>
+            <td><a class="act" href="#">Edit</a> · <a class="act" href="#">Media</a> · <a class="act" href="#">Mark Sold</a></td>
+          </tr>
+          <tr>
+            <td><div style="display:flex;align-items:center;gap:12px"><span class="thumb ph-5"></span><div><div class="display" style="font-style:italic;font-size:15px">Amira El Shams</div><div class="mono" style="font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(23,20,15,.4)">Arabian · Mare · 7 yrs</div></div></div></td>
+            <td>Arabian Horses</td><td>€45,000</td><td><span class="pill pill-av">Available</span></td>
+            <td><span class="togg togg-on"><span class="knob" style="right:2px"></span></span></td>
+            <td><a class="act" href="#">Edit</a> · <a class="act" href="#">Media</a> · <a class="act" href="#">Mark Sold</a></td>
+          </tr>
+          <tr style="border-bottom:none">
+            <td><div style="display:flex;align-items:center;gap:12px"><span class="thumb ph-6"></span><div><div class="display" style="font-style:italic;font-size:15px">Capitaine du Val</div><div class="mono" style="font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(23,20,15,.4)">Selle Français · Stallion · 11 yrs</div></div></div></td>
+            <td>Eventing</td><td>On request</td><td><span class="pill pill-soldout">Sold</span></td>
+            <td><span class="togg togg-off"><span class="knob" style="left:2px"></span></span></td>
+            <td><a class="act" href="#">Edit</a> · <a class="act" href="#">Media</a> · <a class="act" href="#">Relist</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="mono" style="margin:20px 0 0;font-size:10px;letter-spacing:.06em;color:rgba(23,20,15,.4)">Single-owner admin — no seller registration, marketplace commissions or third-party listings. Inquiry pipeline: New → Contacted → Qualified → Viewing Scheduled → Sold / Closed.</p>
+
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

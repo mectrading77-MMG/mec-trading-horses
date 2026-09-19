@@ -1,0 +1,390 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&amp;family=Inter:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+  <style>
+    body{margin:0;background:#F7F2E7;color:#17140F;font-family:'Inter','Segoe UI','Helvetica Neue',Arial,sans-serif;font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+    a{color:#B08D57;text-decoration:none}
+    a:hover{color:#C7A468}
+    .display{font-family:'Fraunces',Georgia,'Times New Roman',serif}
+    .mono{font-family:'IBM Plex Mono','Consolas','Courier New',monospace}
+    .eyebrow{font-family:'IBM Plex Mono','Consolas',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.22em;color:#B08D57;font-weight:400}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:13px 26px;font-family:'IBM Plex Mono','Consolas',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;background:transparent;border:1px solid transparent;cursor:pointer;transition:color .4s,border-color .4s,background .4s}
+    .btn-hunter{background:#1F3327;border-color:#1F3327;color:#F7F2E7}
+    .btn-hunter:hover{background:#2A4433;border-color:#2A4433}
+    .btn-goldline{border-color:#B08D57;color:#B08D57}
+    .btn-goldline:hover{border-color:#C7A468;color:#C7A468}
+    .btn-charcoal{border-color:#17140F;color:#17140F}
+    .btn-charcoal:hover{border-color:#B08D57;color:#B08D57}
+    .navlink{font-family:'IBM Plex Mono','Consolas',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:rgba(23,20,15,.7)}
+    .navlink:hover{color:#B08D57}
+    .badge-inline{display:inline-block;padding:4px 12px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;background:#1F3327;color:#F7F2E7}
+    .ph{position:relative;overflow:hidden;background:#221E17}
+    .ph-1{background:linear-gradient(155deg,#221E17 0%,#453A28 40%,#8A7551 75%,#CBB68C 100%)}
+    .ph-2{background:linear-gradient(150deg,#1F3327 0%,#2A4433 38%,#6E6F4F 72%,#CBB68C 100%)}
+    .ph-3{background:linear-gradient(160deg,#17140F 0%,#3D3628 48%,#77684A 78%,#E4D7BE 100%)}
+    .ph-4{background:linear-gradient(150deg,#2B241A 0%,#5D4C33 52%,#A58C60 82%,#E4D7BE 100%)}
+    .ph-5{background:linear-gradient(165deg,#201C15 0%,#454A3A 45%,#8D8365 76%,#D8C9A8 100%)}
+    .ph-6{background:linear-gradient(145deg,#241F16 0%,#4F4227 50%,#94804F 80%,#CBB68C 100%)}
+    .glow{position:absolute;inset:0;background:radial-gradient(120% 75% at 68% 16%,rgba(247,242,231,.16),rgba(247,242,231,0) 55%)}
+    .k{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(23,20,15,.4)}
+    .trust{display:flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#1F3327}
+    .node{border:1px solid rgba(23,20,15,.12);background:#F7F2E7;padding:12px 16px;text-align:center;display:flex;flex-direction:column;gap:2px}
+    .node-pos{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:#B08D57}
+    .node-name{font-family:'Fraunces',Georgia,serif;font-style:italic;font-size:16px;line-height:1.3;color:#17140F}
+    .node-breed{font-size:12px;color:rgba(23,20,15,.5)}
+    .node-note{font-size:11px;color:#1F3327}
+    .tab{padding:14px 4px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:rgba(23,20,15,.5);background:transparent;border:none;border-bottom:2px solid transparent;cursor:pointer;transition:color .4s}
+    .tab:hover{color:#17140F}
+    .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:56px;height:56px;border:1px solid rgba(247,242,231,.7);border-radius:50%;display:flex;align-items:center;justify-content:center}
+    td,th{text-align:left;padding:14px 16px;font-size:14px}
+    th{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(23,20,15,.4);font-weight:400}
+    tr{border-bottom:1px solid rgba(23,20,15,.12)}
+    .field{width:100%;box-sizing:border-box;border:1px solid rgba(23,20,15,.18);background:rgba(255,255,255,.5);padding:12px 14px;font-family:'Inter',sans-serif;font-size:14px;color:#17140F}
+    .flabel{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(23,20,15,.5);margin-bottom:6px;display:block}
+    .docrow{display:flex;align-items:center;gap:16px;padding:18px 0;border-bottom:1px solid rgba(23,20,15,.12)}
+  </style>
+</helmet>
+<div style="background:#F7F2E7">
+
+  <!-- Header -->
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:24px;padding:16px 40px;background:rgba(247,242,231,.95);border-bottom:1px solid rgba(23,20,15,.12)">
+    <div style="display:flex;align-items:baseline;gap:8px">
+      <span class="display" style="font-style:italic;font-size:24px;letter-spacing:-.02em;color:#17140F">MEC</span>
+      <span class="mono" style="font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#B08D57">Trading</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:32px">
+      <a class="navlink" href="#">Home</a>
+      <a class="navlink" href="#" style="color:#B08D57">Horses for Sale</a>
+      <a class="navlink" href="#">About</a>
+      <a class="navlink" href="#">Services</a>
+      <a class="navlink" href="#">News</a>
+      <a class="navlink" href="#">Contact</a>
+    </div>
+    <div style="display:flex;align-items:center;gap:18px">
+      <div class="mono" style="font-size:11px;letter-spacing:.22em;color:rgba(23,20,15,.45)"><span style="color:#B08D57">EN</span> / FR / AR</div>
+      <a class="btn btn-charcoal" style="padding:9px 20px" href="#">Contact Us</a>
+    </div>
+  </div>
+
+  <!-- Breadcrumb -->
+  <div class="mono" style="padding:20px 40px;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(23,20,15,.4)">
+    <a href="#" style="color:rgba(23,20,15,.4)">Home</a> &nbsp;/&nbsp; <a href="#" style="color:rgba(23,20,15,.4)">Horses for Sale</a> &nbsp;/&nbsp; <span style="color:#B08D57">Orphée des Forges</span>
+  </div>
+
+  <!-- Hero: gallery + info panel -->
+  <div style="display:flex;gap:32px;padding:8px 40px 0;align-items:flex-start">
+
+    <div style="flex:1 1 0;min-width:0">
+      <div class="ph ph-1" style="height:600px"><div class="glow"></div></div>
+      <div style="display:grid;grid-template-columns:repeat(5, minmax(0, 1fr));gap:12px;margin-top:12px">
+        <div class="ph ph-1" style="height:88px;outline:2px solid #B08D57;outline-offset:-2px"><div class="glow"></div></div>
+        <div class="ph ph-4" style="height:88px"><div class="glow"></div></div>
+        <div class="ph ph-3" style="height:88px"><div class="glow"></div></div>
+        <div class="ph ph-5" style="height:88px"><div class="glow"></div><div class="play" style="width:36px;height:36px"><svg width="12" height="12" viewBox="0 0 24 24" fill="#F7F2E7"><path d="M8 5v14l11-7z"></path></svg></div></div>
+        <div class="ph ph-6" style="height:88px"><div class="glow"></div><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(23,20,15,.55)"><span class="mono" style="font-size:11px;letter-spacing:.18em;color:#F7F2E7">+6</span></div></div>
+      </div>
+      <ul style="list-style:none;display:flex;flex-wrap:wrap;gap:10px 24px;margin:24px 0 0;padding:0">
+        <li class="trust"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"></path></svg>Veterinary Documentation Available</li>
+        <li class="trust"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"></path></svg>X-Rays Available</li>
+        <li class="trust"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"></path></svg>Pedigree Documents Available</li>
+        <li class="trust"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"></path></svg>International Transport Available</li>
+        <li class="trust"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"></path></svg>Competition Record Available</li>
+      </ul>
+    </div>
+
+    <div style="flex:none;width:432px;border:1px solid rgba(23,20,15,.12);background:rgba(255,255,255,.35);padding:32px">
+      <span class="badge-inline">Available</span>
+      <div class="eyebrow" style="margin-top:18px">Show Jumping · Brittany, France</div>
+      <h1 class="display" style="margin:8px 0 0;font-style:italic;font-weight:500;font-size:40px;line-height:1.08">Orphée des Forges</h1>
+      <p style="margin:12px 0 0;font-size:15px;line-height:1.6;color:rgba(23,20,15,.65)">A scopey, careful 1.45m partner with the temperament for a first international season.</p>
+      <div class="display" style="margin-top:20px;font-size:26px;color:#B08D57">Price on Request</div>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-top:24px">
+        <a class="btn btn-hunter" href="#">Contact Us</a>
+        <a class="btn btn-goldline" href="#"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.4 8.4 0 0 1-12.3 7.4L3 21l2.2-5.5A8.5 8.5 0 1 1 21 11.5Z"></path></svg>WhatsApp</a>
+        <a class="btn btn-charcoal" href="#">Request a Viewing</a>
+      </div>
+      <p class="mono" style="margin:12px 0 0;font-size:10px;letter-spacing:.06em;line-height:1.7;color:rgba(23,20,15,.4)">Opens WhatsApp with: "Hello, I am interested in Orphée des Forges. I would like to receive more information."</p>
+      <div style="height:1px;background:rgba(23,20,15,.12);margin:24px 0"></div>
+      <div style="display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));gap:16px 20px">
+        <div><div class="k">Breed</div><div style="font-size:14px">Selle Français</div></div>
+        <div><div class="k">Sex</div><div style="font-size:14px">Gelding</div></div>
+        <div><div class="k">Date of Birth</div><div style="font-size:14px">12 April 2017</div></div>
+        <div><div class="k">Age</div><div style="font-size:14px">9 yrs</div></div>
+        <div><div class="k">Height</div><div style="font-size:14px">168 cm</div></div>
+        <div><div class="k">Color</div><div style="font-size:14px">Bay</div></div>
+        <div><div class="k">Discipline</div><div style="font-size:14px">Show Jumping</div></div>
+        <div><div class="k">Competition Level</div><div style="font-size:14px">1.45m</div></div>
+        <div><div class="k">Registration</div><div style="font-size:14px">FR-2017-SF-04821</div></div>
+        <div><div class="k">Location</div><div style="font-size:14px">Brittany, France</div></div>
+      </div>
+      <div style="height:1px;background:rgba(23,20,15,.12);margin:24px 0"></div>
+      <div style="display:flex;align-items:center;gap:16px">
+        <span class="k" style="margin:0">Share</span>
+        <a class="mono" href="#" style="font-size:10px;letter-spacing:.18em;text-transform:uppercase">Instagram</a>
+        <a class="mono" href="#" style="font-size:10px;letter-spacing:.18em;text-transform:uppercase">Facebook</a>
+        <a class="mono" href="#" style="font-size:10px;letter-spacing:.18em;text-transform:uppercase">WhatsApp</a>
+        <a class="mono" href="#" style="font-size:10px;letter-spacing:.18em;text-transform:uppercase">Copy Link</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- About This Horse -->
+  <div style="padding:88px 40px 0">
+    <span class="eyebrow">About This Horse</span>
+    <h2 class="display" style="margin:12px 0 0;font-style:italic;font-weight:500;font-size:40px;line-height:1.1">A thinking horse who tries for his rider</h2>
+    <div style="display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));gap:40px 64px;margin-top:44px;max-width:1180px">
+      <div>
+        <div class="display" style="font-style:italic;font-size:20px">Personality</div>
+        <p style="margin:8px 0 0;font-size:15px;line-height:1.7;color:rgba(23,20,15,.65)">Calm in the stable, sharp in the ring. Orphée is a thinking horse who tries for his rider.</p>
+      </div>
+      <div>
+        <div class="display" style="font-style:italic;font-size:20px">Training &amp; Experience</div>
+        <p style="margin:8px 0 0;font-size:15px;line-height:1.7;color:rgba(23,20,15,.65)">Produced through the young horse classes and stepped up methodically; schooled on the flat three times a week. Winner at 1.40m, placed in three 1.45m grands prix in the last season.</p>
+      </div>
+      <div>
+        <div class="display" style="font-style:italic;font-size:20px">Strengths</div>
+        <p style="margin:8px 0 0;font-size:15px;line-height:1.7;color:rgba(23,20,15,.65)">Exceptional technique over oxers, reliable in the twisty time-faults classes, sound record.</p>
+      </div>
+      <div>
+        <div class="display" style="font-style:italic;font-size:20px">Suitability &amp; Potential</div>
+        <p style="margin:8px 0 0;font-size:15px;line-height:1.7;color:rgba(23,20,15,.65)">A professional or ambitious amateur ready to campaign at 1.45m–1.50m. Correct type and jump for a move to 1.50m within eighteen months.</p>
+      </div>
+      <div>
+        <div class="display" style="font-style:italic;font-size:20px">Ideal Rider</div>
+        <p style="margin:8px 0 0;font-size:15px;line-height:1.7;color:rgba(23,20,15,.65)">Confident, tactful rider comfortable with a forward-thinking horse.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pedigree -->
+  <div style="margin-top:88px;background:#EFE8D8;padding:80px 40px">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px">
+      <div>
+        <span class="eyebrow">Pedigree</span>
+        <h2 class="display" style="margin:12px 0 0;font-style:italic;font-weight:500;font-size:40px;line-height:1.1">Diamant de Semilly bloodline</h2>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));gap:32px;margin-top:44px">
+      <div style="display:flex;flex-direction:column;gap:20px;align-items:stretch">
+        <div class="node" style="border-color:#B08D57">
+          <span class="node-pos">Sire</span>
+          <span class="node-name" style="font-size:19px">Diamant de Semilly</span>
+          <span class="node-breed">Selle Français</span>
+          <span class="node-note">Olympic sire line</span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));gap:12px">
+          <div class="node"><span class="node-pos">Sire</span><span class="node-name">Le Tot de Semilly</span><span class="node-breed">Selle Français</span></div>
+          <div class="node"><span class="node-pos">Dam</span><span class="node-name">Venise des Cresles</span><span class="node-breed">Selle Français</span></div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(4, minmax(0, 1fr));gap:8px;{{p.g3}}">
+          <div class="node" style="padding:10px 8px"><span class="node-pos">Sire</span><span class="node-name" style="font-size:13px">Grand Veneur</span></div>
+          <div class="node" style="padding:10px 8px"><span class="node-pos">Dam</span><span class="node-name" style="font-size:13px">Venue du Tot</span></div>
+          <div class="node" style="padding:10px 8px"><span class="node-pos">Sire</span><span class="node-name" style="font-size:13px">Elf III</span></div>
+          <div class="node" style="padding:10px 8px"><span class="node-pos">Dam</span><span class="node-name" style="font-size:13px">Miss des Cresles</span></div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:20px;align-items:stretch">
+        <div class="node" style="border-color:#B08D57">
+          <span class="node-pos">Dam</span>
+          <span class="node-name" style="font-size:19px">Ulane des Forges</span>
+          <span class="node-breed">Selle Français</span>
+          <span class="node-note">Dam of two 1.40m+ horses</span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));gap:12px">
+          <div class="node"><span class="node-pos">Sire</span><span class="node-name">Quidam de Revel</span><span class="node-breed">Selle Français</span></div>
+          <div class="node"><span class="node-pos">Dam</span><span class="node-name">Odyssée des Forges</span><span class="node-breed">Selle Français</span></div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(4, minmax(0, 1fr));gap:8px;{{p.g3}}">
+          <div class="node" style="padding:10px 8px"><span class="node-pos">Sire</span><span class="node-name" style="font-size:13px">Jalisco B</span></div>
+          <div class="node" style="padding:10px 8px"><span class="node-pos">Dam</span><span class="node-name" style="font-size:13px">Dirka</span></div>
+          <div class="node" style="padding:10px 8px"><span class="node-pos">Sire</span><span class="node-name" style="font-size:13px">Narcos II</span></div>
+          <div class="node" style="padding:10px 8px"><span class="node-pos">Dam</span><span class="node-name" style="font-size:13px">Fougère</span></div>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:32px;{{p.show}}">
+      <button class="mono" onClick="{{p.expand}}" style="background:none;border:none;cursor:pointer;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#B08D57;text-decoration:underline;text-underline-offset:4px">Show more generations</button>
+    </div>
+  </div>
+
+  <!-- Competition history -->
+  <div style="padding:88px 40px 0">
+    <span class="eyebrow">Sport &amp; Competition History</span>
+    <h2 class="display" style="margin:12px 0 0;font-style:italic;font-weight:500;font-size:40px;line-height:1.1">Results on record</h2>
+    <table style="width:100%;border-collapse:collapse;margin-top:36px">
+      <thead>
+        <tr><th>Year</th><th>Competition</th><th>Level</th><th>Result</th><th>Rider</th><th>Location</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>2026</td><td class="display" style="font-style:italic;font-size:16px">CSI3* Grand Prix</td><td>1.45m</td><td style="color:#1F3327;font-weight:500">3rd</td><td>House rider</td><td>Deauville, FR</td></tr>
+        <tr><td>2026</td><td class="display" style="font-style:italic;font-size:16px">CSI2* Grand Prix</td><td>1.45m</td><td style="color:#1F3327;font-weight:500">5th</td><td>House rider</td><td>Dinard, FR</td></tr>
+        <tr><td>2025</td><td class="display" style="font-style:italic;font-size:16px">National Grand Prix</td><td>1.40m</td><td style="color:#1F3327;font-weight:500">1st</td><td>House rider</td><td>Fontainebleau, FR</td></tr>
+        <tr><td>2025</td><td class="display" style="font-style:italic;font-size:16px">CSI2* Grand Prix</td><td>1.45m</td><td style="color:#1F3327;font-weight:500">2nd</td><td>House rider</td><td>Auvers, FR</td></tr>
+        <tr><td>2024</td><td class="display" style="font-style:italic;font-size:16px">7yo Young Horse Final</td><td>1.30m</td><td style="color:#1F3327;font-weight:500">4th</td><td>House rider</td><td>Fontainebleau, FR</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Media -->
+  <div style="padding:88px 40px 0">
+    <span class="eyebrow">Media</span>
+    <div style="display:flex;gap:32px;border-bottom:1px solid rgba(23,20,15,.12);margin-top:20px">
+      <button class="tab" style="{{tv.photos}}" onClick="{{tab.photos}}">Photos</button>
+      <button class="tab" style="{{tv.videos}}" onClick="{{tab.videos}}">Videos</button>
+      <button class="tab" style="{{tv.comp}}" onClick="{{tab.comp}}">Competition Videos</button>
+      <button class="tab" style="{{tv.train}}" onClick="{{tab.train}}">Training Videos</button>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3, minmax(0, 1fr));gap:16px;margin-top:32px;{{pv.photos}}">
+      <div class="ph ph-1" style="height:300px"><div class="glow"></div></div>
+      <div class="ph ph-4" style="height:300px"><div class="glow"></div></div>
+      <div class="ph ph-3" style="height:300px"><div class="glow"></div></div>
+      <div class="ph ph-5" style="height:300px"><div class="glow"></div></div>
+      <div class="ph ph-6" style="height:300px"><div class="glow"></div></div>
+      <div class="ph ph-2" style="height:300px"><div class="glow"></div></div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3, minmax(0, 1fr));gap:16px;margin-top:32px;{{pv.videos}}">
+      <div class="ph ph-3" style="height:250px"><div class="glow"></div><div class="play"><svg width="16" height="16" viewBox="0 0 24 24" fill="#F7F2E7"><path d="M8 5v14l11-7z"></path></svg></div></div>
+      <div class="ph ph-1" style="height:250px"><div class="glow"></div><div class="play"><svg width="16" height="16" viewBox="0 0 24 24" fill="#F7F2E7"><path d="M8 5v14l11-7z"></path></svg></div></div>
+      <div class="ph ph-5" style="height:250px"><div class="glow"></div><div class="play"><svg width="16" height="16" viewBox="0 0 24 24" fill="#F7F2E7"><path d="M8 5v14l11-7z"></path></svg></div></div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));gap:16px;margin-top:32px;{{pv.comp}}">
+      <div class="ph ph-4" style="height:340px"><div class="glow"></div><div class="play"><svg width="16" height="16" viewBox="0 0 24 24" fill="#F7F2E7"><path d="M8 5v14l11-7z"></path></svg></div><span class="mono" style="position:absolute;left:16px;bottom:14px;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(247,242,231,.85)">CSI3* Grand Prix · Deauville 2026</span></div>
+      <div class="ph ph-6" style="height:340px"><div class="glow"></div><div class="play"><svg width="16" height="16" viewBox="0 0 24 24" fill="#F7F2E7"><path d="M8 5v14l11-7z"></path></svg></div><span class="mono" style="position:absolute;left:16px;bottom:14px;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(247,242,231,.85)">National Grand Prix · Fontainebleau 2025</span></div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));gap:16px;margin-top:32px;{{pv.train}}">
+      <div class="ph ph-2" style="height:340px"><div class="glow"></div><div class="play"><svg width="16" height="16" viewBox="0 0 24 24" fill="#F7F2E7"><path d="M8 5v14l11-7z"></path></svg></div><span class="mono" style="position:absolute;left:16px;bottom:14px;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(247,242,231,.85)">Flatwork session · July 2026</span></div>
+      <div class="ph ph-5" style="height:340px"><div class="glow"></div><div class="play"><svg width="16" height="16" viewBox="0 0 24 24" fill="#F7F2E7"><path d="M8 5v14l11-7z"></path></svg></div><span class="mono" style="position:absolute;left:16px;bottom:14px;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(247,242,231,.85)">Gymnastic jumping · June 2026</span></div>
+    </div>
+  </div>
+
+  <!-- Health & documents + location -->
+  <div style="display:flex;gap:64px;padding:88px 40px 0;align-items:flex-start">
+    <div style="flex:1 1 0;min-width:0">
+      <span class="eyebrow">Health &amp; Documents</span>
+      <h2 class="display" style="margin:12px 0 0;font-style:italic;font-weight:500;font-size:32px;line-height:1.1">Documentation on file</h2>
+      <div style="margin-top:24px">
+        <div class="docrow">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B08D57" stroke-width="1.5"><path d="M6 2h9l5 5v15H6z"></path><path d="M15 2v5h5"></path></svg>
+          <div style="flex:1"><div style="font-size:14px">Pre-purchase veterinary exam</div><div class="k" style="margin-top:2px">June 2026</div></div>
+          <span class="mono" style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(23,20,15,.4)">Available on request</span>
+        </div>
+        <div class="docrow">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B08D57" stroke-width="1.5"><path d="M6 2h9l5 5v15H6z"></path><path d="M15 2v5h5"></path></svg>
+          <div style="flex:1"><div style="font-size:14px">Full radiographic set</div><div class="k" style="margin-top:2px">18 images · June 2026</div></div>
+          <span class="mono" style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(23,20,15,.4)">Available on request</span>
+        </div>
+        <div class="docrow">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B08D57" stroke-width="1.5"><path d="M6 2h9l5 5v15H6z"></path><path d="M15 2v5h5"></path></svg>
+          <div style="flex:1"><div style="font-size:14px">Vaccination record</div><div class="k" style="margin-top:2px">Up to date</div></div>
+          <a class="mono" href="#" style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;text-decoration:underline;text-underline-offset:4px">Download</a>
+        </div>
+        <div class="docrow">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B08D57" stroke-width="1.5"><path d="M6 2h9l5 5v15H6z"></path><path d="M15 2v5h5"></path></svg>
+          <div style="flex:1"><div style="font-size:14px">FEI passport</div><div class="k" style="margin-top:2px">Verified</div></div>
+          <span class="mono" style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#1F3327">Verified</span>
+        </div>
+        <div class="docrow" style="border-bottom:none">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B08D57" stroke-width="1.5"><path d="M6 2h9l5 5v15H6z"></path><path d="M15 2v5h5"></path></svg>
+          <div style="flex:1"><div style="font-size:14px">Registration papers &amp; pedigree certificate</div><div class="k" style="margin-top:2px">Studbook Selle Français</div></div>
+          <a class="mono" href="#" style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;text-decoration:underline;text-underline-offset:4px">Download</a>
+        </div>
+      </div>
+      <p class="mono" style="margin:16px 0 0;font-size:10px;letter-spacing:.06em;color:rgba(23,20,15,.4)">Document downloads are enabled individually by the seller.</p>
+    </div>
+
+    <div style="flex:none;width:432px">
+      <span class="eyebrow">Location</span>
+      <h2 class="display" style="margin:12px 0 0;font-style:italic;font-weight:500;font-size:32px;line-height:1.1">Brittany, France</h2>
+      <div class="ph" style="height:240px;margin-top:24px;background:linear-gradient(150deg,#1F3327 0%,#2A4433 45%,#55604B 100%)">
+        <div class="glow"></div>
+        <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:8px">
+          <span style="display:block;width:44px;height:44px;border:1px solid rgba(199,164,104,.6);border-radius:50%"></span>
+          <span style="display:block;width:10px;height:10px;background:#C7A468;border-radius:50%;margin-top:-35px"></span>
+        </div>
+        <span class="mono" style="position:absolute;left:16px;bottom:14px;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(247,242,231,.85)">Approximate area</span>
+      </div>
+      <p style="margin:16px 0 0;font-size:13px;line-height:1.7;color:rgba(23,20,15,.55)">Approximate area shown. Exact address provided to serious buyers on request, once a viewing is confirmed.</p>
+    </div>
+  </div>
+
+  <!-- Inquiry -->
+  <div style="margin-top:96px;background:#17140F;padding:88px 40px">
+    <div style="display:flex;gap:80px;align-items:flex-start">
+      <div style="flex:1;display:flex;flex-direction:column;gap:16px">
+        <span class="eyebrow">Inquire About This Horse</span>
+        <h2 class="display" style="margin:0;font-style:italic;font-weight:500;font-size:44px;line-height:1.12;color:#F7F2E7">Request more information</h2>
+        <p style="margin:0;max-width:440px;font-size:15px;line-height:1.7;color:rgba(247,242,231,.65)">Tell us what you're looking for and we'll reply personally, usually within one business day.</p>
+        <div style="display:flex;gap:12px;margin-top:16px">
+          <a class="btn btn-goldline" href="#"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.4 8.4 0 0 1-12.3 7.4L3 21l2.2-5.5A8.5 8.5 0 1 1 21 11.5Z"></path></svg>WhatsApp</a>
+          <a class="btn" style="border-color:rgba(247,242,231,.45);color:#F7F2E7" href="#"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2Z"></path></svg>Call</a>
+        </div>
+      </div>
+      <div style="flex:1;background:#F7F2E7;padding:36px">
+        <div style="display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));gap:16px">
+          <div><label class="flabel">Name</label><input class="field" placeholder="Your full name"></div>
+          <div><label class="flabel">Email</label><input class="field" placeholder="you@example.com"></div>
+          <div><label class="flabel">Phone</label><input class="field" placeholder="+00 ..."></div>
+          <div><label class="flabel">Country</label><input class="field" placeholder="Country"></div>
+          <div><label class="flabel">What are you looking for?</label><input class="field" placeholder="e.g. 1.40m amateur horse"></div>
+          <div><label class="flabel">Do you have a trainer or rider?</label><input class="field" placeholder="Yes / No"></div>
+          <div style="grid-column:span 2"><label class="flabel">Preferred viewing date</label><input class="field" placeholder="Optional"></div>
+          <div style="grid-column:span 2"><label class="flabel">Message</label><textarea class="field" rows="4" placeholder="I am interested in Orphée des Forges..."></textarea></div>
+        </div>
+        <a class="btn btn-hunter" style="width:100%;box-sizing:border-box;margin-top:20px" href="#">Send Inquiry</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer (slim) -->
+  <div style="background:#17140F;border-top:1px solid rgba(247,242,231,.1)">
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:24px;padding:32px 40px">
+      <div style="display:flex;align-items:baseline;gap:8px">
+        <span class="display" style="font-style:italic;font-size:20px;color:#F7F2E7">MEC</span>
+        <span class="mono" style="font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#B08D57">Trading</span>
+      </div>
+      <p style="margin:0;font-size:12px;color:rgba(247,242,231,.4)">MEC Trading is a private horse trading company. All horses shown are owned or represented directly by MEC Trading.</p>
+      <p style="margin:0;font-size:12px;color:rgba(247,242,231,.3)">© 2026 MEC Trading SAS</p>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+<script data-dc-script data-props='{"$preview":{"width":1440,"height":5150}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { tab: 'photos', ped: false };
+  }
+  renderVals() {
+    const self = this;
+    const tabs = ['photos', 'videos', 'comp', 'train'];
+    const tab = {};
+    const tv = {};
+    const pv = {};
+    tabs.forEach(function (id) {
+      tab[id] = function () { self.setState({ tab: id }); };
+      tv[id] = self.state.tab === id ? 'color:#17140F;border-bottom-color:#B08D57' : '';
+      pv[id] = self.state.tab === id ? '' : 'display:none';
+    });
+    const p = {
+      expand: function () { self.setState({ ped: true }); },
+      g3: self.state.ped ? '' : 'display:none',
+      show: self.state.ped ? 'display:none' : ''
+    };
+    return { tab: tab, tv: tv, pv: pv, p: p };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+  <style>
+    body{margin:0;background:#F7F2E7;color:#17140F;font-family:'IBM Plex Mono','Consolas','Courier New',monospace;-webkit-font-smoothing:antialiased}
+    a{color:#B08D57}a:hover{color:#C7A468}
+    .display{font-family:'Fraunces',Georgia,'Times New Roman',serif}
+    .lab{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:rgba(23,20,15,.4)}
+    .lab-d{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:rgba(247,242,231,.35)}
+  </style>
+</helmet>
+<div style="display:flex;height:720px;background:#F7F2E7">
+
+  <!-- Reversed -->
+  <div style="flex:1;background:#17140F;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:32px">
+    <span class="lab-d" style="position:absolute;top:24px;left:28px">Monogram — reversed</span>
+    <div style="position:relative;width:230px;height:230px;color:#C7A468">
+      <svg viewBox="0 0 170 170" fill="none" stroke="currentColor" style="position:absolute;inset:0">
+        <path d="M85 6 L164 85 L85 164 L6 85 Z" stroke-width="1.5"></path>
+        <path d="M85 17 L153 85 L85 153 L17 85 Z" stroke-width="0.75" opacity="0.7"></path>
+      </svg>
+      <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px">
+        <span class="display" style="font-style:italic;font-weight:500;font-size:52px;line-height:1;letter-spacing:-.01em;color:#F7F2E7">MEC</span>
+        <span style="display:block;width:26px;height:1px;background:#B08D57"></span>
+        <span style="font-size:8px;letter-spacing:.42em;text-transform:uppercase;color:#B08D57;text-indent:.42em">Trading</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- On ivory -->
+  <div style="flex:1;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:48px;border-left:1px solid rgba(23,20,15,.12)">
+    <span class="lab" style="position:absolute;top:24px;left:28px">On ivory · small sizes</span>
+    <div style="position:relative;width:150px;height:150px;color:#B08D57">
+      <svg viewBox="0 0 170 170" fill="none" stroke="currentColor" style="position:absolute;inset:0">
+        <path d="M85 6 L164 85 L85 164 L6 85 Z" stroke-width="1.5"></path>
+        <path d="M85 17 L153 85 L85 153 L17 85 Z" stroke-width="0.75" opacity="0.7"></path>
+      </svg>
+      <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px">
+        <span class="display" style="font-style:italic;font-weight:500;font-size:34px;line-height:1;letter-spacing:-.01em;color:#17140F">MEC</span>
+        <span style="display:block;width:20px;height:1px;background:#B08D57"></span>
+        <span style="font-size:6px;letter-spacing:.42em;text-transform:uppercase;color:#B08D57;text-indent:.42em">Trading</span>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:36px">
+      <div style="position:relative;width:64px;height:64px;color:#B08D57">
+        <svg viewBox="0 0 170 170" fill="none" stroke="currentColor" style="position:absolute;inset:0">
+          <path d="M85 6 L164 85 L85 164 L6 85 Z" stroke-width="3"></path>
+        </svg>
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center">
+          <span class="display" style="font-style:italic;font-weight:500;font-size:19px;line-height:1;color:#17140F">MEC</span>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+        <div style="width:40px;height:40px;background:#17140F;display:flex;align-items:center;justify-content:center">
+          <div style="position:relative;width:32px;height:32px;color:#C7A468">
+            <svg viewBox="0 0 170 170" fill="none" stroke="currentColor" style="position:absolute;inset:0">
+              <path d="M85 6 L164 85 L85 164 L6 85 Z" stroke-width="6"></path>
+            </svg>
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center">
+              <span class="display" style="font-style:italic;font-weight:500;font-size:10px;line-height:1;color:#F7F2E7">M</span>
+            </div>
+          </div>
+        </div>
+        <span class="lab">Favicon</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>

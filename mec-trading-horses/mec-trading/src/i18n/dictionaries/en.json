@@ -1,0 +1,171 @@
+{
+  "brand": {
+    "name": "MEC Trading",
+    "tagline": "Exceptional Horses. Carefully Selected."
+  },
+  "nav": {
+    "home": "Home",
+    "horses": "Horses for Sale",
+    "about": "About",
+    "selection": "Our Selection",
+    "services": "Services",
+    "news": "News",
+    "contact": "Contact",
+    "ctaPrimary": "Discover Our Horses",
+    "ctaSecondary": "Contact Us"
+  },
+  "home": {
+    "heroHeadline": "Exceptional Horses. Exceptional Potential.",
+    "heroSupport": "Discover our carefully selected horses for sport, competition and breeding.",
+    "heroCta": "View Horses for Sale",
+    "featuredEyebrow": "Featured Horses",
+    "featuredTitle": "Currently in our selection",
+    "selectionEyebrow": "Our Selection",
+    "selectionTitle": "Find a horse by discipline",
+    "whyEyebrow": "Why Choose MEC Trading",
+    "whyTitle": "A private, professional standard",
+    "storyEyebrow": "Featured Story",
+    "internationalEyebrow": "International Buyers",
+    "internationalTitle": "Buying from abroad is straightforward",
+    "internationalText": "We assist international clients end to end — from first selection to the horse arriving home.",
+    "closingTitle": "Looking for Your Next Horse?",
+    "closingCta": "Contact Us"
+  },
+  "why": {
+    "selected": { "title": "Carefully Selected Horses", "text": "Every horse is chosen personally, not sourced from a listings feed." },
+    "evaluation": { "title": "Professional Evaluation", "text": "Conformation, temperament and way of going assessed before any horse is offered." },
+    "documentation": { "title": "Verified Documentation", "text": "Passports, registration and veterinary records are checked and kept on file." },
+    "international": { "title": "International Buyers", "text": "Clients across Europe, the Gulf and beyond, in their own language." },
+    "assistance": { "title": "Personalised Assistance", "text": "One point of contact from first enquiry to the horse arriving home." },
+    "transport": { "title": "Transport Assistance", "text": "Trusted transporters and export paperwork coordinated on your behalf." }
+  },
+  "international": {
+    "selection": "Horse selection",
+    "info": "Additional information",
+    "vet": "Veterinary documentation",
+    "xrays": "X-rays",
+    "viewing": "Viewing",
+    "transport": "Transport",
+    "export": "Export documentation"
+  },
+  "disciplines": {
+    "SHOW_JUMPING": "Show Jumping",
+    "DRESSAGE": "Dressage",
+    "EVENTING": "Eventing",
+    "BREEDING": "Breeding",
+    "ARABIAN": "Arabian Horses",
+    "YOUNG_HORSE": "Young Horses",
+    "COMPETITION": "Competition Horses",
+    "PROSPECT": "Prospect Horses"
+  },
+  "horse": {
+    "breed": "Breed",
+    "age": "Age",
+    "sex": "Sex",
+    "height": "Height",
+    "discipline": "Discipline",
+    "location": "Location",
+    "priceOnRequest": "Price on Request",
+    "viewHorse": "View Horse",
+    "years": "yrs",
+    "sexLabel": { "MARE": "Mare", "STALLION": "Stallion", "GELDING": "Gelding" },
+    "statusLabel": { "AVAILABLE": "Available", "RESERVED": "Reserved", "SOLD": "Sold" }
+  },
+  "catalog": {
+    "title": "Horses for Sale",
+    "subtitle": "The complete current selection.",
+    "filters": "Filters",
+    "sortFeatured": "Featured",
+    "sortNewest": "Newest",
+    "sortPriceAsc": "Price: low to high",
+    "sortPriceDesc": "Price: high to low",
+    "sortAge": "Age",
+    "noResults": "No horses match these filters right now — contact us and we'll let you know when one does."
+  },
+  "detail": {
+    "contact": "Contact Us",
+    "whatsapp": "WhatsApp",
+    "requestViewing": "Request a Viewing",
+    "basicInfo": "Basic Information",
+    "dateOfBirth": "Date of Birth",
+    "color": "Color",
+    "competitionLevel": "Competition Level",
+    "registration": "Registration",
+    "description": "About This Horse",
+    "pedigree": "Pedigree",
+    "showMoreGenerations": "Show more generations",
+    "competitionHistory": "Sport & Competition History",
+    "media": "Media",
+    "tabPhotos": "Photos",
+    "tabVideos": "Videos",
+    "tabCompetitionVideos": "Competition Videos",
+    "tabTrainingVideos": "Training Videos",
+    "healthDocuments": "Health & Documents",
+    "downloadNotAvailable": "Available on request",
+    "locationTitle": "Location",
+    "locationNote": "Approximate area shown. Exact address provided to serious buyers on request.",
+    "contactFormTitle": "Enquire About This Horse",
+    "table": { "competition": "Competition", "year": "Year", "level": "Level", "result": "Result", "rider": "Rider", "location": "Location" }
+  },
+  "trust": {
+    "vetDocs": "Veterinary Documentation Available",
+    "xrays": "X-Rays Available",
+    "pedigreeDocs": "Pedigree Documents Available",
+    "transport": "International Transport Available",
+    "competitionRecord": "Competition Record Available"
+  },
+  "form": {
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "country": "Country",
+    "message": "Message",
+    "lookingFor": "What are you looking for?",
+    "hasTrainer": "Do you have a trainer or rider?",
+    "viewingDate": "Preferred viewing date",
+    "send": "Send Inquiry",
+    "call": "Call",
+    "sentTitle": "Thank you — your inquiry has been sent.",
+    "sentText": "We reply personally to every enquiry, usually within one business day."
+  },
+  "about": {
+    "title": "About MEC Trading",
+    "eyebrow": "Our Story"
+  },
+  "services": {
+    "title": "Services",
+    "eyebrow": "How We Help",
+    "list": {
+      "selection": { "title": "Horse Selection", "text": "We identify horses matching your goals, budget and level before you ever travel to see one." },
+      "sales": { "title": "Horse Sales", "text": "Every horse in our selection is offered directly, with no intermediary marketplace." },
+      "prePurchase": { "title": "Pre-Purchase Assistance", "text": "We coordinate independent vetting and interpret the results plainly." },
+      "vetCoordination": { "title": "Veterinary Coordination", "text": "Clinics, timing and travel arranged around your schedule." },
+      "documentation": { "title": "Documentation", "text": "Passports, registration and ownership transfer handled correctly the first time." },
+      "transport": { "title": "International Transport", "text": "Ground and air transport organised door to door." },
+      "export": { "title": "Export Assistance", "text": "Customs, health certificates and country-specific import rules managed for you." },
+      "viewing": { "title": "Viewing Appointments", "text": "In person or by live video call, at a time that suits you." },
+      "afterSale": { "title": "After-Sale Support", "text": "We stay reachable long after the horse has arrived home." }
+    }
+  },
+  "contact": {
+    "title": "Contact",
+    "eyebrow": "Get in Touch",
+    "text": "Tell us what you're looking for and we'll reply personally."
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "privateNotice": "MEC Trading is a private horse trading company. All horses shown are owned or represented directly by MEC Trading."
+  },
+  "admin": {
+    "login": "Admin Sign In",
+    "email": "Email",
+    "password": "Password",
+    "signIn": "Sign In",
+    "dashboard": "Dashboard",
+    "horses": "Horses",
+    "inquiries": "Inquiries",
+    "settings": "Settings",
+    "addHorse": "Add Horse",
+    "signOut": "Sign Out"
+  }
+}

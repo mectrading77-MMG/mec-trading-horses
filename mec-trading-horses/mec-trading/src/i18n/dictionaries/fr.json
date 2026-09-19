@@ -1,0 +1,171 @@
+{
+  "brand": {
+    "name": "MEC Trading",
+    "tagline": "Des chevaux d'exception. Soigneusement sélectionnés."
+  },
+  "nav": {
+    "home": "Accueil",
+    "horses": "Chevaux à vendre",
+    "about": "À propos",
+    "selection": "Notre sélection",
+    "services": "Services",
+    "news": "Actualités",
+    "contact": "Contact",
+    "ctaPrimary": "Découvrir nos chevaux",
+    "ctaSecondary": "Nous contacter"
+  },
+  "home": {
+    "heroHeadline": "Des chevaux d'exception. Un potentiel d'exception.",
+    "heroSupport": "Découvrez notre sélection de chevaux pour le sport, la compétition et l'élevage.",
+    "heroCta": "Voir les chevaux à vendre",
+    "featuredEyebrow": "Chevaux en vedette",
+    "featuredTitle": "Actuellement dans notre sélection",
+    "selectionEyebrow": "Notre sélection",
+    "selectionTitle": "Trouver un cheval par discipline",
+    "whyEyebrow": "Pourquoi MEC Trading",
+    "whyTitle": "Une exigence privée et professionnelle",
+    "storyEyebrow": "Portrait",
+    "internationalEyebrow": "Acheteurs internationaux",
+    "internationalTitle": "Acheter depuis l'étranger, en toute simplicité",
+    "internationalText": "Nous accompagnons nos clients internationaux de bout en bout, de la première sélection jusqu'à l'arrivée du cheval.",
+    "closingTitle": "Vous cherchez votre prochain cheval ?",
+    "closingCta": "Nous contacter"
+  },
+  "why": {
+    "selected": { "title": "Chevaux soigneusement sélectionnés", "text": "Chaque cheval est choisi personnellement, jamais issu d'un simple flux d'annonces." },
+    "evaluation": { "title": "Évaluation professionnelle", "text": "Modèle, tempérament et locomotion évalués avant toute proposition." },
+    "documentation": { "title": "Documentation vérifiée", "text": "Passeports, immatriculation et suivi vétérinaire contrôlés et archivés." },
+    "international": { "title": "Acheteurs internationaux", "text": "Des clients en Europe, dans le Golfe et au-delà, accompagnés dans leur langue." },
+    "assistance": { "title": "Accompagnement personnalisé", "text": "Un seul interlocuteur, de la première demande à l'arrivée du cheval." },
+    "transport": { "title": "Assistance transport", "text": "Transporteurs de confiance et formalités d'export coordonnés pour vous." }
+  },
+  "international": {
+    "selection": "Sélection du cheval",
+    "info": "Informations complémentaires",
+    "vet": "Documentation vétérinaire",
+    "xrays": "Radiographies",
+    "viewing": "Visite",
+    "transport": "Transport",
+    "export": "Documents d'exportation"
+  },
+  "disciplines": {
+    "SHOW_JUMPING": "Saut d'obstacles",
+    "DRESSAGE": "Dressage",
+    "EVENTING": "Concours complet",
+    "BREEDING": "Élevage",
+    "ARABIAN": "Chevaux arabes",
+    "YOUNG_HORSE": "Jeunes chevaux",
+    "COMPETITION": "Chevaux de compétition",
+    "PROSPECT": "Chevaux d'avenir"
+  },
+  "horse": {
+    "breed": "Race",
+    "age": "Âge",
+    "sex": "Sexe",
+    "height": "Taille",
+    "discipline": "Discipline",
+    "location": "Localisation",
+    "priceOnRequest": "Prix sur demande",
+    "viewHorse": "Voir le cheval",
+    "years": "ans",
+    "sexLabel": { "MARE": "Jument", "STALLION": "Étalon", "GELDING": "Hongre" },
+    "statusLabel": { "AVAILABLE": "Disponible", "RESERVED": "Réservé", "SOLD": "Vendu" }
+  },
+  "catalog": {
+    "title": "Chevaux à vendre",
+    "subtitle": "L'ensemble de la sélection actuelle.",
+    "filters": "Filtres",
+    "sortFeatured": "En vedette",
+    "sortNewest": "Plus récent",
+    "sortPriceAsc": "Prix croissant",
+    "sortPriceDesc": "Prix décroissant",
+    "sortAge": "Âge",
+    "noResults": "Aucun cheval ne correspond à ces filtres pour le moment — contactez-nous, nous vous préviendrons."
+  },
+  "detail": {
+    "contact": "Nous contacter",
+    "whatsapp": "WhatsApp",
+    "requestViewing": "Demander une visite",
+    "basicInfo": "Informations générales",
+    "dateOfBirth": "Date de naissance",
+    "color": "Robe",
+    "competitionLevel": "Niveau de compétition",
+    "registration": "Immatriculation",
+    "description": "À propos de ce cheval",
+    "pedigree": "Origines",
+    "showMoreGenerations": "Voir plus de générations",
+    "competitionHistory": "Parcours sportif",
+    "media": "Médias",
+    "tabPhotos": "Photos",
+    "tabVideos": "Vidéos",
+    "tabCompetitionVideos": "Vidéos de compétition",
+    "tabTrainingVideos": "Vidéos d'entraînement",
+    "healthDocuments": "Santé & documents",
+    "downloadNotAvailable": "Disponible sur demande",
+    "locationTitle": "Localisation",
+    "locationNote": "Zone approximative indiquée. Adresse exacte communiquée aux acheteurs sérieux sur demande.",
+    "contactFormTitle": "Se renseigner sur ce cheval",
+    "table": { "competition": "Épreuve", "year": "Année", "level": "Niveau", "result": "Résultat", "rider": "Cavalier", "location": "Lieu" }
+  },
+  "trust": {
+    "vetDocs": "Documentation vétérinaire disponible",
+    "xrays": "Radiographies disponibles",
+    "pedigreeDocs": "Documents d'origines disponibles",
+    "transport": "Transport international disponible",
+    "competitionRecord": "Dossier sportif disponible"
+  },
+  "form": {
+    "name": "Nom",
+    "email": "E-mail",
+    "phone": "Téléphone",
+    "country": "Pays",
+    "message": "Message",
+    "lookingFor": "Que recherchez-vous ?",
+    "hasTrainer": "Avez-vous un entraîneur ou un cavalier ?",
+    "viewingDate": "Date de visite souhaitée",
+    "send": "Envoyer la demande",
+    "call": "Appeler",
+    "sentTitle": "Merci — votre demande a bien été envoyée.",
+    "sentText": "Nous répondons personnellement à chaque demande, généralement sous un jour ouvré."
+  },
+  "about": {
+    "title": "À propos de MEC Trading",
+    "eyebrow": "Notre histoire"
+  },
+  "services": {
+    "title": "Services",
+    "eyebrow": "Notre accompagnement",
+    "list": {
+      "selection": { "title": "Sélection de chevaux", "text": "Nous identifions les chevaux correspondant à vos objectifs, votre budget et votre niveau avant tout déplacement." },
+      "sales": { "title": "Vente de chevaux", "text": "Chaque cheval de notre sélection est proposé directement, sans intermédiaire de type marketplace." },
+      "prePurchase": { "title": "Accompagnement pré-achat", "text": "Nous coordonnons la visite vétérinaire indépendante et en expliquons clairement les résultats." },
+      "vetCoordination": { "title": "Coordination vétérinaire", "text": "Cliniques, calendrier et déplacements organisés autour de votre emploi du temps." },
+      "documentation": { "title": "Documentation", "text": "Passeports, immatriculation et changement de propriétaire traités correctement dès la première fois." },
+      "transport": { "title": "Transport international", "text": "Transport routier et aérien organisé de porte à porte." },
+      "export": { "title": "Assistance export", "text": "Douanes, certificats sanitaires et réglementations d'importation gérés pour vous." },
+      "viewing": { "title": "Rendez-vous de visite", "text": "En personne ou par appel vidéo en direct, au moment qui vous convient." },
+      "afterSale": { "title": "Suivi après-vente", "text": "Nous restons disponibles longtemps après l'arrivée du cheval." }
+    }
+  },
+  "contact": {
+    "title": "Contact",
+    "eyebrow": "Nous écrire",
+    "text": "Dites-nous ce que vous recherchez, nous vous répondrons personnellement."
+  },
+  "footer": {
+    "rights": "Tous droits réservés.",
+    "privateNotice": "MEC Trading est une société privée de commerce équin. Tous les chevaux présentés sont détenus ou représentés directement par MEC Trading."
+  },
+  "admin": {
+    "login": "Connexion administrateur",
+    "email": "E-mail",
+    "password": "Mot de passe",
+    "signIn": "Se connecter",
+    "dashboard": "Tableau de bord",
+    "horses": "Chevaux",
+    "inquiries": "Demandes",
+    "settings": "Paramètres",
+    "addHorse": "Ajouter un cheval",
+    "signOut": "Se déconnecter"
+  }
+}

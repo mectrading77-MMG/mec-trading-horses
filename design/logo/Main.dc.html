@@ -1,0 +1,133 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+  <style>
+    body{margin:0;background:#F7F2E7;color:#17140F;font-family:'IBM Plex Mono','Consolas','Courier New',monospace;-webkit-font-smoothing:antialiased}
+    a{color:#B08D57}a:hover{color:#C7A468}
+    .display{font-family:'Fraunces',Georgia,'Times New Roman',serif}
+    .lab{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:rgba(23,20,15,.4)}
+    .lab-d{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:rgba(247,242,231,.35)}
+    .wm-sub{font-size:11px;letter-spacing:.5em;text-transform:uppercase;color:#B08D57;text-indent:.5em}
+  </style>
+</helmet>
+<div style="display:flex;flex-direction:column;background:#F7F2E7">
+
+  <!-- Reversed hero: primary lockup on charcoal -->
+  <div style="height:640px;background:#17140F;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:36px">
+    <span class="lab-d" style="position:absolute;top:24px;left:28px">Primary lockup — reversed</span>
+    <div style="width:300px;color:#C7A468">
+      <svg viewBox="0 0 120 120">
+        <circle cx="60" cy="60" r="56" fill="none" stroke="currentColor" stroke-width="1.5"></circle>
+        <circle cx="60" cy="60" r="51" fill="none" stroke="currentColor" stroke-width="0.75" opacity="0.7"></circle>
+        <clipPath id="rca"><circle cx="60" cy="60" r="54.5"></circle></clipPath>
+        <g clip-path="url(#rca)"><path transform="translate(60 62) scale(0.56) translate(-114 -106)" fill="currentColor" fill-rule="evenodd" d="M104 16 C102 20 100 26 98 32 C97 35 95 38 94 40 C86 50 77 61 70 72 C66 78 62 84 60 90 C57 95 53 98 52 102 C51 106 53 110 56 112 C58 113 61 114 64 114 C71 112 78 110 84 108 C79 114 75 120 72 126 C73 129 76 131 80 131 C86 131 91 128 94 125 C100 128 104 131 106 134 C102 146 97 158 95 170 C94 180 95 190 96 200 L176 200 C175 184 173 166 170 148 C167 130 162 110 156 92 C152 78 148 64 144 52 C143 46 141 41 138 38 C137 28 134 18 130 10 C128 17 127 23 126 29 C125 31 124 32 123 33 C120 31 116 30 112 30 C110 25 107 20 104 16 Z M94 54 C97 51 101 51 103 55 C100 57 96 57 94 54 Z M57 96 C59 94 61 95 61 98 C59 99 57 98 57 96 Z"></path></g>
+      </svg>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+      <span class="display" style="font-style:italic;font-weight:500;font-size:64px;line-height:1;letter-spacing:-.01em;color:#F7F2E7">MEC</span>
+      <span class="wm-sub">Trading</span>
+    </div>
+  </div>
+
+  <!-- Lockups on ivory -->
+  <div style="height:420px;display:grid;grid-template-columns:repeat(3, minmax(0, 1fr));border-bottom:1px solid rgba(23,20,15,.12)">
+
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;border-right:1px solid rgba(23,20,15,.12)">
+      <div style="display:flex;align-items:center;gap:22px">
+        <div style="width:76px;color:#B08D57;flex:none">
+          <svg viewBox="0 0 120 120">
+            <circle cx="60" cy="60" r="56" fill="none" stroke="currentColor" stroke-width="1.5"></circle>
+            <circle cx="60" cy="60" r="51" fill="none" stroke="currentColor" stroke-width="0.75" opacity="0.7"></circle>
+            <clipPath id="rcb"><circle cx="60" cy="60" r="54.5"></circle></clipPath>
+            <g clip-path="url(#rcb)"><path transform="translate(60 62) scale(0.56) translate(-114 -106)" fill="currentColor" fill-rule="evenodd" d="M104 16 C102 20 100 26 98 32 C97 35 95 38 94 40 C86 50 77 61 70 72 C66 78 62 84 60 90 C57 95 53 98 52 102 C51 106 53 110 56 112 C58 113 61 114 64 114 C71 112 78 110 84 108 C79 114 75 120 72 126 C73 129 76 131 80 131 C86 131 91 128 94 125 C100 128 104 131 106 134 C102 146 97 158 95 170 C94 180 95 190 96 200 L176 200 C175 184 173 166 170 148 C167 130 162 110 156 92 C152 78 148 64 144 52 C143 46 141 41 138 38 C137 28 134 18 130 10 C128 17 127 23 126 29 C125 31 124 32 123 33 C120 31 116 30 112 30 C110 25 107 20 104 16 Z M94 54 C97 51 101 51 103 55 C100 57 96 57 94 54 Z M57 96 C59 94 61 95 61 98 C59 99 57 98 57 96 Z"></path></g>
+          </svg>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <span class="display" style="font-style:italic;font-weight:500;font-size:36px;line-height:1;color:#17140F">MEC</span>
+          <span style="font-size:8px;letter-spacing:.45em;text-transform:uppercase;color:#B08D57;text-indent:.45em">Trading</span>
+        </div>
+      </div>
+      <span class="lab">Horizontal</span>
+    </div>
+
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;border-right:1px solid rgba(23,20,15,.12)">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:16px">
+        <div style="width:104px;color:#B08D57">
+          <svg viewBox="0 0 120 120">
+            <circle cx="60" cy="60" r="56" fill="none" stroke="currentColor" stroke-width="1.5"></circle>
+            <circle cx="60" cy="60" r="51" fill="none" stroke="currentColor" stroke-width="0.75" opacity="0.7"></circle>
+            <clipPath id="rcc"><circle cx="60" cy="60" r="54.5"></circle></clipPath>
+            <g clip-path="url(#rcc)"><path transform="translate(60 62) scale(0.56) translate(-114 -106)" fill="currentColor" fill-rule="evenodd" d="M104 16 C102 20 100 26 98 32 C97 35 95 38 94 40 C86 50 77 61 70 72 C66 78 62 84 60 90 C57 95 53 98 52 102 C51 106 53 110 56 112 C58 113 61 114 64 114 C71 112 78 110 84 108 C79 114 75 120 72 126 C73 129 76 131 80 131 C86 131 91 128 94 125 C100 128 104 131 106 134 C102 146 97 158 95 170 C94 180 95 190 96 200 L176 200 C175 184 173 166 170 148 C167 130 162 110 156 92 C152 78 148 64 144 52 C143 46 141 41 138 38 C137 28 134 18 130 10 C128 17 127 23 126 29 C125 31 124 32 123 33 C120 31 116 30 112 30 C110 25 107 20 104 16 Z M94 54 C97 51 101 51 103 55 C100 57 96 57 94 54 Z M57 96 C59 94 61 95 61 98 C59 99 57 98 57 96 Z"></path></g>
+          </svg>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
+          <span class="display" style="font-style:italic;font-weight:500;font-size:30px;line-height:1;color:#17140F">MEC</span>
+          <span style="font-size:8px;letter-spacing:.45em;text-transform:uppercase;color:#B08D57;text-indent:.45em">Trading</span>
+        </div>
+      </div>
+      <span class="lab">Stacked</span>
+    </div>
+
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px">
+      <div style="width:120px;color:#B08D57">
+        <svg viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="56" fill="none" stroke="currentColor" stroke-width="1.5"></circle>
+          <circle cx="60" cy="60" r="51" fill="none" stroke="currentColor" stroke-width="0.75" opacity="0.7"></circle>
+          <clipPath id="rcd"><circle cx="60" cy="60" r="54.5"></circle></clipPath>
+          <g clip-path="url(#rcd)"><path transform="translate(60 62) scale(0.56) translate(-114 -106)" fill="currentColor" fill-rule="evenodd" d="M104 16 C102 20 100 26 98 32 C97 35 95 38 94 40 C86 50 77 61 70 72 C66 78 62 84 60 90 C57 95 53 98 52 102 C51 106 53 110 56 112 C58 113 61 114 64 114 C71 112 78 110 84 108 C79 114 75 120 72 126 C73 129 76 131 80 131 C86 131 91 128 94 125 C100 128 104 131 106 134 C102 146 97 158 95 170 C94 180 95 190 96 200 L176 200 C175 184 173 166 170 148 C167 130 162 110 156 92 C152 78 148 64 144 52 C143 46 141 41 138 38 C137 28 134 18 130 10 C128 17 127 23 126 29 C125 31 124 32 123 33 C120 31 116 30 112 30 C110 25 107 20 104 16 Z M94 54 C97 51 101 51 103 55 C100 57 96 57 94 54 Z M57 96 C59 94 61 95 61 98 C59 99 57 98 57 96 Z"></path></g>
+        </svg>
+      </div>
+      <span class="lab">Mark only</span>
+    </div>
+  </div>
+
+  <!-- Scale test -->
+  <div style="height:296px;background:#EFE8D8;display:flex;align-items:center;justify-content:center;gap:64px;position:relative">
+    <span class="lab" style="position:absolute;top:24px;left:28px">Scale — use mark only below 40px</span>
+    <div style="width:96px;color:#B08D57">
+      <svg viewBox="0 0 120 120">
+        <circle cx="60" cy="60" r="56" fill="none" stroke="currentColor" stroke-width="1.5"></circle>
+        <circle cx="60" cy="60" r="51" fill="none" stroke="currentColor" stroke-width="0.75" opacity="0.7"></circle>
+        <clipPath id="rce"><circle cx="60" cy="60" r="54.5"></circle></clipPath>
+        <g clip-path="url(#rce)"><path transform="translate(60 62) scale(0.56) translate(-114 -106)" fill="currentColor" fill-rule="evenodd" d="M104 16 C102 20 100 26 98 32 C97 35 95 38 94 40 C86 50 77 61 70 72 C66 78 62 84 60 90 C57 95 53 98 52 102 C51 106 53 110 56 112 C58 113 61 114 64 114 C71 112 78 110 84 108 C79 114 75 120 72 126 C73 129 76 131 80 131 C86 131 91 128 94 125 C100 128 104 131 106 134 C102 146 97 158 95 170 C94 180 95 190 96 200 L176 200 C175 184 173 166 170 148 C167 130 162 110 156 92 C152 78 148 64 144 52 C143 46 141 41 138 38 C137 28 134 18 130 10 C128 17 127 23 126 29 C125 31 124 32 123 33 C120 31 116 30 112 30 C110 25 107 20 104 16 Z M94 54 C97 51 101 51 103 55 C100 57 96 57 94 54 Z M57 96 C59 94 61 95 61 98 C59 99 57 98 57 96 Z"></path></g>
+      </svg>
+    </div>
+    <div style="width:48px;color:#B08D57">
+      <svg viewBox="0 0 120 120">
+        <circle cx="60" cy="60" r="56" fill="none" stroke="currentColor" stroke-width="2.5"></circle>
+        <clipPath id="rcf"><circle cx="60" cy="60" r="54.5"></circle></clipPath>
+        <g clip-path="url(#rcf)"><path transform="translate(60 62) scale(0.56) translate(-114 -106)" fill="currentColor" fill-rule="evenodd" d="M104 16 C102 20 100 26 98 32 C97 35 95 38 94 40 C86 50 77 61 70 72 C66 78 62 84 60 90 C57 95 53 98 52 102 C51 106 53 110 56 112 C58 113 61 114 64 114 C71 112 78 110 84 108 C79 114 75 120 72 126 C73 129 76 131 80 131 C86 131 91 128 94 125 C100 128 104 131 106 134 C102 146 97 158 95 170 C94 180 95 190 96 200 L176 200 C175 184 173 166 170 148 C167 130 162 110 156 92 C152 78 148 64 144 52 C143 46 141 41 138 38 C137 28 134 18 130 10 C128 17 127 23 126 29 C125 31 124 32 123 33 C120 31 116 30 112 30 C110 25 107 20 104 16 Z"></path></g>
+      </svg>
+    </div>
+    <div style="width:24px;color:#B08D57">
+      <svg viewBox="0 0 120 120">
+        <circle cx="60" cy="60" r="55" fill="none" stroke="currentColor" stroke-width="4"></circle>
+        <clipPath id="rcg"><circle cx="60" cy="60" r="53"></circle></clipPath>
+        <g clip-path="url(#rcg)"><path transform="translate(60 62) scale(0.56) translate(-114 -106)" fill="currentColor" fill-rule="evenodd" d="M104 16 C102 20 100 26 98 32 C97 35 95 38 94 40 C86 50 77 61 70 72 C66 78 62 84 60 90 C57 95 53 98 52 102 C51 106 53 110 56 112 C58 113 61 114 64 114 C71 112 78 110 84 108 C79 114 75 120 72 126 C73 129 76 131 80 131 C86 131 91 128 94 125 C100 128 104 131 106 134 C102 146 97 158 95 170 C94 180 95 190 96 200 L176 200 C175 184 173 166 170 148 C167 130 162 110 156 92 C152 78 148 64 144 52 C143 46 141 41 138 38 C137 28 134 18 130 10 C128 17 127 23 126 29 C125 31 124 32 123 33 C120 31 116 30 112 30 C110 25 107 20 104 16 Z"></path></g>
+      </svg>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+      <div style="width:40px;height:40px;background:#17140F;display:flex;align-items:center;justify-content:center">
+        <div style="width:28px;color:#C7A468">
+          <svg viewBox="0 0 120 120">
+            <circle cx="60" cy="60" r="55" fill="none" stroke="currentColor" stroke-width="4"></circle>
+            <clipPath id="rch"><circle cx="60" cy="60" r="53"></circle></clipPath>
+            <g clip-path="url(#rch)"><path transform="translate(60 62) scale(0.56) translate(-114 -106)" fill="currentColor" fill-rule="evenodd" d="M104 16 C102 20 100 26 98 32 C97 35 95 38 94 40 C86 50 77 61 70 72 C66 78 62 84 60 90 C57 95 53 98 52 102 C51 106 53 110 56 112 C58 113 61 114 64 114 C71 112 78 110 84 108 C79 114 75 120 72 126 C73 129 76 131 80 131 C86 131 91 128 94 125 C100 128 104 131 106 134 C102 146 97 158 95 170 C94 180 95 190 96 200 L176 200 C175 184 173 166 170 148 C167 130 162 110 156 92 C152 78 148 64 144 52 C143 46 141 41 138 38 C137 28 134 18 130 10 C128 17 127 23 126 29 C125 31 124 32 123 33 C120 31 116 30 112 30 C110 25 107 20 104 16 Z"></path></g>
+          </svg>
+        </div>
+      </div>
+      <span class="lab">Favicon</span>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>

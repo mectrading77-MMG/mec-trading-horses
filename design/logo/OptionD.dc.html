@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rye&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+  <style>
+    body{margin:0;background:#F7F2E7;color:#17140F;font-family:'IBM Plex Mono','Consolas','Courier New',monospace;-webkit-font-smoothing:antialiased}
+    a{color:#B08D57}a:hover{color:#C7A468}
+    .lab{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:rgba(23,20,15,.4)}
+    .lab-d{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:rgba(247,242,231,.35)}
+  </style>
+</helmet>
+<div style="display:flex;height:720px;background:#F7F2E7">
+
+  <!-- Reversed -->
+  <div style="flex:1;background:#17140F;position:relative;display:flex;align-items:center;justify-content:center">
+    <span class="lab-d" style="position:absolute;top:24px;left:28px">Stable badge — reversed</span>
+    <div style="width:380px;color:#C7A468">
+      <svg viewBox="0 0 240 240">
+        <circle cx="120" cy="120" r="112" fill="none" stroke="currentColor" stroke-width="3"></circle>
+        <circle cx="120" cy="120" r="105" fill="none" stroke="currentColor" stroke-width="4" stroke-dasharray="1.5 5" opacity="0.9"></circle>
+        <circle cx="120" cy="120" r="97" fill="none" stroke="currentColor" stroke-width="1.2"></circle>
+        <path id="dTop" d="M 42 120 A 78 78 0 0 1 198 120" fill="none"></path>
+        <text font-family="Rye, Georgia, serif" font-size="20" letter-spacing="3" fill="currentColor"><textPath href="#dTop" startOffset="50%" text-anchor="middle">MEC TRADING</textPath></text>
+        <path id="dBot" d="M 32 120 A 88 88 0 0 0 208 120" fill="none"></path>
+        <text font-family="Rye, Georgia, serif" font-size="13" letter-spacing="4" fill="currentColor"><textPath href="#dBot" startOffset="50%" text-anchor="middle">SPORT HORSES</textPath></text>
+        <path d="M37 112 L39.5 117.5 L45 120 L39.5 122.5 L37 128 L34.5 122.5 L29 120 L34.5 117.5 Z" fill="#B08D57" stroke="none"></path>
+        <path d="M203 112 L205.5 117.5 L211 120 L205.5 122.5 L203 128 L200.5 122.5 L195 120 L200.5 117.5 Z" fill="#B08D57" stroke="none"></path>
+        <g transform="translate(120 120) scale(0.72) translate(-120 -90)">
+          <path fill="currentColor" fill-rule="evenodd" d="M46 88 L68 62 L120 44 L172 62 L194 88 L184 88 L184 158 L56 158 L56 88 Z M104 34 L120 22 L136 34 L130 34 L130 46 L110 46 L110 34 Z M120 53 L123.1 61.8 L132.4 62 L125 67.6 L127.6 76.5 L120 71.2 L112.4 76.5 L115.1 67.6 L107.6 62 L116.9 61.8 Z M96 158 L96 114 C100 102 140 102 144 114 L144 158 Z M66 104 L82 104 L82 120 L66 120 Z M158 104 L174 104 L174 120 L158 120 Z"></path>
+          <path fill="none" stroke="currentColor" stroke-width="2.5" d="M120 105 L120 158 M99 155 L117 119 M99 119 L117 155 M123 119 L141 155 M123 155 L141 119"></path>
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <!-- On ivory -->
+  <div style="flex:1;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:44px;border-left:1px solid rgba(23,20,15,.12)">
+    <span class="lab" style="position:absolute;top:24px;left:28px">Stamp ink · small sizes</span>
+    <div style="width:290px;color:#17140F">
+      <svg viewBox="0 0 240 240">
+        <circle cx="120" cy="120" r="112" fill="none" stroke="currentColor" stroke-width="3"></circle>
+        <circle cx="120" cy="120" r="105" fill="none" stroke="currentColor" stroke-width="4" stroke-dasharray="1.5 5" opacity="0.9"></circle>
+        <circle cx="120" cy="120" r="97" fill="none" stroke="currentColor" stroke-width="1.2"></circle>
+        <path id="dTop2" d="M 42 120 A 78 78 0 0 1 198 120" fill="none"></path>
+        <text font-family="Rye, Georgia, serif" font-size="20" letter-spacing="3" fill="currentColor"><textPath href="#dTop2" startOffset="50%" text-anchor="middle">MEC TRADING</textPath></text>
+        <path id="dBot2" d="M 32 120 A 88 88 0 0 0 208 120" fill="none"></path>
+        <text font-family="Rye, Georgia, serif" font-size="13" letter-spacing="4" fill="currentColor"><textPath href="#dBot2" startOffset="50%" text-anchor="middle">SPORT HORSES</textPath></text>
+        <path d="M37 112 L39.5 117.5 L45 120 L39.5 122.5 L37 128 L34.5 122.5 L29 120 L34.5 117.5 Z" fill="#B08D57" stroke="none"></path>
+        <path d="M203 112 L205.5 117.5 L211 120 L205.5 122.5 L203 128 L200.5 122.5 L195 120 L200.5 117.5 Z" fill="#B08D57" stroke="none"></path>
+        <g transform="translate(120 120) scale(0.72) translate(-120 -90)">
+          <path fill="currentColor" fill-rule="evenodd" d="M46 88 L68 62 L120 44 L172 62 L194 88 L184 88 L184 158 L56 158 L56 88 Z M104 34 L120 22 L136 34 L130 34 L130 46 L110 46 L110 34 Z M120 53 L123.1 61.8 L132.4 62 L125 67.6 L127.6 76.5 L120 71.2 L112.4 76.5 L115.1 67.6 L107.6 62 L116.9 61.8 Z M96 158 L96 114 C100 102 140 102 144 114 L144 158 Z M66 104 L82 104 L82 120 L66 120 Z M158 104 L174 104 L174 120 L158 120 Z"></path>
+          <path fill="none" stroke="currentColor" stroke-width="2.5" d="M120 105 L120 158 M99 155 L117 119 M99 119 L117 155 M123 119 L141 155 M123 155 L141 119"></path>
+        </g>
+      </svg>
+    </div>
+    <div style="display:flex;align-items:center;gap:36px">
+      <div style="width:88px;color:#17140F">
+        <svg viewBox="0 0 240 240">
+          <circle cx="120" cy="120" r="110" fill="none" stroke="currentColor" stroke-width="6"></circle>
+          <circle cx="120" cy="120" r="96" fill="none" stroke="currentColor" stroke-width="5" stroke-dasharray="2 7" opacity="0.9"></circle>
+          <g transform="translate(120 120) scale(0.86) translate(-120 -92)">
+            <path fill="currentColor" fill-rule="evenodd" d="M46 88 L68 62 L120 44 L172 62 L194 88 L184 88 L184 158 L56 158 L56 88 Z M104 34 L120 22 L136 34 L130 34 L130 46 L110 46 L110 34 Z M96 158 L96 114 C100 102 140 102 144 114 L144 158 Z"></path>
+          </g>
+        </svg>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+        <div style="width:40px;height:40px;background:#17140F;display:flex;align-items:center;justify-content:center">
+          <div style="width:32px;color:#C7A468">
+            <svg viewBox="0 0 240 240">
+              <circle cx="120" cy="120" r="108" fill="none" stroke="currentColor" stroke-width="9"></circle>
+              <g transform="translate(120 120) scale(0.86) translate(-120 -92)">
+                <path fill="currentColor" fill-rule="evenodd" d="M46 88 L68 62 L120 44 L172 62 L194 88 L184 88 L184 158 L56 158 L56 88 Z M104 34 L120 22 L136 34 L130 34 L130 46 L110 46 L110 34 Z M96 158 L96 114 C100 102 140 102 144 114 L144 158 Z"></path>
+              </g>
+            </svg>
+          </div>
+        </div>
+        <span class="lab">Favicon</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>
