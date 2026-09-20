@@ -13,11 +13,25 @@ import { useSwipe } from "@/lib/useSwipe";
 export default function XrayViewer({ set, dict, locale }: { set: XraySet; dict: any; locale: string }) {
   const [i, setI] = useState(0);
   const stripRef = useRef<HTMLDivElement>(null);
+  const rootRef = useRef<HTMLDivElement>(null);
   const n = set.images.length;
   const cur = set.images[i];
 
   const go = (d: number) => setI((k) => (k + d + n) % n);
   const swipe = useSwipe((d) => go(d));
+
+  // Arrow keys step through the views whenever a control inside the viewer has focus.
+  useEffect(() => {
+    const el = rootRef.current;
+    if (!el) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "ArrowRight") go(1);
+      if (e.key === "ArrowLeft") go(-1);
+    };
+    el.addEventListener("keydown", onKey);
+    return () => el.removeEventListener("keydown", onKey);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [n]);
 
   // Keep the active thumbnail in view.
   useEffect(() => {
@@ -28,15 +42,7 @@ export default function XrayViewer({ set, dict, locale }: { set: XraySet; dict: 
   const taken = new Date(set.takenOn).toLocaleDateString(locale, { day: "numeric", month: "long", year: "numeric" });
 
   return (
-    <div
-      className="min-w-0 max-w-full bg-charcoal text-ivory outline-none"
-      tabIndex={0}
-      onKeyDown={(e) => {
-        if (e.key === "ArrowRight") go(1);
-        if (e.key === "ArrowLeft") go(-1);
-      }}
-      aria-label={dict.detail.xraysTitle}
-    >
+    <section ref={rootRef} className="min-w-0 max-w-full bg-charcoal text-ivory" aria-label={dict.detail.xraysTitle}>
       {/* Header strip */}
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-ivory/10 px-5 py-3">
         <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
@@ -136,6 +142,6 @@ export default function XrayViewer({ set, dict, locale }: { set: XraySet; dict: 
       </div>
 
       <p className="px-5 py-3 text-xs text-ivory/45">{dict.detail.xraysNote}</p>
-    </div>
+    </section>
   );
 }

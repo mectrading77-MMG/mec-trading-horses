@@ -18,8 +18,8 @@ export default function HeroVideo({ src, poster }: { src: string; poster: string
     v.muted = true;
     v.defaultMuted = true;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const p = v.play();
-    if (p && typeof p.catch === "function") p.catch(() => {});
+    // play() returns a Promise in modern browsers; autoplay refusals reject and are expected.
+    void v.play().catch(() => {});
   }, []);
 
   return (
@@ -34,6 +34,7 @@ export default function HeroVideo({ src, poster }: { src: string; poster: string
       playsInline
       preload="auto"
       disablePictureInPicture
+      tabIndex={-1}
       aria-hidden="true"
     />
   );
