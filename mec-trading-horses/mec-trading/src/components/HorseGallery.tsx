@@ -7,12 +7,10 @@ import { useSwipe } from "@/lib/useSwipe";
 
 export default function HorseGallery({
   media,
-  name,
-  representativeNote
+  name
 }: {
   media: MediaItem[];
   name: string;
-  representativeNote?: string;
 }) {
   const photos = media.filter((m) => m.type === "PHOTO");
   const [active, setActive] = useState(0);
@@ -82,11 +80,6 @@ export default function HorseGallery({
           <span className="sr-only">Open image fullscreen</span>
           <span aria-hidden="true" className="text-lg leading-none">⛶</span>
         </span>
-        {representativeNote && (
-          <span className="absolute bottom-3 left-3 bg-charcoal/70 px-3 py-1 font-mono text-[10px] uppercase tracking-eyebrow text-ivory/85 backdrop-blur">
-            {representativeNote}
-          </span>
-        )}
       </div>
 
       {photos.length > 1 && (
