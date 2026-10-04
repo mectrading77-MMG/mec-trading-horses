@@ -117,12 +117,6 @@ export default async function HorseDetailPage({
             </div>
 
             <div className="mt-6 flex flex-wrap gap-3">
-              <a
-                href="#contact"
-                className="border border-charcoal px-6 py-3 font-mono text-[11px] uppercase tracking-eyebrow text-charcoal transition-colors duration-400 hover:border-gold hover:text-gold"
-              >
-                {dict.detail.contact}
-              </a>
               <WhatsAppButton horseName={t.name} label={dict.detail.whatsapp} />
               <a
                 href="#contact"
