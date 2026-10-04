@@ -25,10 +25,13 @@ export default function HorseGallery({
   const showNext = () =>
     setActive((a) => (a + 1) % photos.length);
 
-  const swipe = useSwipe((d) => {
+  const handleSwipe = (d: number) => {
     if (photos.length < 2) return;
     setActive((a) => (a + d + photos.length) % photos.length);
-  });
+  };
+
+  const swipe = useSwipe(handleSwipe);
+  const fullscreenSwipe = useSwipe(handleSwipe);
 
   useEffect(() => {
     if (!isFullscreen) return;
@@ -152,10 +155,7 @@ export default function HorseGallery({
           <div
             className="relative h-full w-full"
             onClick={(event) => event.stopPropagation()}
-            {...useSwipe((d) => {
-              if (photos.length < 2) return;
-              setActive((a) => (a + d + photos.length) % photos.length);
-            })}
+            {...fullscreenSwipe}
           >
             <Image
               src={current.url}
