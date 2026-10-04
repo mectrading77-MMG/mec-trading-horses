@@ -12,7 +12,6 @@ import { useSwipe } from "@/lib/useSwipe";
  */
 export default function XrayViewer({ set, dict, locale }: { set: XraySet; dict: any; locale: string }) {
   const [i, setI] = useState(0);
-  const stripRef = useRef<HTMLDivElement>(null);
   const rootRef = useRef<HTMLDivElement>(null);
   const n = set.images.length;
   const cur = set.images[i];
@@ -32,12 +31,6 @@ export default function XrayViewer({ set, dict, locale }: { set: XraySet; dict: 
     return () => el.removeEventListener("keydown", onKey);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [n]);
-
-  // Keep the active thumbnail in view.
-  useEffect(() => {
-    const el = stripRef.current?.querySelector<HTMLElement>(`[data-idx="${i}"]`);
-    el?.scrollIntoView({ block: "nearest", inline: "center", behavior: "smooth" });
-  }, [i]);
 
   const taken = new Date(set.takenOn).toLocaleDateString(locale, { day: "numeric", month: "long", year: "numeric" });
 
@@ -123,7 +116,7 @@ export default function XrayViewer({ set, dict, locale }: { set: XraySet; dict: 
       </div>
 
       {/* Filmstrip */}
-      <div ref={stripRef} className="flex min-w-0 gap-1.5 overflow-x-auto border-t border-ivory/10 bg-charcoal-soft p-3">
+      <div className="flex min-w-0 gap-1.5 overflow-x-auto border-t border-ivory/10 bg-charcoal-soft p-3">
         {set.images.map((img, k) => (
           <button
             key={img.url}
