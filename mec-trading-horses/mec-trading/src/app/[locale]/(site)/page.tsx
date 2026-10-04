@@ -8,7 +8,6 @@ import SectionHeading from "@/components/SectionHeading";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import HeroVideo from "@/components/HeroVideo";
 import SelectionExplorer from "@/components/SelectionExplorer";
-import Logo from "@/components/Logo";
 
 export default async function HomePage({ params }: { params: { locale: Locale } }) {
   const dict = await getDictionary(params.locale);
@@ -23,8 +22,7 @@ export default async function HomePage({ params }: { params: { locale: Locale } 
         <HeroVideo src="/video/hero.mp4" poster="/video/hero-poster.jpg" />
         <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/45 to-charcoal/20" />
         <div className="relative z-10 mx-auto w-full max-w-editorial px-6 pb-16 lg:px-10 lg:pb-24">
-          <Logo variant="full" onDark priority className="!h-24 sm:!h-32" />
-          <h1 className="mt-8 max-w-3xl font-display text-4xl italic leading-[1.05] text-ivory sm:text-6xl">
+          <h1 className="max-w-3xl font-display text-4xl italic leading-[1.05] text-ivory sm:text-6xl">
             {dict.home.heroHeadline}
           </h1>
           <p className="mt-6 max-w-lg text-ivory/75">{dict.home.heroSupport}</p>
