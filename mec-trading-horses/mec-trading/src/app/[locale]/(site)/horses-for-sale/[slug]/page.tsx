@@ -95,7 +95,6 @@ export default async function HorseDetailPage({
       <HorseGallery
         media={horse.media}
         name={t.name}
-        representativeNote={horse.photosAreRepresentative ? dict.detail.representativeNote : undefined}
       />
 
       <div className="mx-auto max-w-editorial px-6 py-12 lg:px-10">
