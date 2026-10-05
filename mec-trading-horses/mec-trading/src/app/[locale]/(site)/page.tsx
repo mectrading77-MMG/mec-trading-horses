@@ -1,19 +1,12 @@
-import Image from "next/image";
 import Link from "next/link";
 import type { Locale } from "@/types/horse";
 import { getDictionary } from "@/i18n/config";
-import { featuredHorses, featuredStory, listHorses } from "@/lib/horses";
-import HorseCard from "@/components/HorseCard";
 import SectionHeading from "@/components/SectionHeading";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import HeroVideo from "@/components/HeroVideo";
-import SelectionExplorer from "@/components/SelectionExplorer";
 
 export default async function HomePage({ params }: { params: { locale: Locale } }) {
   const dict = await getDictionary(params.locale);
-  const [featured, story, all] = await Promise.all([featuredHorses(), featuredStory(), listHorses()]);
-  const storyT = story.translations[params.locale] ?? story.translations.en;
-  const storyCover = story.media.find((m) => m.isCover) ?? story.media[0];
 
   return (
     <>
@@ -43,25 +36,6 @@ export default async function HomePage({ params }: { params: { locale: Locale } 
         </div>
       </section>
 
-      {/* Featured horses */}
-      <section className="mx-auto max-w-editorial px-6 py-24 lg:px-10">
-        <SectionHeading eyebrow={dict.home.featuredEyebrow} title={dict.home.featuredTitle} />
-        <div className="mt-12 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
-          {featured.map((horse) => (
-            <HorseCard key={horse.id} horse={horse} locale={params.locale} dict={dict} />
-          ))}
-        </div>
-      </section>
-
-      {/* Find a horse by the height it jumps */}
-      <section className="bg-charcoal py-24 text-ivory">
-        <div className="mx-auto max-w-editorial px-6 lg:px-10">
-          <SectionHeading eyebrow={dict.home.selectionEyebrow} title={dict.home.selectionTitle} onDark />
-          <p className="mt-3 font-mono text-[10px] uppercase tracking-eyebrow text-ivory/35">{dict.home.selectionHint}</p>
-          <SelectionExplorer horses={all} locale={params.locale} dict={dict} />
-        </div>
-      </section>
-
       {/* Why choose us */}
       <section className="mx-auto max-w-editorial px-6 py-24 lg:px-10">
         <SectionHeading eyebrow={dict.home.whyEyebrow} title={dict.home.whyTitle} />
@@ -74,29 +48,6 @@ export default async function HomePage({ params }: { params: { locale: Locale } 
               </div>
             )
           )}
-        </div>
-      </section>
-
-      {/* Featured story */}
-      <section className="mx-auto max-w-editorial px-6 pb-24 lg:px-10">
-        <div className="grid gap-8 lg:grid-cols-2 lg:items-center">
-          <div className="relative aspect-[4/5] overflow-hidden bg-charcoal-soft">
-            {storyCover && (
-              <Image src={storyCover.url} alt={storyT.name} fill sizes="50vw" className="object-cover" />
-            )}
-          </div>
-          <div>
-            <p className="eyebrow">{dict.home.storyEyebrow}</p>
-            <h2 className="mt-3 font-display text-3xl italic text-charcoal">{storyT.name}</h2>
-            <p className="mt-4 text-charcoal/70">{storyT.positioning}</p>
-            {storyT.experience && <p className="mt-4 text-sm text-charcoal/60">{storyT.experience}</p>}
-            <Link
-              href={`/${params.locale}/horses-for-sale/${story.slug}`}
-              className="mt-6 inline-block font-mono text-[11px] uppercase tracking-eyebrow text-gold underline underline-offset-4"
-            >
-              {dict.horse.viewHorse}
-            </Link>
-          </div>
         </div>
       </section>
 
