@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import type { Horse, Locale } from "@/types/horse";
 import HorseCard from "@/components/HorseCard";
 import { ageFromDob } from "@/lib/horses";
-import { HEIGHT_BANDS, bandFor, formatJumpHeight } from "@/lib/levels";
+import { HEIGHT_BANDS, bandFor } from "@/lib/levels";
 
 export default function CatalogClient({
   horses,
