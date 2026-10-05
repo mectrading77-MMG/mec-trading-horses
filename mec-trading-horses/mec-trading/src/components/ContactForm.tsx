@@ -55,14 +55,6 @@ export default function ContactForm({
         <input name="country" placeholder={dict.form.country} className={inputClass} />
       </div>
       <textarea required name="message" rows={4} placeholder={dict.form.message} className={inputClass} />
-      <div className="grid gap-4 sm:grid-cols-2">
-        <input name="lookingFor" placeholder={dict.form.lookingFor} className={inputClass} />
-        <select name="hasTrainer" className={inputClass}>
-          <option value="">{dict.form.hasTrainer}</option>
-          <option value="yes">Yes</option>
-          <option value="no">No</option>
-        </select>
-      </div>
       <input type="date" name="viewingDate" aria-label={dict.form.viewingDate} className={inputClass} />
 
       <button
