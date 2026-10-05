@@ -20,7 +20,7 @@ export default async function ContactPage({ params }: { params: { locale: Locale
           </div>
           <div>
             <p className="font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/40">Phone</p>
-            <a href="tel:+33600000000" className="text-charcoal">+33 6 00 00 00 00</a>
+            <a href="tel:+33618313530" className="text-charcoal">+33 6 18 31 35 30</a>
           </div>
           <div>
             <p className="font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/40">Location</p>
