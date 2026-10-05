@@ -116,16 +116,6 @@ export default async function HorseDetailPage({
               </div>
             </div>
 
-            <div className="mt-6 flex flex-wrap gap-3">
-              <WhatsAppButton horseName={t.name} label={dict.detail.whatsapp} />
-              <a
-                href="#contact"
-                className="border border-charcoal-line px-6 py-3 font-mono text-[11px] uppercase tracking-eyebrow text-charcoal/70 transition-colors duration-400 hover:border-gold hover:text-gold"
-              >
-                {dict.detail.requestViewing}
-              </a>
-            </div>
-
             <div className="mt-10">
               <TrustBadges trust={horse.trust} hasResults={horse.competitionResults.length > 0} dict={dict} />
             </div>
@@ -153,6 +143,19 @@ export default async function HorseDetailPage({
                 ))}
               </dl>
             </section>
+
+            <div className="mt-10 flex flex-wrap items-center gap-3 border-y border-charcoal-line py-6">
+              <p className="mr-2 font-mono text-[11px] uppercase tracking-eyebrow text-charcoal/50">
+                {price ?? dict.horse.priceOnRequest}
+              </p>
+              <WhatsAppButton horseName={t.name} label={dict.detail.whatsapp} />
+              <a
+                href="#contact"
+                className="border border-charcoal-line px-6 py-3 font-mono text-[11px] uppercase tracking-eyebrow text-charcoal/70 transition-colors duration-400 hover:border-gold hover:text-gold"
+              >
+                {dict.detail.requestViewing}
+              </a>
+            </div>
 
             {/* Description */}
             {descriptionFields.length > 0 && (
