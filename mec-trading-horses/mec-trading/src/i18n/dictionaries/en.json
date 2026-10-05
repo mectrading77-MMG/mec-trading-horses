@@ -104,7 +104,13 @@
     "allLevels": "All heights",
     "filterLevel": "Height",
     "sortHeight": "Height jumped",
-    "showing": "{count} horses"
+    "showing": "{count} horses",
+    "generalInfo": "General Information",
+    "allBreeds": "All breeds",
+    "allSexes": "All sexes",
+    "allColors": "All colors",
+    "allCompetitionLevels": "All competition levels",
+    "allLocations": "All locations"
   },
   "detail": {
     "contact": "Contact Us",
