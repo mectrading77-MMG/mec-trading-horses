@@ -104,7 +104,13 @@
     "allLevels": "Toutes hauteurs",
     "filterLevel": "Hauteur",
     "sortHeight": "Hauteur sautée",
-    "showing": "{count} chevaux"
+    "showing": "{count} chevaux",
+    "generalInfo": "Informations générales",
+    "allBreeds": "Toutes les races",
+    "allSexes": "Tous les sexes",
+    "allColors": "Toutes les robes",
+    "allCompetitionLevels": "Tous les niveaux de compétition",
+    "allLocations": "Toutes les localisations"
   },
   "detail": {
     "contact": "Nous contacter",
