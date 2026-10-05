@@ -104,7 +104,13 @@
     "allLevels": "جميع الارتفاعات",
     "filterLevel": "الارتفاع",
     "sortHeight": "ارتفاع القفز",
-    "showing": "{count} خيول"
+    "showing": "{count} خيول",
+    "generalInfo": "المعلومات العامة",
+    "allBreeds": "جميع السلالات",
+    "allSexes": "جميع الأجناس",
+    "allColors": "جميع الألوان",
+    "allCompetitionLevels": "جميع مستويات المنافسة",
+    "allLocations": "جميع المواقع"
   },
   "detail": {
     "contact": "اتصل بنا",
