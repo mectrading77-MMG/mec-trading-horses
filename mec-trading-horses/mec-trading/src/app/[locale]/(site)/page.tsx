@@ -3,10 +3,13 @@ import type { Locale } from "@/types/horse";
 import { getDictionary } from "@/i18n/config";
 import SectionHeading from "@/components/SectionHeading";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import { listHorses } from "@/lib/horses";
+import SelectionExplorer from "@/components/SelectionExplorer";
 import HeroVideo from "@/components/HeroVideo";
 
 export default async function HomePage({ params }: { params: { locale: Locale } }) {
   const dict = await getDictionary(params.locale);
+  const all = await listHorses();
 
   return (
     <>
@@ -33,6 +36,15 @@ export default async function HomePage({ params }: { params: { locale: Locale } 
               {dict.nav.ctaSecondary}
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* Find a horse by the height it jumps */}
+      <section className="bg-charcoal py-24 text-ivory">
+        <div className="mx-auto max-w-editorial px-6 lg:px-10">
+          <SectionHeading eyebrow={dict.home.selectionEyebrow} title={dict.home.selectionTitle} onDark />
+          <p className="mt-3 font-mono text-[10px] uppercase tracking-eyebrow text-ivory/35">{dict.home.selectionHint}</p>
+          <SelectionExplorer horses={all} locale={params.locale} dict={dict} />
         </div>
       </section>
 
