@@ -142,7 +142,6 @@ export default async function HorseDetailPage({
                   [dict.horse.height, horse.heightCm ? heightHands(horse.heightCm) : "—"],
                   [dict.detail.color, horse.color],
                   [dict.horse.location, horse.locationLabel],
-                  [dict.horse.level, formatJumpHeight(horse.jumpHeightCm)],
                   ...(horse.maxHeightJumpedCm ? [[dict.horse.maxHeight, formatJumpHeight(horse.maxHeightJumpedCm)]] : []),
                   ...(horse.competitionLevel ? [[dict.detail.competitionLevel, horse.competitionLevel]] : []),
                   ...(horse.registrationNo ? [[dict.detail.registration, horse.registrationNo]] : [])
