@@ -122,7 +122,7 @@ export default async function HorseDetailPage({
 
             {/* Basic info */}
             <section className="mt-14">
-              <SectionHeading eyebrow={dict.detail.basicInfo} title={t.name} />
+              <SectionHeading eyebrow={dict.detail.basicInfo} title="" />
               <dl className="mt-8 grid grid-cols-2 gap-x-6 gap-y-5 sm:grid-cols-3">
                 {[
                   [dict.horse.breed, horse.breed],
@@ -160,7 +160,7 @@ export default async function HorseDetailPage({
             {/* Description */}
             {descriptionFields.length > 0 && (
               <section className="mt-14">
-                <SectionHeading eyebrow={dict.detail.description} title={t.name} />
+                <SectionHeading eyebrow={dict.detail.description} title="" />
                 <div className="mt-8 space-y-5">
                   {descriptionFields.map((f) => (
                     <p key={f.label} className="text-charcoal/80">
