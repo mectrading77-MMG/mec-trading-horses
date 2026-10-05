@@ -139,7 +139,7 @@ export default async function HorseDetailPage({
                   [dict.horse.sex, dict.horse.sexLabel[horse.sex]],
                   [dict.detail.dateOfBirth, new Date(horse.dateOfBirth).toLocaleDateString(params.locale)],
                   [dict.horse.age, `${ageFromDob(horse.dateOfBirth)} ${dict.horse.years}`],
-                  ...(horse.heightCm ? [[dict.horse.height, heightHands(horse.heightCm)]] : []),
+                  [dict.horse.height, horse.heightCm ? heightHands(horse.heightCm) : "—"],
                   [dict.detail.color, horse.color],
                   [dict.horse.location, horse.locationLabel],
                   [dict.horse.level, formatJumpHeight(horse.jumpHeightCm)],
