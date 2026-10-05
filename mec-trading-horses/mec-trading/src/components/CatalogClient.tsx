@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import type { Horse, Locale } from "@/types/horse";
 import HorseCard from "@/components/HorseCard";
 import { ageFromDob } from "@/lib/horses";
-import { HEIGHT_BANDS, bandFor } from "@/lib/levels";
+import { HEIGHT_BANDS, bandFor, formatJumpHeight } from "@/lib/levels";
 
 export default function CatalogClient({
   horses,
@@ -18,8 +18,22 @@ export default function CatalogClient({
   initialLevel?: string;
 }) {
   const [level, setLevel] = useState(HEIGHT_BANDS.some((b) => b.id === initialLevel) ? (initialLevel as string) : "");
+  const [breed, setBreed] = useState("");
   const [sex, setSex] = useState("");
+  const [color, setColor] = useState("");
+  const [competitionLevel, setCompetitionLevel] = useState("");
+  const [location, setLocation] = useState("");
   const [sort, setSort] = useState("featured");
+
+  const generalOptions = useMemo(() => {
+    const unique = (values: string[]) => Array.from(new Set(values.filter(Boolean))).sort((a, b) => a.localeCompare(b));
+    return {
+      breeds: unique(horses.map((h) => h.breed)),
+      colors: unique(horses.map((h) => h.color)),
+      competitionLevels: unique(horses.map((h) => h.competitionLevel ?? "")),
+      locations: unique(horses.map((h) => h.locationLabel))
+    };
+  }, [horses]);
 
   const counts = useMemo(() => {
     const c: Record<string, number> = {};
@@ -33,7 +47,11 @@ export default function CatalogClient({
   const filtered = useMemo(() => {
     let list = horses; // sold horses stay visible with their badge
     if (level) list = list.filter((h) => bandFor(h.jumpHeightCm).id === level);
+    if (breed) list = list.filter((h) => h.breed === breed);
     if (sex) list = list.filter((h) => h.sex === sex);
+    if (color) list = list.filter((h) => h.color === color);
+    if (competitionLevel) list = list.filter((h) => h.competitionLevel === competitionLevel);
+    if (location) list = list.filter((h) => h.locationLabel === location);
 
     switch (sort) {
       case "priceAsc":
@@ -59,7 +77,7 @@ export default function CatalogClient({
         );
     }
     return list;
-  }, [horses, level, sex, sort]);
+  }, [horses, level, breed, sex, color, competitionLevel, location, sort]);
 
   const chip = (active: boolean) =>
     `px-4 py-2 font-mono text-[10px] uppercase tracking-eyebrow border transition-colors duration-400 ${
@@ -70,7 +88,7 @@ export default function CatalogClient({
 
   return (
     <div>
-      {/* Height bands */}
+      {/* Jumping-height filter */}
       <div className="flex flex-wrap gap-2">
         <button type="button" onClick={() => setLevel("")} className={chip(level === "")}>
           {dict.catalog.allLevels}
@@ -83,14 +101,45 @@ export default function CatalogClient({
         ))}
       </div>
 
-      {/* Secondary filters + sort */}
-      <div className="mt-5 flex flex-wrap items-center gap-3 border-y border-charcoal-line py-4">
-        <select value={sex} onChange={(e) => setSex(e.target.value)} className={selectClass}>
-          <option value="">{dict.horse.sex}</option>
-          <option value="MARE">{dict.horse.sexLabel.MARE}</option>
-          <option value="STALLION">{dict.horse.sexLabel.STALLION}</option>
-          <option value="GELDING">{dict.horse.sexLabel.GELDING}</option>
-        </select>
+      {/* Filters driven by the horse's General Information */}
+      <div className="mt-5 border-y border-charcoal-line py-4">
+        <p className="mb-3 font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/40">
+          {dict.catalog.generalInfo}
+        </p>
+        <div className="flex flex-wrap items-center gap-3">
+          <select value={breed} onChange={(e) => setBreed(e.target.value)} className={selectClass}>
+            <option value="">{dict.catalog.allBreeds}</option>
+            {generalOptions.breeds.map((value) => <option key={value} value={value}>{value}</option>)}
+          </select>
+
+          <select value={sex} onChange={(e) => setSex(e.target.value)} className={selectClass}>
+            <option value="">{dict.catalog.allSexes}</option>
+            <option value="MARE">{dict.horse.sexLabel.MARE}</option>
+            <option value="STALLION">{dict.horse.sexLabel.STALLION}</option>
+            <option value="GELDING">{dict.horse.sexLabel.GELDING}</option>
+          </select>
+
+          <select value={color} onChange={(e) => setColor(e.target.value)} className={selectClass}>
+            <option value="">{dict.catalog.allColors}</option>
+            {generalOptions.colors.map((value) => <option key={value} value={value}>{value}</option>)}
+          </select>
+
+          {generalOptions.competitionLevels.length > 0 && (
+            <select value={competitionLevel} onChange={(e) => setCompetitionLevel(e.target.value)} className={selectClass}>
+              <option value="">{dict.catalog.allCompetitionLevels}</option>
+              {generalOptions.competitionLevels.map((value) => <option key={value} value={value}>{value}</option>)}
+            </select>
+          )}
+
+          <select value={location} onChange={(e) => setLocation(e.target.value)} className={selectClass}>
+            <option value="">{dict.catalog.allLocations}</option>
+            {generalOptions.locations.map((value) => <option key={value} value={value}>{value}</option>)}
+          </select>
+        </div>
+      </div>
+
+      {/* Sort + result count */}
+      <div className="flex flex-wrap items-center gap-3 py-4">
         <span className="font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/40">
           {dict.catalog.showing.replace("{count}", String(filtered.length))}
         </span>
@@ -107,7 +156,7 @@ export default function CatalogClient({
       {filtered.length === 0 ? (
         <p className="py-24 text-center text-charcoal/50">{dict.catalog.noResults}</p>
       ) : (
-        <div className="mt-12 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map((horse) => (
             <HorseCard key={horse.id} horse={horse} locale={locale} dict={dict} />
           ))}
