@@ -114,7 +114,7 @@ export default function ContactForm({
             type="date"
             name="viewingDate"
             aria-label="Select your viewing date"
-            className={`${inputClass} h-[46px] w-full`}
+            className={inputClass}
           />
           <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-sm text-charcoal/40">
             Select your viewing date
