@@ -29,12 +29,6 @@ export default async function HomePage({ params }: { params: { locale: Locale } 
             >
               {dict.home.heroCta}
             </Link>
-            <Link
-              href={`/${params.locale}/contact`}
-              className="inline-block border border-ivory/40 px-7 py-3 font-mono text-[11px] uppercase tracking-eyebrow text-ivory transition-colors duration-400 hover:border-gold hover:text-gold"
-            >
-              {dict.nav.ctaSecondary}
-            </Link>
           </div>
         </div>
       </section>
