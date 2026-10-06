@@ -3,9 +3,15 @@ import { getDictionary } from "@/i18n/config";
 import SectionHeading from "@/components/SectionHeading";
 import ContactForm from "@/components/ContactForm";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import { listHorses } from "@/lib/horses";
 
 export default async function ContactPage({ params }: { params: { locale: Locale } }) {
   const dict = await getDictionary(params.locale);
+  const horses = await listHorses();
+  const horseOptions = horses.map((horse) => ({
+    id: horse.id,
+    name: horse.translations[params.locale].name
+  }));
 
   return (
     <div className="mx-auto max-w-editorial px-6 py-16 lg:px-10">
@@ -29,7 +35,7 @@ export default async function ContactPage({ params }: { params: { locale: Locale
           <WhatsAppButton label={dict.detail.whatsapp} />
         </div>
         <div className="border border-charcoal-line p-6">
-          <ContactForm dict={dict} />
+          <ContactForm dict={dict} horses={horseOptions} />
         </div>
       </div>
     </div>
