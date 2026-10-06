@@ -32,6 +32,7 @@ export default function ContactForm({
   dict: any;
   horseId?: string;
   horseName?: string;
+  horses?: { id: string; name: string }[];
 }) {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [service, setService] = useState("");
