@@ -24,7 +24,7 @@ export default function StickyMobileBar({ dict }: { dict: any }) {
         {dict.detail.whatsapp}
       </a>
       <a
-        href="tel:+33600000000"
+        href="tel:+33618313530"
         className="flex flex-col items-center gap-1 border-x border-charcoal-line py-3 font-mono text-[10px] uppercase tracking-eyebrow text-charcoal"
       >
         {dict.form.call}
