@@ -22,10 +22,10 @@ export default async function HomePage({ params }: { params: { locale: Locale } 
             {dict.home.heroHeadline}
           </h1>
           <p className="mt-6 max-w-lg text-ivory/75">{dict.home.heroSupport}</p>
-          <div className="mt-8 flex flex-wrap gap-4">
+          <div className="mt-8 flex justify-center lg:justify-start">
             <Link
               href={`/${params.locale}/horses-for-sale`}
-              className="inline-block border border-gold px-7 py-3 font-mono text-[11px] uppercase tracking-eyebrow text-gold transition-colors duration-400 hover:bg-gold hover:text-charcoal"
+              className="inline-block border border-gold bg-charcoal/20 px-7 py-3 shadow-[0_0_0_1px_rgba(255,255,255,0.08)] font-mono text-[11px] uppercase tracking-eyebrow text-gold transition-colors duration-400 hover:bg-gold hover:text-charcoal"
             >
               {dict.home.heroCta}
             </Link>
