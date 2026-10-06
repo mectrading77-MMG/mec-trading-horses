@@ -4,14 +4,14 @@ export default function SectionHeading({
   align = "left",
   onDark = false
 }: {
-  eyebrow: string;
+  eyebrow?: string;
   title: string;
   align?: "left" | "center";
   onDark?: boolean;
 }) {
   return (
     <div className={align === "center" ? "text-center" : "text-left"}>
-      <p className="eyebrow">{eyebrow}</p>
+      {eyebrow && <p className="eyebrow">{eyebrow}</p>}
       <h2 className={`mt-3 font-display text-3xl italic leading-tight sm:text-4xl ${onDark ? "text-ivory" : "text-charcoal"}`}>{title}</h2>
     </div>
   );
