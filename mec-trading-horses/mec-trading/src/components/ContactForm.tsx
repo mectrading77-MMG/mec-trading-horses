@@ -26,7 +26,8 @@ const COUNTRY_NAMES = new Intl.DisplayNames(["en"], { type: "region" });
 export default function ContactForm({
   dict,
   horseId,
-  horseName
+  horseName,
+  horses = []
 }: {
   dict: any;
   horseId?: string;
@@ -34,6 +35,7 @@ export default function ContactForm({
 }) {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [service, setService] = useState("");
+  const [selectedHorse, setSelectedHorse] = useState("");
   const [viewingDate, setViewingDate] = useState("");
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -108,6 +110,25 @@ export default function ContactForm({
         ))}
       </select>
 
+      {service === "selection" && horses.length > 0 && (
+        <select
+          required
+          name="lookingFor"
+          value={selectedHorse}
+          onChange={(e) => setSelectedHorse(e.target.value)}
+          aria-label="Horse"
+          className={`${inputClass} appearance-none`}
+        >
+          <option value="" disabled>
+            Select a horse
+          </option>
+          {horses.map((horse) => (
+            <option key={horse.id} value={horse.name}>
+              {horse.name}
+            </option>
+          ))}
+        </select>
+      )}
       {service === "viewing" && (
         <div className="relative w-full min-w-0">
           <input
