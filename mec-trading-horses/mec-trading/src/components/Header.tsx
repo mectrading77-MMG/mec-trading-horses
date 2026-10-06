@@ -34,12 +34,6 @@ export default function Header({ locale, dict }: { locale: Locale; dict: any }) 
 
         <div className="flex items-center gap-4">
           <LanguageSwitcher current={locale} />
-          <Link
-            href={`/${locale}/contact`}
-            className="hidden rounded-none border border-charcoal px-5 py-2 font-mono text-[11px] uppercase tracking-eyebrow text-charcoal transition-colors duration-400 hover:border-gold hover:text-gold sm:inline-block"
-          >
-            {dict.nav.ctaSecondary}
-          </Link>
         </div>
       </div>
     </header>
