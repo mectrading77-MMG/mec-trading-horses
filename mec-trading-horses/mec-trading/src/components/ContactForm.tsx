@@ -114,6 +114,7 @@ export default function ContactForm({
           name="viewingDate"
           aria-label={dict.form.viewingDate}
           className={inputClass}
+          placeholder="Select your preferred date"
         />
       )}
 
