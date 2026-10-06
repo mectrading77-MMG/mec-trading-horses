@@ -115,7 +115,7 @@ export default function ContactForm({
             type="date"
             name="viewingDate"
             aria-label="Select your viewing date"
-            className={`${inputClass} block min-w-0 max-w-full`}
+            className={`${inputClass} !w-full !max-w-none !min-w-0 text-left [&::-webkit-date-and-time-value]:text-left`}
             value={viewingDate}
             onChange={(e) => setViewingDate(e.target.value)}
           />
