@@ -6,6 +6,7 @@ const InquirySchema = z.object({
   email: z.string().email(),
   phone: z.string().optional(),
   country: z.string().optional(),
+  service: z.string().min(1),
   message: z.string().min(1),
   lookingFor: z.string().optional(),
   hasTrainer: z.string().optional(),
