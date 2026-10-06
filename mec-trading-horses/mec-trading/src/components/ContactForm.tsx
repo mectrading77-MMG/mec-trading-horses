@@ -33,6 +33,7 @@ export default function ContactForm({
   horseName?: string;
 }) {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [service, setService] = useState("");
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -91,7 +92,8 @@ export default function ContactForm({
       <select
         required
         name="service"
-        defaultValue=""
+        value={service}
+        onChange={(e) => setService(e.target.value)}
         aria-label="Service"
         className={`${inputClass} appearance-none`}
       >
@@ -104,6 +106,16 @@ export default function ContactForm({
           </option>
         ))}
       </select>
+
+      {service === "viewing" && (
+        <input
+          required
+          type="date"
+          name="viewingDate"
+          aria-label={dict.form.viewingDate}
+          className={inputClass}
+        />
+      )}
 
       <textarea required name="message" rows={4} placeholder={dict.form.message} className={inputClass} />
 
