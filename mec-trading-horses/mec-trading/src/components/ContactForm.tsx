@@ -108,13 +108,13 @@ export default function ContactForm({
       </select>
 
       {service === "viewing" && (
-        <div className="relative">
+        <div className="relative w-full">
           <input
             required
             type="date"
             name="viewingDate"
             aria-label="Select your preferred date"
-            className={inputClass}
+            className={`${inputClass} h-[46px] w-full`}
           />
           <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-sm text-charcoal/40">
             Select your preferred date
