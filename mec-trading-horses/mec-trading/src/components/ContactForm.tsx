@@ -106,7 +106,6 @@ export default function ContactForm({
       </select>
 
       <textarea required name="message" rows={4} placeholder={dict.form.message} className={inputClass} />
-      <input type="date" name="viewingDate" aria-label={dict.form.viewingDate} className={inputClass} />
 
       <button
         type="submit"
