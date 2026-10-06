@@ -19,7 +19,7 @@ export default async function ServicesPage({ params }: { params: { locale: Local
 
   return (
     <div className="mx-auto max-w-editorial px-6 py-16 lg:px-10">
-      <SectionHeading eyebrow={dict.services.eyebrow} title={dict.services.title} />
+      <SectionHeading title={dict.services.title} />
       <div className="mt-12 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
         {KEYS.map((key, i) => (
           <div key={key} className="border-t border-charcoal-line pt-5">
