@@ -109,13 +109,13 @@ export default function ContactForm({
       </select>
 
       {service === "viewing" && (
-        <div className="relative w-full">
+        <div className="relative w-full min-w-0">
           <input
             required
             type="date"
             name="viewingDate"
             aria-label="Select your viewing date"
-            className={`${inputClass} !w-full !max-w-none !min-w-0 text-left [&::-webkit-date-and-time-value]:text-left`}
+            className={`${inputClass} box-border !w-full !min-w-0 !max-w-none appearance-none pr-12 text-left [&::-webkit-calendar-picker-indicator]:absolute [&::-webkit-calendar-picker-indicator]:right-3 [&::-webkit-calendar-picker-indicator]:h-5 [&::-webkit-calendar-picker-indicator]:w-5`}
             value={viewingDate}
             onChange={(e) => setViewingDate(e.target.value)}
           />
@@ -124,9 +124,14 @@ export default function ContactForm({
               Select your viewing date
             </span>
           )}
+          <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-charcoal/60">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+              <rect x="3" y="4" width="18" height="17" rx="2" />
+              <path d="M16 2v4M8 2v4M3 9h18" />
+            </svg>
+          </span>
         </div>
       )}
-
       <textarea required name="message" rows={4} placeholder={dict.form.message} className={inputClass} />
 
       <button
