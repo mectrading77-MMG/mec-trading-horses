@@ -5,6 +5,18 @@ import { useState } from "react";
 const inputClass =
   "w-full border border-charcoal-line bg-transparent px-4 py-3 text-sm text-charcoal placeholder:text-charcoal/40 focus:border-gold";
 
+const SERVICE_KEYS = [
+  "selection",
+  "sales",
+  "prePurchase",
+  "vetCoordination",
+  "documentation",
+  "transport",
+  "export",
+  "viewing",
+  "afterSale"
+] as const;
+
 export default function ContactForm({
   dict,
   horseId,
@@ -54,6 +66,24 @@ export default function ContactForm({
         <input name="phone" placeholder={dict.form.phone} className={inputClass} />
         <input name="country" placeholder={dict.form.country} className={inputClass} />
       </div>
+
+      <select
+        required
+        name="service"
+        defaultValue=""
+        aria-label="Service"
+        className={`${inputClass} appearance-none`}
+      >
+        <option value="" disabled>
+          Select a service
+        </option>
+        {SERVICE_KEYS.map((key) => (
+          <option key={key} value={key}>
+            {dict.services.list[key].title}
+          </option>
+        ))}
+      </select>
+
       <textarea required name="message" rows={4} placeholder={dict.form.message} className={inputClass} />
       <input type="date" name="viewingDate" aria-label={dict.form.viewingDate} className={inputClass} />
 
