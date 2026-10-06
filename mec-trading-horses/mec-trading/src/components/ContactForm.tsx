@@ -34,6 +34,7 @@ export default function ContactForm({
 }) {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [service, setService] = useState("");
+  const [viewingDate, setViewingDate] = useState("");
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -114,11 +115,15 @@ export default function ContactForm({
             type="date"
             name="viewingDate"
             aria-label="Select your viewing date"
-            className={inputClass}
+            className={`${inputClass} block min-w-0 max-w-full`}
+            value={viewingDate}
+            onChange={(e) => setViewingDate(e.target.value)}
           />
-          <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-sm text-charcoal/40">
-            Select your viewing date
-          </span>
+          {!viewingDate && (
+            <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-sm text-charcoal/40">
+              Select your viewing date
+            </span>
+          )}
         </div>
       )}
 
