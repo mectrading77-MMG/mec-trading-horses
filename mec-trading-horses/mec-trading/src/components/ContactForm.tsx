@@ -108,14 +108,18 @@ export default function ContactForm({
       </select>
 
       {service === "viewing" && (
-        <input
-          required
-          type="date"
-          name="viewingDate"
-          aria-label={dict.form.viewingDate}
-          className={inputClass}
-          placeholder="Select your preferred date"
-        />
+        <div className="relative">
+          <input
+            required
+            type="date"
+            name="viewingDate"
+            aria-label="Select your preferred date"
+            className={inputClass}
+          />
+          <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-sm text-charcoal/40">
+            Select your preferred date
+          </span>
+        </div>
       )}
 
       <textarea required name="message" rows={4} placeholder={dict.form.message} className={inputClass} />
