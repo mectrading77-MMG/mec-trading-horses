@@ -49,7 +49,7 @@ export async function generateMetadata({
       type: "website",
       images: [
         {
-          url: "/brand/logo-full.png",
+          url: "/brand/og-mec-trading.svg",
           width: 1200,
           height: 630,
           alt: "MEC Trading — Sport Horses"
