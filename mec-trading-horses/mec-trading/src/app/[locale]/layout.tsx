@@ -45,7 +45,20 @@ export async function generateMetadata({
     },
     openGraph: {
       siteName: dict.brand.name,
-      locale: params.locale
+      locale: params.locale,
+      type: "website",
+      images: [
+        {
+          url: "/brand/logo-full.png",
+          width: 1200,
+          height: 630,
+          alt: "MEC Trading — Sport Horses"
+        }
+      ]
+    },
+    twitter: {
+      card: "summary_large_image",
+      images: ["/brand/logo-full.png"]
     },
     robots: {
       index: true,
