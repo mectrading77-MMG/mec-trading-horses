@@ -76,7 +76,10 @@ export default function HorseCard({ horse, locale, dict }: { horse: Horse; local
             <p className="mt-1 font-mono text-[11px] uppercase tracking-eyebrow text-charcoal/40">{horse.locationLabel}</p>
           </div>
           <div className="shrink-0 text-right">
-            <p className="font-display text-lg text-gold">{price ?? dict.horse.priceOnRequest}</p>
+            <p className="font-display text-lg text-gold"><div>
+              <p className="font-display text-lg text-gold">{price ?? "—"}</p>
+              <a href={whatsappLink(t.name)} className="mt-2 inline-block border border-gold px-3 py-1.5 font-mono text-[9px] uppercase tracking-eyebrow text-gold transition-colors hover:bg-gold hover:text-charcoal" onClick={(e) => e.stopPropagation()}>Inquire this horse</a>
+            </div></p>
           </div>
         </div>
       </Link>
