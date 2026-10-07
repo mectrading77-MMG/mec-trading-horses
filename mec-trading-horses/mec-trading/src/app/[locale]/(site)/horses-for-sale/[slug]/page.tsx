@@ -14,6 +14,8 @@ import SectionHeading from "@/components/SectionHeading";
 import XrayViewer from "@/components/XrayViewer";
 import { formatJumpHeight } from "@/lib/levels";
 
+export const dynamic = "force-dynamic";
+
 export async function generateStaticParams() {
   const horses = await listHorses();
   return horses.map((h) => ({ slug: h.slug }));
