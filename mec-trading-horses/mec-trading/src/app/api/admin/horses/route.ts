@@ -37,6 +37,21 @@ function slugify(name: string) {
     .replace(/(^-|-$)/g, "");
 }
 
+export async function PATCH(request: NextRequest) {
+  const session = await getSession();
+  if (!session) return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
+  const body = await request.json().catch(() => null);
+  const parsed = z.object({
+    horseId: z.string().min(1),
+    status: z.enum(["AVAILABLE", "RESERVED", "SOLD"])
+  }).safeParse(body);
+  if (!parsed.success) return NextResponse.json({ error: parsed.error.flatten() }, { status: 400 });
+
+  // TODO(production): persist parsed.data with Prisma when the database is connected.
+  console.log("Horse status update:", parsed.data);
+  return NextResponse.json({ ok: true, ...parsed.data });
+}
+
 export async function POST(request: NextRequest) {
   const session = await getSession();
   if (!session) {
