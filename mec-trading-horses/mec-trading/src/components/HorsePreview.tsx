@@ -55,6 +55,12 @@ export default function HorsePreview({
       : horse.status === "RESERVED"
       ? "bg-gold text-charcoal"
       : "bg-charcoal/85 text-ivory";
+  const statusDotClass =
+    horse.status === "AVAILABLE"
+      ? "bg-[#B6FF00]"
+      : horse.status === "RESERVED"
+      ? "bg-[#FF8C00]"
+      : "bg-[#FF2B2B]";
 
   return (
     <div
@@ -74,7 +80,8 @@ export default function HorsePreview({
             priority={n === 0}
           />
         ))}
-        <span className={`absolute left-3 top-3 px-2.5 py-1 font-mono text-[9px] uppercase tracking-eyebrow ${statusClass}`}>
+        <span className={`absolute left-3 top-3 flex items-center gap-2 px-2.5 py-1 font-mono text-[9px] uppercase tracking-eyebrow ${statusClass}`}>
+          <span className={`h-2 w-2 shrink-0 rounded-full ${statusDotClass}`} aria-hidden="true" />
           {dict.horse.statusLabel[horse.status]}
         </span>
         <span className="absolute bottom-3 left-3 bg-ivory/95 px-2.5 py-1 font-display text-sm italic text-charcoal">
