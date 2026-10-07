@@ -65,7 +65,7 @@ export default function CatalogClient({
     if (location) list = list.filter((h) => h.locationLabel === location);
     if (priceRange) {
       const range = PRICE_RANGES.find((r) => r.id === priceRange);
-      if (range) list = list.filter((h) => h.priceAmount != null && h.priceAmount >= range.min && h.priceAmount <= range.max);
+      if (range) list = list.filter((h) => h.priceAmount != null && h.priceAmount >= range.min && (range.max === Infinity || h.priceAmount < range.max));
     }
 
     switch (sort) {
