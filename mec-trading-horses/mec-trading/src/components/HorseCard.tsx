@@ -5,13 +5,13 @@ import { createPortal } from "react-dom";
 import Image from "next/image";
 import Link from "next/link";
 import type { Horse, Locale } from "@/types/horse";
-import { ageFromDob, formatPrice } from "@/lib/horses";
+import { ageFromDob, formatPriceRange } from "@/lib/horses";
 import { formatJumpHeight } from "@/lib/levels";
 import HorsePreview from "@/components/HorsePreview";
 
 export default function HorseCard({ horse, locale, dict }: { horse: Horse; locale: Locale; dict: any }) {
   const cover = horse.media.find((m) => m.isCover) ?? horse.media[0];
-  const price = formatPrice(horse.priceAmount, horse.priceCurrency, horse.priceOnRequest, locale);
+  const price = formatPriceRange(horse.priceAmount, horse.priceCurrency, horse.priceOnRequest, locale);
   const t = horse.translations[locale] ?? horse.translations.en;
 
   const ref = useRef<HTMLAnchorElement>(null);
