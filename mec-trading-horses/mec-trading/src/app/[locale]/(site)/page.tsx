@@ -68,9 +68,9 @@ export default async function HomePage({ params }: { params: { locale: Locale } 
         </div>
       </section>
 
-      <section className="mx-auto max-w-editorial px-6 py-20 text-center sm:py-24 lg:px-10">
+      <section className="mx-auto max-w-editorial px-6 py-12 text-center sm:py-16 lg:px-10">
         <h2 className="font-display text-3xl italic text-charcoal sm:text-4xl">{dict.home.closingTitle}</h2>
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+        <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
           <Link
             href={`/${params.locale}/contact`}
             className="border border-charcoal px-7 py-3 font-mono text-[11px] uppercase tracking-eyebrow text-charcoal transition-colors duration-400 hover:border-gold hover:text-gold"
