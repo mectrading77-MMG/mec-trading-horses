@@ -49,7 +49,7 @@ export async function generateMetadata({
       type: "website",
       images: [
         {
-          url: "https://mec-trading-horses-phi.vercel.app/brand/logo-full.png",
+          url: "https://mec-trading-horses-jiu4nuax0-mec-f416.vercel.app/brand/og-default.jpg",
           width: 1200,
           height: 630,
           alt: "MEC Trading — Sport Horses"
@@ -58,7 +58,7 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      images: ["/brand/logo-full.png"]
+      images: ["https://mec-trading-horses-jiu4nuax0-mec-f416.vercel.app/brand/og-default.jpg"]
     },
     robots: {
       index: true,
