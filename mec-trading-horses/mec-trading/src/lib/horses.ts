@@ -45,6 +45,28 @@ export function formatPrice(amount: number | undefined, currency: string, onRequ
   }).format(amount);
 }
 
+export function formatPriceRange(amount: number | undefined, currency: string, onRequest: boolean, locale: Locale) {
+  if (onRequest || amount === undefined) return null;
+  const ranges = [
+    { min: 5000, max: 10000 },
+    { min: 10000, max: 20000 },
+    { min: 20000, max: 30000 },
+    { min: 30000, max: 50000 },
+    { min: 50000, max: 100000 },
+    { min: 100000, max: 150000 },
+    { min: 150000, max: Infinity }
+  ];
+  const range = ranges.find((r) => amount >= r.min && (r.max === Infinity || amount < r.max));
+  if (!range) return null;
+  const format = (value: number) =>
+    new Intl.NumberFormat(locale === "ar" ? "ar-EG" : locale, {
+      style: "currency",
+      currency,
+      maximumFractionDigits: 0
+    }).format(value);
+  return range.max === Infinity ? format(range.min) + "+" : format(range.min) + " – " + format(range.max);
+}
+
 export function heightHands(cm: number) {
   return `${cm} cm`;
 }
