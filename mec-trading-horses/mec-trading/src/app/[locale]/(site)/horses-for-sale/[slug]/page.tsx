@@ -173,7 +173,7 @@ export default async function HorseDetailPage({
             {/* Pedigree */}
             {horse.pedigree.length > 0 && (
               <section className="mt-14">
-                <SectionHeading eyebrow={dict.detail.pedigree} title="" />
+                <SectionHeading eyebrow={dict.detail.pedigree} title={t.name} />
                 <div className="mt-8">
                   <PedigreeTree entries={horse.pedigree} dict={dict} />
                 </div>
