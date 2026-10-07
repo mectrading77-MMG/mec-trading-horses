@@ -110,7 +110,11 @@ export default async function HorseDetailPage({
               </div>
               <div className="text-right">
                 <p className="font-display text-2xl text-gold">{price ?? "—"}</p>
-                <p className="mt-1 font-mono text-[11px] uppercase tracking-eyebrow text-charcoal/50">
+                <p className="mt-1 flex items-center justify-end gap-2 font-mono text-[11px] uppercase tracking-eyebrow text-charcoal/50">
+                  <span
+                    className={`h-2.5 w-2.5 shrink-0 rounded-full ${horse.status === "AVAILABLE" ? "bg-[#B6FF00]" : horse.status === "RESERVED" ? "bg-[#FF8C00]" : "bg-[#FF2B2B]"}`}
+                    aria-hidden="true"
+                  />
                   {dict.horse.statusLabel[horse.status]}
                 </p>
               </div>
