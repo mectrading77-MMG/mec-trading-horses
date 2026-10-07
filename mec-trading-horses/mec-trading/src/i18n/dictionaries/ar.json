@@ -110,7 +110,9 @@
     "allSexes": "جميع الأجناس",
     "allColors": "جميع الألوان",
     "allCompetitionLevels": "جميع مستويات المنافسة",
-    "allLocations": "جميع المواقع"
+    "allLocations": "جميع المواقع",
+    "priceRange": "نطاق السعر",
+    "allPriceRanges": "كل الأسعار"
   },
   "detail": {
     "contact": "اتصل بنا",
