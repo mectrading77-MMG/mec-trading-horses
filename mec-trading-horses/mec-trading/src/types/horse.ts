@@ -1,4 +1,4 @@
-export type Locale = "en" | "fr" | "ar";
+export type Locale = "en" | "fr" | "ar" | "de" | "nl";
 
 export type HorseStatus = "AVAILABLE" | "RESERVED" | "SOLD";
 export type HorseSex = "MARE" | "STALLION" | "GELDING";
