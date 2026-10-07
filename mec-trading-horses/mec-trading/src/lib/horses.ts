@@ -1,6 +1,18 @@
 import { horses, getHorseBySlug, getFeaturedHorses, getFeaturedStoryHorse } from "@/lib/sample-data";
 import type { Locale } from "@/types/horse";
 import { db } from "@/lib/db";
+import type { Horse } from "@/types/horse";
+
+function withTranslationFallback(horse: Horse): Horse {
+  return {
+    ...horse,
+    translations: {
+      ...horse.translations,
+      de: horse.translations.de ?? horse.translations.en,
+      nl: horse.translations.nl ?? horse.translations.en
+    }
+  };
+}
 
 /**
  * This module is the single seam between UI and data source. Every function
@@ -19,26 +31,27 @@ export async function listHorses() {
       select: { slug: true, status: true }
     });
     const statusBySlug = new Map(statuses.map((h) => [h.slug, h.status]));
-    return horses.map((horse) => ({
+    return horses.map((horse) => withTranslationFallback({
       ...horse,
       status: statusBySlug.get(horse.slug) ?? horse.status
-    }));
+    })));
   } catch {
-    return horses;
+    return horses.map(withTranslationFallback);
   }
 }
 
 export async function getHorse(slug: string) {
   const horse = getHorseBySlug(slug);
   if (!horse) return horse;
+  const normalizedHorse = withTranslationFallback(horse);
   try {
     const record = await db.horse.findUnique({
       where: { slug },
       select: { status: true }
     });
-    return record ? { ...horse, status: record.status } : horse;
+    return record ? { ...normalizedHorse, status: record.status } : normalizedHorse;
   } catch {
-    return horse;
+    return normalizedHorse;
   }
 }
 
