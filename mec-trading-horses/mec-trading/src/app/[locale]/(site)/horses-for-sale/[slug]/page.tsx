@@ -173,7 +173,7 @@ export default async function HorseDetailPage({
             {/* Pedigree */}
             {horse.pedigree.length > 0 && (
               <section className="mt-14">
-                <SectionHeading eyebrow={dict.detail.pedigree} title={t.name} />
+                <SectionHeading eyebrow={dict.detail.pedigree} title="" />
                 <div className="mt-8">
                   <PedigreeTree entries={horse.pedigree} dict={dict} />
                 </div>
@@ -183,7 +183,7 @@ export default async function HorseDetailPage({
             {/* Competition history */}
             {horse.competitionResults.length > 0 && (
               <section className="mt-14">
-                <SectionHeading eyebrow={dict.detail.competitionHistory} title={t.name} />
+                <SectionHeading eyebrow={dict.detail.competitionHistory} title="" />
                 <div className="mt-8">
                   <CompetitionTable results={horse.competitionResults} dict={dict} />
                 </div>
@@ -192,7 +192,7 @@ export default async function HorseDetailPage({
 
             {/* Health & documents */}
             <section className="mt-14">
-              <SectionHeading eyebrow={dict.detail.healthDocuments} title={t.name} />
+              <SectionHeading eyebrow={dict.detail.healthDocuments} title="" />
               {horse.xrays && (
                 <div className="mt-8">
                   <XrayViewer set={horse.xrays} dict={dict} locale={params.locale} />
