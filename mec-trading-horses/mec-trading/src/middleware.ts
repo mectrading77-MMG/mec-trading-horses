@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const locales = ["en", "fr", "ar", "de", "nl"];
+const locales = ["en", "fr", "ar"];
 const defaultLocale = "en";
 
 function pickLocale(request: NextRequest) {
@@ -13,7 +13,6 @@ function pickLocale(request: NextRequest) {
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Never touch admin auth routes, API routes, or static assets.
   if (
     pathname.startsWith("/_next") ||
     pathname.startsWith("/api") ||
@@ -33,10 +32,6 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(url);
   }
 
-  // Gate every /admin/* route except /admin/login behind the session cookie.
-  // This is a cheap presence check for fast redirects; the actual JWT
-  // signature is verified server-side via getSession() on each admin page,
-  // so a forged/expired cookie still can't grant real access.
   if (isProtectedAdminPath(pathname)) {
     const hasSession = request.cookies.has("mec_admin_session");
     if (!hasSession) {
