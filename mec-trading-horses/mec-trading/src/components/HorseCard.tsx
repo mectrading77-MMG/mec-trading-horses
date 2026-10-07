@@ -37,6 +37,13 @@ export default function HorseCard({ horse, locale, dict }: { horse: Horse; local
       ? "bg-gold text-charcoal"
       : "bg-charcoal/80 text-ivory";
 
+  const statusDotClass =
+    horse.status === "AVAILABLE"
+      ? "bg-[#B6FF00]"
+      : horse.status === "RESERVED"
+      ? "bg-[#FF8C00]"
+      : "bg-[#FF2B2B]";
+
   return (
     <>
       <Link
@@ -59,7 +66,7 @@ export default function HorseCard({ horse, locale, dict }: { horse: Horse; local
             />
           )}
           <span className={`absolute left-4 top-4 flex items-center gap-2 px-3 py-1 font-mono text-[10px] uppercase tracking-eyebrow ${statusClass}`}>
-            {horse.status === "AVAILABLE" && <span className="h-2 w-2 rounded-full bg-[#B6FF00]" aria-hidden="true" />}
+            <span className={`h-2 w-2 shrink-0 rounded-full ${statusDotClass}`} aria-hidden="true" />
             {dict.horse.statusLabel[horse.status]}
           </span>
           <span className="absolute bottom-4 left-4 bg-ivory/95 px-3 py-1 font-display text-sm italic text-charcoal">
