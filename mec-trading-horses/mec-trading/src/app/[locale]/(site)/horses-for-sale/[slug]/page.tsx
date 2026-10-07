@@ -8,7 +8,6 @@ import PedigreeTree from "@/components/PedigreeTree";
 import CompetitionTable from "@/components/CompetitionTable";
 import TrustBadges from "@/components/TrustBadges";
 import ContactForm from "@/components/ContactForm";
-import WhatsAppButton from "@/components/WhatsAppButton";
 import SectionHeading from "@/components/SectionHeading";
 import XrayViewer from "@/components/XrayViewer";
 import { formatJumpHeight } from "@/lib/levels";
