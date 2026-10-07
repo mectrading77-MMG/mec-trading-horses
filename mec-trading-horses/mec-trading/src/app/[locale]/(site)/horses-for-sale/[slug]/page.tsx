@@ -193,7 +193,7 @@ export default async function HorseDetailPage({
 
             {/* Media */}
             <section className="mt-14">
-              <SectionHeading eyebrow={dict.detail.media} title={t.name} />
+              <SectionHeading eyebrow={dict.detail.media} title="" />
               <div className="mt-8">
                 <MediaTabs media={horse.media} dict={dict} />
               </div>
