@@ -57,7 +57,8 @@ export default function HorseCard({ horse, locale, dict }: { horse: Horse; local
               className="object-cover transition-transform duration-400 group-hover:scale-105"
             />
           )}
-          <span className={`absolute left-4 top-4 px-3 py-1 font-mono text-[10px] uppercase tracking-eyebrow ${statusClass}`}>
+          <span className={`absolute left-4 top-4 flex items-center gap-2 px-3 py-1 font-mono text-[10px] uppercase tracking-eyebrow ${statusClass}`}>
+            {horse.status === "AVAILABLE" && <span className="h-2 w-2 rounded-full bg-[#B6FF00]" aria-hidden="true" />}
             {dict.horse.statusLabel[horse.status]}
           </span>
           <span className="absolute bottom-4 left-4 bg-ivory/95 px-3 py-1 font-display text-sm italic text-charcoal">
