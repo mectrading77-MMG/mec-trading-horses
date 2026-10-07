@@ -25,7 +25,7 @@ export default async function HomePage({ params }: { params: { locale: Locale } 
           <div className="mt-10 flex justify-center lg:justify-start">
             <Link
               href={`/${params.locale}/horses-for-sale`}
-              className="inline-block min-w-[190px] border border-gold bg-charcoal/20 px-10 py-3.5 text-center shadow-[0_0_0_1px_rgba(255,255,255,0.08)] font-mono text-[11px] uppercase tracking-eyebrow text-gold transition-colors duration-400 hover:bg-gold hover:text-charcoal"
+              className="inline-block w-[75%] border border-gold bg-charcoal/20 px-10 py-3.5 text-center shadow-[0_0_0_1px_rgba(255,255,255,0.08)] font-mono text-[11px] uppercase tracking-eyebrow text-gold transition-colors duration-400 hover:bg-gold hover:text-charcoal translate-y-4"
             >
               {dict.home.heroCta}
             </Link>
