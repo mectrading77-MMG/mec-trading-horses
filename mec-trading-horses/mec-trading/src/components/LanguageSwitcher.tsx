@@ -1,29 +1,48 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import Link from "next/link";
 import type { Locale } from "@/types/horse";
 
-const labels: Record<Locale, string> = { en: "EN", fr: "FR", ar: "AR" };
-const locales: Locale[] = ["en", "fr", "ar"];
+const labels: Record<string, string> = {
+  en: "English",
+  fr: "Français",
+  ar: "العربية",
+  de: "Deutsch",
+  nl: "Nederlands (België)"
+};
+
+const locales = ["en", "fr", "ar", "de", "nl"] as const;
 
 export default function LanguageSwitcher({ current }: { current: Locale }) {
   const pathname = usePathname() ?? `/${current}`;
   const rest = pathname.split("/").slice(2).join("/");
 
   return (
-    <div className="flex items-center gap-1 font-mono text-[11px] uppercase tracking-eyebrow">
-      {locales.map((locale, i) => (
-        <span key={locale} className="flex items-center gap-1">
-          <Link
-            href={`/${locale}${rest ? `/${rest}` : ""}`}
-            className={locale === current ? "text-gold" : "text-charcoal/50 hover:text-charcoal"}
-          >
+    <div className="relative">
+      <label className="sr-only" htmlFor="language-switcher">
+        Language
+      </label>
+      <select
+        id="language-switcher"
+        value={current}
+        onChange={(e) => {
+          window.location.href = `/${e.target.value}${rest ? `/${rest}` : ""}`;
+        }}
+        className="appearance-none border border-charcoal-line bg-ivory px-3 py-2 pr-8 font-mono text-[10px] uppercase tracking-eyebrow text-charcoal cursor-pointer"
+        aria-label="Select language"
+      >
+        {locales.map((locale) => (
+          <option key={locale} value={locale}>
             {labels[locale]}
-          </Link>
-          {i < locales.length - 1 && <span className="text-charcoal/20">/</span>}
-        </span>
-      ))}
+          </option>
+        ))}
+      </select>
+      <span
+        className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-charcoal/50"
+        aria-hidden="true"
+      >
+        ⌄
+      </span>
     </div>
   );
 }
