@@ -16,7 +16,7 @@ export default async function SiteLayout({
   return (
     <>
       <Header locale={params.locale} dict={dict} />
-      <main className="pb-16 lg:pb-0">{children}</main>
+      <main>{children}</main>
       <Footer locale={params.locale} dict={dict} />
       <StickyMobileBar dict={dict} />
     </>
