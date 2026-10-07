@@ -18,7 +18,7 @@ export default function LanguageSwitcher({ current }: { current: Locale }) {
   const rest = pathname.split("/").slice(2).join("/");
 
   return (
-    <div className="relative ml-auto shrink-0">
+    <div className="relative shrink-0">
       <label className="sr-only" htmlFor="language-switcher">
         Language
       </label>
@@ -28,7 +28,7 @@ export default function LanguageSwitcher({ current }: { current: Locale }) {
         onChange={(e) => {
           window.location.href = `/${e.target.value}${rest ? `/${rest}` : ""}`;
         }}
-        className="h-6 w-[42px] appearance-none border border-charcoal-line bg-ivory px-1 pr-3 font-mono text-[9px] uppercase tracking-normal text-charcoal cursor-pointer"
+        className="h-[34px] w-[92px] appearance-none rounded-none border border-charcoal bg-ivory px-4 py-2 pr-7 font-mono text-[10px] uppercase tracking-eyebrow text-charcoal cursor-pointer transition-colors duration-400 hover:border-gold hover:text-gold sm:h-[38px] sm:w-[108px] sm:text-[11px]"
         aria-label="Select language"
       >
         {locales.map((locale) => (
@@ -38,7 +38,7 @@ export default function LanguageSwitcher({ current }: { current: Locale }) {
         ))}
       </select>
       <span
-        className="pointer-events-none absolute right-1 top-1/2 -translate-y-1/2 text-[8px] text-charcoal/50"
+        className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-[9px] text-charcoal/50"
         aria-hidden="true"
       >
         ⌄
