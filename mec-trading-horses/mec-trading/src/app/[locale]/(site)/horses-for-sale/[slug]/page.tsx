@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import type { Locale } from "@/types/horse";
 import { getDictionary } from "@/i18n/config";
-import { getHorse, listHorses, ageFromDob, formatPrice, heightHands } from "@/lib/horses";
+import { getHorse, listHorses, ageFromDob, formatPriceRange, heightHands } from "@/lib/horses";
 import HorseGallery from "@/components/HorseGallery";
 import MediaTabs from "@/components/MediaTabs";
 import PedigreeTree from "@/components/PedigreeTree";
@@ -51,7 +51,7 @@ export default async function HorseDetailPage({
   if (!horse) notFound();
 
   const t = horse.translations[params.locale] ?? horse.translations.en;
-  const price = formatPrice(horse.priceAmount, horse.priceCurrency, horse.priceOnRequest, params.locale);
+  const price = formatPriceRange(horse.priceAmount, horse.priceCurrency, horse.priceOnRequest, params.locale);
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.mectrading.com";
 
   const jsonLd = {
@@ -64,7 +64,6 @@ export default async function HorseDetailPage({
     offers: {
       "@type": "Offer",
       priceCurrency: horse.priceCurrency,
-      price: horse.priceAmount ?? undefined,
       availability:
         horse.status === "AVAILABLE"
           ? "https://schema.org/InStock"
