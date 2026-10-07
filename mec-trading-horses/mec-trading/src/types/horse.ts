@@ -111,7 +111,7 @@ export interface Horse {
     pedigreeDocs: boolean;
     transport: boolean;
   };
-  translations: Record<Locale, HorseTranslation>;
+  translations: Record<string, HorseTranslation>;
   media: MediaItem[];
   documents: DocumentItem[];
   xrays?: XraySet;
