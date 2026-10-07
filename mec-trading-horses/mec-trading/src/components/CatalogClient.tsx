@@ -119,6 +119,15 @@ export default function CatalogClient({
           </label>
 
           <label className="flex flex-col gap-2">
+            <span className="font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/50">{dict.catalog.priceRange}</span>
+            <select value={priceRange} onChange={(e) => setPriceRange(e.target.value)} className={selectClass}>
+              <option value="">{dict.catalog.allPriceRanges}</option>
+              {PRICE_RANGES.map((range) => <option key={range.id} value={range.id}>{range.label}</option>)}
+            </select>
+          </label>
+
+
+          <label className="flex flex-col gap-2">
             <span className="font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/50">{dict.horse.breed}</span>
             <select value={breed} onChange={(e) => setBreed(e.target.value)} className={selectClass}>
               <option value="">{dict.catalog.allBreeds}</option>
@@ -153,14 +162,6 @@ export default function CatalogClient({
               </select>
             </label>
           )}
-
-          <label className="flex flex-col gap-2">
-            <span className="font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/50">{dict.catalog.priceRange}</span>
-            <select value={priceRange} onChange={(e) => setPriceRange(e.target.value)} className={selectClass}>
-              <option value="">{dict.catalog.allPriceRanges}</option>
-              {PRICE_RANGES.map((range) => <option key={range.id} value={range.id}>{range.label}</option>)}
-            </select>
-          </label>
 
           <label className="flex flex-col gap-2">
             <span className="font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/50">{dict.horse.location}</span>
