@@ -4,7 +4,6 @@ import type { Locale } from "@/types/horse";
 import { getDictionary } from "@/i18n/config";
 import { getHorse, listHorses, ageFromDob, formatPriceRange, heightHands } from "@/lib/horses";
 import HorseGallery from "@/components/HorseGallery";
-import MediaTabs from "@/components/MediaTabs";
 import PedigreeTree from "@/components/PedigreeTree";
 import CompetitionTable from "@/components/CompetitionTable";
 import TrustBadges from "@/components/TrustBadges";
