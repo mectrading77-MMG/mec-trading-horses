@@ -47,7 +47,7 @@ export default async function AdminHorsesPage({ params }: { params: { locale: Lo
                   <td className="px-4 py-3 text-charcoal/70">{formatJumpHeight(horse.jumpHeightCm)}</td>
                   <td className="px-4 py-3 text-charcoal/70">{price ?? dict.horse.priceOnRequest}</td>
                   <td className="px-4 py-3">
-                    <StatusControls horseId={horse.id} status={horse.status} dict={dict} />
+                    <StatusControls horseSlug={horse.slug} status={horse.status} dict={dict} />
                   </td>
                   <td className="px-4 py-3 text-charcoal/50">{horse.featuredOnHome ? "Yes" : "—"}</td>
                   <td className="px-4 py-3 text-right">
