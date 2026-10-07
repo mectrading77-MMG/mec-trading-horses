@@ -68,7 +68,7 @@ export function formatPrice(amount: number | undefined, currency: string, onRequ
 }
 
 export function formatPriceRange(amount: number | undefined, currency: string, onRequest: boolean, locale: Locale) {
-  if (onRequest || amount === undefined) return null;
+  if (amount === undefined) return null;
   const ranges = [
     { min: 5000, max: 10000 },
     { min: 10000, max: 20000 },
