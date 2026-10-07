@@ -110,7 +110,9 @@
     "allSexes": "Tous les sexes",
     "allColors": "Toutes les robes",
     "allCompetitionLevels": "Tous les niveaux de compétition",
-    "allLocations": "Toutes les localisations"
+    "allLocations": "Toutes les localisations",
+    "priceRange": "Gamme de prix",
+    "allPriceRanges": "Tous les prix"
   },
   "detail": {
     "contact": "Nous contacter",
