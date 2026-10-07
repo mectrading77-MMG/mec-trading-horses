@@ -45,6 +45,7 @@ export default function ContactForm({
   const [viewingDate, setViewingDate] = useState("");
   const [phone, setPhone] = useState("");
   const [country, setCountry] = useState("");
+  const [sendMethod, setSendMethod] = useState<"email" | "whatsapp" | "">("");
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -52,16 +53,30 @@ export default function ContactForm({
     const form = new FormData(e.currentTarget);
     const payload = Object.fromEntries(form.entries());
 
-    try {
-      const res = await fetch("/api/inquiries", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...payload, horseId })
-      });
-      setStatus(res.ok ? "sent" : "error");
-    } catch {
-      setStatus("error");
+    const inquiryText = [
+      `Name: ${payload.name ?? ""}`,
+      `Email: ${payload.email ?? ""}`,
+      `Country: ${payload.country ?? ""}`,
+      `Phone: ${payload.phone ?? ""}`,
+      `Service: ${payload.service ?? ""}`,
+      payload.lookingFor ? `Horse: ${payload.lookingFor}` : "",
+      payload.viewingDate ? `Viewing date: ${payload.viewingDate}` : "",
+      `Message: ${payload.message ?? ""}`
+    ].filter(Boolean).join("\n");
+
+    if (sendMethod === "whatsapp") {
+      window.location.href = "https://wa.me/33618313530?text=" + encodeURIComponent("MEC Horses inquiry\n\n" + inquiryText);
+      setStatus("sent");
+      return;
     }
+
+    if (sendMethod === "email") {
+      window.location.href = "mailto:mec.trading77@gmail.com?subject=" + encodeURIComponent("MEC Horses inquiry — " + (payload.name ?? "")) + "&body=" + encodeURIComponent(inquiryText);
+      setStatus("sent");
+      return;
+    }
+
+    setStatus("error");
   }
 
   if (status === "sent") {
@@ -175,6 +190,20 @@ export default function ContactForm({
         </div>
       )}
       <textarea required name="message" rows={4} placeholder={dict.form.message} className={inputClass} />
+
+      <div className="grid gap-3">
+        <p className="font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/50">Send inquiry via</p>
+        <div className="grid gap-3 sm:grid-cols-2">
+          <label className="flex cursor-pointer items-center gap-3 border border-charcoal-line px-4 py-3 text-sm">
+            <input required type="radio" name="sendMethod" value="email" checked={sendMethod === "email"} onChange={() => setSendMethod("email")} />
+            <span>Email — mec.trading77@gmail.com</span>
+          </label>
+          <label className="flex cursor-pointer items-center gap-3 border border-charcoal-line px-4 py-3 text-sm">
+            <input required type="radio" name="sendMethod" value="whatsapp" checked={sendMethod === "whatsapp"} onChange={() => setSendMethod("whatsapp")} />
+            <span>WhatsApp — +33 6 18 31 35 30</span>
+          </label>
+        </div>
+      </div>
 
       <button
         type="submit"
