@@ -25,7 +25,7 @@ export default async function HomePage({ params }: { params: { locale: Locale } 
           <div className="mt-10 flex justify-center lg:justify-start">
             <Link
               href={`/${params.locale}/horses-for-sale`}
-              className="inline-block w-[75%] border border-gold bg-charcoal/20 px-10 py-3.5 text-center shadow-[0_0_0_1px_rgba(255,255,255,0.08)] font-mono text-[11px] uppercase tracking-eyebrow text-gold transition-colors duration-400 hover:bg-gold hover:text-charcoal translate-y-4"
+              className="inline-block w-[75%] border border-gold bg-charcoal/20 px-10 py-5 text-center text-base font-semibold uppercase tracking-[0.16em] text-gold shadow-[0_0_0_1px_rgba(255,255,255,0.08)] transition-colors duration-400 hover:bg-gold hover:text-charcoal translate-y-4 sm:w-auto sm:min-w-[260px] sm:text-lg"
             >
               {dict.home.heroCta}
             </Link>
@@ -33,7 +33,6 @@ export default async function HomePage({ params }: { params: { locale: Locale } 
         </div>
       </section>
 
-      {/* Find a horse by the height it jumps */}
       <section className="bg-charcoal py-24 text-ivory">
         <div className="mx-auto max-w-editorial px-6 lg:px-10">
           <SectionHeading eyebrow={dict.home.selectionEyebrow} title={dict.home.selectionTitle} onDark />
@@ -42,7 +41,6 @@ export default async function HomePage({ params }: { params: { locale: Locale } 
         </div>
       </section>
 
-      {/* Why choose us */}
       <section className="mx-auto max-w-editorial px-6 py-24 lg:px-10">
         <SectionHeading eyebrow={dict.home.whyEyebrow} title={dict.home.whyTitle} />
         <div className="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
@@ -57,7 +55,6 @@ export default async function HomePage({ params }: { params: { locale: Locale } 
         </div>
       </section>
 
-      {/* International buyers */}
       <section className="bg-hunter py-24 text-ivory">
         <div className="mx-auto max-w-editorial px-6 lg:px-10">
           <SectionHeading eyebrow={dict.home.internationalEyebrow} title={dict.home.internationalTitle} onDark />
@@ -70,7 +67,6 @@ export default async function HomePage({ params }: { params: { locale: Locale } 
         </div>
       </section>
 
-      {/* Closing CTA */}
       <section className="mx-auto max-w-editorial px-6 py-24 text-center lg:px-10">
         <h2 className="font-display text-3xl italic text-charcoal sm:text-4xl">{dict.home.closingTitle}</h2>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
