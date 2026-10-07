@@ -6,6 +6,7 @@ import CatalogClient from "@/components/CatalogClient";
 import SectionHeading from "@/components/SectionHeading";
 
 export const dynamic = "force-dynamic";
+// Vercel deployment connectivity test
 
 export async function generateMetadata({ params }: { params: { locale: Locale } }): Promise<Metadata> {
   const dict = await getDictionary(params.locale);
