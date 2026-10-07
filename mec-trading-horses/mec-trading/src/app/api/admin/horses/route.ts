@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { getSession } from "@/lib/auth";
+import { db } from "@/lib/db";
 
 const HorseInputSchema = z.object({
   nameEn: z.string().min(1),
@@ -42,14 +43,22 @@ export async function PATCH(request: NextRequest) {
   if (!session) return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
   const body = await request.json().catch(() => null);
   const parsed = z.object({
-    horseId: z.string().min(1),
+    horseSlug: z.string().min(1),
     status: z.enum(["AVAILABLE", "RESERVED", "SOLD"])
   }).safeParse(body);
   if (!parsed.success) return NextResponse.json({ error: parsed.error.flatten() }, { status: 400 });
 
-  // TODO(production): persist parsed.data with Prisma when the database is connected.
-  console.log("Horse status update:", parsed.data);
-  return NextResponse.json({ ok: true, ...parsed.data });
+  try {
+    const horse = await db.horse.update({
+      where: { slug: parsed.data.horseSlug },
+      data: { status: parsed.data.status },
+      select: { slug: true, status: true }
+    });
+    return NextResponse.json({ ok: true, horse });
+  } catch (error) {
+    console.error("Horse status update failed:", error);
+    return NextResponse.json({ error: "Horse not found or database unavailable" }, { status: 500 });
+  }
 }
 
 export async function POST(request: NextRequest) {
