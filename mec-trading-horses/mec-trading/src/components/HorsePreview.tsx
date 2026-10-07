@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import type { Horse, Locale } from "@/types/horse";
-import { ageFromDob, formatPrice } from "@/lib/horses";
+import { ageFromDob, formatPriceRange } from "@/lib/horses";
 import { formatJumpHeight } from "@/lib/levels";
 
 export const PREVIEW_W = 340;
@@ -32,7 +32,7 @@ export default function HorsePreview({
   const t = horse.translations[locale] ?? horse.translations.en;
   const photos = horse.media.filter((m) => m.type === "PHOTO");
   const [i, setI] = useState(0);
-  const price = formatPrice(horse.priceAmount, horse.priceCurrency, horse.priceOnRequest, locale);
+  const price = formatPriceRange(horse.priceAmount, horse.priceCurrency, horse.priceOnRequest, locale);
 
   useEffect(() => {
     if (photos.length < 2) return;
