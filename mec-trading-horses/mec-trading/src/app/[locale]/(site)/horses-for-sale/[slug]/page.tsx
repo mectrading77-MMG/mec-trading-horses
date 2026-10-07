@@ -12,6 +12,7 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import SectionHeading from "@/components/SectionHeading";
 import XrayViewer from "@/components/XrayViewer";
 import { formatJumpHeight } from "@/lib/levels";
+import { whatsappLink } from "@/lib/whatsapp";
 
 export const dynamic = "force-dynamic";
 
@@ -109,7 +110,7 @@ export default async function HorseDetailPage({
                 <p className="mt-3 max-w-xl text-charcoal/70">{t.positioning}</p>
               </div>
               <div className="text-right">
-                <p className="font-display text-2xl text-gold">{price ?? dict.horse.priceOnRequest}</p>
+                <p className="font-display text-2xl text-gold">{price ?? "—"}</p>
                 <p className="mt-1 font-mono text-[11px] uppercase tracking-eyebrow text-charcoal/50">
                   {dict.horse.statusLabel[horse.status]}
                 </p>
@@ -144,10 +145,10 @@ export default async function HorseDetailPage({
             </section>
 
             <div className="mt-10 flex flex-wrap items-center gap-3 border-y border-charcoal-line py-6">
-              <p className="mr-2 font-mono text-[11px] uppercase tracking-eyebrow text-charcoal/50">
-                {price ?? dict.horse.priceOnRequest}
-              </p>
-              <WhatsAppButton horseName={t.name} label={dict.detail.whatsapp} />
+              <div className="mr-2">
+                <p className="font-display text-lg text-gold">{price ?? "—"}</p>
+                <a href={whatsappLink(t.name)} className="mt-2 inline-block border border-gold px-4 py-2 font-mono text-[10px] uppercase tracking-eyebrow text-gold">Inquire this horse</a>
+              </div>
               <a
                 href="#contact"
                 className="border border-charcoal-line px-6 py-3 font-mono text-[11px] uppercase tracking-eyebrow text-charcoal/70 transition-colors duration-400 hover:border-gold hover:text-gold"
