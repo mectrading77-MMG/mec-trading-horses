@@ -1,4 +1,5 @@
 import Link from "next/link";
+import StatusControls from "@/components/admin/StatusControls";
 import type { Locale } from "@/types/horse";
 import { getDictionary } from "@/i18n/config";
 import { listHorses, ageFromDob, formatPrice } from "@/lib/horses";
@@ -46,17 +47,7 @@ export default async function AdminHorsesPage({ params }: { params: { locale: Lo
                   <td className="px-4 py-3 text-charcoal/70">{formatJumpHeight(horse.jumpHeightCm)}</td>
                   <td className="px-4 py-3 text-charcoal/70">{price ?? dict.horse.priceOnRequest}</td>
                   <td className="px-4 py-3">
-                    <span
-                      className={`px-2 py-1 font-mono text-[10px] uppercase tracking-eyebrow ${
-                        horse.status === "AVAILABLE"
-                          ? "bg-hunter/10 text-hunter"
-                          : horse.status === "RESERVED"
-                          ? "bg-gold/10 text-gold"
-                          : "bg-charcoal/10 text-charcoal/60"
-                      }`}
-                    >
-                      {dict.horse.statusLabel[horse.status]}
-                    </span>
+                    <StatusControls horseId={horse.id} status={horse.status} dict={dict} />
                   </td>
                   <td className="px-4 py-3 text-charcoal/50">{horse.featuredOnHome ? "Yes" : "—"}</td>
                   <td className="px-4 py-3 text-right">
@@ -74,10 +65,6 @@ export default async function AdminHorsesPage({ params }: { params: { locale: Lo
         </table>
       </div>
 
-      <p className="mt-4 text-xs text-charcoal/40">
-        Edit, delete, and status-change actions post to the horse API routes (see README) — wire these
-        buttons up once Prisma is connected so they persist to the database.
-      </p>
-    </div>
+   </div>
   );
 }
