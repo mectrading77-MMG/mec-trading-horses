@@ -163,7 +163,7 @@ export default function ContactForm({
               {horse.name}
             </option>
           ))}
-          <option value="NOT_LISTED">Not listed / Other</option>
+          <option value="NOT_LISTED">Not listed</option>
         </select>
       )}
       {service === "viewing" && (
