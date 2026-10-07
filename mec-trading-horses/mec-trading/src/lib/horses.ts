@@ -1,5 +1,6 @@
 import { horses, getHorseBySlug, getFeaturedHorses, getFeaturedStoryHorse } from "@/lib/sample-data";
 import type { Locale } from "@/types/horse";
+import { db } from "@/lib/db";
 
 /**
  * This module is the single seam between UI and data source. Every function
@@ -13,11 +14,32 @@ import type { Locale } from "@/types/horse";
  */
 
 export async function listHorses() {
-  return horses;
+  try {
+    const statuses = await db.horse.findMany({
+      select: { slug: true, status: true }
+    });
+    const statusBySlug = new Map(statuses.map((h) => [h.slug, h.status]));
+    return horses.map((horse) => ({
+      ...horse,
+      status: statusBySlug.get(horse.slug) ?? horse.status
+    }));
+  } catch {
+    return horses;
+  }
 }
 
 export async function getHorse(slug: string) {
-  return getHorseBySlug(slug);
+  const horse = getHorseBySlug(slug);
+  if (!horse) return horse;
+  try {
+    const record = await db.horse.findUnique({
+      where: { slug },
+      select: { status: true }
+    });
+    return record ? { ...horse, status: record.status } : horse;
+  } catch {
+    return horse;
+  }
 }
 
 export async function featuredHorses() {
