@@ -23,6 +23,7 @@ export default function CatalogClient({
   const [color, setColor] = useState("");
   const [competitionLevel, setCompetitionLevel] = useState("");
   const [location, setLocation] = useState("");
+  const [priceRange, setPriceRange] = useState("");
   const [sort, setSort] = useState("featured");
 
   const generalOptions = useMemo(() => {
@@ -44,6 +45,16 @@ export default function CatalogClient({
     return c;
   }, [horses]);
 
+  const PRICE_RANGES = [
+    { id: "5000-10000", min: 5000, max: 10000, label: "€5,000 – €10,000" },
+    { id: "10000-20000", min: 10000, max: 20000, label: "€10,000 – €20,000" },
+    { id: "20000-30000", min: 20000, max: 30000, label: "€20,000 – €30,000" },
+    { id: "30000-50000", min: 30000, max: 50000, label: "€30,000 – €50,000" },
+    { id: "50000-100000", min: 50000, max: 100000, label: "€50,000 – €100,000" },
+    { id: "100000-150000", min: 100000, max: 150000, label: "€100,000 – €150,000" },
+    { id: "150000-plus", min: 150000, max: Infinity, label: "€150,000+" }
+  ];
+
   const filtered = useMemo(() => {
     let list = horses; // sold horses stay visible with their badge
     if (level) list = list.filter((h) => bandFor(h.jumpHeightCm).id === level);
@@ -52,6 +63,10 @@ export default function CatalogClient({
     if (color) list = list.filter((h) => h.color === color);
     if (competitionLevel) list = list.filter((h) => h.competitionLevel === competitionLevel);
     if (location) list = list.filter((h) => h.locationLabel === location);
+    if (priceRange) {
+      const range = PRICE_RANGES.find((r) => r.id === priceRange);
+      if (range) list = list.filter((h) => h.priceAmount != null && h.priceAmount >= range.min && h.priceAmount <= range.max);
+    }
 
     switch (sort) {
       case "priceAsc":
@@ -77,7 +92,7 @@ export default function CatalogClient({
         );
     }
     return list;
-  }, [horses, level, breed, sex, color, competitionLevel, location, sort]);
+  }, [horses, level, breed, sex, color, competitionLevel, location, priceRange, sort]);
 
   const chip = (active: boolean) =>
     `px-4 py-2 font-mono text-[10px] uppercase tracking-eyebrow border transition-colors duration-400 ${
@@ -138,6 +153,14 @@ export default function CatalogClient({
               </select>
             </label>
           )}
+
+          <label className="flex flex-col gap-2">
+            <span className="font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/50">{dict.catalog.priceRange}</span>
+            <select value={priceRange} onChange={(e) => setPriceRange(e.target.value)} className={selectClass}>
+              <option value="">{dict.catalog.allPriceRanges}</option>
+              {PRICE_RANGES.map((range) => <option key={range.id} value={range.id}>{range.label}</option>)}
+            </select>
+          </label>
 
           <label className="flex flex-col gap-2">
             <span className="font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/50">{dict.horse.location}</span>
