@@ -41,7 +41,7 @@ export async function generateMetadata({
     description: dict.brand.tagline,
     metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.mectrading.com"),
     alternates: {
-      languages: { en: "/en", fr: "/fr", ar: "/ar" }
+      languages: { en: "/en", fr: "/fr", ar: "/ar", de: "/de", nl: "/nl" }
     },
     openGraph: {
       siteName: dict.brand.name,
