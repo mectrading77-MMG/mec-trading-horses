@@ -56,11 +56,12 @@ export async function getHorse(slug: string) {
 }
 
 export async function featuredHorses() {
-  return getFeaturedHorses();
+  return getFeaturedHorses().map(withTranslationFallback);
 }
 
 export async function featuredStory() {
-  return getFeaturedStoryHorse();
+  const horse = getFeaturedStoryHorse();
+  return horse ? withTranslationFallback(horse) : horse;
 }
 
 export function ageFromDob(dob: string) {
