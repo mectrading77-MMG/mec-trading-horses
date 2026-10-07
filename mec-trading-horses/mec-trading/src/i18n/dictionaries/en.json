@@ -110,7 +110,9 @@
     "allSexes": "All sexes",
     "allColors": "All colors",
     "allCompetitionLevels": "All competition levels",
-    "allLocations": "All locations"
+    "allLocations": "All locations",
+    "priceRange": "Price range",
+    "allPriceRanges": "All prices"
   },
   "detail": {
     "contact": "Contact Us",
