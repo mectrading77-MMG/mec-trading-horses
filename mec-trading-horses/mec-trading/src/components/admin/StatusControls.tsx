@@ -3,7 +3,7 @@
 import { useState } from "react";
 import type { HorseStatus } from "@/types/horse";
 
-export default function StatusControls({ horseId, status, dict }: { horseId: string; status: HorseStatus; dict: any }) {
+export default function StatusControls({ horseSlug, status, dict }: { horseSlug: string; status: HorseStatus; dict: any }) {
   const [current, setCurrent] = useState<HorseStatus>(status);
   const [saving, setSaving] = useState(false);
   const options = [
@@ -15,7 +15,7 @@ export default function StatusControls({ horseId, status, dict }: { horseId: str
     if (next === current || saving) return;
     setSaving(true);
     try {
-      const response = await fetch("/api/admin/horses", { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ horseId, status: next }) });
+      const response = await fetch("/api/admin/horses", { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ horseSlug, status: next }) });
       if (!response.ok) throw new Error("Status update failed");
       setCurrent(next);
     } catch {}
