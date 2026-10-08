@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { Locale } from "@/types/horse";
 import { getDictionary } from "@/i18n/config";
 import SectionHeading from "@/components/SectionHeading";
