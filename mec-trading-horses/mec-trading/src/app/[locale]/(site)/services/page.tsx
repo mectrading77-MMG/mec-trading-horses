@@ -22,11 +22,15 @@ export default async function ServicesPage({ params }: { params: { locale: Local
       <SectionHeading title={dict.services.title} />
       <div className="mt-12 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
         {KEYS.map((key, i) => (
-          <div key={key} className="border-t border-charcoal-line pt-5">
+          <Link
+            key={key}
+            href={`/${params.locale}/contact?service=${key}`}
+            className="group border-t border-charcoal-line pt-5 transition-colors duration-300 hover:border-gold"
+          >
             <span className="font-mono text-[10px] text-charcoal/30">{String(i + 1).padStart(2, "0")}</span>
-            <h3 className="mt-2 font-display text-xl italic text-charcoal">{dict.services.list[key].title}</h3>
+            <h3 className="mt-2 font-display text-xl italic text-charcoal group-hover:text-gold">{dict.services.list[key].title}</h3>
             <p className="mt-2 text-sm text-charcoal/60">{dict.services.list[key].text}</p>
-          </div>
+          </Link>
         ))}
       </div>
     </div>
