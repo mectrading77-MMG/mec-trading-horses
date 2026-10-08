@@ -32,15 +32,17 @@ export default function ContactForm({
   dict,
   horseId,
   horseName,
-  horses = []
+  horses = [],
+  initialService = ""
 }: {
   dict: any;
   horseId?: string;
   horseName?: string;
   horses?: { id: string; name: string }[];
+  initialService?: string;
 }) {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
-  const [service, setService] = useState("");
+  const [service, setService] = useState(initialService);
   const [selectedHorse, setSelectedHorse] = useState("");
   const [viewingDate, setViewingDate] = useState("");
   const [phone, setPhone] = useState("");
