@@ -5,13 +5,26 @@ import ContactForm from "@/components/ContactForm";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { listHorses } from "@/lib/horses";
 
-export default async function ContactPage({ params }: { params: { locale: Locale } }) {
+export default async function ContactPage({ params, searchParams }: { params: { locale: Locale }; searchParams?: { service?: string } }) {
   const dict = await getDictionary(params.locale);
   const horses = await listHorses();
   const horseOptions = horses.map((horse) => ({
     id: horse.id,
     name: horse.translations[params.locale].name
   }));
+
+  const requestedService = searchParams?.service;
+  const initialService = requestedService && [
+    "selection",
+    "sales",
+    "prePurchase",
+    "vetCoordination",
+    "documentation",
+    "transport",
+    "export",
+    "viewing",
+    "afterSale"
+  ].includes(requestedService) ? requestedService : "";
 
   return (
     <div className="mx-auto max-w-editorial px-6 py-16 lg:px-10">
@@ -35,7 +48,7 @@ export default async function ContactPage({ params }: { params: { locale: Locale
           <WhatsAppButton label={dict.detail.whatsapp} />
         </div>
         <div className="border border-charcoal-line p-6">
-          <ContactForm dict={dict} horses={horseOptions} />
+          <ContactForm dict={dict} horses={horseOptions} initialService={initialService} />
         </div>
       </div>
     </div>
