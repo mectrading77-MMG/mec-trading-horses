@@ -23,12 +23,18 @@ export default async function HomePage({ params }: { params: { locale: Locale } 
           <p className="mt-5 max-w-lg text-base leading-relaxed text-ivory/75 sm:mt-6 sm:text-lg">
             {dict.home.heroSupport}
           </p>
-          <div className="mt-8 flex justify-center lg:justify-start">
+          <div className="mt-8 flex flex-col items-center gap-3 lg:items-start">
             <Link
               href={`/${params.locale}/horses-for-sale`}
               className="inline-flex min-w-[220px] items-center justify-center border border-gold bg-charcoal/20 px-7 py-4 text-center text-[13px] font-semibold uppercase tracking-[0.14em] text-gold shadow-[0_0_0_1px_rgba(255,255,255,0.08)] transition-colors duration-400 hover:bg-gold hover:text-charcoal sm:min-w-[260px] sm:px-8 sm:py-4 sm:text-[14px]"
             >
               {dict.home.heroCta}
+            </Link>
+            <Link
+              href={`/${params.locale}/services`}
+              className="inline-flex min-w-[220px] items-center justify-center border border-ivory/70 bg-charcoal/15 px-7 py-3.5 text-center text-[12px] font-medium uppercase tracking-[0.14em] text-ivory transition-colors duration-400 hover:border-gold hover:bg-gold hover:text-charcoal sm:min-w-[260px] sm:text-[13px]"
+            >
+              {dict.nav.services}
             </Link>
           </div>
         </div>
