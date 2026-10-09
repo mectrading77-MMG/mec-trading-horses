@@ -196,12 +196,12 @@ export default function CatalogClient({
       </div>
 
       {/* Sort + result count */}
-      <div className="grid grid-cols-[auto_1fr] items-center gap-x-3 gap-y-3 py-3 sm:flex sm:flex-wrap sm:gap-3 sm:py-4">
+      <div className="flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:py-4">
         <button type="button" onClick={() => setFavoritesOnly((value) => !value)} aria-pressed={favoritesOnly} className={`flex items-center gap-2 border px-4 py-2 font-mono text-[10px] uppercase tracking-eyebrow transition-colors ${favoritesOnly ? "border-gold bg-gold/10 text-gold" : "border-charcoal-line text-charcoal/70 hover:border-gold hover:text-gold"}`}>
           <span aria-hidden="true" className="text-base leading-none">★</span>
           {locale === "fr" ? "Favoris" : locale === "ar" ? "المفضلة" : "Favorites"}
         </button>
-        <select value={sort} onChange={(e) => setSort(e.target.value)} className={`${selectClass} col-span-2 w-full sm:ms-auto sm:w-auto`}>
+        <select value={sort} onChange={(e) => setSort(e.target.value)} className={`${selectClass} w-full sm:w-auto sm:min-w-[220px]`}>
           <option value="featured">{dict.catalog.sortFeatured}</option>
           <option value="height">{dict.catalog.sortHeight}</option>
           <option value="newest">{dict.catalog.sortNewest}</option>
