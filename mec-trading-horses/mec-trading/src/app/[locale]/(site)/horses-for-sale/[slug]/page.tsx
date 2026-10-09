@@ -150,7 +150,7 @@ export default async function HorseDetailPage({
             <div className="mt-10 flex flex-wrap items-center gap-3 border-y border-charcoal-line py-6">
               <div className="mr-2">
                 <p className="font-display text-lg text-gold">{price ?? "—"}</p>
-                <a href={whatsappLink(t.name)} className="mt-2 inline-block border border-gold px-4 py-2 font-mono text-[10px] uppercase tracking-eyebrow text-gold">Inquire this horse</a>
+                <a href={whatsappLink(t.name)} className="mt-2 inline-block border border-gold px-4 py-2 font-mono text-[10px] uppercase tracking-eyebrow text-gold">{dict.horse.inquireHorse}</a>
               </div>
               <a
                 href="#contact"
