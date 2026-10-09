@@ -56,7 +56,8 @@ export default function HorseCard({ horse, locale, dict }: { horse: Horse; local
         onFocus={show}
         onBlur={hide}
       >
-        <div className="relative aspect-[4/5] overflow-hidden bg-charcoal-soft">\n          <FavoriteStar horseId={horse.id} />
+        <div className="relative aspect-[4/5] overflow-hidden bg-charcoal-soft">
+          <FavoriteStar horseId={horse.id} />
           {cover && (
             <Image
               src={cover.url}
