@@ -9,6 +9,7 @@ import { ageFromDob, formatPriceRange } from "@/lib/horses";
 import { formatJumpHeight } from "@/lib/levels";
 import HorsePreview from "@/components/HorsePreview";
 import { whatsappLink } from "@/lib/whatsapp";
+import FavoriteStar from "@/components/FavoriteStar";
 
 export default function HorseCard({ horse, locale, dict }: { horse: Horse; locale: Locale; dict: any }) {
   const cover = horse.media.find((m) => m.isCover) ?? horse.media[0];
@@ -55,7 +56,7 @@ export default function HorseCard({ horse, locale, dict }: { horse: Horse; local
         onFocus={show}
         onBlur={hide}
       >
-        <div className="relative aspect-[4/5] overflow-hidden bg-charcoal-soft">
+        <div className="relative aspect-[4/5] overflow-hidden bg-charcoal-soft">\n          <FavoriteStar horseId={horse.id} />
           {cover && (
             <Image
               src={cover.url}
