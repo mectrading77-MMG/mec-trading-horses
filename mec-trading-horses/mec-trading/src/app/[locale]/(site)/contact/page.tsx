@@ -10,7 +10,7 @@ export default async function ContactPage({ params, searchParams }: { params: { 
   const horses = await listHorses();
   const horseOptions = horses.map((horse) => ({
     id: horse.id,
-    name: horse.translations[params.locale].name
+    name: (horse.translations[params.locale] ?? horse.translations.en).name
   }));
 
   const requestedService = searchParams?.service;
