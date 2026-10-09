@@ -24,7 +24,28 @@ export default function CatalogClient({
   const [competitionLevel, setCompetitionLevel] = useState("");
   const [location, setLocation] = useState("");
   const [priceRange, setPriceRange] = useState("");
-  const [sort, setSort] = useState("featured");\n  const [favoritesOnly, setFavoritesOnly] = useState(false);\n  const [favoriteIds, setFavoriteIds] = useState<string[]>([]);\n\n  useEffect(() => {\n    const syncFavorites = () => {\n      try {\n        const stored = window.localStorage.getItem("mec-favorite-horses");\n        const parsed: unknown = stored ? JSON.parse(stored) : [];\n        setFavoriteIds(Array.isArray(parsed) ? parsed.filter((id): id is string => typeof id === "string") : []);\n      } catch {\n        setFavoriteIds([]);\n      }\n    };\n    syncFavorites();\n    window.addEventListener("mec-favorites-changed", syncFavorites);\n    window.addEventListener("storage", syncFavorites);\n    return () => {\n      window.removeEventListener("mec-favorites-changed", syncFavorites);\n      window.removeEventListener("storage", syncFavorites);\n    };\n  }, []);
+  const [sort, setSort] = useState("featured");
+  const [favoritesOnly, setFavoritesOnly] = useState(false);
+  const [favoriteIds, setFavoriteIds] = useState<string[]>([]);
+
+  useEffect(() => {
+    const syncFavorites = () => {
+      try {
+        const stored = window.localStorage.getItem("mec-favorite-horses");
+        const parsed: unknown = stored ? JSON.parse(stored) : [];
+        setFavoriteIds(Array.isArray(parsed) ? parsed.filter((id): id is string => typeof id === "string") : []);
+      } catch {
+        setFavoriteIds([]);
+      }
+    };
+    syncFavorites();
+    window.addEventListener("mec-favorites-changed", syncFavorites);
+    window.addEventListener("storage", syncFavorites);
+    return () => {
+      window.removeEventListener("mec-favorites-changed", syncFavorites);
+      window.removeEventListener("storage", syncFavorites);
+    };
+  }, []);
 
   const generalOptions = useMemo(() => {
     const unique = (values: string[]) => Array.from(new Set(values.filter(Boolean))).sort((a, b) => a.localeCompare(b));
@@ -56,7 +77,8 @@ export default function CatalogClient({
   ];
 
   const filtered = useMemo(() => {
-    let list = horses; // sold horses stay visible with their badge\n    if (favoritesOnly) list = list.filter((h) => favoriteIds.includes(h.id));
+    let list = horses; // sold horses stay visible with their badge
+    if (favoritesOnly) list = list.filter((h) => favoriteIds.includes(h.id));
     if (level) list = list.filter((h) => bandFor(h.jumpHeightCm).id === level);
     if (breed) list = list.filter((h) => h.breed === breed);
     if (sex) list = list.filter((h) => h.sex === sex);
@@ -174,7 +196,11 @@ export default function CatalogClient({
       </div>
 
       {/* Sort + result count */}
-      <div className="flex flex-wrap items-center gap-3 py-4">\n        <button type="button" onClick={() => setFavoritesOnly((value) => !value)} aria-pressed={favoritesOnly} className={`flex items-center gap-2 border px-4 py-2 font-mono text-[10px] uppercase tracking-eyebrow transition-colors ${favoritesOnly ? "border-gold bg-gold/10 text-gold" : "border-charcoal-line text-charcoal/70 hover:border-gold hover:text-gold"}`}>\n          <span aria-hidden="true" className="text-base leading-none">★</span>\n          {locale === "fr" ? "Favoris" : locale === "ar" ? "المفضلة" : "Favorites"}\n        </button>
+      <div className="flex flex-wrap items-center gap-3 py-4">
+        <button type="button" onClick={() => setFavoritesOnly((value) => !value)} aria-pressed={favoritesOnly} className={`flex items-center gap-2 border px-4 py-2 font-mono text-[10px] uppercase tracking-eyebrow transition-colors ${favoritesOnly ? "border-gold bg-gold/10 text-gold" : "border-charcoal-line text-charcoal/70 hover:border-gold hover:text-gold"}`}>
+          <span aria-hidden="true" className="text-base leading-none">★</span>
+          {locale === "fr" ? "Favoris" : locale === "ar" ? "المفضلة" : "Favorites"}
+        </button>
         <span className="font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/40">
           {dict.catalog.showing.replace("{count}", String(filtered.length))}
         </span>
