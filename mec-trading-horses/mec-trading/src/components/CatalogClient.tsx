@@ -131,7 +131,7 @@ export default function CatalogClient({
           <label className="flex flex-col gap-2">
             <span className="font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/50">{dict.catalog.filterLevel}</span>
             <select value={level} onChange={(e) => setLevel(e.target.value)} className={selectClass}>
-              <option value="">{dict.catalog.allLevels}</option>
+              <option value="">{dict.catalog.allLevels} ({horses.length})</option>
               {HEIGHT_BANDS.map((b) => (
                 <option key={b.id} value={b.id}>
                   {b.label} — {counts[b.id] ?? 0}
@@ -143,8 +143,8 @@ export default function CatalogClient({
           <label className="flex flex-col gap-2">
             <span className="font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/50">{dict.catalog.priceRange}</span>
             <select value={priceRange} onChange={(e) => setPriceRange(e.target.value)} className={selectClass}>
-              <option value="">{dict.catalog.allPriceRanges}</option>
-              {PRICE_RANGES.map((range) => <option key={range.id} value={range.id}>{range.label}</option>)}
+              <option value="">{dict.catalog.allPriceRanges} ({horses.length})</option>
+              {PRICE_RANGES.map((range) => <option key={range.id} value={range.id}>{range.label} ({horses.filter((h) => h.priceAmount != null && h.priceAmount >= range.min && (range.max === Infinity || h.priceAmount < range.max)).length})</option>)}
             </select>
           </label>
 
@@ -152,26 +152,26 @@ export default function CatalogClient({
           <label className="flex flex-col gap-2">
             <span className="font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/50">{dict.horse.breed}</span>
             <select value={breed} onChange={(e) => setBreed(e.target.value)} className={selectClass}>
-              <option value="">{dict.catalog.allBreeds}</option>
-              {generalOptions.breeds.map((value) => <option key={value} value={value}>{value}</option>)}
+              <option value="">{dict.catalog.allBreeds} ({horses.length})</option>
+              {generalOptions.breeds.map((value) => <option key={value} value={value}>{value} ({horses.filter((h) => h.breed === value).length})</option>)}
             </select>
           </label>
 
           <label className="flex flex-col gap-2">
             <span className="font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/50">{dict.horse.sex}</span>
             <select value={sex} onChange={(e) => setSex(e.target.value)} className={selectClass}>
-              <option value="">{dict.catalog.allSexes}</option>
-              <option value="MARE">{dict.horse.sexLabel.MARE}</option>
-              <option value="STALLION">{dict.horse.sexLabel.STALLION}</option>
-              <option value="GELDING">{dict.horse.sexLabel.GELDING}</option>
+              <option value="">{dict.catalog.allSexes} ({horses.length})</option>
+              <option value="MARE">{dict.horse.sexLabel.MARE} ({horses.filter((h) => h.sex === "MARE").length})</option>
+              <option value="STALLION">{dict.horse.sexLabel.STALLION} ({horses.filter((h) => h.sex === "STALLION").length})</option>
+              <option value="GELDING">{dict.horse.sexLabel.GELDING} ({horses.filter((h) => h.sex === "GELDING").length})</option>
             </select>
           </label>
 
           <label className="flex flex-col gap-2">
             <span className="font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/50">{dict.detail.color}</span>
             <select value={color} onChange={(e) => setColor(e.target.value)} className={selectClass}>
-              <option value="">{dict.catalog.allColors}</option>
-              {generalOptions.colors.map((value) => <option key={value} value={value}>{value}</option>)}
+              <option value="">{dict.catalog.allColors} ({horses.length})</option>
+              {generalOptions.colors.map((value) => <option key={value} value={value}>{value} ({horses.filter((h) => h.color === value).length})</option>)}
             </select>
           </label>
 
@@ -179,8 +179,8 @@ export default function CatalogClient({
             <label className="flex flex-col gap-2">
               <span className="font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/50">{dict.detail.competitionLevel}</span>
               <select value={competitionLevel} onChange={(e) => setCompetitionLevel(e.target.value)} className={selectClass}>
-                <option value="">{dict.catalog.allCompetitionLevels}</option>
-                {generalOptions.competitionLevels.map((value) => <option key={value} value={value}>{value}</option>)}
+                <option value="">{dict.catalog.allCompetitionLevels} ({horses.length})</option>
+                {generalOptions.competitionLevels.map((value) => <option key={value} value={value}>{value} ({horses.filter((h) => h.competitionLevel === value).length})</option>)}
               </select>
             </label>
           )}
@@ -188,8 +188,8 @@ export default function CatalogClient({
           <label className="flex flex-col gap-2">
             <span className="font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/50">{dict.horse.location}</span>
             <select value={location} onChange={(e) => setLocation(e.target.value)} className={selectClass}>
-              <option value="">{dict.catalog.allLocations}</option>
-              {generalOptions.locations.map((value) => <option key={value} value={value}>{value}</option>)}
+              <option value="">{dict.catalog.allLocations} ({horses.length})</option>
+              {generalOptions.locations.map((value) => <option key={value} value={value}>{value} ({horses.filter((h) => h.locationLabel === value).length})</option>)}
             </select>
           </label>
         </div>
