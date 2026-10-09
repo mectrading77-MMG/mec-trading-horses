@@ -1,0 +1,262 @@
+{
+  "brand": {
+    "name": "MEC Trading",
+    "tagline": "Außergewöhnliche Pferde. Sorgfältig ausgewählt."
+  },
+  "nav": {
+    "home": "Startseite",
+    "horses": "Pferde zum Verkauf",
+    "about": "Über uns",
+    "selection": "Unsere Auswahl",
+    "services": "Dienstleistungen",
+    "news": "Neuigkeiten",
+    "contact": "Kontakt",
+    "ctaPrimary": "Unsere Pferde entdecken",
+    "ctaSecondary": "Kontaktieren Sie uns"
+  },
+  "home": {
+    "heroHeadline": "Außergewöhnliche Pferde. Außergewöhnliches Potenzial.",
+    "heroSupport": "Sorgfältig ausgewählte Springpferde – von vielversprechenden Nachwuchspferden bis zu erfahrenen Grand-Prix-Pferden.",
+    "heroCta": "Unsere Pferde",
+    "featuredEyebrow": "Ausgewählte Pferde",
+    "featuredTitle": "Aktuell in unserer Auswahl",
+    "selectionEyebrow": "Unsere Auswahl",
+    "selectionTitle": "Finden Sie ein Pferd nach Sprunghöhe",
+    "whyEyebrow": "Warum MEC Trading",
+    "whyTitle": "Ein persönlicher, professioneller Anspruch",
+    "storyEyebrow": "Ausgewählte Geschichte",
+    "internationalEyebrow": "Internationale Käufer",
+    "internationalTitle": "Der Kauf aus dem Ausland ist unkompliziert",
+    "internationalText": "Wir begleiten internationale Kunden von der ersten Auswahl bis zur Ankunft des Pferdes zu Hause.",
+    "closingTitle": "Suchen Sie Ihr nächstes Pferd?",
+    "closingCta": "Kontaktieren Sie uns",
+    "selectionHint": "Bewegen Sie den Mauszeiger über eine Höhe oder tippen Sie darauf, um Pferde dieser Klasse anzusehen"
+  },
+  "why": {
+    "selected": {
+      "title": "Sorgfältig ausgewählte Pferde",
+      "text": "Jedes Pferd wird persönlich ausgewählt und nicht aus einem Anzeigenportal übernommen."
+    },
+    "evaluation": {
+      "title": "Professionelle Bewertung",
+      "text": "Exterieur, Temperament und Bewegungsablauf werden geprüft, bevor ein Pferd angeboten wird."
+    },
+    "documentation": {
+      "title": "Geprüfte Dokumentation",
+      "text": "Pässe, Registrierung und tierärztliche Unterlagen werden geprüft und archiviert."
+    },
+    "international": {
+      "title": "Internationale Käufer",
+      "text": "Wir betreuen Kunden in Europa, der Golfregion und darüber hinaus in ihrer Sprache."
+    },
+    "assistance": {
+      "title": "Persönliche Betreuung",
+      "text": "Ein Ansprechpartner von der ersten Anfrage bis zur Ankunft des Pferdes."
+    },
+    "transport": {
+      "title": "Transportorganisation",
+      "text": "Zuverlässige Transporteure und Exportformalitäten werden für Sie koordiniert."
+    }
+  },
+  "international": {
+    "selection": "Pferdeauswahl",
+    "info": "Weitere Informationen",
+    "vet": "Tierärztliche Unterlagen",
+    "xrays": "Röntgenbilder",
+    "viewing": "Besichtigung",
+    "transport": "Transport",
+    "export": "Exportdokumente"
+  },
+  "horse": {
+    "breed": "Rasse",
+    "age": "Alter",
+    "sex": "Geschlecht",
+    "height": "Stockmaß",
+    "location": "Standort",
+    "priceOnRequest": "Preis auf Anfrage",
+    "viewHorse": "Pferd ansehen",
+    "inquireHorse": "Informationen zu diesem Pferd anfragen",
+    "years": "Jahre",
+    "sexLabel": {
+      "MARE": "Stute",
+      "STALLION": "Hengst",
+      "GELDING": "Wallach"
+    },
+    "statusLabel": {
+      "AVAILABLE": "Verfügbar",
+      "RESERVED": "Reserviert",
+      "SOLD": "Verkauft"
+    },
+    "level": "Niveau",
+    "jumpsAt": "Springt auf",
+    "maxHeight": "Höchste gesprungene Höhe",
+    "discipline": "Springreiten"
+  },
+  "catalog": {
+    "title": "Pferde zum Verkauf",
+    "subtitle": "Die gesamte aktuelle Auswahl.",
+    "filters": "Filter",
+    "sortFeatured": "Empfohlen",
+    "sortNewest": "Neueste",
+    "sortPriceAsc": "Preis: aufsteigend",
+    "sortPriceDesc": "Preis: absteigend",
+    "sortAge": "Alter",
+    "noResults": "Derzeit entsprechen keine Pferde diesen Filtern. Kontaktieren Sie uns, und wir informieren Sie, sobald ein passendes Pferd verfügbar ist.",
+    "allLevels": "Alle Höhen",
+    "filterLevel": "Höhe",
+    "sortHeight": "Gesprungene Höhe",
+    "showing": "{count} Pferde",
+    "generalInfo": "Allgemeine Informationen",
+    "allBreeds": "Alle Rassen",
+    "allSexes": "Alle Geschlechter",
+    "allColors": "Alle Fellfarben",
+    "allCompetitionLevels": "Alle Wettkampfniveaus",
+    "allLocations": "Alle Standorte",
+    "priceRange": "Preisspanne",
+    "allPriceRanges": "Alle Preise"
+  },
+  "detail": {
+    "contact": "Kontakt",
+    "whatsapp": "WhatsApp",
+    "requestViewing": "Besichtigung anfragen",
+    "basicInfo": "Grundlegende Informationen",
+    "dateOfBirth": "Geburtsdatum",
+    "color": "Fellfarbe",
+    "competitionLevel": "Wettkampfniveau",
+    "registration": "Registrierung",
+    "description": "Über dieses Pferd",
+    "pedigree": "Abstammung",
+    "showMoreGenerations": "Weitere Generationen anzeigen",
+    "competitionHistory": "Sport- und Wettkampfgeschichte",
+    "media": "Medien",
+    "tabPhotos": "Fotos",
+    "tabVideos": "Videos",
+    "tabCompetitionVideos": "Wettkampfvideos",
+    "tabTrainingVideos": "Trainingsvideos",
+    "healthDocuments": "Gesundheit und Dokumente",
+    "downloadNotAvailable": "Auf Anfrage erhältlich",
+    "locationTitle": "Standort",
+    "locationNote": "Ungefähre Region angezeigt. Die genaue Adresse erhalten ernsthafte Interessenten auf Anfrage.",
+    "contactFormTitle": "Anfrage zu diesem Pferd",
+    "table": {
+      "competition": "Wettkampf",
+      "year": "Jahr",
+      "level": "Niveau",
+      "result": "Ergebnis",
+      "rider": "Reiter",
+      "location": "Ort"
+    },
+    "xraysTitle": "Röntgenbilder",
+    "xraysViews": "{count} Aufnahmen",
+    "xraysTakenOn": "Aufgenommen am",
+    "xraysBy": "von",
+    "xraysDownloadAll": "Alle Aufnahmen herunterladen (ZIP, {size} MB)",
+    "xraysDownloadView": "Diese Aufnahme herunterladen",
+    "xraysPrev": "Vorherige Aufnahme",
+    "xraysNext": "Nächste Aufnahme",
+    "xraysOnRequest": "Röntgenbilder auf Anfrage verfügbar",
+    "xraysNote": "Digitale Röntgenbilder in voller Auflösung. Sehen Sie alle Aufnahmen durch oder laden Sie den vollständigen Satz für Ihren Tierarzt herunter.",
+    "photoCredits": "Fotohinweise"
+  },
+  "trust": {
+    "vetDocs": "Tierärztliche Unterlagen verfügbar",
+    "xrays": "Röntgenbilder verfügbar",
+    "pedigreeDocs": "Abstammungsnachweise verfügbar",
+    "transport": "Internationaler Transport verfügbar",
+    "competitionRecord": "Wettkampfnachweise verfügbar"
+  },
+  "form": {
+    "name": "Name",
+    "email": "E-Mail",
+    "phone": "Telefon",
+    "country": "Land",
+    "message": "Nachricht",
+    "lookingFor": "Wonach suchen Sie?",
+    "hasTrainer": "Haben Sie einen Trainer oder Reiter?",
+    "viewingDate": "Gewünschter Besichtigungstermin",
+    "send": "Anfrage senden",
+    "call": "Anrufen",
+    "sentTitle": "Vielen Dank – Ihre Anfrage wurde gesendet.",
+    "sentText": "Wir beantworten jede Anfrage persönlich, in der Regel innerhalb eines Werktags."
+  },
+  "about": {
+    "title": "Über MEC Trading",
+    "eyebrow": "Unsere Geschichte"
+  },
+  "services": {
+    "title": "Dienstleistungen",
+    "list": {
+      "selection": {
+        "title": "Pferdekauf",
+        "text": "Wir helfen Ihnen, das richtige Pferd für Ihre Ziele, Ihr Budget und Ihr Niveau zu finden und zu kaufen."
+      },
+      "sales": {
+        "title": "Pferdeverkauf",
+        "text": "Jedes Pferd unserer Auswahl wird direkt angeboten, ohne zwischengeschalteten Marktplatz."
+      },
+      "prePurchase": {
+        "title": "Unterstützung vor dem Kauf",
+        "text": "Wir koordinieren eine unabhängige tierärztliche Untersuchung und erläutern die Ergebnisse verständlich."
+      },
+      "vetCoordination": {
+        "title": "Tierärztliche Koordination",
+        "text": "Kliniktermine, Zeitplanung und Reisen werden auf Ihren Zeitplan abgestimmt."
+      },
+      "documentation": {
+        "title": "Dokumentation",
+        "text": "Pässe, Registrierung und Eigentumsübertragung werden von Anfang an korrekt erledigt."
+      },
+      "transport": {
+        "title": "Internationaler Transport",
+        "text": "Straßen- und Lufttransport werden von Tür zu Tür organisiert."
+      },
+      "export": {
+        "title": "Exportunterstützung",
+        "text": "Zoll, Gesundheitszeugnisse und länderspezifische Einfuhrbestimmungen werden für Sie verwaltet."
+      },
+      "viewing": {
+        "title": "Besichtigungstermine",
+        "text": "Persönlich oder per Live-Videoanruf zu einem für Sie passenden Zeitpunkt."
+      },
+      "afterSale": {
+        "title": "Betreuung nach dem Kauf",
+        "text": "Auch lange nach der Ankunft des Pferdes bleiben wir für Sie erreichbar."
+      }
+    }
+  },
+  "contact": {
+    "title": "Kontakt",
+    "eyebrow": "Kontaktieren Sie uns",
+    "text": "Teilen Sie uns mit, wonach Sie suchen, und wir melden uns persönlich bei Ihnen."
+  },
+  "footer": {
+    "rights": "Alle Rechte vorbehalten.",
+    "privateNotice": "MEC Trading ist ein privates Pferdehandelsunternehmen. Alle gezeigten Pferde gehören MEC Trading oder werden direkt von MEC Trading vertreten."
+  },
+  "admin": {
+    "login": "Administrator-Anmeldung",
+    "email": "E-Mail",
+    "password": "Passwort",
+    "signIn": "Anmelden",
+    "dashboard": "Dashboard",
+    "horses": "Pferde",
+    "inquiries": "Anfragen",
+    "settings": "Einstellungen",
+    "addHorse": "Pferd hinzufügen",
+    "signOut": "Abmelden"
+  },
+  "preview": {
+    "view": "Pferd ansehen",
+    "highlights": "Highlights",
+    "more": "Vollständiges Profil öffnen"
+  },
+  "bands": {
+    "eyebrow": "Springreiten",
+    "count": "{count} Pferde",
+    "empty": "Derzeit gibt es keine Pferde auf dieser Höhe. Kontaktieren Sie uns, und wir informieren Sie, sobald eines verfügbar ist.",
+    "countOne": "{count} Pferd"
+  },
+  "site": {
+    "demoNotice": "Demodaten – echte Pferde aus öffentlichen Registern; Preise und Verfügbarkeit sind Platzhalter."
+  }
+}
