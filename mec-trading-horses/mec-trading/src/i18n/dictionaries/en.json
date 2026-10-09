@@ -75,6 +75,7 @@
     "location": "Location",
     "priceOnRequest": "Price on Request",
     "viewHorse": "View Horse",
+    "inquireHorse": "Inquire this horse",
     "years": "yrs",
     "sexLabel": {
       "MARE": "Mare",
