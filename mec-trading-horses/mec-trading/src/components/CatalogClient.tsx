@@ -196,7 +196,7 @@ export default function CatalogClient({
       </div>
 
       {/* Sort + result count */}
-      <div className="flex flex-wrap items-center gap-3 py-4">
+      <div className="grid grid-cols-[auto_1fr] items-center gap-x-3 gap-y-3 py-3 sm:flex sm:flex-wrap sm:gap-3 sm:py-4">
         <button type="button" onClick={() => setFavoritesOnly((value) => !value)} aria-pressed={favoritesOnly} className={`flex items-center gap-2 border px-4 py-2 font-mono text-[10px] uppercase tracking-eyebrow transition-colors ${favoritesOnly ? "border-gold bg-gold/10 text-gold" : "border-charcoal-line text-charcoal/70 hover:border-gold hover:text-gold"}`}>
           <span aria-hidden="true" className="text-base leading-none">★</span>
           {locale === "fr" ? "Favoris" : locale === "ar" ? "المفضلة" : "Favorites"}
@@ -204,7 +204,7 @@ export default function CatalogClient({
         <span className="font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/40">
           {dict.catalog.showing.replace("{count}", String(filtered.length))}
         </span>
-        <select value={sort} onChange={(e) => setSort(e.target.value)} className={`${selectClass} ms-auto`}>
+        <select value={sort} onChange={(e) => setSort(e.target.value)} className={`${selectClass} col-span-2 w-full sm:ms-auto sm:w-auto`}>
           <option value="featured">{dict.catalog.sortFeatured}</option>
           <option value="height">{dict.catalog.sortHeight}</option>
           <option value="newest">{dict.catalog.sortNewest}</option>
@@ -217,7 +217,7 @@ export default function CatalogClient({
       {filtered.length === 0 ? (
         <p className="py-24 text-center text-charcoal/50">{dict.catalog.noResults}</p>
       ) : (
-        <div className="mt-8 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-4 grid gap-x-6 gap-y-8 sm:mt-8 sm:grid-cols-2 sm:gap-y-12 lg:grid-cols-3">
           {filtered.map((horse) => (
             <HorseCard key={horse.id} horse={horse} locale={locale} dict={dict} />
           ))}
