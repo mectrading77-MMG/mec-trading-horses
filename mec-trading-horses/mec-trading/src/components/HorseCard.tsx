@@ -47,6 +47,7 @@ export default function HorseCard({ horse, locale, dict }: { horse: Horse; local
 
   return (
     <>
+      <div className="relative">
       <Link
         ref={ref}
         href={`/${locale}/horses-for-sale/${horse.slug}`}
@@ -93,6 +94,8 @@ export default function HorseCard({ horse, locale, dict }: { horse: Horse; local
           </div>
         </div>
       </Link>
+      <FavoriteStar horseId={horse.id} />
+      </div>
 
       {anchor &&
         typeof document !== "undefined" &&
