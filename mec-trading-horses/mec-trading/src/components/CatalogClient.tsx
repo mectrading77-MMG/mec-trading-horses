@@ -200,6 +200,7 @@ export default function CatalogClient({
         <button type="button" onClick={() => setFavoritesOnly((value) => !value)} aria-pressed={favoritesOnly} className={`flex items-center gap-2 border px-4 py-2 font-mono text-[10px] uppercase tracking-eyebrow transition-colors ${favoritesOnly ? "border-gold bg-gold/10 text-gold" : "border-charcoal-line text-charcoal/70 hover:border-gold hover:text-gold"}`}>
           <span aria-hidden="true" className="text-base leading-none">★</span>
           {locale === "fr" ? "Favoris" : locale === "ar" ? "المفضلة" : "Favorites"}
+          <span className="ms-1 inline-flex min-w-5 items-center justify-center rounded-full bg-current/10 px-1.5 py-0.5 text-[9px] tabular-nums">{favoriteIds.length}</span>
         </button>
         <select value={sort} onChange={(e) => setSort(e.target.value)} className={`${selectClass} w-full sm:w-auto sm:min-w-[220px]`}>
           <option value="featured">{dict.catalog.sortFeatured}</option>
