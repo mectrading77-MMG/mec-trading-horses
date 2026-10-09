@@ -120,7 +120,7 @@ export default function HorsePreview({
         </dl>
 
         <p className="mt-3 font-display text-lg text-gold">{price ?? "—"}</p>
-        <a href={horse.status === "SOLD" ? undefined : whatsappLink(horse.translations[locale]?.name ?? horse.translations.en.name)} className="mt-3 block border border-gold px-3 py-2 text-center font-mono text-[9px] uppercase tracking-eyebrow text-gold">Inquire this horse</a>
+        <a href={horse.status === "SOLD" ? undefined : whatsappLink(horse.translations[locale]?.name ?? horse.translations.en.name)} className="mt-3 block border border-gold px-3 py-2 text-center font-mono text-[9px] uppercase tracking-eyebrow text-gold">{dict.horse.inquireHorse}</a>
 
         {horse.highlights.length > 0 && (
           <ul className="mt-3 space-y-1.5">
