@@ -201,9 +201,6 @@ export default function CatalogClient({
           <span aria-hidden="true" className="text-base leading-none">★</span>
           {locale === "fr" ? "Favoris" : locale === "ar" ? "المفضلة" : "Favorites"}
         </button>
-        <span className="font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/40">
-          {dict.catalog.showing.replace("{count}", String(filtered.length))}
-        </span>
         <select value={sort} onChange={(e) => setSort(e.target.value)} className={`${selectClass} col-span-2 w-full sm:ms-auto sm:w-auto`}>
           <option value="featured">{dict.catalog.sortFeatured}</option>
           <option value="height">{dict.catalog.sortHeight}</option>
