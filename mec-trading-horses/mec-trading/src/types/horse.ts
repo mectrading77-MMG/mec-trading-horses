@@ -98,7 +98,7 @@ export interface Horse {
     pedigreeDocs: boolean;
     transport: boolean;
   };
-  translations: Record<"en" | "fr" | "ar", HorseTranslation>;
+  translations: Partial<Record<Locale, HorseTranslation>> & Record<"en" | "fr" | "ar", HorseTranslation>;
   media: MediaItem[];
   documents: DocumentItem[];
   xrays?: XraySet;
