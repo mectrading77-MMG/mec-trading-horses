@@ -1,0 +1,262 @@
+{
+  "brand": {
+    "name": "MEC Trading",
+    "tagline": "Uitzonderlijke paarden. Zorgvuldig geselecteerd."
+  },
+  "nav": {
+    "home": "Home",
+    "horses": "Paarden te koop",
+    "about": "Over ons",
+    "selection": "Onze selectie",
+    "services": "Diensten",
+    "news": "Nieuws",
+    "contact": "Contact",
+    "ctaPrimary": "Ontdek onze paarden",
+    "ctaSecondary": "Neem contact op"
+  },
+  "home": {
+    "heroHeadline": "Uitzonderlijke paarden. Uitzonderlijk potentieel.",
+    "heroSupport": "Zorgvuldig geselecteerde springpaarden, van veelbelovende jonge paarden tot ervaren Grand Prix-paarden.",
+    "heroCta": "Onze paarden",
+    "featuredEyebrow": "Uitgelichte paarden",
+    "featuredTitle": "Momenteel in onze selectie",
+    "selectionEyebrow": "Onze selectie",
+    "selectionTitle": "Vind een paard op basis van springhoogte",
+    "whyEyebrow": "Waarom MEC Trading",
+    "whyTitle": "Een persoonlijke, professionele aanpak",
+    "storyEyebrow": "Uitgelicht verhaal",
+    "internationalEyebrow": "Internationale kopers",
+    "internationalTitle": "Een paard kopen vanuit het buitenland is eenvoudig",
+    "internationalText": "We begeleiden internationale klanten van de eerste selectie tot het paard thuis aankomt.",
+    "closingTitle": "Op zoek naar uw volgende paard?",
+    "closingCta": "Neem contact op",
+    "selectionHint": "Beweeg over een hoogte of tik erop om paarden op dat niveau te bekijken"
+  },
+  "why": {
+    "selected": {
+      "title": "Zorgvuldig geselecteerde paarden",
+      "text": "Elk paard wordt persoonlijk geselecteerd en niet zomaar uit een advertentieplatform gehaald."
+    },
+    "evaluation": {
+      "title": "Professionele beoordeling",
+      "text": "Bouw, temperament en beweging worden beoordeeld voordat een paard wordt aangeboden."
+    },
+    "documentation": {
+      "title": "Gecontroleerde documentatie",
+      "text": "Paspoorten, registratie en veterinaire gegevens worden gecontroleerd en bewaard."
+    },
+    "international": {
+      "title": "Internationale kopers",
+      "text": "We begeleiden klanten in Europa, de Golfregio en daarbuiten in hun eigen taal."
+    },
+    "assistance": {
+      "title": "Persoonlijke begeleiding",
+      "text": "Eén aanspreekpunt vanaf de eerste aanvraag tot het paard thuis aankomt."
+    },
+    "transport": {
+      "title": "Transportbegeleiding",
+      "text": "Betrouwbare vervoerders en exportformaliteiten worden voor u geregeld."
+    }
+  },
+  "international": {
+    "selection": "Paardenselectie",
+    "info": "Aanvullende informatie",
+    "vet": "Veterinaire documentatie",
+    "xrays": "Röntgenfoto's",
+    "viewing": "Bezichtiging",
+    "transport": "Transport",
+    "export": "Exportdocumenten"
+  },
+  "horse": {
+    "breed": "Ras",
+    "age": "Leeftijd",
+    "sex": "Geslacht",
+    "height": "Schofthoogte",
+    "location": "Locatie",
+    "priceOnRequest": "Prijs op aanvraag",
+    "viewHorse": "Bekijk paard",
+    "inquireHorse": "Informatie over dit paard aanvragen",
+    "years": "jaar",
+    "sexLabel": {
+      "MARE": "Merrie",
+      "STALLION": "Hengst",
+      "GELDING": "Ruin"
+    },
+    "statusLabel": {
+      "AVAILABLE": "Beschikbaar",
+      "RESERVED": "Gereserveerd",
+      "SOLD": "Verkocht"
+    },
+    "level": "Niveau",
+    "jumpsAt": "Springt op",
+    "maxHeight": "Hoogst gesprongen hoogte",
+    "discipline": "Springconcours"
+  },
+  "catalog": {
+    "title": "Paarden te koop",
+    "subtitle": "De volledige actuele selectie.",
+    "filters": "Filters",
+    "sortFeatured": "Uitgelicht",
+    "sortNewest": "Nieuwste",
+    "sortPriceAsc": "Prijs: laag naar hoog",
+    "sortPriceDesc": "Prijs: hoog naar laag",
+    "sortAge": "Leeftijd",
+    "noResults": "Er zijn momenteel geen paarden die aan deze filters voldoen. Neem contact op; we laten het u weten zodra er een geschikt paard is.",
+    "allLevels": "Alle hoogtes",
+    "filterLevel": "Hoogte",
+    "sortHeight": "Gesprongen hoogte",
+    "showing": "{count} paarden",
+    "generalInfo": "Algemene informatie",
+    "allBreeds": "Alle rassen",
+    "allSexes": "Alle geslachten",
+    "allColors": "Alle kleuren",
+    "allCompetitionLevels": "Alle wedstrijdniveaus",
+    "allLocations": "Alle locaties",
+    "priceRange": "Prijsklasse",
+    "allPriceRanges": "Alle prijzen"
+  },
+  "detail": {
+    "contact": "Contact",
+    "whatsapp": "WhatsApp",
+    "requestViewing": "Bezichtiging aanvragen",
+    "basicInfo": "Basisinformatie",
+    "dateOfBirth": "Geboortedatum",
+    "color": "Kleur",
+    "competitionLevel": "Wedstrijdniveau",
+    "registration": "Registratie",
+    "description": "Over dit paard",
+    "pedigree": "Afstamming",
+    "showMoreGenerations": "Meer generaties tonen",
+    "competitionHistory": "Sport- en wedstrijdgeschiedenis",
+    "media": "Media",
+    "tabPhotos": "Foto's",
+    "tabVideos": "Video's",
+    "tabCompetitionVideos": "Wedstrijdvideo's",
+    "tabTrainingVideos": "Trainingsvideo's",
+    "healthDocuments": "Gezondheid en documenten",
+    "downloadNotAvailable": "Op aanvraag beschikbaar",
+    "locationTitle": "Locatie",
+    "locationNote": "De regio bij benadering wordt getoond. Het exacte adres wordt op verzoek aan serieuze kopers verstrekt.",
+    "contactFormTitle": "Informeer naar dit paard",
+    "table": {
+      "competition": "Wedstrijd",
+      "year": "Jaar",
+      "level": "Niveau",
+      "result": "Resultaat",
+      "rider": "Ruiter",
+      "location": "Locatie"
+    },
+    "xraysTitle": "Röntgenfoto's",
+    "xraysViews": "{count} beelden",
+    "xraysTakenOn": "Gemaakt op",
+    "xraysBy": "door",
+    "xraysDownloadAll": "Alle beelden downloaden (ZIP, {size} MB)",
+    "xraysDownloadView": "Dit beeld downloaden",
+    "xraysPrev": "Vorig beeld",
+    "xraysNext": "Volgend beeld",
+    "xraysOnRequest": "Röntgenfoto's beschikbaar op aanvraag",
+    "xraysNote": "Digitale röntgenfoto's in volledige resolutie. Bekijk alle beelden of download de volledige set voor uw dierenarts.",
+    "photoCredits": "Fotocredits"
+  },
+  "trust": {
+    "vetDocs": "Veterinaire documentatie beschikbaar",
+    "xrays": "Röntgenfoto's beschikbaar",
+    "pedigreeDocs": "Afstammingsdocumenten beschikbaar",
+    "transport": "Internationaal transport beschikbaar",
+    "competitionRecord": "Wedstrijdresultaten beschikbaar"
+  },
+  "form": {
+    "name": "Naam",
+    "email": "E-mail",
+    "phone": "Telefoon",
+    "country": "Land",
+    "message": "Bericht",
+    "lookingFor": "Waar bent u naar op zoek?",
+    "hasTrainer": "Heeft u een trainer of ruiter?",
+    "viewingDate": "Gewenste bezichtigingsdatum",
+    "send": "Aanvraag verzenden",
+    "call": "Bellen",
+    "sentTitle": "Bedankt — uw aanvraag is verzonden.",
+    "sentText": "We beantwoorden elke aanvraag persoonlijk, meestal binnen één werkdag."
+  },
+  "about": {
+    "title": "Over MEC Trading",
+    "eyebrow": "Ons verhaal"
+  },
+  "services": {
+    "title": "Diensten",
+    "list": {
+      "selection": {
+        "title": "Een paard kopen",
+        "text": "We helpen u het juiste paard te vinden en te kopen, passend bij uw doelen, budget en niveau."
+      },
+      "sales": {
+        "title": "Paardenverkoop",
+        "text": "Elk paard in onze selectie wordt rechtstreeks aangeboden, zonder tussenkomst van een marktplaats."
+      },
+      "prePurchase": {
+        "title": "Begeleiding vóór aankoop",
+        "text": "We coördineren een onafhankelijke veterinaire keuring en leggen de resultaten helder uit."
+      },
+      "vetCoordination": {
+        "title": "Veterinaire coördinatie",
+        "text": "Kliniekafspraken, planning en reizen worden op uw agenda afgestemd."
+      },
+      "documentation": {
+        "title": "Documentatie",
+        "text": "Paspoorten, registratie en eigendomsoverdracht worden meteen correct afgehandeld."
+      },
+      "transport": {
+        "title": "Internationaal transport",
+        "text": "Vervoer over de weg en door de lucht wordt van deur tot deur geregeld."
+      },
+      "export": {
+        "title": "Exportbegeleiding",
+        "text": "Douane, gezondheidscertificaten en landspecifieke invoerregels worden voor u geregeld."
+      },
+      "viewing": {
+        "title": "Bezichtigingsafspraken",
+        "text": "Persoonlijk of via een live videogesprek, op een moment dat u uitkomt."
+      },
+      "afterSale": {
+        "title": "Nazorg",
+        "text": "Ook lang nadat het paard thuis is aangekomen, blijven we bereikbaar."
+      }
+    }
+  },
+  "contact": {
+    "title": "Contact",
+    "eyebrow": "Neem contact op",
+    "text": "Vertel ons wat u zoekt en we reageren persoonlijk."
+  },
+  "footer": {
+    "rights": "Alle rechten voorbehouden.",
+    "privateNotice": "MEC Trading is een particuliere paardenhandelsonderneming. Alle getoonde paarden zijn eigendom van of worden rechtstreeks vertegenwoordigd door MEC Trading."
+  },
+  "admin": {
+    "login": "Beheerderslogin",
+    "email": "E-mail",
+    "password": "Wachtwoord",
+    "signIn": "Inloggen",
+    "dashboard": "Dashboard",
+    "horses": "Paarden",
+    "inquiries": "Aanvragen",
+    "settings": "Instellingen",
+    "addHorse": "Paard toevoegen",
+    "signOut": "Uitloggen"
+  },
+  "preview": {
+    "view": "Bekijk paard",
+    "highlights": "Hoogtepunten",
+    "more": "Volledig profiel openen"
+  },
+  "bands": {
+    "eyebrow": "Springconcours",
+    "count": "{count} paarden",
+    "empty": "Er zijn momenteel geen paarden op deze hoogte. Neem contact op; we laten het u weten zodra er een beschikbaar is.",
+    "countOne": "{count} paard"
+  },
+  "site": {
+    "demoNotice": "Demogegevens — echte paarden uit openbare registers; prijzen en beschikbaarheid zijn tijdelijke voorbeelden."
+  }
+}
