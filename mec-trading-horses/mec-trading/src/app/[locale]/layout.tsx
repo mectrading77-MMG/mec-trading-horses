@@ -39,7 +39,7 @@ export async function generateMetadata({
       template: `%s — ${dict.brand.name}`
     },
     description: dict.brand.tagline,
-    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.mectrading.com"),
+    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.mechorses.com"),
     alternates: {
       languages: { en: "/en", fr: "/fr", ar: "/ar", de: "/de", nl: "/nl" }
     },
@@ -49,7 +49,7 @@ export async function generateMetadata({
       type: "website",
       images: [
         {
-          url: "https://mec-trading-horses-jiu4nuax0-mec-f416.vercel.app/brand/og-default.jpg",
+          url: "https://www.mechorses.com/brand/og-default.jpg",
           width: 1200,
           height: 630,
           alt: "MEC Trading — Sport Horses"
@@ -58,7 +58,7 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      images: ["https://mec-trading-horses-jiu4nuax0-mec-f416.vercel.app/brand/og-default.jpg"]
+      images: ["https://www.mechorses.com/brand/og-default.jpg"]
     },
     robots: {
       index: true,
