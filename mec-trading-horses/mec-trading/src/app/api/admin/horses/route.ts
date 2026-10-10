@@ -52,24 +52,46 @@ export async function PATCH(request: NextRequest) {
     status: z.enum(["AVAILABLE", "RESERVED", "SOLD"])
   }).safeParse(body);
   if (!statusUpdate.success) {
-    const fullUpdate = z.object({
-      horseSlug: z.string().min(1),
-      ...HorseInputSchema.partial().shape
-    }).safeParse(body);
+    const fullUpdate = z.object({ horseSlug: z.string().min(1), ...HorseInputSchema.partial().shape }).safeParse(body);
     if (!fullUpdate.success) return NextResponse.json({ error: fullUpdate.error.flatten() }, { status: 400 });
     const { horseSlug, ...input } = fullUpdate.data;
     try {
+      const existing = await db.horse.findUniqueOrThrow({ where: { slug: horseSlug }, select: { id: true } });
       const horse = await db.horse.update({
         where: { slug: horseSlug },
         data: {
-          ...input,
+          breed: input.breed,
+          sex: input.sex,
           dateOfBirth: input.dateOfBirth ? new Date(input.dateOfBirth) : undefined,
-          translations: input.nameEn || input.positioning || input.personality || input.training || input.strengths || input.experience || input.suitability || input.potential || input.idealRider
-            ? { upsert: { where: { horseId_locale: { horseId: (await db.horse.findUniqueOrThrow({ where: { slug: horseSlug }, select: { id: true } })).id, locale: "en" } }, create: { locale: "en", name: input.nameEn ?? "Unnamed horse", positioning: input.positioning ?? "", personality: input.personality, training: input.training, strengths: input.strengths, experience: input.experience, suitability: input.suitability, potential: input.potential, idealRider: input.idealRider }, update: { name: input.nameEn, positioning: input.positioning, personality: input.personality, training: input.training, strengths: input.strengths, experience: input.experience, suitability: input.suitability, potential: input.potential, idealRider: input.idealRider } } }
+          heightCm: input.heightCm,
+          color: input.color,
+          jumpHeightCm: input.jumpHeightCm,
+          maxHeightJumpedCm: input.maxHeightJumpedCm,
+          competitionLevel: input.competitionLevel,
+          priceAmount: input.priceAmount,
+          priceCurrency: input.priceCurrency,
+          priceOnRequest: input.priceAmount === undefined ? undefined : false,
+          status: input.status,
+          locationLabel: input.locationLabel,
+          registrationNo: input.registrationNo,
+          passportNo: input.passportNo,
+          featuredOnHome: input.featuredOnHome,
+          documentsPublic: input.documentsPublic,
+          trustVetDocs: input.trustVetDocs,
+          trustXrays: input.trustXrays,
+          trustPedigreeDocs: input.trustPedigreeDocs,
+          trustTransport: input.trustTransport,
+          translations: (input.nameEn !== undefined || input.positioning !== undefined || input.personality !== undefined || input.training !== undefined || input.strengths !== undefined || input.experience !== undefined || input.suitability !== undefined || input.potential !== undefined || input.idealRider !== undefined)
+            ? { upsert: {
+                where: { horseId_locale: { horseId: existing.id, locale: "en" } },
+                create: { locale: "en", name: input.nameEn ?? "Unnamed horse", positioning: input.positioning ?? "", personality: input.personality, training: input.training, strengths: input.strengths, experience: input.experience, suitability: input.suitability, potential: input.potential, idealRider: input.idealRider },
+                update: { name: input.nameEn, positioning: input.positioning, personality: input.personality, training: input.training, strengths: input.strengths, experience: input.experience, suitability: input.suitability, potential: input.potential, idealRider: input.idealRider }
+              } }
             : undefined
-        }
+        },
+        select: { slug: true, status: true }
       });
-      return NextResponse.json({ ok: true, horse: { slug: horse.slug, status: horse.status } });
+      return NextResponse.json({ ok: true, horse });
     } catch (error) {
       console.error("Horse update failed:", error);
       return NextResponse.json({ error: "Horse not found or database unavailable" }, { status: 500 });
