@@ -1,6 +1,6 @@
 {
   "brand": {
-    "name": "MEC Trading",
+    "name": "MEC Horses",
     "tagline": "Des chevaux d'exception. Soigneusement sélectionnés."
   },
   "nav": {
@@ -22,7 +22,7 @@
     "featuredTitle": "Actuellement dans notre sélection",
     "selectionEyebrow": "Notre sélection",
     "selectionTitle": "Trouver un cheval selon la hauteur sautée",
-    "whyEyebrow": "Pourquoi MEC Trading",
+    "whyEyebrow": "Pourquoi MEC Horses",
     "whyTitle": "Une exigence privée et professionnelle",
     "storyEyebrow": "Portrait",
     "internationalEyebrow": "Acheteurs internationaux",
@@ -180,7 +180,7 @@
     "sentText": "Nous répondons personnellement à chaque demande, généralement sous un jour ouvré."
   },
   "about": {
-    "title": "À propos de MEC Trading",
+    "title": "À propos de MEC Horses",
     "eyebrow": "Notre histoire"
   },
   "services": {
@@ -232,7 +232,7 @@
   },
   "footer": {
     "rights": "Tous droits réservés.",
-    "privateNotice": "MEC Trading est une société privée de commerce équin. Tous les chevaux présentés sont détenus ou représentés directement par MEC Trading."
+    "privateNotice": "MEC Horses est une société privée de commerce équin. Tous les chevaux présentés sont détenus ou représentés directement par MEC Horses."
   },
   "admin": {
     "login": "Connexion administrateur",
