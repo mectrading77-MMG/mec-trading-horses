@@ -222,6 +222,15 @@
       "afterSale": {
         "title": "Suivi après-vente",
         "text": "Nous restons disponibles longtemps après l'arrivée du cheval."
+      },
+
+      "trainingCamp": {
+        "title": "Stage d’entraînement",
+        "text": "Des stages structurés pour développer les capacités, la condition physique et la préparation à la compétition de votre cheval."
+      },
+      "valorization": {
+        "title": "Valorisation du cheval",
+        "text": "Nous vous aidons à révéler et développer le potentiel sportif de votre cheval afin de mieux le présenter et valoriser."
       }
     }
   },
