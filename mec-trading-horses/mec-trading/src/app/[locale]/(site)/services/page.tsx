@@ -12,7 +12,9 @@ const KEYS = [
   "transport",
   "export",
   "viewing",
-  "afterSale"
+  "afterSale",
+  "trainingCamp",
+  "valorization"
 ] as const;
 
 export default async function ServicesPage({ params }: { params: { locale: Locale } }) {
