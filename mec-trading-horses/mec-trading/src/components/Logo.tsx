@@ -21,7 +21,7 @@ export default function Logo({
   return (
     <Image
       src={src}
-      alt="MEC Trading — Sport Horses"
+      alt="MEC Horses — Sport Horses"
       width={dims.width}
       height={dims.height}
       priority={priority}
