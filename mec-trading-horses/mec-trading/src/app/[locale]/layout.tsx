@@ -52,7 +52,7 @@ export async function generateMetadata({
           url: "https://www.mechorses.com/brand/og-default.jpg",
           width: 1200,
           height: 630,
-          alt: "MEC Trading — Sport Horses"
+          alt: "MEC Horses — Sport Horses"
         }
       ]
     },
