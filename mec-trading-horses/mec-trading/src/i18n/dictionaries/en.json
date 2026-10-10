@@ -8,7 +8,7 @@
     "horses": "Horses for Sale",
     "about": "About",
     "selection": "Our Selection",
-    "services": "Services",
+    "services": "Our Services",
     "news": "News",
     "contact": "Contact",
     "ctaPrimary": "Discover Our Horses",
@@ -184,7 +184,7 @@
     "eyebrow": "Our Story"
   },
   "services": {
-    "title": "Services",
+    "title": "Our Services",
     "list": {
       "selection": {
         "title": "Horse Purchase",
