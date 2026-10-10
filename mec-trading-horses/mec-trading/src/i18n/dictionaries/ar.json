@@ -1,6 +1,6 @@
 {
   "brand": {
-    "name": "MEC Trading",
+    "name": "MEC Horses",
     "tagline": "خيول استثنائية. مُنتقاة بعناية."
   },
   "nav": {
@@ -22,7 +22,7 @@
     "featuredTitle": "ضمن مجموعتنا حاليًا",
     "selectionEyebrow": "مجموعتنا",
     "selectionTitle": "ابحث عن حصان حسب ارتفاع القفز",
-    "whyEyebrow": "لماذا MEC Trading",
+    "whyEyebrow": "لماذا MEC Horses",
     "whyTitle": "معيار خاص واحترافي",
     "storyEyebrow": "قصة مميزة",
     "internationalEyebrow": "المشترون الدوليون",
@@ -180,7 +180,7 @@
     "sentText": "نرد شخصيًا على كل استفسار، عادةً خلال يوم عمل واحد."
   },
   "about": {
-    "title": "عن MEC Trading",
+    "title": "عن MEC Horses",
     "eyebrow": "قصتنا"
   },
   "services": {
@@ -232,7 +232,7 @@
   },
   "footer": {
     "rights": "جميع الحقوق محفوظة.",
-    "privateNotice": "MEC Trading شركة خاصة لتجارة الخيول. جميع الخيول المعروضة مملوكة أو ممثَّلة مباشرة من قبل MEC Trading."
+    "privateNotice": "MEC Horses شركة خاصة لتجارة الخيول. جميع الخيول المعروضة مملوكة أو ممثَّلة مباشرة من قبل MEC Horses."
   },
   "admin": {
     "login": "تسجيل دخول المسؤول",
