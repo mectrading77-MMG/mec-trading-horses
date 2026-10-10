@@ -221,6 +221,15 @@
       "afterSale": {
         "title": "Nazorg",
         "text": "Ook lang nadat het paard thuis is aangekomen, blijven we bereikbaar."
+      },
+
+      "trainingCamp": {
+        "title": "Trainingskamp",
+        "text": "Gestructureerde trainingskampen om de vaardigheden, conditie en wedstrijdvoorbereiding van uw paard te verbeteren."
+      },
+      "valorization": {
+        "title": "Paardenvalorisatie",
+        "text": "We helpen het sportieve potentieel van uw paard te ontwikkelen en het beter te presenteren en in de markt te zetten."
       }
     }
   },
