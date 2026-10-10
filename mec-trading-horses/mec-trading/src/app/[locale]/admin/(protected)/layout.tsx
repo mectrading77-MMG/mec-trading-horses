@@ -35,7 +35,7 @@ export default async function AdminLayout({
     <div className="flex min-h-screen bg-ivory">
       <aside className="hidden w-56 shrink-0 border-r border-charcoal-line bg-charcoal text-ivory lg:block">
         <div className="px-6 py-6">
-          <span className="font-display text-xl italic">MEC</span>
+          <span className="font-display text-xl italic">MEC Horses</span>
           <p className="font-mono text-[9px] uppercase tracking-eyebrow text-gold">Admin</p>
         </div>
         <nav className="mt-4 flex flex-col">
@@ -56,7 +56,7 @@ export default async function AdminLayout({
 
       <div className="flex-1">
         <header className="flex items-center justify-between border-b border-charcoal-line px-6 py-4 lg:hidden">
-          <span className="font-display text-lg italic text-charcoal">MEC Admin</span>
+          <span className="font-display text-lg italic text-charcoal">MEC Horses Admin</span>
           <SignOutButton label={dict.admin.signOut} locale={params.locale} />
         </header>
         <div className="p-6 lg:p-10">{children}</div>
