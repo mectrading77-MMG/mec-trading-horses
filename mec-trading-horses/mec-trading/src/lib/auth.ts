@@ -69,13 +69,13 @@ export async function verifyCredentials(email: string, password: string): Promis
   //   const user = await db.adminUser.findUnique({ where: { email } });
   //   if (!user || !(await bcrypt.compare(password, user.passwordHash))) return null;
   //   return { sub: user.id, email: user.email, name: user.name, role: user.role };
-  const ownerEmail = process.env.ADMIN_EMAIL ?? "admin@mectrading.com";
+  const ownerEmail = process.env.ADMIN_EMAIL ?? "admin@mechorses.com";
   const ownerPassword = process.env.ADMIN_PASSWORD;
   // No credentials configured in production means no one can sign in, rather
   // than everyone being able to sign in with a password published in the repo.
   if (!ownerPassword) return null;
   if (email.toLowerCase() === ownerEmail.toLowerCase() && password === ownerPassword) {
-    return { sub: "owner", email: ownerEmail, name: "MEC Trading", role: "OWNER" };
+    return { sub: "owner", email: ownerEmail, name: "MEC HORSES", role: "OWNER" };
   }
   return null;
 }
