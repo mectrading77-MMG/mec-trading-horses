@@ -13,29 +13,33 @@ export default async function HomePage({ params }: { params: { locale: Locale } 
 
   return (
     <>
-      <section className="relative flex h-[88vh] min-h-[520px] items-end overflow-hidden bg-charcoal supports-[height:88dvh]:h-[88dvh]">
+      <section className="relative isolate flex min-h-[680px] h-[88vh] items-center overflow-hidden bg-charcoal supports-[height:88dvh]:h-[88dvh]">
         <HeroVideo src="/video/hero.mp4" poster="/video/hero-poster.jpg" />
-        <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/45 to-charcoal/20" />
-        <div className="relative z-10 mx-auto w-full max-w-editorial px-6 pb-10 sm:pb-16 lg:px-10 lg:pb-24">
-          <h1 className="max-w-3xl font-display text-3xl italic leading-[1.08] text-ivory sm:text-6xl">
-            {dict.home.heroHeadline}
-          </h1>
-          <p className="mt-5 max-w-lg text-base leading-relaxed text-ivory/75 sm:mt-6 sm:text-lg">
-            {dict.home.heroSupport}
-          </p>
-          <div className="mt-8 flex flex-col items-center gap-3 lg:items-start">
-            <Link
-              href={`/${params.locale}/horses-for-sale`}
-              className="inline-flex min-w-[220px] items-center justify-center border border-gold bg-charcoal/20 px-7 py-4 text-center text-[13px] font-semibold uppercase tracking-[0.14em] text-gold shadow-[0_0_0_1px_rgba(255,255,255,0.08)] transition-colors duration-400 hover:bg-gold hover:text-charcoal sm:min-w-[260px] sm:px-8 sm:py-4 sm:text-[14px]"
-            >
-              {dict.home.heroCta}
-            </Link>
-            <Link
-              href={`/${params.locale}/services`}
-              className="inline-flex min-w-[220px] items-center justify-center border border-ivory/70 bg-charcoal/15 px-7 py-3.5 text-center text-[12px] font-medium uppercase tracking-[0.14em] text-ivory transition-colors duration-400 hover:border-gold hover:bg-gold hover:text-charcoal sm:min-w-[260px] sm:text-[13px]"
-            >
-              {dict.nav.services}
-            </Link>
+        <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 to-black/10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-black/10" />
+        <div className="relative z-10 mx-auto w-full max-w-editorial px-6 py-16 lg:px-10">
+          <div className="max-w-4xl">
+            <p className="mb-5 font-mono text-[10px] uppercase tracking-[0.32em] text-[#e6c16b] sm:text-xs">MEC HORSES · SPORT HORSES</p>
+            <h1 className="max-w-4xl font-display text-4xl italic leading-[1.02] text-white sm:text-6xl lg:text-7xl xl:text-[5.25rem]">
+              <span className="block">{dict.home.heroHeadline}</span>
+            </h1>
+            <p className="mt-6 max-w-xl text-base leading-relaxed text-white/85 sm:text-lg">
+              {dict.home.heroSupport}
+            </p>
+            <div className="mt-9 flex flex-col items-start gap-3 sm:flex-row sm:gap-4">
+              <Link
+                href={`/${params.locale}/horses-for-sale`}
+                className="group inline-flex min-h-[58px] min-w-[250px] items-center justify-between gap-8 border border-[#d7ae53] bg-gradient-to-r from-[#b9872e] via-[#f0d27d] to-[#b9872e] px-7 py-4 text-[12px] font-semibold uppercase tracking-[0.16em] text-[#17130b] shadow-lg transition-all duration-300 hover:brightness-110 sm:min-w-[280px]"
+              >
+                {dict.home.heroCta}<span aria-hidden="true" className="text-xl transition-transform group-hover:translate-x-1">→</span>
+              </Link>
+              <Link
+                href={`/${params.locale}/services`}
+                className="group inline-flex min-h-[58px] min-w-[250px] items-center justify-between gap-8 border border-[#e4c36d] bg-black/25 px-7 py-4 text-[12px] font-medium uppercase tracking-[0.16em] text-white transition-all duration-300 hover:bg-[#d7ae53] hover:text-black sm:min-w-[280px]"
+              >
+                {dict.nav.services}<span aria-hidden="true" className="text-xl transition-transform group-hover:translate-x-1">→</span>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
