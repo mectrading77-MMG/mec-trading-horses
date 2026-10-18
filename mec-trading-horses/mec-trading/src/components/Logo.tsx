@@ -1,10 +1,6 @@
 import Image from "next/image";
 
-/**
- * Brand lockup. `compact` drops the "Sport Horses" line (for the header);
- * `onDark` switches to the ivory/gold artwork for charcoal backgrounds.
- * Source files live in public/brand/ (transparent PNGs cut from the master logo).
- */
+/** MEC HORSES master mark, used consistently across light and dark surfaces. */
 export default function Logo({
   variant = "full",
   onDark = false,
@@ -16,16 +12,14 @@ export default function Logo({
   className?: string;
   priority?: boolean;
 }) {
-  const src = `/brand/logo-${variant}${onDark ? "-light" : ""}.png`;
-  const dims = variant === "compact" ? { width: 807, height: 647 } : { width: 807, height: 711 };
   return (
     <Image
-      src={src}
-      alt="MEC Horses — Sport Horses"
-      width={dims.width}
-      height={dims.height}
+      src="/brand/mec-horses.svg"
+      alt="MEC HORSES"
+      width={variant === "compact" ? 260 : 320}
+      height={variant === "compact" ? 165 : 203}
       priority={priority}
-      className={`h-auto w-auto select-none ${className}`}
+      className={`h-auto w-auto select-none ${onDark ? "brightness-110" : ""} ${className}`}
     />
   );
 }
