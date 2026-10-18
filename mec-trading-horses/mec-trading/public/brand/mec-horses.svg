@@ -1,1 +1,27 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 330" role="img" aria-labelledby="title"><title id="title">MEC HORSES</title><defs><linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8b5b12"/><stop offset=".48" stop-color="#f5d477"/><stop offset="1" stop-color="#a66b14"/></linearGradient></defs><g fill="none" stroke="url(#gold)" stroke-linecap="round" stroke-linejoin="round"><path stroke-width="5" d="M126 177c62-18 103-54 133-102l30-42 10 38 24-30 12 48c16 12 23 29 17 47l-10 30 10 23-13 30-25 9-14-20 5-21-17-18-4-25-17-12-22 10-12 32-20 13-9 29"/><path stroke-width="3" d="M278 57l-25 28 21 3m42-5-6 17m-28 22 18 5 13-9m-2 31 11 4m-25 22 14 6m-77-45-30 39-69 30-52 8 79-36 34-33"/><path stroke-width="2.5" d="M307 44l-18-25m41 30 16-29m-42 87 13 4m-39 33 11 10"/></g><text x="260" y="254" text-anchor="middle" font-family="Georgia,serif" font-size="106" letter-spacing="-7" fill="#111">MEC</text><text x="260" y="297" text-anchor="middle" font-family="Georgia,serif" font-size="31" letter-spacing="14" fill="#171717">HORSES</text><path d="M60 288h74m252 0h74" stroke="url(#gold)" stroke-width="3"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 341" role="img" aria-labelledby="title">
+<title id="title">MEC HORSES</title>
+<defs><linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8f5b12"/><stop offset=".32" stop-color="#f5d77c"/><stop offset=".62" stop-color="#bd8425"/><stop offset="1" stop-color="#8c5a11"/></linearGradient><linearGradient id="mane" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#b77b1d"/><stop offset=".5" stop-color="#ffdf83"/><stop offset="1" stop-color="#9a6517"/></linearGradient></defs>
+<g fill="none" stroke="url(#gold)" stroke-linecap="round" stroke-linejoin="round">
+<!-- flowing neck and crest -->
+<path stroke-width="4.2" d="M71 226 C119 211 164 189 205 160 C241 134 261 104 282 75 C299 51 321 33 347 28"/>
+<path stroke-width="2.6" d="M103 213 C160 193 209 161 244 126 C268 102 282 73 303 52"/>
+<!-- horse head profile -->
+<path stroke-width="4.4" d="M335 29 C344 18 356 15 368 18 L382 7 L378 28 L399 18 L388 41 C400 53 407 69 406 86 L399 106 L405 125 L397 145 L383 157 L377 177 L360 189 L344 183 L337 164 L324 153 L319 135 L307 122 L306 102 L315 81 L324 60 Z"/>
+<path stroke-width="3" d="M335 31 L329 12 L349 26 M367 20 L378 2 M389 42 L374 56 L365 76 L371 92 L389 103 L397 121 L385 139 L370 147 L362 166"/>
+<path stroke-width="2.8" d="M320 81 C336 73 348 76 356 86 M343 102 L357 108 M352 125 C362 121 373 124 380 131"/>
+<path stroke-width="2.6" d="M385 151 L395 161 L390 177 L375 187"/>
+<!-- bridle -->
+<path stroke-width="3.2" d="M324 62 C342 71 360 76 383 77 L399 84 M324 62 L317 100 C326 119 344 132 370 140 M339 69 L342 103 L370 140"/>
+<circle cx="350" cy="111" r="7" stroke-width="3"/><path stroke-width="2.4" d="M356 118 L375 144 L368 165"/>
+<!-- mane -->
+<path stroke-width="3" d="M338 30 C323 42 314 54 306 67 M327 35 L311 40 M333 27 L319 26 M341 22 L333 13 M350 21 L350 9"/>
+</g>
+<g fill="url(#mane)">
+<path d="M341 34 Q323 47 311 64 Q320 43 336 28Z"/>
+<path d="M350 29 Q342 15 346 5 Q354 17 356 25Z"/>
+<path d="M360 26 Q365 12 378 3 Q372 20 364 30Z"/>
+</g>
+<g fill="#171717"><text x="256" y="274" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="119" letter-spacing="-7">MEC</text></g>
+<text x="256" y="316" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="30" letter-spacing="13" fill="#171717">HORSES</text>
+<path d="M71 305 H143 M369 305 H441" stroke="url(#gold)" stroke-width="3"/>
+</svg>
