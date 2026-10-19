@@ -5,7 +5,7 @@ import Image from "next/image";
 import type { Horse, Locale } from "@/types/horse";
 import { ageFromDob, formatPriceRange } from "@/lib/horses";
 import { formatJumpHeight } from "@/lib/levels";
-import { whatsappLink } from "@/lib/whatsapp";
+import InquiryOptions from "@/components/InquiryOptions";
 
 export const PREVIEW_W = 340;
 export const PREVIEW_H = 470;
@@ -120,7 +120,7 @@ export default function HorsePreview({
         </dl>
 
         <p className="mt-3 font-display text-lg text-gold">{price ?? "—"}</p>
-        <a href={horse.status === "SOLD" ? undefined : whatsappLink(horse.translations[locale]?.name ?? horse.translations.en.name)} className="mt-3 block border border-gold px-3 py-2 text-center font-mono text-[9px] uppercase tracking-eyebrow text-gold">{dict.horse.inquireHorse}</a>
+        {horse.status !== "SOLD" && <div className="mt-3 text-center"><InquiryOptions horseName={t.name} label={dict.horse.inquireHorse} /></div>}
 
         {horse.highlights.length > 0 && (
           <ul className="mt-3 space-y-1.5">
