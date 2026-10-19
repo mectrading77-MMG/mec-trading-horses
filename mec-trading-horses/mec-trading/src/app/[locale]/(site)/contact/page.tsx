@@ -35,7 +35,7 @@ export default async function ContactPage({ params, searchParams }: { params: { 
         <div className="space-y-6">
           <div>
             <p className="font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/40">Email</p>
-            <a href="mailto:contact@mectrading.com" className="text-charcoal">contact@mectrading.com</a>
+            <a href="mailto:sales@mechorses.com" className="text-charcoal">sales@mechorses.com</a>
           </div>
           <div>
             <p className="font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/40">Phone</p>
