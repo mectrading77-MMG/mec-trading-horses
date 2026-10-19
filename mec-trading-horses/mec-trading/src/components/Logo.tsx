@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-/** MEC HORSES master mark, used consistently across light and dark surfaces. */
+/** Uses the original uploaded MEC HORSES logo asset. */
 export default function Logo({
   variant = "full",
   onDark = false,
@@ -14,12 +14,12 @@ export default function Logo({
 }) {
   return (
     <Image
-      src="/brand/mec-horses.svg"
+      src="/brand/mec-horses.png.png"
       alt="MEC HORSES"
-      width={variant === "compact" ? 260 : 320}
-      height={variant === "compact" ? 165 : 203}
+      width={variant === "compact" ? 520 : 700}
+      height={variant === "compact" ? 341 : 459}
       priority={priority}
-      className={`h-auto w-auto select-none ${onDark ? "brightness-110" : ""} ${className}`}
+      className={`h-auto w-auto select-none object-contain ${onDark ? "" : ""} ${className}`}
     />
   );
 }
