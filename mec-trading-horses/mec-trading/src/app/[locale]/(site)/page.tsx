@@ -6,6 +6,7 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import { listHorses } from "@/lib/horses";
 import SelectionExplorer from "@/components/SelectionExplorer";
 import HeroVideo from "@/components/HeroVideo";
+import MobileQuickNav from "@/components/MobileQuickNav";
 
 export default async function HomePage({ params }: { params: { locale: Locale } }) {
   const dict = await getDictionary(params.locale);
@@ -13,14 +14,7 @@ export default async function HomePage({ params }: { params: { locale: Locale } 
 
   return (
     <>
-      <nav aria-label="Quick navigation" className="fixed right-0 top-1/2 z-[100] flex -translate-y-1/2 flex-col gap-2 md:hidden">
-        <Link href={`/${params.locale}/horses-for-sale`} className="flex min-h-12 w-32 items-center justify-between border border-[#e5c36c] bg-[#171717]/95 px-2.5 py-3 text-[10px] font-semibold uppercase tracking-wide text-[#f2d27d] shadow-2xl">
-          <span>Our Horses</span><span aria-hidden="true">→</span>
-        </Link>
-        <Link href={`/${params.locale}/services`} className="flex min-h-12 w-32 items-center justify-between border border-[#e5c36c] bg-[#171717]/95 px-2.5 py-3 text-[10px] font-semibold uppercase tracking-wide text-[#f2d27d] shadow-2xl">
-          <span>Our Services</span><span aria-hidden="true">→</span>
-        </Link>
-      </nav>
+      <MobileQuickNav locale={params.locale} />
       <section className="relative isolate flex min-h-[680px] h-[88vh] items-center overflow-hidden bg-charcoal supports-[height:88dvh]:h-[88dvh]">
         <HeroVideo src="/video/hero.mp4" poster="/video/hero-poster.jpg" />
         <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 to-black/10" />
