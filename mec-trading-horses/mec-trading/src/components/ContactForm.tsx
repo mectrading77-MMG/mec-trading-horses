@@ -73,7 +73,7 @@ export default function ContactForm({
     }
 
     if (sendMethod === "email") {
-      window.location.href = "mailto:mec.trading77@gmail.com?subject=" + encodeURIComponent("MEC Horses inquiry — " + (payload.name ?? "")) + "&body=" + encodeURIComponent(inquiryText);
+      window.location.href = "mailto:sales@mechorses.com?subject=" + encodeURIComponent("MEC Horses inquiry — " + (payload.name ?? "")) + "&body=" + encodeURIComponent(inquiryText);
       setStatus("sent");
       return;
     }
@@ -199,7 +199,7 @@ export default function ContactForm({
         <div className="grid gap-3 sm:grid-cols-2">
           <label className="flex cursor-pointer items-center gap-3 border border-charcoal-line px-4 py-3 text-sm">
             <input required type="radio" name="sendMethod" value="email" checked={sendMethod === "email"} onChange={() => setSendMethod("email")} />
-            <span>Email — mec.trading77@gmail.com</span>
+            <span>Email — sales@mechorses.com</span>
           </label>
           <label className="flex cursor-pointer items-center gap-3 border border-charcoal-line px-4 py-3 text-sm">
             <input required type="radio" name="sendMethod" value="whatsapp" checked={sendMethod === "whatsapp"} onChange={() => setSendMethod("whatsapp")} />
