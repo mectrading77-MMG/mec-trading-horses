@@ -26,7 +26,7 @@ export default function Footer({ locale, dict }: { locale: Locale; dict: any }) 
           <p className="eyebrow">{dict.nav.contact}</p>
           <ul className="mt-4 space-y-2 text-sm text-ivory/80">
             <li>La Chapelle-des-Fougeretz, Brittany, France</li>
-            <li><a href="mailto:contact@mectrading.com">contact@mectrading.com</a></li>
+            <li><a href="mailto:sales@mechorses.com">sales@mechorses.com</a></li>
             <li><a href="tel:+33618313530">+33 6 18 31 35 30</a></li>
           </ul>
         </div>
