@@ -13,6 +13,14 @@ export default async function HomePage({ params }: { params: { locale: Locale } 
 
   return (
     <>
+      <nav aria-label="Quick navigation" className="fixed right-0 top-1/2 z-[100] flex -translate-y-1/2 flex-col gap-2">
+        <Link href={`/${params.locale}/horses-for-sale`} className="flex min-h-12 w-36 items-center justify-between border border-[#e5c36c] bg-[#171717] px-3 py-3 text-[11px] font-semibold uppercase tracking-wide text-[#f2d27d] shadow-2xl sm:w-44 sm:px-4 sm:text-xs">
+          <span>Our Horses</span><span aria-hidden="true">→</span>
+        </Link>
+        <Link href={`/${params.locale}/services`} className="flex min-h-12 w-36 items-center justify-between border border-[#e5c36c] bg-[#171717] px-3 py-3 text-[11px] font-semibold uppercase tracking-wide text-[#f2d27d] shadow-2xl sm:w-44 sm:px-4 sm:text-xs">
+          <span>Our Services</span><span aria-hidden="true">→</span>
+        </Link>
+      </nav>
       <section className="relative isolate flex min-h-[680px] h-[88vh] items-center overflow-hidden bg-charcoal supports-[height:88dvh]:h-[88dvh]">
         <HeroVideo src="/video/hero.mp4" poster="/video/hero-poster.jpg" />
         <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 to-black/10" />
