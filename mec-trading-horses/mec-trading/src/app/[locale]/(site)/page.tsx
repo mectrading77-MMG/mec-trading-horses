@@ -15,13 +15,13 @@ export default async function HomePage({ params }: { params: { locale: Locale } 
   return (
     <>
       <MobileQuickNav locale={params.locale} />
-      <section className="relative isolate flex min-h-[680px] h-[88vh] items-center overflow-hidden bg-charcoal supports-[height:88dvh]:h-[88dvh]">
+      <section className="relative isolate flex min-h-[680px] h-[88vh] items-start overflow-hidden bg-charcoal supports-[height:88dvh]:h-[88dvh]">
         <HeroVideo src="/video/hero.mp4" poster="/video/hero-poster.jpg" />
         <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 to-black/10" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-black/10" />
-        <div className="relative z-10 mx-auto w-full max-w-editorial px-6 py-16 lg:px-10">
+        <div aria-hidden="true" className="absolute inset-y-0 right-0 w-[28%] bg-gradient-to-l from-black/90 via-black/55 to-transparent sm:w-[24%]" />
+        <div className="relative z-10 mx-auto w-full max-w-editorial px-6 pt-20 pb-16 sm:pt-24 lg:px-10 lg:pt-28">
           <div className="max-w-4xl">
-            <p className="mb-5 font-mono text-[10px] uppercase tracking-[0.32em] text-[#e6c16b] sm:text-xs">MEC HORSES · SPORT HORSES</p>
             <h1 className="max-w-4xl font-display text-4xl italic leading-[1.02] text-white sm:text-6xl lg:text-7xl xl:text-[5.25rem]">
               <span className="block">{dict.home.heroHeadline}</span>
             </h1>
