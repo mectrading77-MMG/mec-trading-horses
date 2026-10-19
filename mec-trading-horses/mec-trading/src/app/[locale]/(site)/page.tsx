@@ -13,11 +13,11 @@ export default async function HomePage({ params }: { params: { locale: Locale } 
 
   return (
     <>
-      <nav aria-label="Quick navigation" className="fixed right-0 top-1/2 z-[100] flex -translate-y-1/2 flex-col gap-2">
-        <Link href={`/${params.locale}/horses-for-sale`} className="flex min-h-12 w-36 items-center justify-between border border-[#e5c36c] bg-[#171717] px-3 py-3 text-[11px] font-semibold uppercase tracking-wide text-[#f2d27d] shadow-2xl sm:w-44 sm:px-4 sm:text-xs">
+      <nav aria-label="Quick navigation" className="fixed right-0 top-1/2 z-[100] flex -translate-y-1/2 flex-col gap-2 md:hidden">
+        <Link href={`/${params.locale}/horses-for-sale`} className="flex min-h-12 w-32 items-center justify-between border border-[#e5c36c] bg-[#171717]/95 px-2.5 py-3 text-[10px] font-semibold uppercase tracking-wide text-[#f2d27d] shadow-2xl">
           <span>Our Horses</span><span aria-hidden="true">→</span>
         </Link>
-        <Link href={`/${params.locale}/services`} className="flex min-h-12 w-36 items-center justify-between border border-[#e5c36c] bg-[#171717] px-3 py-3 text-[11px] font-semibold uppercase tracking-wide text-[#f2d27d] shadow-2xl sm:w-44 sm:px-4 sm:text-xs">
+        <Link href={`/${params.locale}/services`} className="flex min-h-12 w-32 items-center justify-between border border-[#e5c36c] bg-[#171717]/95 px-2.5 py-3 text-[10px] font-semibold uppercase tracking-wide text-[#f2d27d] shadow-2xl">
           <span>Our Services</span><span aria-hidden="true">→</span>
         </Link>
       </nav>
@@ -34,7 +34,14 @@ export default async function HomePage({ params }: { params: { locale: Locale } 
             <p className="mt-6 max-w-xl text-base leading-relaxed text-white/85 sm:text-lg">
               {dict.home.heroSupport}
             </p>
-
+            <div className="mt-9 hidden flex-col items-start gap-3 md:flex md:flex-row md:gap-4">
+              <Link href={`/${params.locale}/horses-for-sale`} className="group inline-flex min-h-[58px] min-w-[250px] items-center justify-between gap-8 border border-[#d7ae53] bg-gradient-to-r from-[#b9872e] via-[#f0d27d] to-[#b9872e] px-7 py-4 text-[12px] font-semibold uppercase tracking-[0.16em] text-[#17130b] shadow-lg transition-all duration-300 hover:brightness-110 sm:min-w-[280px]">
+                {dict.home.heroCta}<span aria-hidden="true" className="text-xl transition-transform group-hover:translate-x-1">→</span>
+              </Link>
+              <Link href={`/${params.locale}/services`} className="group inline-flex min-h-[58px] min-w-[250px] items-center justify-between gap-8 border border-[#e4c36d] bg-black/25 px-7 py-4 text-[12px] font-medium uppercase tracking-[0.16em] text-white transition-all duration-300 hover:bg-[#d7ae53] hover:text-black sm:min-w-[280px]">
+                Our Services<span aria-hidden="true" className="text-xl transition-transform group-hover:translate-x-1">→</span>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
