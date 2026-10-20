@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import type { FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import type { Locale } from "@/types/horse";
 
@@ -26,7 +27,7 @@ export default function HeroCatalogSearch({ locale }: { locale: Locale }) {
     return () => window.clearInterval(id);
   }, []);
 
-  function submit(event: React.FormEvent<HTMLFormElement>) {
+  function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const value = query.trim();
     router.push(`/${locale}/horses-for-sale${value ? `?search=${encodeURIComponent(value)}` : ""}`);
