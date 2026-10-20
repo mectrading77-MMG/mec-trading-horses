@@ -7,6 +7,7 @@ import { listHorses } from "@/lib/horses";
 import SelectionExplorer from "@/components/SelectionExplorer";
 import HeroVideo from "@/components/HeroVideo";
 import MobileQuickNav from "@/components/MobileQuickNav";
+import HeroCatalogSearch from "@/components/HeroCatalogSearch";
 
 export default async function HomePage({ params }: { params: { locale: Locale } }) {
   const dict = await getDictionary(params.locale);
@@ -22,11 +23,9 @@ export default async function HomePage({ params }: { params: { locale: Locale } 
         <div className="relative z-10 mx-auto w-full max-w-editorial px-6 pt-20 pb-16 sm:pt-24 lg:px-10 lg:pt-28">
           <div className="max-w-4xl">
             <h1 className="max-w-4xl font-display text-4xl italic leading-[1.02] text-white sm:text-6xl lg:text-7xl xl:text-[5.25rem]">
-              <span className="block">{dict.home.heroHeadline}</span>
+              <span className="block not-italic text-3xl font-semibold tracking-[0.04em] sm:text-5xl lg:text-6xl xl:text-7xl">BUY · SELL · LEASE · CONSULTING</span>
             </h1>
-            <p className="mt-6 max-w-xl text-base leading-relaxed text-white/85 sm:text-lg">
-              {dict.home.heroSupport}
-            </p>
+            <HeroCatalogSearch locale={params.locale} />
             <div className="mt-9 hidden flex-col items-start gap-3 md:flex md:flex-row md:gap-4">
               <Link href={`/${params.locale}/horses-for-sale`} className="group inline-flex min-h-[58px] min-w-[250px] items-center justify-between gap-8 border border-[#d7ae53] bg-gradient-to-r from-[#b9872e] via-[#f0d27d] to-[#b9872e] px-7 py-4 text-[12px] font-semibold uppercase tracking-[0.16em] text-[#17130b] shadow-lg transition-all duration-300 hover:brightness-110 sm:min-w-[280px]">
                 {dict.home.heroCta}<span aria-hidden="true" className="text-xl transition-transform group-hover:translate-x-1">→</span>
