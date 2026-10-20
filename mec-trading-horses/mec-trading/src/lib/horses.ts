@@ -1,4 +1,4 @@
-import { horses, getHorseBySlug, getFeaturedHorses, getFeaturedStoryHorse } from "@/lib/sample-data";
+import { horses, getFeaturedHorses, getFeaturedStoryHorse } from "@/lib/sample-data";
 import type { Locale } from "@/types/horse";
 import { db } from "@/lib/db";
 
@@ -107,17 +107,8 @@ export async function listHorses() {
 }
 
 export async function getHorse(slug: string) {
-  const horse = getHorseBySlug(slug);
-  if (!horse) return horse;
-  try {
-    const record = await db.horse.findUnique({
-      where: { slug },
-      select: { status: true }
-    });
-    return record ? { ...horse, status: record.status } : horse;
-  } catch {
-    return horse;
-  }
+  const catalogue = await listHorses();
+  return catalogue.find((horse) => horse.slug === slug);
 }
 
 export async function featuredHorses() {
