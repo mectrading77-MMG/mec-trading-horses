@@ -9,6 +9,8 @@ import HeroVideo from "@/components/HeroVideo";
 import MobileQuickNav from "@/components/MobileQuickNav";
 import HeroCatalogSearch from "@/components/HeroCatalogSearch";
 
+export const dynamic = "force-dynamic";
+
 export default async function HomePage({ params }: { params: { locale: Locale } }) {
   const dict = await getDictionary(params.locale);
   const all = await listHorses();
