@@ -24,7 +24,7 @@ export default async function HomePage({ params }: { params: { locale: Locale } 
         <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-black/10" />
         <div className="absolute inset-x-0 bottom-[308px] z-10 mx-auto w-full max-w-editorial px-6 pb-0 sm:relative sm:inset-auto sm:bottom-auto sm:pt-[308px] sm:pb-16 lg:px-10 lg:pt-[324px]">
           <div className="mx-auto w-full max-w-4xl text-center">
-            <h1 className="mx-auto w-full max-w-4xl text-center text-3xl font-normal leading-tight sm:text-5xl lg:text-6xl xl:text-6xl">
+            <h1 className="relative left-1/2 mx-auto w-screen max-w-none -translate-x-1/2 text-center text-3xl font-normal leading-tight sm:text-5xl lg:text-6xl xl:text-6xl">
               <span className="block w-full whitespace-nowrap text-center font-display text-[clamp(0.92rem,3.15vw,3.5rem)] font-normal italic tracking-[0.055em] text-[#e4c36d] drop-shadow-[0_1px_8px_rgba(0,0,0,0.35)] sm:text-[clamp(1.8rem,3.8vw,3.5rem)] lg:text-[clamp(2.25rem,3.8vw,3.6rem)]">BUY · SELL · LEASE · CONSULTING</span>
             </h1>
             <HeroCatalogSearch locale={params.locale} />
