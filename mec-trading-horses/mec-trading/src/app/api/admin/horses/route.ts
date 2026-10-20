@@ -43,10 +43,55 @@ function slugify(name: string) {
     .replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 }
 
+export async function GET(request: NextRequest) {
+  const session = await getSession();
+  if (!session) return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
+  const slug = request.nextUrl.searchParams.get("slug");
+  try {
+    const horses = await db.horse.findMany({
+      where: slug ? { slug } : undefined,
+      include: { translations: true, media: { orderBy: { sortOrder: "asc" } }, documents: true, competitionResults: true, pedigreeEntries: true },
+      orderBy: { updatedAt: "desc" }
+    });
+    if (slug && horses.length === 0) return NextResponse.json({ error: "Horse not found" }, { status: 404 });
+    return NextResponse.json({ horses });
+  } catch (error) {
+    console.error("Admin horse list failed:", error);
+    return NextResponse.json({ error: "Could not load horses" }, { status: 500 });
+  }
+}
+
 export async function PATCH(request: NextRequest) {
   const session = await getSession();
   if (!session) return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
   const body = await request.json().catch(() => null);
+  const mediaAction = z.object({
+    mediaAction: z.enum(["add", "delete"]),
+    horseSlug: z.string().min(1),
+    mediaId: z.string().optional(),
+    type: z.enum(["PHOTO", "VIDEO_GENERAL", "VIDEO_COMPETITION", "VIDEO_TRAINING"]).optional(),
+    url: z.string().url().optional(),
+    alt: z.string().optional(),
+    isCover: z.boolean().optional()
+  }).safeParse(body);
+  if (mediaAction.success) {
+    try {
+      const horse = await db.horse.findUnique({ where: { slug: mediaAction.data.horseSlug }, select: { id: true } });
+      if (!horse) return NextResponse.json({ error: "Horse not found" }, { status: 404 });
+      if (mediaAction.data.mediaAction === "delete") {
+        if (!mediaAction.data.mediaId) return NextResponse.json({ error: "Media ID is required" }, { status: 400 });
+        await db.media.delete({ where: { id: mediaAction.data.mediaId, horseId: horse.id } });
+      } else {
+        if (!mediaAction.data.url || !mediaAction.data.type) return NextResponse.json({ error: "Media URL and type are required" }, { status: 400 });
+        if (mediaAction.data.isCover) await db.media.updateMany({ where: { horseId: horse.id }, data: { isCover: false } });
+        await db.media.create({ data: { horseId: horse.id, type: mediaAction.data.type, url: mediaAction.data.url, alt: mediaAction.data.alt, isCover: mediaAction.data.isCover ?? false } });
+      }
+      return NextResponse.json({ ok: true });
+    } catch (error) {
+      console.error("Horse media update failed:", error);
+      return NextResponse.json({ error: "Could not update horse media" }, { status: 500 });
+    }
+  }
   const statusUpdate = z.object({
     horseSlug: z.string().min(1),
     status: z.enum(["AVAILABLE", "RESERVED", "SOLD"])
