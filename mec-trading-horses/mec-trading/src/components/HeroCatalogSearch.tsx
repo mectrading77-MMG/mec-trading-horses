@@ -34,7 +34,7 @@ export default function HeroCatalogSearch({ locale }: { locale: Locale }) {
   }
 
   return (
-    <form onSubmit={submit} role="search" className="mx-auto mt-12 flex w-full max-w-4xl items-center gap-2 rounded-full border border-[#e4c36d] bg-gradient-to-r from-[#b9872e] via-[#f0d27d] to-[#b9872e] p-1.5 text-left shadow-[0_18px_50px_-22px_rgba(0,0,0,0.65)] sm:mt-13 sm:p-2">
+    <form onSubmit={submit} role="search" className="mx-auto mt-3 flex w-full max-w-4xl items-center gap-2 rounded-full border border-[#e4c36d] bg-gradient-to-r from-[#b9872e] via-[#f0d27d] to-[#b9872e] p-1.5 text-left shadow-[0_18px_50px_-22px_rgba(0,0,0,0.65)] sm:mt-4 sm:p-2">
       <label htmlFor="hero-horse-search" className="sr-only">Search the horse catalogue</label>
       <span aria-hidden="true" className="flex items-center ps-4 text-[#17130b]/70 sm:ps-5">
         <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5" stroke="currentColor" strokeWidth="1.7"><circle cx="10.8" cy="10.8" r="6.8" /><path d="m16 16 4.2 4.2" strokeLinecap="round" /></svg>
