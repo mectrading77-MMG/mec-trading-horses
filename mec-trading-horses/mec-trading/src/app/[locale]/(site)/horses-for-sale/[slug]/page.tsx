@@ -198,7 +198,7 @@ export default async function HorseDetailPage({
             {/* Health & documents */}
             <section className="mt-14">
               <SectionHeading eyebrow={dict.detail.healthDocuments} title="" />
-              {horse.xrays && (
+              {"xrays" in horse && horse.xrays && (
                 <div className="mt-8">
                   <XrayViewer set={horse.xrays} dict={dict} locale={params.locale} />
                 </div>
