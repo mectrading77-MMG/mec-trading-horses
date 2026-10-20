@@ -20,7 +20,7 @@ export default async function HomePage({ params }: { params: { locale: Locale } 
         <HeroVideo src="/video/hero.mp4" poster="/video/hero-poster.jpg" />
         <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 to-black/10" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-black/10" />
-        <div className="absolute inset-x-0 bottom-[104px] z-10 mx-auto w-full max-w-editorial px-6 pb-0 sm:relative sm:inset-auto sm:bottom-auto sm:pt-[104px] sm:pb-16 lg:px-10 lg:pt-[120px]">
+        <div className="absolute inset-x-0 bottom-[224px] z-10 mx-auto w-full max-w-editorial px-6 pb-0 sm:relative sm:inset-auto sm:bottom-auto sm:pt-[224px] sm:pb-16 lg:px-10 lg:pt-[240px]">
           <div className="mx-auto w-full max-w-4xl text-center">
             <h1 className="mx-auto w-full max-w-4xl font-sans text-center text-3xl font-semibold leading-tight text-white sm:text-5xl lg:text-6xl xl:text-6xl">
               <span className="block w-full whitespace-nowrap text-center text-[clamp(0.92rem,3.15vw,3.5rem)] font-semibold tracking-[0.025em] sm:text-[clamp(1.8rem,3.8vw,3.5rem)] lg:text-[clamp(2.25rem,3.8vw,3.6rem)]">BUY · SELL · LEASE · CONSULTING</span>
