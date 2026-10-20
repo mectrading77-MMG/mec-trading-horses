@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+/* System font stacks avoid build failures when Google Fonts is unreachable. */
+:root {
+  --font-display: Georgia, "Times New Roman", serif;
+  --font-body: Arial, Helvetica, sans-serif;
+  --font-mono: "Courier New", Courier, monospace;
+}
+
 html {
   scroll-behavior: smooth;
 }
