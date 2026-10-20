@@ -20,7 +20,7 @@ export async function listHorses() {
     return records.map((record) => {
       const byLocale = new Map(record.translations.map((translation) => [translation.locale, translation]));
       const english = byLocale.get("en") ?? record.translations[0];
-      const translationFor = (locale: string) => {
+      const translationFor = (locale: Locale) => {
         const translation = byLocale.get(locale) ?? english;
         return {
           locale,
