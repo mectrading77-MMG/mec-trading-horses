@@ -10,14 +10,17 @@ export default function CatalogClient({
   horses,
   locale,
   dict,
-  initialLevel
+  initialLevel,
+  initialSearch
 }: {
   horses: Horse[];
   locale: Locale;
   dict: any;
   initialLevel?: string;
+  initialSearch?: string;
 }) {
   const [level, setLevel] = useState(HEIGHT_BANDS.some((b) => b.id === initialLevel) ? (initialLevel as string) : "");
+  const [search, setSearch] = useState(initialSearch ?? "");
   const [breed, setBreed] = useState("");
   const [sex, setSex] = useState("");
   const [color, setColor] = useState("");
@@ -78,6 +81,20 @@ export default function CatalogClient({
 
   const filtered = useMemo(() => {
     let list = horses; // sold horses stay visible with their badge
+    const needle = search.trim().toLocaleLowerCase();
+    if (needle) {
+      list = list.filter((h) => {
+        const age = String(ageFromDob(h.dateOfBirth));
+        const height = String(h.jumpHeightCm);
+        const price = h.priceAmount == null ? "" : String(h.priceAmount);
+        const translatedNames = Object.values(h.translations).map((t) => t?.name ?? "").join(" ");
+        const searchable = [
+          h.breed, h.sex, h.color, h.competitionLevel ?? "", h.locationLabel,
+          age, height, price, translatedNames, h.status
+        ].join(" ").toLocaleLowerCase();
+        return searchable.includes(needle);
+      });
+    }
     if (favoritesOnly) list = list.filter((h) => favoriteIds.includes(h.id));
     if (level) list = list.filter((h) => bandFor(h.jumpHeightCm).id === level);
     if (breed) list = list.filter((h) => h.breed === breed);
@@ -114,7 +131,7 @@ export default function CatalogClient({
         );
     }
     return list;
-  }, [horses, level, breed, sex, color, competitionLevel, location, priceRange, sort, favoritesOnly, favoriteIds]);
+  }, [horses, search, level, breed, sex, color, competitionLevel, location, priceRange, sort, favoritesOnly, favoriteIds]);
 
   const chip = (active: boolean) =>
     `px-4 py-2 font-mono text-[10px] uppercase tracking-eyebrow border transition-colors duration-400 ${
