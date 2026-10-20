@@ -115,7 +115,7 @@ export default function SelectionExplorer({
               ))}
               <span
                 className={`absolute left-4 top-4 px-3 py-1 font-mono text-[10px] uppercase tracking-eyebrow ${
-                  horse.status === "AVAILABLE" ? "bg-hunter text-ivory" : horse.status === "RESERVED" ? "bg-gold text-charcoal" : "bg-charcoal/85 text-ivory"
+                  horse.status === "AVAILABLE" ? "bg-hunter text-ivory" : horse.status === "RESERVED" ? "bg-gold text-charcoal" : "bg-red-700 text-white"
                 }`}
               >
                 {dict.horse.statusLabel[horse.status]}
