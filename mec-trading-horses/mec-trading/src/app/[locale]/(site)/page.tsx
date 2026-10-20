@@ -21,12 +21,12 @@ export default async function HomePage({ params }: { params: { locale: Locale } 
         <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 to-black/10" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-black/10" />
         <div className="relative z-10 mx-auto w-full max-w-editorial px-6 pt-40 pb-16 sm:pt-44 lg:px-10 lg:pt-48">
-          <div className="max-w-4xl">
-            <h1 className="max-w-4xl font-display text-4xl italic leading-[1.02] text-white sm:text-6xl lg:text-7xl xl:text-[5.25rem]">
-              <span className="block not-italic whitespace-nowrap text-[clamp(1rem,3.3vw,3.75rem)] font-semibold tracking-[0.015em] sm:text-[clamp(2rem,4vw,3.75rem)] lg:text-[clamp(2.5rem,4.2vw,4rem)] xl:text-[4rem]">BUY · SELL · LEASE · CONSULTING</span>
+          <div className="mx-auto w-full max-w-4xl text-center">
+            <h1 className="mx-auto w-full max-w-4xl font-sans text-center text-3xl font-semibold leading-tight text-white sm:text-5xl lg:text-6xl xl:text-6xl">
+              <span className="block w-full whitespace-nowrap text-center text-[clamp(0.92rem,3.15vw,3.5rem)] font-semibold tracking-[0.025em] sm:text-[clamp(1.8rem,3.8vw,3.5rem)] lg:text-[clamp(2.25rem,3.8vw,3.6rem)]">BUY · SELL · LEASE · CONSULTING</span>
             </h1>
             <HeroCatalogSearch locale={params.locale} />
-            <div className="mt-9 hidden flex-col items-start gap-3 md:flex md:flex-row md:gap-4">
+            <div className="mt-9 hidden flex-col items-center justify-center gap-3 md:flex md:flex-row md:gap-4">
               <Link href={`/${params.locale}/horses-for-sale`} className="group inline-flex min-h-[58px] min-w-[250px] items-center justify-between gap-8 border border-[#d7ae53] bg-gradient-to-r from-[#b9872e] via-[#f0d27d] to-[#b9872e] px-7 py-4 text-[12px] font-semibold uppercase tracking-[0.16em] text-[#17130b] shadow-lg transition-all duration-300 hover:brightness-110 sm:min-w-[280px]">
                 {dict.home.heroCta}<span aria-hidden="true" className="text-xl transition-transform group-hover:translate-x-1">→</span>
               </Link>
