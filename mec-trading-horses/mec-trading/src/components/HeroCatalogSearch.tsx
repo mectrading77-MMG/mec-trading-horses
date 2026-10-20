@@ -47,8 +47,8 @@ export default function HeroCatalogSearch({ locale }: { locale: Locale }) {
         placeholder={placeholders[placeholderIndex]}
         className="min-w-0 flex-1 rounded-full bg-transparent px-2 py-3 text-sm font-medium text-[#17130b] outline-none placeholder:text-[#3d321b]/75 sm:px-3 sm:py-3.5 sm:text-base"
       />
-      <button type="submit" className="inline-flex shrink-0 items-center gap-2 rounded-full border border-[#17130b]/80 bg-[#17130b] px-5 py-3 font-sans text-[11px] font-semibold uppercase tracking-[0.14em] text-[#f0d27d] transition-colors hover:bg-[#292317] sm:px-7 sm:py-3.5 sm:text-xs">
-        <span>Search</span><span aria-hidden="true" className="text-base">→</span>
+      <button type="submit" aria-label="Search horses" className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#17130b]/80 bg-[#17130b] p-0 text-lg font-semibold text-[#f0d27d] transition-colors hover:bg-[#292317] sm:h-12 sm:w-12" >
+        <span aria-hidden="true">→</span>
       </button>
     </form>
   );
