@@ -20,10 +20,10 @@ export default async function HomePage({ params }: { params: { locale: Locale } 
         <HeroVideo src="/video/hero.mp4" poster="/video/hero-poster.jpg" />
         <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 to-black/10" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-black/10" />
-        <div className="relative z-10 mx-auto w-full max-w-editorial px-6 pt-20 pb-16 sm:pt-24 lg:px-10 lg:pt-28">
+        <div className="relative z-10 mx-auto w-full max-w-editorial px-6 pt-28 pb-16 sm:pt-32 lg:px-10 lg:pt-36">
           <div className="max-w-4xl">
             <h1 className="max-w-4xl font-display text-4xl italic leading-[1.02] text-white sm:text-6xl lg:text-7xl xl:text-[5.25rem]">
-              <span className="block not-italic text-3xl font-semibold tracking-[0.04em] sm:text-5xl lg:text-6xl xl:text-7xl">BUY · SELL · LEASE · CONSULTING</span>
+              <span className="block not-italic text-2xl font-semibold tracking-[0.025em] sm:text-4xl lg:text-5xl xl:text-6xl">BUY · SELL · LEASE · CONSULTING</span>
             </h1>
             <HeroCatalogSearch locale={params.locale} />
             <div className="mt-9 hidden flex-col items-start gap-3 md:flex md:flex-row md:gap-4">
