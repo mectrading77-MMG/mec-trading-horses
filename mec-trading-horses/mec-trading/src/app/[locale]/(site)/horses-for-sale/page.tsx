@@ -17,7 +17,7 @@ export default async function HorsesForSalePage({
   searchParams
 }: {
   params: { locale: Locale };
-  searchParams: { level?: string };
+  searchParams: { level?: string; search?: string };
 }) {
   const dict = await getDictionary(params.locale);
   const horses = await listHorses();
@@ -31,6 +31,7 @@ export default async function HorsesForSalePage({
           locale={params.locale}
           dict={dict}
           initialLevel={searchParams.level}
+          initialSearch={searchParams.search}
         />
       </div>
     </div>
