@@ -4,15 +4,104 @@ import { db } from "@/lib/db";
 
 export async function listHorses() {
   try {
-    const statuses = await db.horse.findMany({
-      select: { slug: true, status: true }
+    const records = await db.horse.findMany({
+      include: {
+        translations: true,
+        media: { orderBy: { sortOrder: "asc" } },
+        documents: true,
+        competitionResults: true,
+        pedigreeEntries: true
+      },
+      orderBy: { updatedAt: "desc" }
     });
-    const statusBySlug = new Map(statuses.map((h) => [h.slug, h.status]));
-    return horses.map((horse) => ({
-      ...horse,
-      status: statusBySlug.get(horse.slug) ?? horse.status
-    }));
+
+    // When the database is available, the public catalogue is the source of
+    // truth. This keeps the rotating homepage preview in sync with admin CRUD.
+    return records.map((record) => {
+      const byLocale = new Map(record.translations.map((translation) => [translation.locale, translation]));
+      const english = byLocale.get("en") ?? record.translations[0];
+      const translationFor = (locale: string) => {
+        const translation = byLocale.get(locale) ?? english;
+        return {
+          locale,
+          name: translation?.name ?? "Unnamed horse",
+          positioning: translation?.positioning ?? "",
+          personality: translation?.personality ?? undefined,
+          training: translation?.training ?? undefined,
+          strengths: translation?.strengths ?? undefined,
+          experience: translation?.experience ?? undefined,
+          suitability: translation?.suitability ?? undefined,
+          potential: translation?.potential ?? undefined,
+          idealRider: translation?.idealRider ?? undefined
+        };
+      };
+
+      return {
+        id: record.id,
+        slug: record.slug,
+        breed: record.breed,
+        sex: record.sex,
+        dateOfBirth: record.dateOfBirth.toISOString(),
+        heightCm: record.heightCm ?? undefined,
+        color: record.color,
+        jumpHeightCm: record.jumpHeightCm,
+        maxHeightJumpedCm: record.maxHeightJumpedCm ?? undefined,
+        competitionLevel: record.competitionLevel ?? undefined,
+        registrationNo: record.registrationNo ?? undefined,
+        passportNo: record.passportNo ?? undefined,
+        priceAmount: record.priceAmount ?? undefined,
+        priceCurrency: record.priceCurrency,
+        priceOnRequest: record.priceOnRequest,
+        status: record.status,
+        locationLabel: record.locationLabel,
+        featuredOnHome: record.featuredOnHome,
+        featuredStory: record.featuredStory,
+        highlights: [record.translations.find((translation) => translation.locale === "en")?.strengths ?? ""].filter(Boolean),
+        photosAreRepresentative: false,
+        trust: {
+          vetDocs: record.trustVetDocs,
+          xrays: record.trustXrays,
+          pedigreeDocs: record.trustPedigreeDocs,
+          transport: record.trustTransport
+        },
+        translations: {
+          en: translationFor("en"),
+          fr: translationFor("fr"),
+          ar: translationFor("ar"),
+          de: translationFor("de"),
+          nl: translationFor("nl")
+        },
+        media: record.media.map((item) => ({
+          type: item.type,
+          url: item.url,
+          alt: item.alt ?? undefined,
+          isCover: item.isCover
+        })),
+        documents: record.documents.map((item) => ({
+          type: item.type,
+          label: item.label,
+          url: item.url,
+          downloadable: item.downloadable
+        })),
+        competitionResults: record.competitionResults.map((item) => ({
+          competition: item.competition,
+          year: item.year,
+          level: item.level,
+          result: item.result,
+          rider: item.rider ?? undefined,
+          location: item.location ?? undefined
+        })),
+        pedigree: record.pedigreeEntries.map((item) => ({
+          position: item.position,
+          name: item.name,
+          breed: item.breed ?? undefined,
+          photoUrl: item.photoUrl ?? undefined,
+          competitionNote: item.competitionNote ?? undefined
+        }))
+      };
+    });
   } catch {
+    // Keep the demo catalogue usable when the database is not configured.
     return horses;
   }
 }
