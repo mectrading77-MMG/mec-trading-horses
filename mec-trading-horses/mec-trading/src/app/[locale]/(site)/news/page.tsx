@@ -31,7 +31,8 @@ const postsByLocale: Record<Locale, { title: string; date: string }[]> = {
 };
 
 export default async function NewsPage({ params }: { params: { locale: Locale } }) {
-  const dict = await getDictionary(params.locale);\n  const posts = postsByLocale[params.locale] ?? postsByLocale.en;
+  const dict = await getDictionary(params.locale);
+  const posts = postsByLocale[params.locale] ?? postsByLocale.en;
 
   return (
     <div className="mx-auto max-w-editorial px-6 py-16 lg:px-10">
