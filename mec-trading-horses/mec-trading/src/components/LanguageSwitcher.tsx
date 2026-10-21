@@ -1,6 +1,6 @@
 "use client";
 
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import type { Locale } from "@/types/horse";
 
 const labels: Record<Locale, string> = {
@@ -16,14 +16,12 @@ const locales: Locale[] = ["en", "fr", "ar", "de", "nl"];
 export default function LanguageSwitcher({ current }: { current: Locale }) {
   const pathname = usePathname() ?? `/${current}`;
   const router = useRouter();
-  const searchParams = useSearchParams();
 
   // Strip the active locale once, then build the destination with the
   // selected locale so the language choice is reflected in the actual route.
   const segments = pathname.split("/").filter(Boolean);
   const routeSegments = locales.includes(segments[0] as Locale) ? segments.slice(1) : segments;
   const rest = routeSegments.length ? `/${routeSegments.join("/")}` : "";
-  const query = searchParams.toString();
 
   return (
     <div className="relative shrink-0">
@@ -35,7 +33,7 @@ export default function LanguageSwitcher({ current }: { current: Locale }) {
         value={current}
         onChange={(e) => {
           const nextLocale = e.target.value as Locale;
-          const destination = `/${nextLocale}${rest}${query ? `?${query}` : ""}`;
+          const destination = `/${nextLocale}${rest}`;
           router.push(destination);
           router.refresh();
         }}
