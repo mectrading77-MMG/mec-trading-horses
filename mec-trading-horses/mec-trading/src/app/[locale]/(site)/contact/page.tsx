@@ -13,7 +13,16 @@ export default async function ContactPage({ params, searchParams }: { params: { 
     name: (horse.translations[params.locale] ?? horse.translations.en).name
   }));
 
-  const labels: Record<Locale, { email: string; phone: string; location: string }> = {\n    en: { email: "Email", phone: "Phone", location: "Location" },\n    fr: { email: "E-mail", phone: "Téléphone", location: "Localisation" },\n    ar: { email: "البريد الإلكتروني", phone: "الهاتف", location: "الموقع" },\n    de: { email: "E-Mail", phone: "Telefon", location: "Standort" },\n    nl: { email: "E-mail", phone: "Telefoon", location: "Locatie" }\n  };\n  const label = labels[params.locale] ?? labels.en;\n\n  const requestedService = searchParams?.service;
+  const labels: Record<Locale, { email: string; phone: string; location: string }> = {
+    en: { email: "Email", phone: "Phone", location: "Location" },
+    fr: { email: "E-mail", phone: "Téléphone", location: "Localisation" },
+    ar: { email: "البريد الإلكتروني", phone: "الهاتف", location: "الموقع" },
+    de: { email: "E-Mail", phone: "Telefon", location: "Standort" },
+    nl: { email: "E-mail", phone: "Telefoon", location: "Locatie" }
+  };
+  const label = labels[params.locale] ?? labels.en;
+
+  const requestedService = searchParams?.service;
   const initialService = requestedService && [
     "selection",
     "sales",
