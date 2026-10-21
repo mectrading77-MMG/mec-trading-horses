@@ -232,7 +232,7 @@ export default async function HorseDetailPage({
           <aside id="contact" className="h-fit border border-charcoal-line p-6 lg:sticky lg:top-28">
             <h2 className="font-display text-xl italic text-charcoal">{dict.detail.contactFormTitle}</h2>
             <div className="mt-6">
-              <ContactForm dict={dict} horseId={horse.id} horseName={t.name} />
+              <ContactForm locale={params.locale} dict={dict} horseId={horse.id} horseName={t.name} />
             </div>
           </aside>
         </div>
