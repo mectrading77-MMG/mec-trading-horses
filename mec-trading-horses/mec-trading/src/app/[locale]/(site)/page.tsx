@@ -33,7 +33,7 @@ export default async function HomePage({ params }: { params: { locale: Locale } 
                 {dict.home.heroCta}<span aria-hidden="true" className="text-xl transition-transform group-hover:translate-x-1">→</span>
               </Link>
               <Link href={`/${params.locale}/services`} className="group inline-flex min-h-[58px] min-w-[250px] items-center justify-between gap-8 border border-[#e4c36d] bg-black/25 px-7 py-4 text-[12px] font-medium uppercase tracking-[0.16em] text-white transition-all duration-300 hover:bg-[#d7ae53] hover:text-black sm:min-w-[280px]">
-                Our Services<span aria-hidden="true" className="text-xl transition-transform group-hover:translate-x-1">→</span>
+                {({ en: "Our Services", fr: "Nos services", ar: "خدماتنا", de: "Unsere Leistungen", nl: "Onze diensten" } as Record<Locale, string>)[params.locale]}<span aria-hidden="true" className="text-xl transition-transform group-hover:translate-x-1">→</span>
               </Link>
             </div>
           </div>
