@@ -57,7 +57,7 @@ export default async function ContactPage({ params, searchParams }: { params: { 
           <WhatsAppButton label={dict.detail.whatsapp} />
         </div>
         <div className="border border-charcoal-line p-6">
-          <ContactForm dict={dict} horses={horseOptions} initialService={initialService} />
+          <ContactForm locale={params.locale} dict={dict} horses={horseOptions} initialService={initialService} />
         </div>
       </div>
     </div>
