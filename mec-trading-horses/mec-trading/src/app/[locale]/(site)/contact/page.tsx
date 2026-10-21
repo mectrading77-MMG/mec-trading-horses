@@ -13,7 +13,7 @@ export default async function ContactPage({ params, searchParams }: { params: { 
     name: (horse.translations[params.locale] ?? horse.translations.en).name
   }));
 
-  const requestedService = searchParams?.service;
+  const labels: Record<Locale, { email: string; phone: string; location: string }> = {\n    en: { email: "Email", phone: "Phone", location: "Location" },\n    fr: { email: "E-mail", phone: "Téléphone", location: "Localisation" },\n    ar: { email: "البريد الإلكتروني", phone: "الهاتف", location: "الموقع" },\n    de: { email: "E-Mail", phone: "Telefon", location: "Standort" },\n    nl: { email: "E-mail", phone: "Telefoon", location: "Locatie" }\n  };\n  const label = labels[params.locale] ?? labels.en;\n\n  const requestedService = searchParams?.service;
   const initialService = requestedService && [
     "selection",
     "sales",
@@ -34,15 +34,15 @@ export default async function ContactPage({ params, searchParams }: { params: { 
       <div className="mt-12 grid gap-12 lg:grid-cols-[1fr_1.2fr]">
         <div className="space-y-6">
           <div>
-            <p className="font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/40">Email</p>
+            <p className="font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/40">{label.email}</p>
             <a href="mailto:sales@mechorses.com" className="text-charcoal">sales@mechorses.com</a>
           </div>
           <div>
-            <p className="font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/40">Phone</p>
+            <p className="font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/40">{label.phone}</p>
             <a href="tel:+33618313530" className="text-charcoal">+33 6 18 31 35 30</a>
           </div>
           <div>
-            <p className="font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/40">Location</p>
+            <p className="font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/40">{label.location}</p>
             <p className="text-charcoal">La Chapelle-des-Fougeretz, Brittany, France</p>
           </div>
           <WhatsAppButton label={dict.detail.whatsapp} />
