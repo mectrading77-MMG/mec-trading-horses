@@ -18,7 +18,7 @@ export default async function SiteLayout({
       <Header locale={params.locale} dict={dict} />
       <main>{children}</main>
       <Footer locale={params.locale} dict={dict} />
-      <StickyMobileBar dict={dict} />
+      <StickyMobileBar dict={dict} locale={params.locale} />
     </>
   );
 }
