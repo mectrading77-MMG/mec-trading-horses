@@ -1,8 +1,9 @@
 "use client";
 
 import { whatsappLink } from "@/lib/whatsapp";
+import type { Locale } from "@/types/horse";
 
-export default function StickyMobileBar({ dict }: { dict: any }) {\n  const shareLabel: Record<string, string> = { en: "Share", fr: "Partager", ar: "مشاركة", de: "Teilen", nl: "Delen" };\n  const shareText = shareLabel[dict.locale] ?? shareLabel.en;
+export default function StickyMobileBar({ dict, locale = "en" }: { dict: any; locale?: Locale }) {\n  const shareLabel: Record<string, string> = { en: "Share", fr: "Partager", ar: "مشاركة", de: "Teilen", nl: "Delen" };\n  const shareText = shareLabel[locale] ?? shareLabel.en;
   const share = async () => {
     if (typeof navigator !== "undefined" && navigator.share) {
       try {
