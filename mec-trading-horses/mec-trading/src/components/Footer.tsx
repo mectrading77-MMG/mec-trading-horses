@@ -4,6 +4,8 @@ import Logo from "@/components/Logo";
 
 export default function Footer({ locale, dict }: { locale: Locale; dict: any }) {
   const year = new Date().getFullYear();
+  const footerLabels: Record<Locale, { social: string; location: string }> = { en: { social: "Social", location: "La Chapelle-des-Fougeretz, Brittany, France" }, fr: { social: "Réseaux sociaux", location: "La Chapelle-des-Fougeretz, Bretagne, France" }, ar: { social: "وسائل التواصل", location: "لا شابيل دي فوجريه، بريتاني، فرنسا" }, de: { social: "Soziale Medien", location: "La Chapelle-des-Fougeretz, Bretagne, Frankreich" }, nl: { social: "Sociale media", location: "La Chapelle-des-Fougeretz, Bretagne, Frankrijk" } };
+  const labels = footerLabels[locale] ?? footerLabels.en;
 
   return (
     <footer className="mt-24 border-t border-charcoal-line bg-charcoal text-ivory">
@@ -25,14 +27,14 @@ export default function Footer({ locale, dict }: { locale: Locale; dict: any }) 
         <div>
           <p className="eyebrow">{dict.nav.contact}</p>
           <ul className="mt-4 space-y-2 text-sm text-ivory/80">
-            <li>La Chapelle-des-Fougeretz, Brittany, France</li>
+            <li>{labels.location}</li>
             <li><a href="mailto:sales@mechorses.com">sales@mechorses.com</a></li>
             <li><a href="tel:+33618313530">+33 6 18 31 35 30</a></li>
           </ul>
         </div>
 
         <div>
-          <p className="eyebrow">Social</p>
+          <p className="eyebrow">{labels.social}</p>
           <ul className="mt-4 space-y-2 text-sm text-ivory/80">
             <li><a href="#" target="_blank" rel="noreferrer">Instagram</a></li>
             <li><a href="#" target="_blank" rel="noreferrer">Facebook</a></li>
