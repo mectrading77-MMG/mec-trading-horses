@@ -2,7 +2,7 @@
 
 import { whatsappLink } from "@/lib/whatsapp";
 
-export default function StickyMobileBar({ dict }: { dict: any }) {
+export default function StickyMobileBar({ dict }: { dict: any }) {\n  const shareLabel: Record<string, string> = { en: "Share", fr: "Partager", ar: "مشاركة", de: "Teilen", nl: "Delen" };\n  const shareText = shareLabel[dict.locale] ?? shareLabel.en;
   const share = async () => {
     if (typeof navigator !== "undefined" && navigator.share) {
       try {
