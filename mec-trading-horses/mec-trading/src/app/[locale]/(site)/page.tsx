@@ -28,7 +28,7 @@ export default async function HomePage({ params }: { params: { locale: Locale } 
               <span className="block w-full whitespace-nowrap text-center font-display text-[clamp(0.92rem,3.15vw,3.5rem)] font-normal italic tracking-[0.055em] text-[#e4c36d] drop-shadow-[0_1px_8px_rgba(0,0,0,0.35)] sm:text-[clamp(1.8rem,3.8vw,3.5rem)] lg:text-[clamp(2.25rem,3.8vw,3.6rem)]">BUY · SELL · LEASE · CONSULTING</span>
             </h1>
             <HeroCatalogSearch locale={params.locale} />
-            <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:mt-9 sm:flex-row sm:gap-4">
+            <div className="mt-6 hidden flex-col items-center justify-center gap-3 sm:mt-9 md:flex md:flex-row md:gap-4">
               <Link href={`/${params.locale}/horses-for-sale`} className="group inline-flex min-h-[58px] min-w-[250px] items-center justify-between gap-8 border border-[#d7ae53] bg-gradient-to-r from-[#b9872e] via-[#f0d27d] to-[#b9872e] px-7 py-4 text-[12px] font-semibold uppercase tracking-[0.16em] text-[#17130b] shadow-lg transition-all duration-300 hover:brightness-110 sm:min-w-[280px]">
                 {({ en: "Our Horses", fr: "Nos chevaux", ar: "خيولنا", de: "Unsere Pferde", nl: "Onze paarden" } as Record<Locale, string>)[params.locale]}<span aria-hidden="true" className="text-xl transition-transform group-hover:translate-x-1">→</span>
               </Link>
