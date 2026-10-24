@@ -6,7 +6,6 @@ export const dynamic = "force-dynamic";
 export async function GET() {
   try {
     const horses = await db.horse.findMany({
-      where: { status: { not: "SOLD" } },
       include: { translations: true, media: { orderBy: { sortOrder: "asc" } }, pedigreeEntries: true, competitionResults: true },
       orderBy: [{ featuredOnHome: "desc" }, { updatedAt: "desc" }]
     });
