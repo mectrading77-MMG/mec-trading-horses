@@ -1,0 +1,9 @@
+{
+  "expo": {
+    "name": "MEC HORSES", "slug": "mec-horses", "scheme": "mechorses", "version": "1.0.0", "orientation": "portrait", "userInterfaceStyle": "light", "newArchEnabled": true,
+    "plugins": ["expo-router"],
+    "ios": { "supportsTablet": true, "bundleIdentifier": "com.mechorses.app" },
+    "android": { "package": "com.mechorses.app", "adaptiveIcon": { "backgroundColor": "#171717" } },
+    "extra": { "catalogApiUrl": "https://www.mechorses.com/api/public/horses" }
+  }
+}
