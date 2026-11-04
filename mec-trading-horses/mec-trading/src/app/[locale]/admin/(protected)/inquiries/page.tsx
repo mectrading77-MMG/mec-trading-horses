@@ -1,3 +1,4 @@
+import LeadActions from "./LeadActions";
 import { db } from "@/lib/db";
 
 const statusStyles: Record<string, string> = {
@@ -81,6 +82,7 @@ export default async function AdminInquiriesPage() {
               <p className="mt-4 font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/35">
                 {inq.createdAt.toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" })} · ID {inq.id}
               </p>
+              <LeadActions id={inq.id} initialStatus={inq.status} initialNotes={inq.notes} />
             </article>
           );
         })}
