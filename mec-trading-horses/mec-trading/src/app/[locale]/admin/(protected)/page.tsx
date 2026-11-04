@@ -2,10 +2,14 @@ import Link from "next/link";
 import type { Locale } from "@/types/horse";
 import { getDictionary } from "@/i18n/config";
 import { listHorses } from "@/lib/horses";
+import { db } from "@/lib/db";
 
 export default async function AdminDashboardPage({ params }: { params: { locale: Locale } }) {
   const dict = await getDictionary(params.locale);
-  const horses = await listHorses();
+  const [horses, newInquiries] = await Promise.all([
+    listHorses(),
+    db.inquiry.count({ where: { status: "NEW" } })
+  ]);
 
   const counts = {
     available: horses.filter((h) => h.status === "AVAILABLE").length,
@@ -17,7 +21,7 @@ export default async function AdminDashboardPage({ params }: { params: { locale:
     { label: "Available", value: counts.available },
     { label: "Reserved", value: counts.reserved },
     { label: "Sold", value: counts.sold },
-    { label: "New inquiries", value: 3 }
+    { label: "New inquiries", value: newInquiries }
   ];
 
   return (
