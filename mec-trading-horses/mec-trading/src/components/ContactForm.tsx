@@ -67,30 +67,30 @@ export default function ContactForm({
     const form = new FormData(e.currentTarget);
     const payload = Object.fromEntries(form.entries());
 
-    const inquiryText = [
-      `${labels.name}: ${payload.name ?? ""}`,
-      `Email: ${payload.email ?? ""}`,
-      `${labels.country}: ${payload.country ?? ""}`,
-      `${labels.phone}: ${payload.phone ?? ""}`,
-      `${labels.service}: ${payload.service ?? ""}`,
-      payload.lookingFor ? `${labels.horse}: ${payload.lookingFor}` : "",
-      payload.viewingDate ? `Viewing date: ${payload.viewingDate}` : "",
-      `${labels.message}: ${payload.message ?? ""}`
-    ].filter(Boolean).join("\n");
-
-    if (sendMethod === "whatsapp") {
-      window.location.href = "https://wa.me/33618313530?text=" + encodeURIComponent("MEC Horses inquiry\n\n" + inquiryText);
+    try {
+      const response = await fetch("/api/inquiries", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: payload.name,
+          email: payload.email,
+          phone: payload.phone,
+          country: payload.country,
+          service: payload.service,
+          message: payload.message,
+          lookingFor: payload.lookingFor || horseName || "",
+          viewingDate: payload.viewingDate || "",
+          horseId: horseId || "",
+          locale,
+          source: "website-contact-form",
+          preferredContact: sendMethod || "email"
+        })
+      });
+      if (!response.ok) throw new Error("Could not save inquiry");
       setStatus("sent");
-      return;
+    } catch {
+      setStatus("error");
     }
-
-    if (sendMethod === "email") {
-      window.location.href = "mailto:sales@mechorses.com?subject=" + encodeURIComponent("MEC Horses inquiry — " + (payload.name ?? "")) + "&body=" + encodeURIComponent(inquiryText);
-      setStatus("sent");
-      return;
-    }
-
-    setStatus("error");
   }
 
   if (status === "sent") {
