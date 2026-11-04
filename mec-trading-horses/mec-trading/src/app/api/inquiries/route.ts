@@ -14,7 +14,8 @@ const InquirySchema = z.object({
   viewingDate: z.string().optional(),
   horseId: z.string().optional(),
   locale: z.enum(["en", "fr", "ar", "de", "nl"]).default("en"),
-  source: z.string().max(120).optional().default("website")
+  source: z.string().max(120).optional().default("website"),
+  preferredContact: z.enum(["email", "whatsapp"]).default("email")
 });
 
 async function notifyByEmail(subject: string, body: string) {
@@ -66,6 +67,7 @@ export async function POST(request: NextRequest) {
         horseId: data.horseId || null,
         locale: data.locale,
         source: data.source,
+        preferredContact: data.preferredContact,
         status: "NEW"
       },
       select: { id: true, createdAt: true }
