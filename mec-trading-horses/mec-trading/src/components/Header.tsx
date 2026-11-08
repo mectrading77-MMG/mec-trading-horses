@@ -32,7 +32,7 @@ export default function Header({ locale, dict }: { locale: Locale; dict: any }) 
         </div>
 
         <Link href={`/${locale}`} aria-label={dict.brand.name} className="flex justify-center">
-          <Logo variant="compact" priority className="!h-[58px] lg:!h-[66px]" />
+          <Logo variant="compact" priority className="!h-[68px] lg:!h-[78px]" />
         </Link>
 
         <div className="flex items-center justify-end">
