@@ -14,31 +14,28 @@ export default function Header({ locale, dict }: { locale: Locale; dict: any }) 
   ];
 
   return (
-    <header className="sticky top-0 z-40 border-b border-charcoal-line bg-ivory/90 backdrop-blur">
-      <div className="mx-auto flex max-w-editorial items-center justify-between gap-6 px-6 py-2.5 lg:px-10">
-        <Link href={`/${locale}`} aria-label={dict.brand.name} className="flex shrink-0 items-center">
-          <Logo variant="compact" priority className="!h-[60px] lg:!h-[68px]" />
+    <header className="sticky top-0 z-40 border-b border-charcoal-line bg-ivory/95 backdrop-blur">
+      <div dir="ltr" className="mx-auto grid max-w-editorial grid-cols-3 items-center gap-3 px-4 py-2.5 lg:px-10">
+        <div className="flex items-center justify-start">
+          <details className="group relative">
+            <summary className="flex cursor-pointer list-none items-center gap-2 border border-charcoal/25 px-3 py-2 font-mono text-[10px] uppercase tracking-eyebrow text-charcoal transition-colors hover:border-gold hover:text-gold [&::-webkit-details-marker]:hidden">
+              <span className="text-base leading-none">☰</span>
+              <span className="hidden sm:inline">Menu</span>
+            </summary>
+            <nav className="absolute left-0 top-full z-50 mt-2 min-w-56 border border-charcoal/15 bg-ivory p-2 shadow-xl">
+              <Link href={`/${locale}/account`} className="block border-b border-charcoal/15 px-4 py-3 font-mono text-[11px] font-semibold uppercase tracking-eyebrow text-gold hover:bg-sand/15">My Account</Link>
+              {nav.map((item) => (
+                <Link key={item.href} href={item.href} className="block px-4 py-3 font-mono text-[11px] uppercase tracking-eyebrow text-charcoal/75 transition-colors hover:bg-sand/15 hover:text-gold">{item.label}</Link>
+              ))}
+            </nav>
+          </details>
+        </div>
+
+        <Link href={`/${locale}`} aria-label={dict.brand.name} className="flex justify-center">
+          <Logo variant="compact" priority className="!h-[58px] lg:!h-[66px]" />
         </Link>
 
-        <nav className="hidden items-center gap-8 lg:flex">
-          {nav.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="font-mono text-[11px] uppercase tracking-eyebrow text-charcoal/70 transition-colors duration-400 hover:text-gold"
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-
-        <div className="flex items-center gap-3">
-          <Link
-            href={`/${locale}/contact`}
-            className="rounded-none border border-charcoal px-4 py-2 font-mono text-[10px] uppercase tracking-eyebrow text-charcoal transition-colors duration-400 hover:border-gold hover:text-gold sm:px-5 sm:text-[11px]"
-          >
-            {dict.nav.ctaSecondary}
-          </Link>
+        <div className="flex items-center justify-end">
           <LanguageSwitcher current={locale} />
         </div>
       </div>
