@@ -42,9 +42,6 @@ export default async function HomePage({ params }: { params: { locale: Locale } 
               {({ en: "Speak with our team", fr: "Contacter notre équipe", ar: "تواصل مع فريقنا", de: "Kontaktieren Sie unser Team", nl: "Neem contact op" } as Record<Locale, string>)[params.locale]}
             </Link>
           </div>
-          <div className="mx-auto mt-14 flex max-w-3xl items-center justify-center gap-5 text-[9px] font-mono uppercase tracking-[0.2em] text-ivory/55 sm:gap-9">
-            <span>France</span><span className="h-px w-7 bg-[#B08D57]/70" /><span>Europe</span><span className="h-px w-7 bg-[#B08D57]/70" /><span>Middle East</span>
-          </div>
         </div>
       </section>
       <section className="relative z-10 mx-auto -mt-1 grid max-w-editorial gap-px bg-charcoal-line px-6 lg:grid-cols-3 lg:px-10">
