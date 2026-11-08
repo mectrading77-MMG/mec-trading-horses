@@ -26,7 +26,7 @@ export default function AdminLoginPage() {
       router.push(`/${locale}/admin`);
       router.refresh();
     } else {
-      setError("Invalid email or password.");
+      setError("Invalid username or password.");
     }
   }
 
@@ -41,8 +41,8 @@ export default function AdminLoginPage() {
         <form onSubmit={onSubmit} className="mt-10 space-y-4">
           <input
             required
-            type="email"
-            placeholder="Email"
+            type="text"
+            placeholder="Admin username or email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="w-full border border-ivory/20 bg-transparent px-4 py-3 text-sm text-ivory placeholder:text-ivory/40 focus:border-gold"
