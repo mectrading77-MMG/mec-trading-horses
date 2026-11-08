@@ -37,7 +37,7 @@ export default function LanguageSwitcher({ current }: { current: Locale }) {
           router.push(destination);
           router.refresh();
         }}
-        className="h-[34px] w-[92px] appearance-none rounded-none border border-charcoal bg-ivory px-4 py-2 pr-7 font-mono text-[10px] uppercase tracking-eyebrow text-charcoal cursor-pointer transition-colors duration-400 hover:border-gold hover:text-gold sm:h-[38px] sm:w-[108px] sm:text-[11px]"
+        className="h-[30px] w-[76px] appearance-none rounded-none border border-charcoal bg-ivory px-2 py-1 pr-6 font-mono text-[10px] uppercase tracking-eyebrow text-charcoal cursor-pointer transition-colors duration-400 hover:border-gold hover:text-gold sm:h-[32px] sm:w-[86px] sm:text-[10px]"
         aria-label="Select language"
       >
         {locales.map((locale) => (
@@ -47,7 +47,7 @@ export default function LanguageSwitcher({ current }: { current: Locale }) {
         ))}
       </select>
       <span
-        className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-[9px] text-charcoal/50"
+        className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-[9px] text-charcoal/50"
         aria-hidden="true"
       >
         ⌄
