@@ -18,28 +18,38 @@ export default async function HomePage({ params }: { params: { locale: Locale } 
   return (
     <>
       <MobileQuickNav locale={params.locale} />
-      <section className="relative isolate flex min-h-[680px] h-[88vh] items-start overflow-hidden bg-charcoal supports-[height:88dvh]:h-[88dvh]">
+      <section className="relative isolate flex min-h-[620px] items-center overflow-hidden bg-charcoal sm:min-h-[700px]">
         <HeroVideo src="/video/hero.mp4" poster="/video/hero-poster.jpg" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 to-black/10" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-black/10" />
-        <div className="absolute inset-x-0 bottom-[308px] z-10 mx-auto w-full max-w-editorial px-6 pb-0 sm:relative sm:inset-auto sm:bottom-auto sm:pt-[308px] sm:pb-16 lg:px-10 lg:pt-[324px]">
-          <div className="mx-auto w-full max-w-4xl text-center">
-            <h1 className="relative left-1/2 mx-auto w-screen max-w-none -translate-x-1/2 text-center text-3xl font-normal leading-tight sm:text-5xl lg:text-6xl xl:text-6xl">
-              <span className="block w-full whitespace-nowrap text-center font-display text-[clamp(0.92rem,3.15vw,3.5rem)] font-normal italic tracking-[0.055em] text-[#e4c36d] drop-shadow-[0_1px_8px_rgba(0,0,0,0.35)] sm:text-[clamp(1.8rem,3.8vw,3.5rem)] lg:text-[clamp(2.25rem,3.8vw,3.6rem)]">BUY · SELL · LEASE · CONSULTING</span>
-            </h1>
+        <div className="absolute inset-0 bg-gradient-to-r from-charcoal/90 via-charcoal/60 to-charcoal/20" />
+        <div className="absolute inset-0 bg-gradient-to-t from-charcoal/55 via-transparent to-charcoal/20" />
+        <div className="relative z-10 mx-auto w-full max-w-editorial px-6 py-24 text-center sm:py-32 lg:px-10">
+          <p className="mb-7 font-mono text-[10px] uppercase tracking-[0.28em] text-[#C7A468] sm:text-xs">
+            {({ en: "International Sport Horse Sales & Brokerage", fr: "Vente et courtage international de chevaux de sport", ar: "بيع ووساطة الخيول الرياضية دوليًا", de: "Internationaler Sportpferdeverkauf & Vermittlung", nl: "Internationale verkoop & bemiddeling van sportpaarden" } as Record<Locale, string>)[params.locale]}
+          </p>
+          <h1 className="mx-auto max-w-5xl font-display text-4xl font-normal italic leading-[1.08] tracking-[-0.035em] text-ivory sm:text-6xl lg:text-7xl">
+            Where Champions
+            <span className="mt-2 block text-[#C7A468]">Change Hands</span>
+          </h1>
+          <p className="mx-auto mt-7 max-w-2xl text-sm leading-7 text-ivory/80 sm:text-base">
+            {({ en: "A considered approach to finding, presenting and placing exceptional sport horses.", fr: "Une approche exigeante pour trouver, présenter et placer des chevaux de sport d’exception.", ar: "نهج احترافي لاختيار الخيول الرياضية المتميزة وعرضها وربطها بالفرسان المناسبين.", de: "Ein sorgfältiger Ansatz, um außergewöhnliche Sportpferde zu finden, zu präsentieren und zu vermitteln.", nl: "Een zorgvuldige aanpak voor het vinden, presenteren en bemiddelen van uitzonderlijke sportpaarden." } as Record<Locale, string>)[params.locale]}
+          </p>
+          <div className="mx-auto mt-9 max-w-3xl">
             <HeroCatalogSearch locale={params.locale} />
-            <div className="mt-6 hidden flex-col items-center justify-center gap-3 sm:mt-9 md:flex md:flex-row md:gap-4">
-              <Link href={`/${params.locale}/horses-for-sale`} className="group inline-flex min-h-[58px] min-w-[250px] items-center justify-between gap-8 border border-[#d7ae53] bg-gradient-to-r from-[#b9872e] via-[#f0d27d] to-[#b9872e] px-7 py-4 text-[12px] font-semibold uppercase tracking-[0.16em] text-[#17130b] shadow-lg transition-all duration-300 hover:brightness-110 sm:min-w-[280px]">
-                {({ en: "Our Horses", fr: "Nos chevaux", ar: "خيولنا", de: "Unsere Pferde", nl: "Onze paarden" } as Record<Locale, string>)[params.locale]}<span aria-hidden="true" className="text-xl transition-transform group-hover:translate-x-1">→</span>
-              </Link>
-              <Link href={`/${params.locale}/services`} className="group inline-flex min-h-[58px] min-w-[250px] items-center justify-between gap-8 border border-[#e4c36d] bg-black/25 px-7 py-4 text-[12px] font-medium uppercase tracking-[0.16em] text-white transition-all duration-300 hover:bg-[#d7ae53] hover:text-black sm:min-w-[280px]">
-                {({ en: "Our Services", fr: "Nos services", ar: "خدماتنا", de: "Unsere Leistungen", nl: "Onze diensten" } as Record<Locale, string>)[params.locale]}<span aria-hidden="true" className="text-xl transition-transform group-hover:translate-x-1">→</span>
-              </Link>
-            </div>
+          </div>
+          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <Link href={`/${params.locale}/horses-for-sale`} className="group inline-flex min-h-[54px] min-w-[220px] items-center justify-center gap-5 border border-[#C7A468] bg-[#B08D57] px-7 py-4 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-charcoal transition-all duration-300 hover:bg-[#C7A468]">
+              {({ en: "Explore our horses", fr: "Découvrir nos chevaux", ar: "اكتشف خيولنا", de: "Unsere Pferde entdecken", nl: "Ontdek onze paarden" } as Record<Locale, string>)[params.locale]}
+              <span aria-hidden="true" className="text-lg transition-transform group-hover:translate-x-1">→</span>
+            </Link>
+            <Link href={`/${params.locale}/contact`} className="inline-flex min-h-[54px] min-w-[220px] items-center justify-center border border-ivory/60 bg-charcoal/20 px-7 py-4 font-mono text-[10px] uppercase tracking-[0.18em] text-ivory transition-all duration-300 hover:border-[#C7A468] hover:text-[#C7A468]">
+              {({ en: "Speak with our team", fr: "Contacter notre équipe", ar: "تواصل مع فريقنا", de: "Kontaktieren Sie unser Team", nl: "Neem contact op" } as Record<Locale, string>)[params.locale]}
+            </Link>
+          </div>
+          <div className="mx-auto mt-14 flex max-w-3xl items-center justify-center gap-5 text-[9px] font-mono uppercase tracking-[0.2em] text-ivory/55 sm:gap-9">
+            <span>France</span><span className="h-px w-7 bg-[#B08D57]/70" /><span>Europe</span><span className="h-px w-7 bg-[#B08D57]/70" /><span>Middle East</span>
           </div>
         </div>
       </section>
-
       <section className="relative z-10 mx-auto -mt-1 grid max-w-editorial gap-px bg-charcoal-line px-6 lg:grid-cols-3 lg:px-10">
         {([
           {
