@@ -30,9 +30,6 @@ export default async function HomePage({ params }: { params: { locale: Locale } 
             Where Champions
             <span className="mt-2 block text-[#C7A468]">Change Hands</span>
           </h1>
-          <p className="mx-auto mt-7 max-w-2xl text-sm leading-7 text-ivory/80 sm:text-base">
-            {({ en: "A considered approach to finding, presenting and placing exceptional sport horses.", fr: "Une approche exigeante pour trouver, présenter et placer des chevaux de sport d’exception.", ar: "نهج احترافي لاختيار الخيول الرياضية المتميزة وعرضها وربطها بالفرسان المناسبين.", de: "Ein sorgfältiger Ansatz, um außergewöhnliche Sportpferde zu finden, zu präsentieren und zu vermitteln.", nl: "Een zorgvuldige aanpak voor het vinden, presenteren en bemiddelen van uitzonderlijke sportpaarden." } as Record<Locale, string>)[params.locale]}
-          </p>
           <div className="mx-auto mt-9 max-w-3xl">
             <HeroCatalogSearch locale={params.locale} />
           </div>
