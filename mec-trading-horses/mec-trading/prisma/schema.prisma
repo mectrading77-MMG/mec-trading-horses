@@ -201,7 +201,7 @@ model Inquiry {
   updatedAt     DateTime      @updatedAt
 }
 
-model AdminUser {
+model CustomerUser {\n  id           String   @id @default(cuid())\n  email        String   @unique\n  passwordHash String\n  name         String\n  phone        String?\n  createdAt    DateTime @default(now())\n  updatedAt    DateTime @updatedAt\n}\n\nmodel AdminUser {
   id           String    @id @default(cuid())
   email        String    @unique
   passwordHash String
