@@ -31,8 +31,11 @@ export default function Header({ locale, dict }: { locale: Locale; dict: any }) 
           </details>
         </div>
 
-        <Link href={`/${locale}`} aria-label={dict.brand.name} className="flex justify-center">
+        <Link href={`/${locale}`} aria-label={dict.brand.name} className="flex flex-col items-center justify-center">
           <Logo variant="compact" priority className="!h-[68px] lg:!h-[78px]" />
+          <span className="mt-0.5 flex items-center justify-center gap-2 font-mono text-[7px] uppercase tracking-[0.18em] text-charcoal/65 sm:gap-3 sm:text-[9px]">
+            <span>France</span><span className="h-px w-3 bg-[#B08D57]/70 sm:w-5" /><span>Europe</span><span className="h-px w-3 bg-[#B08D57]/70 sm:w-5" /><span>Middle East</span>
+          </span>
         </Link>
 
         <div className="flex items-center justify-end">
