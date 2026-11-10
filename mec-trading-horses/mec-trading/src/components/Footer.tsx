@@ -49,7 +49,6 @@ export default function Footer({ locale, dict }: { locale: Locale; dict: any }) 
         <p className="mx-auto mt-2 max-w-editorial text-xs text-ivory/30">
           © {year} MEC Horses. {dict.footer.rights}
         </p>
-        <p className="mx-auto mt-2 max-w-editorial text-[11px] text-ivory/25">{dict.site.demoNotice}</p>
       </div>
     </footer>
   );
