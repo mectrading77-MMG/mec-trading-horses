@@ -36,10 +36,8 @@ export default function Footer({ locale, dict }: { locale: Locale; dict: any }) 
         <div>
           <p className="eyebrow">{labels.social}</p>
           <ul className="mt-4 space-y-2 text-sm text-ivory/80">
-            <li><a href="#" target="_blank" rel="noreferrer">Instagram</a></li>
-            <li><a href="#" target="_blank" rel="noreferrer">Facebook</a></li>
-            <li><a href="#" target="_blank" rel="noreferrer">YouTube</a></li>
-            <li><a href="#" target="_blank" rel="noreferrer">TikTok</a></li>
+            <li><a href="https://www.instagram.com/m.e.c_horses?dlrf=MXV6MGVkbWd5dzBqOA%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer">Instagram · @m.e.c_horses</a></li>
+            <li><a href="https://www.facebook.com/share/1BR9wA2KLn/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">Facebook · MEC Horses</a></li>
           </ul>
         </div>
       </div>
