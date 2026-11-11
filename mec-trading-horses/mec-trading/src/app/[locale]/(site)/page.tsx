@@ -7,7 +7,6 @@ import { listHorses } from "@/lib/horses";
 import SelectionExplorer from "@/components/SelectionExplorer";
 import HeroVideo from "@/components/HeroVideo";
 import MobileQuickNav from "@/components/MobileQuickNav";
-import HeroCatalogSearch from "@/components/HeroCatalogSearch";
 
 export const dynamic = "force-dynamic";
 
@@ -30,9 +29,6 @@ export default async function HomePage({ params }: { params: { locale: Locale } 
             Where Champions
             <span className="mt-2 block text-[#C7A468]">Change Hands</span>
           </h1>
-          <div className="mx-auto mt-9 max-w-3xl">
-            <HeroCatalogSearch locale={params.locale} />
-          </div>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Link href={`/${params.locale}/horses-for-sale`} className="group inline-flex min-h-[54px] min-w-[220px] items-center justify-center gap-5 border border-[#C7A468] bg-[#B08D57] px-7 py-4 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-charcoal transition-all duration-300 hover:bg-[#C7A468]">
               {({ en: "Explore our horses", fr: "Découvrir nos chevaux", ar: "اكتشف خيولنا", de: "Unsere Pferde entdecken", nl: "Ontdek onze paarden" } as Record<Locale, string>)[params.locale]}
