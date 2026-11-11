@@ -4,12 +4,18 @@ import Logo from "@/components/Logo";
 
 export default function Footer({ locale, dict }: { locale: Locale; dict: any }) {
   const year = new Date().getFullYear();
-  const footerLabels: Record<Locale, { social: string; location: string }> = { en: { social: "Social", location: "La Chapelle-des-Fougeretz, Brittany, France" }, fr: { social: "Réseaux sociaux", location: "La Chapelle-des-Fougeretz, Bretagne, France" }, ar: { social: "وسائل التواصل", location: "لا شابيل دي فوجريه، بريتاني، فرنسا" }, de: { social: "Soziale Medien", location: "La Chapelle-des-Fougeretz, Bretagne, Frankreich" }, nl: { social: "Sociale media", location: "La Chapelle-des-Fougeretz, Bretagne, Frankrijk" } };
+  const footerLabels: Record<Locale, { social: string; location: string; legal: string; mentions: string; privacy: string; cookies: string }> = {
+    en: { social: "Social", location: "La Chapelle-des-Fougeretz, Brittany, France", legal: "Legal information", mentions: "Legal notices", privacy: "Privacy policy", cookies: "Cookie policy" },
+    fr: { social: "Réseaux sociaux", location: "La Chapelle-des-Fougeretz, Bretagne, France", legal: "Informations légales", mentions: "Mentions légales", privacy: "Politique de confidentialité", cookies: "Politique relative aux cookies" },
+    ar: { social: "وسائل التواصل", location: "لا شابيل دي فوجريه، بريتاني، فرنسا", legal: "معلومات قانونية", mentions: "الإشعارات القانونية", privacy: "سياسة الخصوصية", cookies: "سياسة ملفات تعريف الارتباط" },
+    de: { social: "Soziale Medien", location: "La Chapelle-des-Fougeretz, Bretagne, Frankreich", legal: "Rechtliche Informationen", mentions: "Impressum", privacy: "Datenschutzerklärung", cookies: "Cookie-Richtlinie" },
+    nl: { social: "Sociale media", location: "La Chapelle-des-Fougeretz, Bretagne, Frankrijk", legal: "Juridische informatie", mentions: "Juridische kennisgeving", privacy: "Privacybeleid", cookies: "Cookiebeleid" }
+  };
   const labels = footerLabels[locale] ?? footerLabels.en;
 
   return (
     <footer className="mt-24 border-t border-charcoal-line bg-charcoal text-ivory">
-      <div className="mx-auto grid max-w-editorial gap-10 px-6 py-16 lg:grid-cols-4 lg:px-10">
+      <div className="mx-auto grid max-w-editorial gap-10 px-6 py-16 lg:grid-cols-5 lg:px-10">
         <div>
           <Logo variant="full" onDark className="!h-28" />
           <p className="mt-5 max-w-xs text-sm text-ivory/60">{dict.brand.tagline}</p>
@@ -34,6 +40,15 @@ export default function Footer({ locale, dict }: { locale: Locale; dict: any }) 
         </div>
 
         <div>
+          <p className="eyebrow">{labels.legal}</p>
+          <ul className="mt-4 space-y-2 text-sm text-ivory/80">
+            <li><Link href={`/${locale}/legal/mentions-legales`}>{labels.mentions}</Link></li>
+            <li><Link href={`/${locale}/legal/confidentialite`}>{labels.privacy}</Link></li>
+            <li><Link href={`/${locale}/legal/cookies`}>{labels.cookies}</Link></li>
+          </ul>
+        </div>
+
+        <div>
           <p className="eyebrow">{labels.social}</p>
           <ul className="mt-4 space-y-2 text-sm text-ivory/80">
             <li><a href="https://www.instagram.com/m.e.c_horses?dlrf=MXV6MGVkbWd5dzBqOA%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer">Instagram · @m.e.c_horses</a></li>
@@ -44,6 +59,7 @@ export default function Footer({ locale, dict }: { locale: Locale; dict: any }) 
 
       <div className="border-t border-ivory/10 px-6 py-6 lg:px-10">
         <p className="mx-auto max-w-editorial text-xs text-ivory/40">{dict.footer.privateNotice}</p>
+        <p className="mx-auto mt-2 max-w-editorial text-xs text-ivory/35">MEC Trading SAS · SIRET : 108 537 549 00017 · La Chapelle-des-Fougeretz, 35520, France</p>
         <p className="mx-auto mt-2 max-w-editorial text-xs text-ivory/30">
           © {year} MEC Horses. {dict.footer.rights}
         </p>
