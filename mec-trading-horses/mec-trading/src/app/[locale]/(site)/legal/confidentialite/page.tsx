@@ -1,6 +1,4 @@
-import type { Locale } from "@/types/horse";
-
-export default function ConfidentialitePage({ params }: { params: { locale: Locale } }) {
+export default function ConfidentialitePage() {
   return (
     <article className="mx-auto max-w-4xl px-6 py-16 text-charcoal sm:py-24 lg:px-10">
       <p className="font-mono text-xs uppercase tracking-[0.2em] text-[#9a7837]">MEC HORSES · DONNÉES PERSONNELLES</p>
