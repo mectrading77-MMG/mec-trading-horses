@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: { params: { locale: Locale } 
     de: "Entdecken Sie unsere Leistungen: Pferdesuche und -verkauf, tierärztliche Kaufuntersuchung, Besichtigungen, Transport und Export ab Frankreich.",
     nl: "Ontdek onze diensten: paarden zoeken en verkopen, veterinaire keuring vóór aankoop, bezichtigingen, transport en export vanuit Frankrijk."
   };
-  return { title: titles[params.locale], description: descriptions[params.locale], alternates: localizedAlternates("/services") };
+  return { title: titles[params.locale], description: descriptions[params.locale], alternates: localizedAlternates(params.locale, "/services") };
 }
 
 const KEYS = [
