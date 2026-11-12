@@ -48,7 +48,7 @@ export async function generateMetadata({ params }: { params: { locale: Locale } 
     de: "Erfahren Sie mehr über MEC Horses, Spezialist für Springpferde in Frankreich und Ansprechpartner für internationale Käufer.",
     nl: "Maak kennis met MEC Horses, specialist in springpaarden in Frankrijk voor ruiters, fokkers en internationale kopers."
   };
-  return { title: titles[params.locale], description: descriptions[params.locale], alternates: localizedAlternates("/about") };
+  return { title: titles[params.locale], description: descriptions[params.locale], alternates: localizedAlternates(params.locale, "/about") };
 }
 
 export default async function AboutPage({ params }: { params: { locale: Locale } }) {
