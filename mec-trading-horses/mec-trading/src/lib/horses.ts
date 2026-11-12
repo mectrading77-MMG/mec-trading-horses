@@ -1,4 +1,4 @@
-import { horses, getFeaturedHorses, getFeaturedStoryHorse } from "@/lib/sample-data";
+import { horses } from "@/lib/sample-data";
 import type { Locale } from "@/types/horse";
 import { db } from "@/lib/db";
 
@@ -101,8 +101,8 @@ export async function listHorses() {
       };
     });
   } catch {
-    // Keep the demo catalogue usable when the database is not configured.
-    return horses;
+    // Never expose demo listings when the database is unavailable.
+    return [];
   }
 }
 
@@ -112,11 +112,11 @@ export async function getHorse(slug: string) {
 }
 
 export async function featuredHorses() {
-  return getFeaturedHorses();
+  return (await listHorses()).filter((horse) => horse.featuredOnHome);
 }
 
 export async function featuredStory() {
-  return getFeaturedStoryHorse();
+  return (await listHorses()).find((horse) => horse.featuredStory);
 }
 
 export function ageFromDob(dob: string) {
