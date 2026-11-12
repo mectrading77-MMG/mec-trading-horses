@@ -14,7 +14,7 @@ export default function Logo({
 }) {
   return (
     <Image
-      src="/brand/mec-horses.png.png"
+      src="/brand/mec-horses.png"
       alt="MEC HORSES"
       width={variant === "compact" ? 520 : 700}
       height={variant === "compact" ? 341 : 459}
