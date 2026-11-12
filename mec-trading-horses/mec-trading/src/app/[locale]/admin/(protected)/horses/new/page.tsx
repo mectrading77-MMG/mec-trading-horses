@@ -30,7 +30,7 @@ export default function NewHorsePage() {
     setSaving(true);
     setError(null);
     const form = new FormData(e.currentTarget);
-    const payload = Object.fromEntries(form.entries());
+    const payload: Record<string, FormDataEntryValue | boolean> = Object.fromEntries(form.entries());
     const heightMeters = String(payload.heightCm ?? "").trim();
     payload.heightCm = heightMeters === "" ? "" : String(Math.round(Number(heightMeters.replace(",", ".")) * 100));
     const selectedJumpLevel = String(payload.jumpHeightCm ?? "130");
