@@ -37,7 +37,7 @@ export default function HorseManager() {
 
   useEffect(() => { void load(); }, [load]);
 
-  async function removeHorse(horse: AdminHorse) {
+  async function removeAllHorses() {\n    if (!window.confirm(`Permanently delete all ${horses.length} horses from the database? Their media and related horse records will also be deleted. This cannot be undone.`)) return;\n    setBusy("ALL");\n    try {\n      const res = await fetch("/api/admin/horses", { method: "DELETE", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ deleteAll: true }) });\n      const data = await res.json();\n      if (!res.ok) throw new Error(data.error ?? "Bulk delete failed");\n      setHorses([]);\n    } catch (e) {\n      setError(e instanceof Error ? e.message : "Bulk delete failed");\n    } finally {\n      setBusy("");\n    }\n  }\n\n  async function removeHorse(horse: AdminHorse) {
     const name = horse.translations.find((t) => t.locale === locale)?.name ?? horse.translations.find((t) => t.locale === "en")?.name ?? horse.slug;
     if (!window.confirm(`Delete "${name}" permanently? Its media and related records will also be deleted.`)) return;
     setBusy(horse.slug);
