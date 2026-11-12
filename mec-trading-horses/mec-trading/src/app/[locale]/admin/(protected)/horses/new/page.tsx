@@ -30,6 +30,8 @@ export default function NewHorsePage() {
     setError(null);
     const form = new FormData(e.currentTarget);
     const payload = Object.fromEntries(form.entries());
+    const heightMeters = String(payload.heightCm ?? "").trim();
+    payload.heightCm = heightMeters === "" ? "" : String(Math.round(Number(heightMeters.replace(",", ".")) * 100));
 
     const res = await fetch("/api/admin/horses", {
       method: "POST",
@@ -63,7 +65,7 @@ export default function NewHorsePage() {
           </Field>
           <Field label="Date of Birth"><input required type="date" name="dateOfBirth" className={inputClass} /></Field>
 
-          <Field label="Height at withers (cm)"><input type="number" name="heightCm" className={inputClass} /></Field>
+          <Field label="Height at withers (m)"><input type="number" name="heightCm" inputMode="decimal" min="0.8" max="2.5" step="0.01" placeholder="1.66" className={inputClass} /><span className="text-xs text-charcoal/45">Enter metres, e.g. 1.66. Saved as 166 cm.</span></Field>
           <Field label="Color"><input required name="color" className={inputClass} /></Field>
 
           <Field label="Jumping height (level offered at)">
