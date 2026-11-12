@@ -21,7 +21,7 @@ const HorseInputSchema = z.object({
   priceOnRequest: z.boolean().optional(),
   priceCurrency: z.string().default("EUR"),
   locationLabel: z.string().trim().min(1),
-  status: z.enum(["AVAILABLE", "RESERVED", "SOLD"]).default("AVAILABLE"),
+  status: z.enum(["AVAILABLE", "RESERVED", "SOLD", "ARCHIVED"]).default("AVAILABLE"),
   registrationNo: optionalText,
   passportNo: optionalText,
   positioning: optionalText,
