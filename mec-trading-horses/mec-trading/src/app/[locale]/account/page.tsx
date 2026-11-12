@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 
@@ -9,6 +9,10 @@ export default function AccountPage() {
   const router = useRouter();
   const locale = String(params?.locale ?? "en");
   const [mode, setMode] = useState<"login" | "register">("login");
+  useEffect(() => {
+    const requestedMode = new URLSearchParams(window.location.search).get("mode");
+    if (requestedMode === "login" || requestedMode === "register") setMode(requestedMode);
+  }, []);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
