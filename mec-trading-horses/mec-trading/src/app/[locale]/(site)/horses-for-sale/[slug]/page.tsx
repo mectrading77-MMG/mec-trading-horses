@@ -34,7 +34,7 @@ export async function generateMetadata({
   return {
     title: `${t.name} — ${horse.breed}`,
     description: t.positioning,
-    alternates: localizedAlternates(`/horses-for-sale/${horse.slug}`),
+    alternates: localizedAlternates(params.locale, `/horses-for-sale/${horse.slug}`),
     openGraph: {
       title: t.name,
       description: t.positioning,
@@ -54,7 +54,7 @@ export default async function HorseDetailPage({
 
   const t = horse.translations[params.locale] ?? horse.translations.en;
   const price = formatPriceRange(horse.priceAmount, horse.priceCurrency, horse.priceOnRequest, params.locale);
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.mectrading.com";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.mechorses.com";
 
   const jsonLd = {
     "@context": "https://schema.org",
