@@ -4,11 +4,11 @@ import type { Locale } from "@/types/horse";
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.mechorses.com";
 
 export const siteDescriptions: Record<Locale, string> = {
-  en: "MEC Horses is a France-based sport horse brokerage specialising in show jumping horses for sale, with expert assistance for buyers across Europe and the Middle East.",
-  fr: "MEC Horses est une agence de courtage équin basée en France, spécialisée dans les chevaux de saut d’obstacles et l’accompagnement des acheteurs en Europe et au Moyen-Orient.",
+  en: "France-based MEC Horses specialises in show jumping horses for sale, helping buyers across Europe and the Middle East with selection and export.",
+  fr: "Basée en France, MEC Horses est spécialisée dans les chevaux de saut d’obstacles et accompagne les acheteurs en Europe et au Moyen-Orient.",
   ar: "MEC Horses شركة وساطة خيول رياضية مقرها فرنسا، متخصصة في خيول قفز الحواجز ومساعدة المشترين في أوروبا والشرق الأوسط.",
-  de: "MEC Horses ist ein in Frankreich ansässiger Sportpferdevermittler, spezialisiert auf Springpferde und die Betreuung internationaler Käufer in Europa und im Nahen Osten.",
-  nl: "MEC Horses is een in Frankrijk gevestigd bemiddelingsbedrijf voor sportpaarden, gespecialiseerd in springpaarden en begeleiding van kopers in Europa en het Midden-Oosten."
+  de: "MEC Horses vermittelt Springpferde aus Frankreich und begleitet internationale Käufer in Europa und im Nahen Osten.",
+  nl: "MEC Horses bemiddelt in springpaarden vanuit Frankrijk en begeleidt kopers in Europa en het Midden-Oosten."
 };
 
 export function localizedAlternates(locale: Locale, path: string): NonNullable<Metadata["alternates"]> {
