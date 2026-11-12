@@ -11,8 +11,8 @@ export const siteDescriptions: Record<Locale, string> = {
   nl: "MEC Horses is een in Frankrijk gevestigd bemiddelingsbedrijf voor sportpaarden, gespecialiseerd in springpaarden en begeleiding van kopers in Europa en het Midden-Oosten."
 };
 
-export function localizedAlternates(path: string): NonNullable<Metadata["alternates"]> {
-  const cleanPath = path.startsWith("/") ? path : `/${path}`;
+export function localizedAlternates(locale: Locale, path: string): NonNullable<Metadata["alternates"]> {
+  const cleanPath = path ? (path.startsWith("/") ? path : `/${path}`) : "";
   const languages = {
     en: `${SITE_URL}/en${cleanPath}`,
     fr: `${SITE_URL}/fr${cleanPath}`,
@@ -21,5 +21,5 @@ export function localizedAlternates(path: string): NonNullable<Metadata["alterna
     nl: `${SITE_URL}/nl${cleanPath}`,
     "x-default": `${SITE_URL}/en${cleanPath}`
   };
-  return { canonical: `${SITE_URL}${cleanPath}`, languages };
+  return { canonical: `${SITE_URL}/${locale}${cleanPath}`, languages };
 }
