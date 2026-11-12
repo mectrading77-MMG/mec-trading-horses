@@ -16,7 +16,7 @@ export const dynamic = "force-dynamic";
 export async function generateMetadata({ params }: { params: { locale: Locale } }): Promise<Metadata> {
   const dict = await getDictionary(params.locale);
   return {
-    title: `${dict.brand.name} | Show Jumping Horses for Sale in Europe`,
+    title: "Show Jumping Horses for Sale in Europe",
     description: siteDescriptions[params.locale],
     alternates: localizedAlternates(params.locale, "")
   };
