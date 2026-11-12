@@ -1,4 +1,6 @@
 import Image from "next/image";
+import type { Metadata } from "next";
+import { localizedAlternates } from "@/lib/seo";
 import type { Locale } from "@/types/horse";
 import { getDictionary } from "@/i18n/config";
 import SectionHeading from "@/components/SectionHeading";
@@ -30,6 +32,24 @@ const copy: Record<Locale, [string, string, string]> = {
     "Voor internationale kopers zijn goede documentatie, veterinaire transparantie en duidelijke communicatie net zo belangrijk als het paard zelf. We coördineren bezichtigingen, dierenartskeuringen, transport en exportdocumenten."
   ]
 };
+
+export async function generateMetadata({ params }: { params: { locale: Locale } }): Promise<Metadata> {
+  const titles: Record<Locale, string> = {
+    en: "About MEC Horses | French Sport Horse Brokerage",
+    fr: "À propos de MEC Horses | Courtage de chevaux de sport en France",
+    ar: "من نحن | MEC Horses لوساطة الخيول الرياضية",
+    de: "Über MEC Horses | Sportpferdevermittlung in Frankreich",
+    nl: "Over MEC Horses | Bemiddeling in sportpaarden in Frankrijk"
+  };
+  const descriptions: Record<Locale, string> = {
+    en: "Learn about MEC Horses, a France-based show jumping horse specialist supporting riders, breeders and international buyers across Europe and the Gulf.",
+    fr: "Découvrez MEC Horses, spécialiste français du cheval de saut d’obstacles, au service des cavaliers, éleveurs et acheteurs internationaux.",
+    ar: "تعرف على MEC Horses، شركة فرنسية متخصصة في خيول قفز الحواجز وتقديم الدعم للمشترين والفرسان دوليًا.",
+    de: "Erfahren Sie mehr über MEC Horses, Spezialist für Springpferde in Frankreich und Ansprechpartner für internationale Käufer.",
+    nl: "Maak kennis met MEC Horses, specialist in springpaarden in Frankrijk voor ruiters, fokkers en internationale kopers."
+  };
+  return { title: titles[params.locale], description: descriptions[params.locale], alternates: localizedAlternates("/about") };
+}
 
 export default async function AboutPage({ params }: { params: { locale: Locale } }) {
   const dict = await getDictionary(params.locale);
