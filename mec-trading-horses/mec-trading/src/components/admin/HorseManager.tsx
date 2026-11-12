@@ -37,10 +37,29 @@ export default function HorseManager() {
 
   useEffect(() => { void load(); }, [load]);
 
-  async function removeAllHorses() {\n    if (!window.confirm(`Permanently delete all ${horses.length} horses from the database? Their media and related horse records will also be deleted. This cannot be undone.`)) return;\n    setBusy("ALL");\n    try {\n      const res = await fetch("/api/admin/horses", { method: "DELETE", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ deleteAll: true }) });\n      const data = await res.json();\n      if (!res.ok) throw new Error(data.error ?? "Bulk delete failed");\n      setHorses([]);\n    } catch (e) {\n      setError(e instanceof Error ? e.message : "Bulk delete failed");\n    } finally {\n      setBusy("");\n    }\n  }\n\n  async function removeHorse(horse: AdminHorse) {
-    const name = horse.translations.find((t) => t.locale === locale)?.name ?? horse.translations.find((t) => t.locale === "en")?.name ?? horse.slug;
-    if (!window.confirm(`Delete "${name}" permanently? Its media and related records will also be deleted.`)) return;
+  async function changeStatus(horse: AdminHorse, status: "ARCHIVED" | "AVAILABLE") {
     setBusy(horse.slug);
+    setError("");
+    try {
+      const res = await fetch("/api/admin/horses", {
+        method: "PATCH", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ horseSlug: horse.slug, status })
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error ?? "Could not update horse");
+      setHorses((current) => current.map((item) => item.slug === horse.slug ? { ...item, status } : item));
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Could not update horse");
+    } finally {
+      setBusy("");
+    }
+  }
+
+  async function removeHorse(horse: AdminHorse) {
+    const name = horse.translations.find((t) => t.locale === locale)?.name ?? horse.translations.find((t) => t.locale === "en")?.name ?? horse.slug;
+    if (!window.confirm(`Permanently delete "${name}"? Its media and related horse records will also be deleted. This cannot be undone.`)) return;
+    setBusy(horse.slug);
+    setError("");
     try {
       const res = await fetch("/api/admin/horses", {
         method: "DELETE", headers: { "Content-Type": "application/json" },
@@ -63,23 +82,29 @@ export default function HorseManager() {
         <div className="border border-charcoal-line bg-white p-8 text-sm text-charcoal/60">No horses in the database yet. Add your first horse to get started.</div>
       ) : (
         <div className="overflow-x-auto border border-charcoal-line bg-white">
-          <table className="w-full min-w-[850px] border-collapse text-sm">
+          <table className="w-full min-w-[1050px] border-collapse text-sm">
             <thead><tr className="border-b border-charcoal-line bg-ivory-dim font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/50">
               <th className="px-4 py-3 text-left">Name</th><th className="px-4 py-3 text-left">Breed</th><th className="px-4 py-3 text-left">Born</th><th className="px-4 py-3 text-left">Level</th><th className="px-4 py-3 text-left">Price</th><th className="px-4 py-3 text-left">Status</th><th className="px-4 py-3 text-left">Media</th><th className="px-4 py-3 text-right">Actions</th>
             </tr></thead>
             <tbody>{horses.map((horse) => {
               const name = horse.translations.find((t) => t.locale === locale)?.name ?? horse.translations.find((t) => t.locale === "en")?.name ?? horse.slug;
+              const archived = horse.status === "ARCHIVED";
               return <tr key={horse.id} className="border-b border-charcoal-line/60">
                 <td className="px-4 py-3 font-display italic text-charcoal">{name}</td>
                 <td className="px-4 py-3 text-charcoal/70">{horse.breed}</td>
                 <td className="px-4 py-3 text-charcoal/70">{new Date(horse.dateOfBirth).getFullYear()}</td>
                 <td className="px-4 py-3 text-charcoal/70">{horse.jumpHeightCm} cm</td>
                 <td className="px-4 py-3 text-charcoal/70">{horse.priceOnRequest || horse.priceAmount == null ? "On request" : new Intl.NumberFormat(locale, { style: "currency", currency: horse.priceCurrency, maximumFractionDigits: 0 }).format(horse.priceAmount)}</td>
-                <td className="px-4 py-3"><span className="text-xs font-medium">{horse.status}</span></td>
+                <td className="px-4 py-3"><span className="text-xs font-medium">{archived ? "Sold Archived" : horse.status}</span></td>
                 <td className="px-4 py-3 text-charcoal/70">{horse.media.length}</td>
                 <td className="px-4 py-3"><div className="flex justify-end gap-3">
                   <Link href={`/${locale}/admin/horses/${encodeURIComponent(horse.slug)}`} className="font-mono text-[10px] uppercase tracking-eyebrow text-gold underline underline-offset-4">Edit</Link>
-                  <button type="button" disabled={busy === horse.slug} onClick={() => void removeHorse(horse)} className="font-mono text-[10px] uppercase tracking-eyebrow text-red-700 underline underline-offset-4 disabled:opacity-50">{busy === horse.slug ? "Deleting…" : "Delete"}</button>
+                  {archived ? (
+                    <button type="button" disabled={Boolean(busy)} onClick={() => void changeStatus(horse, "AVAILABLE")} className="font-mono text-[10px] uppercase tracking-eyebrow text-hunter underline underline-offset-4 disabled:opacity-50">Restore</button>
+                  ) : (
+                    <button type="button" disabled={Boolean(busy)} onClick={() => void changeStatus(horse, "ARCHIVED")} className="font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/70 underline underline-offset-4 disabled:opacity-50">Archive</button>
+                  )}
+                  <button type="button" disabled={Boolean(busy)} onClick={() => void removeHorse(horse)} className="font-mono text-[10px] uppercase tracking-eyebrow text-red-700 underline underline-offset-4 disabled:opacity-50">{busy === horse.slug ? "Working…" : "Delete Horse"}</button>
                 </div></td>
               </tr>;
             })}</tbody>
