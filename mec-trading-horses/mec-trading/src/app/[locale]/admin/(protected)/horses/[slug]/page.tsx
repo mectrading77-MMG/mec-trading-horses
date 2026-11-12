@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { HORSE_BREEDS, HORSE_COLOURS } from "@/lib/horse-options";
 import { HEIGHT_BANDS } from "@/lib/levels";
-import { HEIGHT_BANDS, bandFor } from "@/lib/levels";
 const input="w-full border border-charcoal-line bg-white px-3 py-2.5 text-sm text-charcoal";
 type Media={id:string;type:string;url:string;alt?:string|null};
 type Horse=any;
