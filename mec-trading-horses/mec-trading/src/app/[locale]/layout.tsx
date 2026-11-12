@@ -54,7 +54,37 @@ export default async function LocaleLayout({
 }) {
   return (
     <html lang={params.locale} dir={dirFor(params.locale)}>
-      <body>{children}</body>
+      <body>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "@id": "https://www.mechorses.com/#organization",
+            name: "MEC Horses",
+            legalName: "MEC Trading SAS",
+            url: "https://www.mechorses.com",
+            email: "sales@mechorses.com",
+            telephone: "+33618313530",
+            address: {
+              "@type": "PostalAddress",
+              streetAddress: "La Chapelle-des-Fougeretz",
+              postalCode: "35520",
+              addressLocality: "La Chapelle-des-Fougeretz",
+              addressRegion: "Brittany",
+              addressCountry: "FR"
+            },
+            sameAs: [
+              "https://instagram.com/m.e.c_horses",
+              "https://facebook.com/MecHorses"
+            ],
+            areaServed: ["Europe", "Middle East"]
+          }).replace(/</g, "\\u003c")
+        }}
+      />
+      {children}
+    </body>
     </html>
   );
 }
