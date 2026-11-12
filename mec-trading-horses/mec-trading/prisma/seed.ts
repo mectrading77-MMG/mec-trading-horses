@@ -21,18 +21,23 @@ async function main() {
     }
   });
 
-  const ownerEmail = process.env.ADMIN_EMAIL ?? "admin@mectrading.com";
-  const ownerPassword = process.env.ADMIN_PASSWORD ?? "changeme";
-  await db.adminUser.upsert({
-    where: { email: ownerEmail },
-    update: {},
-    create: {
-      email: ownerEmail,
-      passwordHash: await bcrypt.hash(ownerPassword, 10),
-      name: "MEC Trading",
-      role: "OWNER"
-    }
-  });
+  const ownerEmail = (process.env.ADMIN_EMAIL ?? "admin@mechorses.com").trim().toLowerCase();
+  const ownerPassword = process.env.ADMIN_PASSWORD;
+  if (ownerPassword) {
+    await db.adminUser.upsert({
+      where: { email: ownerEmail },
+      update: {},
+      create: {
+        email: ownerEmail,
+        passwordHash: await bcrypt.hash(ownerPassword, 12),
+        name: "MEC HORSES",
+        role: "OWNER"
+      }
+    });
+    console.log(`  admin owner ensured: ${ownerEmail}`);
+  } else {
+    console.log("  ADMIN_PASSWORD not set; skipping admin account creation (no default password is created).");
+  }
 
   for (const horse of horses) {
     const created = await db.horse.upsert({
