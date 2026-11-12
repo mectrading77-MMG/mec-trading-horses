@@ -53,6 +53,7 @@ model Horse {
   color             String
   /// Height the horse is offered at, in cm (e.g. 140) — drives the catalogue bands
   jumpHeightCm      Int           @default(130)
+  isYoungHorse      Boolean       @default(false)
   maxHeightJumpedCm Int?
   competitionLevel  String?
   registrationNo    String?
