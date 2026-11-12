@@ -33,6 +33,9 @@ export default function NewHorsePage() {
     const payload = Object.fromEntries(form.entries());
     const heightMeters = String(payload.heightCm ?? "").trim();
     payload.heightCm = heightMeters === "" ? "" : String(Math.round(Number(heightMeters.replace(",", ".")) * 100));
+    const selectedJumpLevel = String(payload.jumpHeightCm ?? "130");
+    payload.isYoungHorse = selectedJumpLevel === "YOUNG_HORSE";
+    if (selectedJumpLevel === "YOUNG_HORSE") payload.jumpHeightCm = "80";
 
     const res = await fetch("/api/admin/horses", {
       method: "POST",
@@ -72,10 +75,9 @@ export default function NewHorsePage() {
           <Field label="Jumping height (level offered at)">
             <select required name="jumpHeightCm" className={inputClass} defaultValue="130">
               {HEIGHT_BANDS.map((b) => (
-                <option key={b.id} value={b.id === "150" ? 150 : Number(b.id)}>
-                  {b.label}
-                </option>
+                <option key={b.id} value={Number(b.id)}>{b.label}</option>
               ))}
+              <option value="YOUNG_HORSE">Young Horse / Jeunes chevaux</option>
             </select>
           </Field>
           <Field label="Highest height jumped (cm)"><input type="number" name="maxHeightJumpedCm" className={inputClass} /></Field>
