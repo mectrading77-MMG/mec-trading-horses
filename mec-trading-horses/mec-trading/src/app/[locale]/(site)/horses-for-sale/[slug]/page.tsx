@@ -87,7 +87,6 @@ export default async function HorseDetailPage({
                 : horse.status === "RESERVED"
                 ? "https://schema.org/LimitedAvailability"
                 : "https://schema.org/SoldOut",
-            itemCondition: "https://schema.org/UsedCondition",
             seller: { "@id": "https://www.mechorses.com/#organization" }
           }
         }
