@@ -1,0 +1,37 @@
+name: Apply database migrations
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mec-horses-database-migrations
+  cancel-in-progress: false
+
+jobs:
+  migrate:
+    name: Apply Prisma migrations
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: mec-trading-horses/mec-trading
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: mec-trading-horses/mec-trading/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Apply pending migrations
+        run: npx prisma migrate deploy --schema=./prisma/schema.prisma
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
