@@ -1,6 +1,6 @@
 export type Locale = "en" | "fr" | "ar" | "de" | "nl";
 
-export type HorseStatus = "AVAILABLE" | "RESERVED" | "SOLD";
+export type HorseStatus = "AVAILABLE" | "RESERVED" | "SOLD" | "ARCHIVED";
 export type HorseSex = "MARE" | "STALLION" | "GELDING";
 
 export interface HorseTranslation {
