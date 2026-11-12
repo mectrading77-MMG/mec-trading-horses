@@ -1,4 +1,6 @@
+import type { Metadata } from "next";
 import type { Locale } from "@/types/horse";
+import { localizedAlternates } from "@/lib/seo";
 import { getDictionary } from "@/i18n/config";
 import SectionHeading from "@/components/SectionHeading";
 
@@ -29,6 +31,24 @@ const postsByLocale: Record<Locale, { title: string; date: string }[]> = {
     { title: "Waarom elk paard onafhankelijk veterinair wordt onderzocht", date: "2026-05-10" }
   ]
 };
+
+export async function generateMetadata({ params }: { params: { locale: Locale } }): Promise<Metadata> {
+  const titles: Record<Locale, string> = {
+    en: "Equestrian News & Show Jumping Updates | MEC Horses",
+    fr: "Actualités équestres et saut d’obstacles | MEC Horses",
+    ar: "أخبار الفروسية وقفز الحواجز | MEC Horses",
+    de: "Aktuelles aus dem Springsport | MEC Horses",
+    nl: "Paardensportnieuws en springconcours | MEC Horses"
+  };
+  const descriptions: Record<Locale, string> = {
+    en: "Read news from MEC Horses, including show jumping results, sport horse sales and guidance for international buyers.",
+    fr: "Suivez l’actualité de MEC Horses : résultats de saut d’obstacles, chevaux de sport et conseils aux acheteurs internationaux.",
+    ar: "تابع أخبار MEC Horses ونتائج قفز الحواجز ومستجدات الخيول الرياضية وإرشادات المشترين الدوليين.",
+    de: "Lesen Sie Neuigkeiten von MEC Horses zu Springturnieren, Sportpferden und Informationen für internationale Käufer.",
+    nl: "Lees het nieuws van MEC Horses over springwedstrijden, sportpaarden en informatie voor internationale kopers."
+  };
+  return { title: titles[params.locale], description: descriptions[params.locale], alternates: localizedAlternates(params.locale, "/news") };
+}
 
 export default async function NewsPage({ params }: { params: { locale: Locale } }) {
   const dict = await getDictionary(params.locale);
