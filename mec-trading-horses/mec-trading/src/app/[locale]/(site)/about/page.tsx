@@ -35,11 +35,11 @@ const copy: Record<Locale, [string, string, string]> = {
 
 export async function generateMetadata({ params }: { params: { locale: Locale } }): Promise<Metadata> {
   const titles: Record<Locale, string> = {
-    en: "About MEC Horses | French Sport Horse Brokerage",
-    fr: "À propos de MEC Horses | Courtage de chevaux de sport en France",
-    ar: "من نحن | MEC Horses لوساطة الخيول الرياضية",
-    de: "Über MEC Horses | Sportpferdevermittlung in Frankreich",
-    nl: "Over MEC Horses | Bemiddeling in sportpaarden in Frankrijk"
+    en: "About MEC Horses",
+    fr: "À propos de MEC Horses",
+    ar: "من نحن",
+    de: "Über MEC Horses",
+    nl: "Over MEC Horses"
   };
   const descriptions: Record<Locale, string> = {
     en: "Learn about MEC Horses, a France-based show jumping horse specialist supporting riders, breeders and international buyers across Europe and the Gulf.",
