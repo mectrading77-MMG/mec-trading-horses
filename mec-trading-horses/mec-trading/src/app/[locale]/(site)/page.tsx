@@ -1,4 +1,6 @@
 import Link from "next/link";
+import type { Metadata } from "next";
+import { localizedAlternates, siteDescriptions } from "@/lib/seo";
 import type { Locale } from "@/types/horse";
 import { getDictionary } from "@/i18n/config";
 import SectionHeading from "@/components/SectionHeading";
@@ -8,7 +10,17 @@ import SelectionExplorer from "@/components/SelectionExplorer";
 import HeroVideo from "@/components/HeroVideo";
 import MobileQuickNav from "@/components/MobileQuickNav";
 
+
 export const dynamic = "force-dynamic";
+
+export async function generateMetadata({ params }: { params: { locale: Locale } }): Promise<Metadata> {
+  const dict = await getDictionary(params.locale);
+  return {
+    title: `${dict.brand.name} | Show Jumping Horses for Sale in Europe`,
+    description: siteDescriptions[params.locale],
+    alternates: localizedAlternates("")
+  };
+}
 
 export default async function HomePage({ params }: { params: { locale: Locale } }) {
   const dict = await getDictionary(params.locale);
