@@ -23,7 +23,6 @@ export default function Header({ locale, dict }: { locale: Locale; dict: any }) 
               <span className="hidden sm:inline">Menu</span>
             </summary>
             <nav className="absolute left-0 top-full z-50 mt-2 min-w-56 border border-charcoal/15 bg-ivory p-2 shadow-xl">
-              <Link href={`/${locale}/account`} className="block border-b border-charcoal/15 px-4 py-3 font-mono text-[11px] font-semibold uppercase tracking-eyebrow text-gold hover:bg-sand/15">My Account</Link>
               {nav.map((item) => (
                 <Link key={item.href} href={item.href} className="block px-4 py-3 font-mono text-[11px] uppercase tracking-eyebrow text-charcoal/75 transition-colors hover:bg-sand/15 hover:text-gold">{item.label}</Link>
               ))}
@@ -38,7 +37,8 @@ export default function Header({ locale, dict }: { locale: Locale; dict: any }) 
           </span>
         </Link>
 
-        <div className="flex items-center justify-end">
+        <div className="flex items-center justify-end gap-2 sm:gap-3">
+          <Link href={`/${locale}/account`} className="whitespace-nowrap border border-charcoal/30 px-2.5 py-2 font-mono text-[9px] font-semibold uppercase tracking-[0.08em] text-charcoal transition-colors hover:border-gold hover:text-gold sm:px-3 sm:text-[10px] sm:tracking-eyebrow">My Account</Link>
           <LanguageSwitcher current={locale} />
         </div>
       </div>
