@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "../globals.css";
 import { locales, dirFor, getDictionary } from "@/i18n/config";
 import type { Locale } from "@/types/horse";
+import { siteDescriptions } from "@/lib/seo";
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -18,11 +19,8 @@ export async function generateMetadata({
       default: `${dict.brand.name} — ${dict.brand.tagline}`,
       template: `%s — ${dict.brand.name}`
     },
-    description: dict.brand.tagline,
+    description: siteDescriptions[params.locale],
     metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.mechorses.com"),
-    alternates: {
-      languages: { en: "/en", fr: "/fr", ar: "/ar", de: "/de", nl: "/nl" }
-    },
     openGraph: {
       siteName: dict.brand.name,
       locale: params.locale,
