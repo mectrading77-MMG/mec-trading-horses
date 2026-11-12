@@ -11,6 +11,7 @@ import ContactForm from "@/components/ContactForm";
 import SectionHeading from "@/components/SectionHeading";
 import XrayViewer from "@/components/XrayViewer";
 import { formatJumpHeight } from "@/lib/levels";
+import { localizedAlternates } from "@/lib/seo";
 import InquiryOptions from "@/components/InquiryOptions";
 
 export const dynamic = "force-dynamic";
@@ -28,12 +29,12 @@ export async function generateMetadata({
   const horse = await getHorse(params.slug);
   if (!horse) return {};
   const t = horse.translations[params.locale] ?? horse.translations.en;
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.mectrading.com";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.mechorses.com";
 
   return {
     title: `${t.name} — ${horse.breed}`,
     description: t.positioning,
-    alternates: { canonical: `${siteUrl}/${params.locale}/horses-for-sale/${horse.slug}` },
+    alternates: localizedAlternates(`/horses-for-sale/${horse.slug}`),
     openGraph: {
       title: t.name,
       description: t.positioning,
