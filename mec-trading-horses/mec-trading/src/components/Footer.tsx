@@ -52,7 +52,7 @@ export default function Footer({ locale, dict }: { locale: Locale; dict: any }) 
           <p className="eyebrow">{labels.social}</p>
           <ul className="mt-4 space-y-2 text-sm text-ivory/80">
             <li><a href="https://instagram.com/m.e.c_horses" target="_blank" rel="noopener noreferrer">Instagram · @m.e.c_horses</a></li>
-            <li><a href="https://www.facebook.com/share/1BR9wA2KLn/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">Facebook · MEC Horses</a></li>
+            <li><a href="https://facebook.com/MecHorses" target="_blank" rel="noopener noreferrer">Facebook · @MecHorses</a></li>
           </ul>
         </div>
       </div>
