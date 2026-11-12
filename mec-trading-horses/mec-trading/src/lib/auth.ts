@@ -1,16 +1,11 @@
 import "server-only";
 import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
+import bcrypt from "bcryptjs";
+import { db } from "@/lib/db";
 
 const COOKIE_NAME = "mec_admin_session";
 const isProd = process.env.NODE_ENV === "production";
-
-/**
- * This repository is public, so a hard-coded fallback secret would let anyone
- * forge an admin session cookie. In production the signing key must come from
- * the environment; if it is missing we fail closed — the public site is
- * unaffected, but no session can be issued or verified.
- */
 const rawSecret = process.env.AUTH_SECRET;
 const secret = rawSecret
   ? new TextEncoder().encode(rawSecret)
@@ -35,7 +30,7 @@ export async function createSession(session: AdminSession) {
 
   cookies().set(COOKIE_NAME, token, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
+    secure: isProd,
     sameSite: "lax",
     path: "/",
     maxAge: 60 * 60 * 24 * 7
@@ -48,6 +43,8 @@ export async function getSession(): Promise<AdminSession | null> {
   if (!token) return null;
   try {
     const { payload } = await jwtVerify(token, secret);
+    if (typeof payload.sub !== "string" || typeof payload.email !== "string") return null;
+    if (payload.role !== "OWNER" && payload.role !== "EDITOR") return null;
     return payload as unknown as AdminSession;
   } catch {
     return null;
@@ -59,22 +56,40 @@ export function clearSession() {
 }
 
 /**
- * Verifies credentials against AdminUser in the database (bcrypt compare).
- * Wire this up once Prisma is connected — see the TODO inline. Until then it
- * checks against a single owner account read from environment variables so
- * the admin area is demonstrable without a database.
+ * Authenticate against the AdminUser table first. Environment credentials are
+ * retained as an explicit emergency owner fallback for existing deployments.
  */
 export async function verifyCredentials(email: string, password: string): Promise<AdminSession | null> {
-  // TODO(production): replace with
-  //   const user = await db.adminUser.findUnique({ where: { email } });
-  //   if (!user || !(await bcrypt.compare(password, user.passwordHash))) return null;
-  //   return { sub: user.id, email: user.email, name: user.name, role: user.role };
+  if (typeof email !== "string" || typeof password !== "string" || !email.trim() || !password) return null;
+
+  try {
+    const user = await db.adminUser.findUnique({
+      where: { email: email.trim().toLowerCase() }
+    });
+    if (user && await bcrypt.compare(password, user.passwordHash)) {
+      return {
+        sub: user.id,
+        email: user.email,
+        name: user.name,
+        role: user.role === "OWNER" ? "OWNER" : "EDITOR"
+      };
+    }
+  } catch (error) {
+    // If the database is temporarily unavailable, allow only explicitly
+    // configured environment credentials below; never invent a default password.
+    console.error("Admin database authentication failed:", error);
+  }
+
   const ownerEmail = process.env.ADMIN_EMAIL ?? "admin@mechorses.com";
   const ownerUsername = (process.env.ADMIN_USERNAME ?? "admin").toLowerCase();
   const ownerPassword = process.env.ADMIN_PASSWORD;
-  // No credentials configured in production means no one can sign in.
   if (!ownerPassword) return null;
-  if ((email.toLowerCase() === ownerEmail.toLowerCase() || email.toLowerCase() === ownerUsername) && password === ownerPassword) {
+
+  if (
+    (email.trim().toLowerCase() === ownerEmail.toLowerCase() ||
+      email.trim().toLowerCase() === ownerUsername) &&
+    password === ownerPassword
+  ) {
     return { sub: "owner", email: ownerEmail, name: "MEC HORSES", role: "OWNER" };
   }
   return null;
