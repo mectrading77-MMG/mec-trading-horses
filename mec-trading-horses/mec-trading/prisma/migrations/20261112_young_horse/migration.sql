@@ -1,0 +1,1 @@
+ALTER TABLE "Horse" ADD COLUMN "isYoungHorse" BOOLEAN NOT NULL DEFAULT false;
