@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { HEIGHT_BANDS } from "@/lib/levels";
+import { HORSE_BREEDS, HORSE_COLOURS } from "@/lib/horse-options";
 
 const inputClass =
   "w-full border border-charcoal-line bg-white px-4 py-2.5 text-sm text-charcoal placeholder:text-charcoal/40 focus:border-gold";
@@ -54,7 +55,7 @@ export default function NewHorsePage() {
       <form onSubmit={onSubmit} className="mt-8 space-y-10">
         <section className="grid gap-5 sm:grid-cols-2">
           <Field label="Horse Name (English)"><input required name="nameEn" className={inputClass} /></Field>
-          <Field label="Breed"><input required name="breed" className={inputClass} /></Field>
+          <Field label="Breed"><select required name="breed" className={inputClass} defaultValue=""><option value="" disabled>Select breed</option>{HORSE_BREEDS.map((breed) => <option key={breed} value={breed}>{breed}</option>)}</select></Field>
 
           <Field label="Sex">
             <select required name="sex" className={inputClass}>
@@ -66,7 +67,7 @@ export default function NewHorsePage() {
           <Field label="Date of Birth"><input required type="date" name="dateOfBirth" className={inputClass} /></Field>
 
           <Field label="Height at withers (m)"><input type="number" name="heightCm" inputMode="decimal" min="0.8" max="2.5" step="0.01" placeholder="1.66" className={inputClass} /><span className="text-xs text-charcoal/45">Enter metres, e.g. 1.66. Saved as 166 cm.</span></Field>
-          <Field label="Color"><input required name="color" className={inputClass} /></Field>
+          <Field label="Color"><select required name="color" className={inputClass} defaultValue=""><option value="" disabled>Select coat colour</option>{HORSE_COLOURS.map((colour) => <option key={colour} value={colour}>{colour}</option>)}</select></Field>
 
           <Field label="Jumping height (level offered at)">
             <select required name="jumpHeightCm" className={inputClass} defaultValue="130">
