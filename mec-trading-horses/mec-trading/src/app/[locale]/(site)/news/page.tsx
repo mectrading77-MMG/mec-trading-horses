@@ -34,11 +34,11 @@ const postsByLocale: Record<Locale, { title: string; date: string }[]> = {
 
 export async function generateMetadata({ params }: { params: { locale: Locale } }): Promise<Metadata> {
   const titles: Record<Locale, string> = {
-    en: "Equestrian News & Show Jumping Updates | MEC Horses",
-    fr: "Actualités équestres et saut d’obstacles | MEC Horses",
-    ar: "أخبار الفروسية وقفز الحواجز | MEC Horses",
-    de: "Aktuelles aus dem Springsport | MEC Horses",
-    nl: "Paardensportnieuws en springconcours | MEC Horses"
+    en: "Equestrian News & Show Jumping Updates",
+    fr: "Actualités équestres et saut d’obstacles",
+    ar: "أخبار الفروسية وقفز الحواجز",
+    de: "Aktuelles aus dem Springsport",
+    nl: "Paardensportnieuws en springconcours"
   };
   const descriptions: Record<Locale, string> = {
     en: "Read news from MEC Horses, including show jumping results, sport horse sales and guidance for international buyers.",
