@@ -96,7 +96,7 @@ export async function PATCH(request: NextRequest) {
   }
   const statusUpdate = z.object({
     horseSlug: z.string().min(1),
-    status: z.enum(["AVAILABLE", "RESERVED", "SOLD"])
+    status: z.enum(["AVAILABLE", "RESERVED", "SOLD", "ARCHIVED"])
   }).safeParse(body);
   if (!statusUpdate.success) {
     const fullUpdate = z.object({ horseSlug: z.string().min(1), ...HorseInputSchema.partial().shape }).safeParse(body);
