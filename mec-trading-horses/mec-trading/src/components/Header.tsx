@@ -23,6 +23,8 @@ export default function Header({ locale, dict }: { locale: Locale; dict: any }) 
               <span className="hidden sm:inline">Menu</span>
             </summary>
             <nav className="absolute left-0 top-full z-50 mt-2 min-w-56 border border-charcoal/15 bg-ivory p-2 shadow-xl">
+              <Link href={`/${locale}/account?mode=login`} className="block border-b border-charcoal/15 px-4 py-3 font-mono text-[11px] font-semibold uppercase tracking-eyebrow text-charcoal hover:bg-sand/15 hover:text-gold">Sign in</Link>
+              <Link href={`/${locale}/account?mode=register`} className="block border-b border-charcoal/15 px-4 py-3 font-mono text-[11px] font-semibold uppercase tracking-eyebrow text-charcoal hover:bg-sand/15 hover:text-gold">Sign up</Link>
               {nav.map((item) => (
                 <Link key={item.href} href={item.href} className="block px-4 py-3 font-mono text-[11px] uppercase tracking-eyebrow text-charcoal/75 transition-colors hover:bg-sand/15 hover:text-gold">{item.label}</Link>
               ))}
