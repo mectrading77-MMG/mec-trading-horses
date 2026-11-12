@@ -210,6 +210,16 @@ export async function DELETE(request: NextRequest) {
   const session = await getSession();
   if (!session) return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
   const body = await request.json().catch(() => null);
+  const bulkDelete = z.object({ deleteAll: z.literal(true) }).safeParse(body);
+  if (bulkDelete.success) {
+    try {
+      const result = await db.horse.deleteMany({});
+      return NextResponse.json({ ok: true, deletedCount: result.count });
+    } catch (error) {
+      console.error("Bulk horse deletion failed:", error);
+      return NextResponse.json({ error: "Could not delete horses. Check database relations and availability." }, { status: 500 });
+    }
+  }
   const parsed = z.object({ horseSlug: z.string().min(1) }).safeParse(body);
   if (!parsed.success) return NextResponse.json({ error: "A valid horse slug is required" }, { status: 400 });
   try {
