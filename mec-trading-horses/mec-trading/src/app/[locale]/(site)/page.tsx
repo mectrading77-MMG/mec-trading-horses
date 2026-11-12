@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: { params: { locale: Locale } 
   return {
     title: `${dict.brand.name} | Show Jumping Horses for Sale in Europe`,
     description: siteDescriptions[params.locale],
-    alternates: localizedAlternates("")
+    alternates: localizedAlternates(params.locale, "")
   };
 }
 
