@@ -7,11 +7,11 @@ import SectionHeading from "@/components/SectionHeading";
 
 export async function generateMetadata({ params }: { params: { locale: Locale } }): Promise<Metadata> {
   const titles: Record<Locale, string> = {
-    en: "Show Jumping Horse Sales & Buying Services | MEC Horses",
-    fr: "Services d’achat et de vente de chevaux de saut d’obstacles | MEC Horses",
-    ar: "خدمات شراء وبيع خيول قفز الحواجز | MEC Horses",
-    de: "Dienstleistungen rund um Kauf und Verkauf von Springpferden | MEC Horses",
-    nl: "Diensten voor aankoop en verkoop van springpaarden | MEC Horses"
+    en: "Show Jumping Horse Sales & Buying Services",
+    fr: "Services d’achat et de vente de chevaux de saut d’obstacles",
+    ar: "خدمات شراء وبيع خيول قفز الحواجز",
+    de: "Dienstleistungen rund um Kauf und Verkauf von Springpferden",
+    nl: "Diensten voor aankoop en verkoop van springpaarden"
   };
   const descriptions: Record<Locale, string> = {
     en: "Explore MEC Horses services: horse sourcing and sales, pre-purchase veterinary checks, viewings, transport and export assistance from France.",
