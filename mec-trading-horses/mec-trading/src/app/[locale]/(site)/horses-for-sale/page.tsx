@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: { params: { locale: Locale } 
     de: "Entdecken Sie Springpferde bei MEC Horses in Frankreich. Filtern Sie nach Alter, Stockmaß, Leistungsniveau und Turniererfahrung.",
     nl: "Bekijk springpaarden bij MEC Horses in Frankrijk. Zoek op leeftijd, stokmaat, wedstrijdniveau en ervaring."
   };
-  return { title: titles[params.locale], description: descriptions[params.locale], alternates: localizedAlternates("/horses-for-sale") };
+  return { title: titles[params.locale], description: descriptions[params.locale], alternates: localizedAlternates(params.locale, "/horses-for-sale") };
 }
 
 export default async function HorsesForSalePage({
