@@ -58,7 +58,6 @@ export default function Footer({ locale, dict }: { locale: Locale; dict: any }) 
       </div>
 
       <div className="border-t border-ivory/10 px-6 py-6 lg:px-10">
-        <p className="mx-auto max-w-editorial text-xs text-ivory/40">{dict.footer.privateNotice}</p>
         <p className="mx-auto mt-2 max-w-editorial text-xs text-ivory/35">MEC Trading SAS · SIRET : 108 537 549 00017 · La Chapelle-des-Fougeretz, 35520, France</p>
         <p className="mx-auto mt-2 max-w-editorial text-xs text-ivory/30">
           © {year} MEC Horses. {dict.footer.rights}
