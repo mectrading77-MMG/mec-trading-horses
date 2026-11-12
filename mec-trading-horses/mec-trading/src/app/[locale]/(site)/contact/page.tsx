@@ -9,11 +9,11 @@ import { listHorses } from "@/lib/horses";
 
 export async function generateMetadata({ params }: { params: { locale: Locale } }): Promise<Metadata> {
   const titles: Record<Locale, string> = {
-    en: "Contact MEC Horses | International Show Jumping Horse Sales",
-    fr: "Contact MEC Horses | Vente internationale de chevaux de saut d’obstacles",
-    ar: "تواصل مع MEC Horses | بيع خيول قفز الحواجز دوليًا",
-    de: "Kontakt MEC Horses | Internationaler Verkauf von Springpferden",
-    nl: "Contact MEC Horses | Internationale verkoop van springpaarden"
+    en: "Contact MEC Horses",
+    fr: "Contact MEC Horses",
+    ar: "تواصل مع MEC Horses",
+    de: "Kontakt MEC Horses",
+    nl: "Contact MEC Horses"
   };
   const descriptions: Record<Locale, string> = {
     en: "Contact MEC Horses in France about buying or selling a show jumping horse. We assist clients across Europe and the Middle East.",
