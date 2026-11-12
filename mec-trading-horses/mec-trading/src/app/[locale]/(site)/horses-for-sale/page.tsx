@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { localizedAlternates } from "@/lib/seo";
 import type { Locale } from "@/types/horse";
 import { getDictionary } from "@/i18n/config";
 import { listHorses } from "@/lib/horses";
@@ -8,8 +9,21 @@ import SectionHeading from "@/components/SectionHeading";
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: { params: { locale: Locale } }): Promise<Metadata> {
-  const dict = await getDictionary(params.locale);
-  return { title: dict.catalog.title, description: dict.catalog.subtitle };
+  const titles: Record<Locale, string> = {
+    en: "Show Jumping Horses for Sale in Europe | MEC Horses",
+    fr: "Chevaux de saut d’obstacles à vendre en Europe | MEC Horses",
+    ar: "خيول قفز حواجز للبيع في أوروبا | MEC Horses",
+    de: "Springpferde in Europa kaufen | MEC Horses",
+    nl: "Springpaarden te koop in Europa | MEC Horses"
+  };
+  const descriptions: Record<Locale, string> = {
+    en: "Browse show jumping horses for sale at MEC Horses in France. Explore sport horses by age, height, competition level and experience.",
+    fr: "Découvrez les chevaux de saut d’obstacles proposés par MEC Horses en France. Filtrez par âge, taille, niveau et expérience sportive.",
+    ar: "تصفح خيول قفز الحواجز المعروضة لدى MEC Horses في فرنسا، وابحث حسب العمر والارتفاع والمستوى والخبرة الرياضية.",
+    de: "Entdecken Sie Springpferde bei MEC Horses in Frankreich. Filtern Sie nach Alter, Stockmaß, Leistungsniveau und Turniererfahrung.",
+    nl: "Bekijk springpaarden bij MEC Horses in Frankrijk. Zoek op leeftijd, stokmaat, wedstrijdniveau en ervaring."
+  };
+  return { title: titles[params.locale], description: descriptions[params.locale], alternates: localizedAlternates("/horses-for-sale") };
 }
 
 export default async function HorsesForSalePage({
