@@ -10,9 +10,6 @@ const publicPaths = [
   "/about",
   "/news",
   "/contact",
-  "/legal/mentions-legales",
-  "/legal/confidentialite",
-  "/legal/cookies"
 ] as const;
 
 function languageAlternates(path: string) {
@@ -38,6 +35,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }))
   );
 
+  const legalPaths = ["/legal/mentions-legales", "/legal/confidentialite", "/legal/cookies"];
+  const legalEntries: MetadataRoute.Sitemap = legalPaths.map((path) => ({
+    url: `${siteUrl}/fr${path}`,
+    lastModified,
+    changeFrequency: "yearly" as const,
+    priority: 0.2
+  }));
+
   const horses = await listHorses();
   const horseEntries: MetadataRoute.Sitemap = horses.flatMap((horse) =>
     locales.map((locale) => {
@@ -52,5 +57,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })
   );
 
-  return [...staticEntries, ...horseEntries];
+  return [...staticEntries, ...legalEntries, ...horseEntries];
 }
