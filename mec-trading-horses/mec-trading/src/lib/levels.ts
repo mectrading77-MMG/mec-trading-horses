@@ -1,5 +1,5 @@
 /**
- * Show-jumping height bands. Band ids are used by catalogue URL filters.
+ * Show-jumping height bands. IDs double as catalogue URL params (?level=120).
  */
 export interface HeightBand {
   id: string;
@@ -9,25 +9,25 @@ export interface HeightBand {
 }
 
 export const HEIGHT_BANDS: HeightBand[] = [
-  { id: "80", minCm: 80, maxCm: 89, label: "80 cm" },
-  { id: "90", minCm: 90, maxCm: 99, label: "90 cm" },
-  { id: "100", minCm: 100, maxCm: 109, label: "1.00 m" },
-  { id: "110", minCm: 110, maxCm: 114, label: "1.10 m" },
-  { id: "115", minCm: 115, maxCm: 119, label: "1.15 m" },
-  { id: "120", minCm: 120, maxCm: 129, label: "1.20 m" },
-  { id: "130", minCm: 130, maxCm: 134, label: "1.30 m" },
-  { id: "135", minCm: 135, maxCm: 139, label: "1.35 m" },
-  { id: "140", minCm: 140, maxCm: 144, label: "1.40 m" },
-  { id: "145", minCm: 145, maxCm: 149, label: "1.45 m" },
-  { id: "150", minCm: 150, maxCm: 999, label: "1.50 m +" }
+  { id: "80", minCm: 80, maxCm: 84, label: "80 cm" },
+  { id: "90", minCm: 85, maxCm: 94, label: "90 cm" },
+  { id: "100", minCm: 95, maxCm: 104, label: "1.00 m" },
+  { id: "110", minCm: 105, maxCm: 112, label: "1.10 m" },
+  { id: "115", minCm: 113, maxCm: 117, label: "1.15 m" },
+  { id: "120", minCm: 118, maxCm: 125, label: "1.20 m" },
+  { id: "130", minCm: 126, maxCm: 132, label: "1.30 m" },
+  { id: "135", minCm: 133, maxCm: 137, label: "1.35 m" },
+  { id: "140", minCm: 138, maxCm: 142, label: "1.40 m" },
+  { id: "145", minCm: 143, maxCm: 147, label: "1.45 m" },
+  { id: "150", minCm: 148, maxCm: 999, label: "1.50 m +" }
 ];
 
 export function bandFor(jumpHeightCm: number): HeightBand {
-  return HEIGHT_BANDS.find((band) => jumpHeightCm >= band.minCm && jumpHeightCm <= band.maxCm) ?? HEIGHT_BANDS[HEIGHT_BANDS.length - 1];
+  return HEIGHT_BANDS.find((b) => jumpHeightCm >= b.minCm && jumpHeightCm <= b.maxCm) ?? HEIGHT_BANDS[HEIGHT_BANDS.length - 1];
 }
 
 export function bandById(id: string | undefined): HeightBand | undefined {
-  return HEIGHT_BANDS.find((band) => band.id === id);
+  return HEIGHT_BANDS.find((b) => b.id === id);
 }
 
 /** 145 -> "1.45 m" */
