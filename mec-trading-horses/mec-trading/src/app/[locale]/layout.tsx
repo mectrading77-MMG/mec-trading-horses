@@ -27,7 +27,7 @@ export async function generateMetadata({
       type: "website",
       images: [
         {
-          url: "https://www.mechorses.com/brand/og-default.jpg",
+          url: "https://www.mechorses.com/brand/og-default.png",
           width: 1200,
           height: 630,
           alt: "MEC Horses — Sport Horses"
@@ -36,7 +36,7 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      images: ["https://www.mechorses.com/brand/og-default.jpg"]
+      images: ["https://www.mechorses.com/brand/og-default.png"]
     },
     robots: {
       index: true,
