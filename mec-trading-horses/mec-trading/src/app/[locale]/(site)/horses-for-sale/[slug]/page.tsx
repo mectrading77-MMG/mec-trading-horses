@@ -56,24 +56,42 @@ export default async function HorseDetailPage({
   const price = formatPriceRange(horse.priceAmount, horse.priceCurrency, horse.priceOnRequest, params.locale);
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.mechorses.com";
 
+  const productUrl = `${siteUrl}/${params.locale}/horses-for-sale/${horse.slug}`;
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
+    "@id": `${productUrl}#product`,
     name: t.name,
     description: t.positioning,
     image: horse.media.map((m) => m.url),
-    brand: { "@type": "Organization", name: "MEC Trading" },
-    offers: {
-      "@type": "Offer",
-      priceCurrency: horse.priceCurrency,
-      availability:
-        horse.status === "AVAILABLE"
-          ? "https://schema.org/InStock"
-          : horse.status === "RESERVED"
-          ? "https://schema.org/LimitedAvailability"
-          : "https://schema.org/SoldOut",
-      url: `${siteUrl}/${params.locale}/horses-for-sale/${horse.slug}`
-    }
+    sku: horse.id,
+    category: "Show jumping horse",
+    brand: { "@id": "https://www.mechorses.com/#organization" },
+    additionalProperty: [
+      { "@type": "PropertyValue", name: "Breed", value: horse.breed },
+      { "@type": "PropertyValue", name: "Sex", value: horse.sex },
+      { "@type": "PropertyValue", name: "Colour", value: horse.color },
+      ...(horse.heightCm ? [{ "@type": "PropertyValue", name: "Height", value: `${horse.heightCm} cm` }] : []),
+      ...(horse.competitionLevel ? [{ "@type": "PropertyValue", name: "Competition level", value: horse.competitionLevel }] : [])
+    ],
+    ...(horse.priceAmount !== undefined && !horse.priceOnRequest
+      ? {
+          offers: {
+            "@type": "Offer",
+            url: productUrl,
+            price: horse.priceAmount,
+            priceCurrency: horse.priceCurrency,
+            availability:
+              horse.status === "AVAILABLE"
+                ? "https://schema.org/InStock"
+                : horse.status === "RESERVED"
+                ? "https://schema.org/LimitedAvailability"
+                : "https://schema.org/SoldOut",
+            itemCondition: "https://schema.org/UsedCondition",
+            seller: { "@id": "https://www.mechorses.com/#organization" }
+          }
+        }
+      : {})
   };
 
   const descriptionFields: Array<{ label: string; value?: string }> = [
