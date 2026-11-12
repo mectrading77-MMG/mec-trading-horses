@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: { params: { locale: Locale } 
     de: "Kontaktieren Sie MEC Horses in Frankreich zum Kauf oder Verkauf eines Springpferdes. Wir betreuen Kunden in Europa und im Nahen Osten.",
     nl: "Neem contact op met MEC Horses in Frankrijk voor de aankoop of verkoop van een springpaard. We begeleiden klanten in Europa en het Midden-Oosten."
   };
-  return { title: titles[params.locale], description: descriptions[params.locale], alternates: localizedAlternates("/contact") };
+  return { title: titles[params.locale], description: descriptions[params.locale], alternates: localizedAlternates(params.locale, "/contact") };
 }
 
 export default async function ContactPage({ params, searchParams }: { params: { locale: Locale }; searchParams?: { service?: string } }) {
