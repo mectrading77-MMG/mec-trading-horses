@@ -10,11 +10,11 @@ export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: { params: { locale: Locale } }): Promise<Metadata> {
   const titles: Record<Locale, string> = {
-    en: "Show Jumping Horses for Sale in Europe | MEC Horses",
-    fr: "Chevaux de saut d’obstacles à vendre en Europe | MEC Horses",
-    ar: "خيول قفز حواجز للبيع في أوروبا | MEC Horses",
-    de: "Springpferde in Europa kaufen | MEC Horses",
-    nl: "Springpaarden te koop in Europa | MEC Horses"
+    en: "Show Jumping Horses for Sale in Europe",
+    fr: "Chevaux de saut d’obstacles à vendre en Europe",
+    ar: "خيول قفز حواجز للبيع في أوروبا",
+    de: "Springpferde in Europa kaufen",
+    nl: "Springpaarden te koop in Europa"
   };
   const descriptions: Record<Locale, string> = {
     en: "Browse show jumping horses for sale at MEC Horses in France. Explore sport horses by age, height, competition level and experience.",
