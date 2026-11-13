@@ -31,7 +31,23 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Validate database secret format
+        shell: bash
+        env:
+          RAW_DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          value="$RAW_DATABASE_URL"
+          value="${value#\"}"
+          value="${value%\"}"
+          value="${value#\'}"
+          value="${value%\'}"
+          if [[ "$value" =~ ^postgres(ql)?:// ]]; then
+            echo "DATABASE_URL format is valid."
+            echo "DATABASE_URL=$value" >> "$GITHUB_ENV"
+          else
+            echo "::error::DATABASE_URL secret is present but does not start with postgresql:// or postgres:// after removing surrounding quotes. Update the GitHub secret with the raw PostgreSQL connection URL only."
+            exit 1
+          fi
+
       - name: Apply pending migrations
         run: npx prisma migrate deploy --schema=./prisma/schema.prisma
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
