@@ -105,6 +105,17 @@ export default function NewHorsePage() {
           <Field label="Passport Number"><input name="passportNo" className={inputClass} /></Field>
         </section>
 
+        <section className="border border-charcoal-line bg-white p-5">
+          <h2 className="font-display text-lg italic text-charcoal">Pedigree</h2>
+          <p className="mt-1 text-xs text-charcoal/50">Add the horse's parents and the sire of each parent. All fields are optional.</p>
+          <div className="mt-4 grid gap-5 sm:grid-cols-2">
+            <Field label="Sire (Father)"><input name="sireName" className={inputClass} placeholder="Father's name" /></Field>
+            <Field label="Dam (Mother)"><input name="damName" className={inputClass} placeholder="Mother's name" /></Field>
+            <Field label="Sire's sire (Paternal grandsire)"><input name="sireSireName" className={inputClass} placeholder="Father's father" /></Field>
+            <Field label="Dam's sire (Maternal grandsire)"><input name="damSireName" className={inputClass} placeholder="Mother's father" /></Field>
+          </div>
+        </section>
+
         <section>
           <h2 className="font-display text-lg italic text-charcoal">Description (English)</h2>
           <div className="mt-4 grid gap-5">
