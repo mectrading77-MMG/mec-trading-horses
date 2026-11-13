@@ -85,7 +85,8 @@
     "statusLabel": {
       "AVAILABLE": "Verfügbar",
       "RESERVED": "Reserviert",
-      "SOLD": "Verkauft"
+      "SOLD": "Verkauft",
+      "ARCHIVED": "Verkauft — Archiviert"
     },
     "level": "Niveau",
     "jumpsAt": "Springt auf",
