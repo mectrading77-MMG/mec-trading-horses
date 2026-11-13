@@ -31,21 +31,21 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Validate database secret format
+      - name: Validate Neon direct connection secret
         shell: bash
         env:
-          RAW_DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          RAW_DIRECT_URL: ${{ secrets.DIRECT_URL }}
         run: |
-          value="$RAW_DATABASE_URL"
+          value="$RAW_DIRECT_URL"
           value="${value#\"}"
           value="${value%\"}"
           value="${value#\'}"
           value="${value%\'}"
           if [[ "$value" =~ ^postgres(ql)?:// ]]; then
-            echo "DATABASE_URL format is valid."
+            echo "Neon direct connection URL format is valid."
             echo "DATABASE_URL=$value" >> "$GITHUB_ENV"
           else
-            echo "::error::DATABASE_URL secret is present but does not start with postgresql:// or postgres:// after removing surrounding quotes. Update the GitHub secret with the raw PostgreSQL connection URL only."
+            echo "::error::DIRECT_URL secret is missing or is not a PostgreSQL URL. Add the Neon unpooled/direct connection string as the DIRECT_URL repository secret."
             exit 1
           fi
 
