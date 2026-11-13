@@ -85,7 +85,8 @@
     "statusLabel": {
       "AVAILABLE": "متاح",
       "RESERVED": "محجوز",
-      "SOLD": "مُباع"
+      "SOLD": "مُباع",
+      "ARCHIVED": "مباع — مؤرشف"
     },
     "level": "المستوى",
     "jumpsAt": "يقفز على",
