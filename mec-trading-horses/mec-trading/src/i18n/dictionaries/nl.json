@@ -85,7 +85,8 @@
     "statusLabel": {
       "AVAILABLE": "Beschikbaar",
       "RESERVED": "Gereserveerd",
-      "SOLD": "Verkocht"
+      "SOLD": "Verkocht",
+      "ARCHIVED": "Verkocht — Gearchiveerd"
     },
     "level": "Niveau",
     "jumpsAt": "Springt op",
