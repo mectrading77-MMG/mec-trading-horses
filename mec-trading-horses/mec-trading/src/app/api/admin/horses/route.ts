@@ -24,6 +24,10 @@ const HorseInputSchema = z.object({
   status: z.enum(["AVAILABLE", "RESERVED", "SOLD", "ARCHIVED"]).default("AVAILABLE"),
   registrationNo: optionalText,
   passportNo: optionalText,
+  sireName: z.string().trim().optional(),
+  damName: z.string().trim().optional(),
+  sireSireName: z.string().trim().optional(),
+  damSireName: z.string().trim().optional(),
   positioning: optionalText,
   personality: optionalText,
   training: optionalText,
@@ -129,6 +133,17 @@ export async function PATCH(request: NextRequest) {
           trustXrays: input.trustXrays,
           trustPedigreeDocs: input.trustPedigreeDocs,
           trustTransport: input.trustTransport,
+          pedigreeEntries: (input.sireName !== undefined || input.damName !== undefined || input.sireSireName !== undefined || input.damSireName !== undefined)
+            ? {
+                deleteMany: { position: { in: ["sire", "dam", "sire.sire", "dam.sire"] } },
+                create: [
+                  ...(input.sireName ? [{ position: "sire", name: input.sireName }] : []),
+                  ...(input.damName ? [{ position: "dam", name: input.damName }] : []),
+                  ...(input.sireSireName ? [{ position: "sire.sire", name: input.sireSireName }] : []),
+                  ...(input.damSireName ? [{ position: "dam.sire", name: input.damSireName }] : [])
+                ]
+              }
+            : undefined,
           translations: (input.nameEn !== undefined || input.positioning !== undefined || input.personality !== undefined || input.training !== undefined || input.strengths !== undefined || input.experience !== undefined || input.suitability !== undefined || input.potential !== undefined || input.idealRider !== undefined)
             ? { upsert: {
                 where: { horseId_locale: { horseId: existing.id, locale: "en" } },
@@ -195,7 +210,15 @@ export async function POST(request: NextRequest) {
         trustXrays: data.trustXrays ?? false,
         trustPedigreeDocs: data.trustPedigreeDocs ?? false,
         trustTransport: data.trustTransport ?? false,
-        translations: { create: [{ locale: "en", name: data.nameEn, positioning: data.positioning ?? "", personality: data.personality, training: data.training, strengths: data.strengths, experience: data.experience, suitability: data.suitability, potential: data.potential, idealRider: data.idealRider }] }
+        translations: { create: [{ locale: "en", name: data.nameEn, positioning: data.positioning ?? "", personality: data.personality, training: data.training, strengths: data.strengths, experience: data.experience, suitability: data.suitability, potential: data.potential, idealRider: data.idealRider }] },
+        pedigreeEntries: {
+          create: [
+            ...(data.sireName ? [{ position: "sire", name: data.sireName }] : []),
+            ...(data.damName ? [{ position: "dam", name: data.damName }] : []),
+            ...(data.sireSireName ? [{ position: "sire.sire", name: data.sireSireName }] : []),
+            ...(data.damSireName ? [{ position: "dam.sire", name: data.damSireName }] : [])
+          ]
+        }
       },
       select: { id: true, slug: true, status: true }
     });
