@@ -1,23 +1,21 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const locales = ["en", "fr", "ar", "de", "nl"];
+const locales = ["ar", "en", "fr"] as const;
 const defaultLocale = "en";
 
 function pickLocale(request: NextRequest) {
-  const header = request.headers.get("accept-language");
-  if (!header) return defaultLocale;
-  const preferred = header.split(",")[0]?.split("-")[0];
-  return locales.includes(preferred ?? "") ? preferred! : defaultLocale;
+  const accepted = request.headers.get("accept-language")?.split(",") ?? [];
+  for (const entry of accepted) {
+    const language = entry.split(";")[0]?.trim().split("-")[0]?.toLowerCase();
+    if (language && locales.includes(language as (typeof locales)[number])) return language;
+  }
+  return defaultLocale;
 }
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  if (
-    pathname.startsWith("/_next") ||
-    pathname.startsWith("/api") ||
-    pathname.includes(".")
-  ) {
+  if (pathname.startsWith("/_next") || pathname.startsWith("/api") || pathname.includes(".")) {
     return NextResponse.next();
   }
 
@@ -26,9 +24,8 @@ export function middleware(request: NextRequest) {
   );
 
   if (!hasLocale) {
-    const locale = pickLocale(request);
     const url = request.nextUrl.clone();
-    url.pathname = `/${locale}${pathname}`;
+    url.pathname = `/${pickLocale(request)}${pathname}`;
     return NextResponse.redirect(url);
   }
 
@@ -47,7 +44,7 @@ export function middleware(request: NextRequest) {
 
 function isProtectedAdminPath(pathname: string) {
   return locales.some(
-    (l) => pathname.startsWith(`/${l}/admin`) && !pathname.startsWith(`/${l}/admin/login`)
+    (locale) => pathname.startsWith(`/${locale}/admin`) && !pathname.startsWith(`/${locale}/admin/login`)
   );
 }
 
