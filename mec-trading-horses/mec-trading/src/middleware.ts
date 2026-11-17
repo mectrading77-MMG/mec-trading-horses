@@ -20,20 +20,19 @@ export function middleware(request: NextRequest) {
   }
 
   // Redirect legacy German and Dutch routes to the English equivalent.
-  const legacyLocale = pathname.match(/^\/(de|nl)(?=\/|$)/);
-  if (legacyLocale) {
+  if (/^\/(de|nl)(?=\/|$)/.test(pathname)) {
     const url = request.nextUrl.clone();
     url.pathname = pathname.replace(/^\/(de|nl)(?=\/|$)/, "/en");
     return NextResponse.redirect(url, 308);
   }
 
   const hasLocale = locales.some(
-    (locale) => pathname === \`/\${locale}\` || pathname.startsWith(\`/\${locale}/\`)
+    (locale) => pathname === "/" + locale || pathname.startsWith("/" + locale + "/")
   );
 
   if (!hasLocale) {
     const url = request.nextUrl.clone();
-    url.pathname = \`/\${pickLocale(request)}\${pathname}\`;
+    url.pathname = "/" + pickLocale(request) + pathname;
     return NextResponse.redirect(url);
   }
 
@@ -42,7 +41,7 @@ export function middleware(request: NextRequest) {
     if (!hasSession) {
       const locale = pathname.split("/")[1];
       const url = request.nextUrl.clone();
-      url.pathname = \`/\${locale}/admin/login\`;
+      url.pathname = "/" + locale + "/admin/login";
       return NextResponse.redirect(url);
     }
   }
@@ -52,10 +51,10 @@ export function middleware(request: NextRequest) {
 
 function isProtectedAdminPath(pathname: string) {
   return locales.some(
-    (locale) => pathname.startsWith(\`/\${locale}/admin\`) && !pathname.startsWith(\`/\${locale}/admin/login\`)
+    (locale) => pathname.startsWith("/" + locale + "/admin") && !pathname.startsWith("/" + locale + "/admin/login")
   );
 }
 
 export const config = {
-  matcher: ["/((?!_next|api|.*\\\\..*).*)"]
+  matcher: ["/((?!_next|api|.*\\..*).*)"]
 };
