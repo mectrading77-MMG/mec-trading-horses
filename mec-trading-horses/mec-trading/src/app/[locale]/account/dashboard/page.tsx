@@ -16,10 +16,7 @@ export default async function CustomerDashboard({ params }: { params: { locale: 
           <h2 className="font-display text-2xl italic">Your account</h2>
           <p className="mt-2 text-sm leading-6 text-charcoal/65">Your personal MEC HORSES account is ready. You can use it when contacting our team about horses and services.</p>
         </div>
-        <form action="/api/account/logout" method="post" className="mt-8">
-          <button className="border border-charcoal px-5 py-3 font-mono text-[10px] uppercase tracking-[.18em] hover:border-gold hover:text-gold">Sign out</button>
-        </form>
-        <Link href={`/${params.locale}/horses-for-sale`} className="ml-5 text-sm underline underline-offset-4">Explore horses</Link>
+        <Link href={`/${params.locale}/horses-for-sale`} className="mt-8 inline-block text-sm underline underline-offset-4">Explore horses</Link>
       </div>
     </main>
   );
