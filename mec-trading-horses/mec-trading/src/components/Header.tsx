@@ -2,8 +2,10 @@ import Link from "next/link";
 import type { Locale } from "@/types/horse";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import Logo from "@/components/Logo";
+import { getCustomerSession } from "@/lib/customer-auth";
 
-export default function Header({ locale, dict }: { locale: Locale; dict: any }) {
+export default async function Header({ locale, dict }: { locale: Locale; dict: any }) {
+  const customer = await getCustomerSession();
   const nav = [
     { href: `/${locale}`, label: dict.nav.home },
     { href: `/${locale}/horses-for-sale`, label: dict.nav.horses },
@@ -23,8 +25,6 @@ export default function Header({ locale, dict }: { locale: Locale; dict: any }) 
               <span className="hidden sm:inline">Menu</span>
             </summary>
             <nav className="absolute left-0 top-full z-50 mt-2 min-w-56 border border-charcoal/15 bg-ivory p-2 shadow-xl">
-              <Link href={`/${locale}/account?mode=login`} className="block border-b border-charcoal/15 px-4 py-3 font-mono text-[11px] font-semibold uppercase tracking-eyebrow text-charcoal hover:bg-sand/15 hover:text-gold">Sign in</Link>
-              <Link href={`/${locale}/account?mode=register`} className="block border-b border-charcoal/15 px-4 py-3 font-mono text-[11px] font-semibold uppercase tracking-eyebrow text-charcoal hover:bg-sand/15 hover:text-gold">Sign up</Link>
               {nav.map((item) => (
                 <Link key={item.href} href={item.href} className="block px-4 py-3 font-mono text-[11px] uppercase tracking-eyebrow text-charcoal/75 transition-colors hover:bg-sand/15 hover:text-gold">{item.label}</Link>
               ))}
@@ -40,7 +40,24 @@ export default function Header({ locale, dict }: { locale: Locale; dict: any }) 
         </Link>
 
         <div className="flex items-center justify-end gap-2 sm:gap-3">
-          <Link href={`/${locale}/account`} className="whitespace-nowrap border border-charcoal/30 px-2.5 py-2 font-mono text-[9px] font-semibold uppercase tracking-[0.08em] text-charcoal transition-colors hover:border-gold hover:text-gold sm:px-3 sm:text-[10px] sm:tracking-eyebrow">My Account</Link>
+          <details className="group relative">
+            <summary className="flex cursor-pointer list-none items-center whitespace-nowrap border border-charcoal/30 px-2.5 py-2 font-mono text-[9px] font-semibold uppercase tracking-[0.08em] text-charcoal transition-colors hover:border-gold hover:text-gold sm:px-3 sm:text-[10px] sm:tracking-eyebrow [&::-webkit-details-marker]:hidden">My Account ▾</summary>
+            <div className="absolute right-0 top-full z-50 mt-2 min-w-48 border border-charcoal/15 bg-ivory p-2 shadow-xl">
+              {customer ? (
+                <>
+                  <Link href={`/${locale}/account/dashboard`} className="block px-4 py-3 font-mono text-[11px] uppercase tracking-eyebrow text-charcoal hover:bg-sand/15 hover:text-gold">My Dashboard</Link>
+                  <form action="/api/account/logout" method="post">
+                    <button type="submit" className="block w-full px-4 py-3 text-left font-mono text-[11px] uppercase tracking-eyebrow text-charcoal hover:bg-sand/15 hover:text-gold">Sign out</button>
+                  </form>
+                </>
+              ) : (
+                <>
+                  <Link href={`/${locale}/account?mode=login`} className="block px-4 py-3 font-mono text-[11px] uppercase tracking-eyebrow text-charcoal hover:bg-sand/15 hover:text-gold">Sign in</Link>
+                  <Link href={`/${locale}/account?mode=register`} className="block px-4 py-3 font-mono text-[11px] uppercase tracking-eyebrow text-charcoal hover:bg-sand/15 hover:text-gold">Sign up</Link>
+                </>
+              )}
+            </div>
+          </details>
           <LanguageSwitcher current={locale} />
         </div>
       </div>
