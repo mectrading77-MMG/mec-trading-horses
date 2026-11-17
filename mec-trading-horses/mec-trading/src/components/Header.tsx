@@ -9,7 +9,6 @@ export default function Header({ locale, dict }: { locale: Locale; dict: any }) 
     { href: `/${locale}/horses-for-sale`, label: dict.nav.horses },
     { href: `/${locale}/about`, label: dict.nav.about },
     { href: `/${locale}/services`, label: dict.nav.services },
-    { href: `/${locale}/news`, label: dict.nav.news },
     { href: `/${locale}/contact`, label: dict.nav.contact }
   ];
 
@@ -39,8 +38,13 @@ export default function Header({ locale, dict }: { locale: Locale; dict: any }) 
           </span>
         </Link>
 
-        <div className="flex items-center justify-end gap-2 sm:gap-3">
-          <Link href={`/${locale}/account`} className="whitespace-nowrap border border-charcoal/30 px-2.5 py-2 font-mono text-[9px] font-semibold uppercase tracking-[0.08em] text-charcoal transition-colors hover:border-gold hover:text-gold sm:px-3 sm:text-[10px] sm:tracking-eyebrow">My Account</Link>
+        <div className="flex items-center justify-end gap-1.5 sm:gap-3">
+          <Link href={`/${locale}/news`} aria-label="Daily Equestrian News" className="relative inline-flex items-center gap-1.5 whitespace-nowrap border border-gold bg-charcoal px-2 py-2 font-mono text-[9px] font-semibold uppercase tracking-[0.06em] text-ivory transition-colors hover:bg-gold sm:gap-2 sm:px-3 sm:text-[10px]">
+            <span aria-hidden="true">✦</span>
+            <span>Daily News</span>
+            <span className="absolute -right-1.5 -top-1.5 rounded-full bg-[#B33A32] px-1.5 py-0.5 text-[7px] leading-none tracking-normal text-white">NEW</span>
+          </Link>
+          <Link href={`/${locale}/account`} className="hidden whitespace-nowrap border border-charcoal/30 px-2.5 py-2 font-mono text-[9px] font-semibold uppercase tracking-[0.08em] text-charcoal transition-colors hover:border-gold hover:text-gold sm:inline-flex sm:px-3 sm:text-[10px] sm:tracking-eyebrow">My Account</Link>
           <LanguageSwitcher current={locale} />
         </div>
       </div>

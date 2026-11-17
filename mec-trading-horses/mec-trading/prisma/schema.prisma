@@ -237,3 +237,66 @@ model WebsiteSettings {
   aboutFr         String
   aboutAr         String
 }
+
+
+enum NewsRegion {
+  EGYPT
+  GULF
+  EUROPE
+  INTERNATIONAL
+}
+
+enum NewsCategory {
+  COMPETITION
+  RESULT
+  FEDERATION
+  MARKET
+  WELFARE
+}
+
+model NewsArticle {
+  id          String       @id @default(cuid())
+  slug        String       @unique
+  sourceUrl   String       @unique
+  sourceName  String
+  region      NewsRegion
+  category    NewsCategory
+  publishedAt DateTime
+  titleEn     String
+  summaryEn   String
+  titleFr     String
+  summaryFr   String
+  titleAr     String
+  summaryAr   String
+  titleDe     String
+  summaryDe   String
+  titleNl     String
+  summaryNl   String
+  imageUrl    String?
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  @@index([publishedAt])
+  @@index([region, publishedAt])
+  @@index([category, publishedAt])
+}
+
+model CompetitionEvent {
+  id           String     @id @default(cuid())
+  sourceUrl    String     @unique
+  sourceName   String
+  title        String
+  discipline   String     @default("Show jumping")
+  region       NewsRegion
+  city         String?
+  country      String
+  startsAt     DateTime
+  endsAt       DateTime?
+  heightLevels String?
+  eventLevel   String?
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  @@index([startsAt])
+  @@index([region, startsAt])
+}
