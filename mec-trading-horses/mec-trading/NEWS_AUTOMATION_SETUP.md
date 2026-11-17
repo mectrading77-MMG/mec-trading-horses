@@ -11,6 +11,9 @@ Add these variables to the Vercel project for **Production** and **Preview**:
 - `NEWS_RSS_FEEDS`: JSON array of curated HTTPS RSS/Atom feeds. Each item must have `name`, `url`, and `region` (`EGYPT`, `GULF`, `EUROPE`, or `INTERNATIONAL`).
 - `NEWS_ICS_FEEDS`: JSON array of curated HTTPS iCalendar feeds. Each item must have `name`, `url`, `region`, and `country`; optional `city`.
 - `NEWS_AI_MODEL` (optional): defaults to `gpt-4o-mini`.
+- `FACEBOOK_PAGE_ID`: the numeric ID of the official MEC HORSES Facebook Page.
+- `FACEBOOK_PAGE_ACCESS_TOKEN`: a Page access token with permission to publish Page posts (keep it server-side in Vercel; never expose it in browser code or commit it to GitHub).
+- `SITE_URL`: canonical website origin, e.g. `https://www.mechorses.com`.
 
 Example structure (replace the example URLs with feeds confirmed by the relevant federation or event organiser):
 
@@ -28,7 +31,7 @@ Calendar feed example:
 ]
 ```
 
-Do not add a source until its ownership, publication rights, and feed URL have been checked. The importer stores short AI-written summaries and links to the original publisher; it does not republish full articles. The editorial filter rejects wanted/buyer requests and individual horse-sale classifieds. The news hub never creates or changes horse listings: those remain managed in the MEC HORSES horse catalogue.
+Do not add a source until its ownership, publication rights, and feed URL have been checked. The importer stores short AI-written summaries and links to the original publisher; it does not republish full articles. When `FACEBOOK_PAGE_ID` and `FACEBOOK_PAGE_ACCESS_TOKEN` are configured, each newly imported article is automatically published to the MEC HORSES Facebook Page with its English headline, summary, and a link to the matching article anchor on the website. If these credentials are absent, website news import continues without Facebook posting. The editorial filter rejects wanted/buyer requests and individual horse-sale classifieds. The news hub never creates or changes horse listings: those remain managed in the MEC HORSES horse catalogue.
 
 ## Database
 
