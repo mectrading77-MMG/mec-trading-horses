@@ -113,6 +113,30 @@ export async function GET(request: NextRequest) {
               titleNl: content.nl.title, summaryNl: content.nl.summary, imageUrl: item.image
             }});
             importedNews++;
+
+            // Publish each newly imported story to the MEC HORSES Facebook Page when configured.
+            const pageId = process.env.FACEBOOK_PAGE_ID;
+            const pageToken = process.env.FACEBOOK_PAGE_ACCESS_TOKEN;
+            const siteUrl = (process.env.SITE_URL || "https://www.mechorses.com").replace(/\\/$/, "");
+            if (pageId && pageToken) {
+              const storyUrl = `${siteUrl}/en/news#${slug}`;
+              const message = `${content.en.title}\\n\\n${content.en.summary}\\n\\nRead the full story on MEC HORSES: ${storyUrl}`;
+              try {
+                const form = new URLSearchParams({ message, link: storyUrl, access_token: pageToken });
+                const fbResponse = await fetch(`https://graph.facebook.com/v23.0/${pageId}/feed`, {
+                  method: "POST",
+                  headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                  body: form,
+                  signal: AbortSignal.timeout(10000)
+                });
+                const fbResult = await fbResponse.json();
+                if (!fbResponse.ok) throw new Error(fbResult.error?.message || `Facebook API returned ${fbResponse.status}`);
+                console.info("Published news to MEC HORSES Facebook Page", fbResult.id);
+              } catch (facebookError) {
+                failed++;
+                console.error("Facebook news publishing failed", slug, facebookError);
+              }
+            }
           } catch (error) { failed++; console.error("News item failed", item.link, error); }
         }
       } catch (error) { failed++; console.error("News feed failed", feed.name, error); }
