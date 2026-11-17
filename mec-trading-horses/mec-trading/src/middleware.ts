@@ -19,6 +19,14 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
+  // Preserve old German and Dutch URLs by redirecting them to the English equivalent.
+  const legacyLocale = pathname.match(/^\\/(de|nl)(?=\\/|$)/);
+  if (legacyLocale) {
+    const url = request.nextUrl.clone();
+    url.pathname = pathname.replace(/^\\/(de|nl)(?=\\/|$)/, "/en");
+    return NextResponse.redirect(url, 308);
+  }
+
   const hasLocale = locales.some(
     (locale) => pathname === `/${locale}` || pathname.startsWith(`/${locale}/`)
   );
