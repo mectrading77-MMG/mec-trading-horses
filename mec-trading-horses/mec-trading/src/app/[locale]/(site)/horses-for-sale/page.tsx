@@ -13,15 +13,11 @@ export async function generateMetadata({ params }: { params: { locale: Locale } 
     en: "Show Jumping Horses for Sale in Europe",
     fr: "Chevaux de saut d’obstacles à vendre en Europe",
     ar: "خيول قفز حواجز للبيع في أوروبا",
-    de: "Springpferde in Europa kaufen",
-    nl: "Springpaarden te koop in Europa"
   };
   const descriptions: Record<Locale, string> = {
     en: "Browse show jumping horses for sale at MEC Horses in France. Explore sport horses by age, height, competition level and experience.",
     fr: "Découvrez les chevaux de saut d’obstacles proposés par MEC Horses en France. Filtrez par âge, taille, niveau et expérience sportive.",
     ar: "تصفح خيول قفز الحواجز المعروضة لدى MEC Horses في فرنسا، وابحث حسب العمر والارتفاع والمستوى والخبرة الرياضية.",
-    de: "Entdecken Sie Springpferde bei MEC Horses in Frankreich. Filtern Sie nach Alter, Stockmaß, Leistungsniveau und Turniererfahrung.",
-    nl: "Bekijk springpaarden bij MEC Horses in Frankrijk. Zoek op leeftijd, stokmaat, wedstrijdniveau en ervaring."
   };
   return { title: titles[params.locale], description: descriptions[params.locale], alternates: localizedAlternates(params.locale, "/horses-for-sale") };
 }
