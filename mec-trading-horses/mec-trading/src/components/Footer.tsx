@@ -8,8 +8,6 @@ export default function Footer({ locale, dict }: { locale: Locale; dict: any }) 
     en: { social: "Social", location: "La Chapelle-des-Fougeretz, Brittany, France", legal: "Legal information", mentions: "Legal notices", privacy: "Privacy policy", cookies: "Cookie policy" },
     fr: { social: "Réseaux sociaux", location: "La Chapelle-des-Fougeretz, Bretagne, France", legal: "Informations légales", mentions: "Mentions légales", privacy: "Politique de confidentialité", cookies: "Politique relative aux cookies" },
     ar: { social: "وسائل التواصل", location: "لا شابيل دي فوجريه، بريتاني، فرنسا", legal: "معلومات قانونية", mentions: "الإشعارات القانونية", privacy: "سياسة الخصوصية", cookies: "سياسة ملفات تعريف الارتباط" },
-    de: { social: "Soziale Medien", location: "La Chapelle-des-Fougeretz, Bretagne, Frankreich", legal: "Rechtliche Informationen", mentions: "Impressum", privacy: "Datenschutzerklärung", cookies: "Cookie-Richtlinie" },
-    nl: { social: "Sociale media", location: "La Chapelle-des-Fougeretz, Bretagne, Frankrijk", legal: "Juridische informatie", mentions: "Juridische kennisgeving", privacy: "Privacybeleid", cookies: "Cookiebeleid" }
   };
   const labels = footerLabels[locale] ?? footerLabels.en;
 
