@@ -8,8 +8,6 @@ export default function StickyMobileBar({ dict, locale = "en" }: { dict: any; lo
     en: "Share",
     fr: "Partager",
     ar: "مشاركة",
-    de: "Teilen",
-    nl: "Delen"
   };
   const shareText = shareLabel[locale] ?? shareLabel.en;
 
