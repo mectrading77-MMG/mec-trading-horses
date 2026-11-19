@@ -3,57 +3,57 @@ import type { Locale } from "@/types/horse";
 import { localizedAlternates } from "@/lib/seo";
 import { getDictionary } from "@/i18n/config";
 import SectionHeading from "@/components/SectionHeading";
-
-const postsByLocale: Record<Locale, { title: string; date: string }[]> = {
-  en: [
-    { title: "Orphée des Forges placed at CSI3* Deauville", date: "2026-07-18" },
-    { title: "MEC Horses supports Gulf-based buyers with export documentation", date: "2026-06-02" },
-    { title: "Why every horse receives an independent veterinary review", date: "2026-05-10" }
-  ],
-  fr: [
-    { title: "Orphée des Forges classé au CSI3* de Deauville", date: "2026-07-18" },
-    { title: "MEC Horses accompagne les acheteurs du Golfe dans les formalités d’exportation", date: "2026-06-02" },
-    { title: "Pourquoi chaque cheval fait l’objet d’un examen vétérinaire indépendant", date: "2026-05-10" }
-  ],
-  ar: [
-    { title: "أورفيه دي فورج ضمن المراكز المتقدمة في CSI3* دوفيل", date: "2026-07-18" },
-    { title: "MEC Horses تساعد المشترين في الخليج في مستندات التصدير", date: "2026-06-02" },
-    { title: "لماذا نخضع كل حصان لفحص بيطري مستقل", date: "2026-05-10" }
-  ],
-
-};
+import { getEquestrianNews } from "@/lib/equestrian-news";
 
 export async function generateMetadata({ params }: { params: { locale: Locale } }): Promise<Metadata> {
   const titles: Record<Locale, string> = {
     en: "Equestrian News & Show Jumping Updates",
     fr: "Actualités équestres et saut d’obstacles",
-    ar: "أخبار الفروسية وقفز الحواجز",
+    ar: "أخبار الفروسية وقفز الحواجز"
   };
   const descriptions: Record<Locale, string> = {
-    en: "Read news from MEC Horses, including show jumping results, sport horse sales and guidance for international buyers.",
-    fr: "Suivez l’actualité de MEC Horses : résultats de saut d’obstacles, chevaux de sport et conseils aux acheteurs internationaux.",
-    ar: "تابع أخبار MEC Horses ونتائج قفز الحواجز ومستجدات الخيول الرياضية وإرشادات المشترين الدوليين.",
+    en: "The latest show jumping and equestrian headlines from specialist publishers, refreshed automatically.",
+    fr: "Les dernières actualités du saut d’obstacles et du monde équestre, actualisées automatiquement.",
+    ar: "أحدث أخبار قفز الحواجز والفروسية من مصادر متخصصة، تُحدّث تلقائيًا."
   };
-  return { title: titles[params.locale], description: descriptions[params.locale], alternates: localizedAlternates(params.locale, "/news") };
+  return {
+    title: titles[params.locale],
+    description: descriptions[params.locale],
+    alternates: localizedAlternates(params.locale, "/news")
+  };
 }
 
 export default async function NewsPage({ params }: { params: { locale: Locale } }) {
   const dict = await getDictionary(params.locale);
-  const posts = postsByLocale[params.locale] ?? postsByLocale.en;
+  const posts = await getEquestrianNews(18);
+  const copy = {
+    en: { intro: "Fresh headlines from the international equestrian community.", empty: "No headlines are available right now. Please check again soon.", source: "Original publisher", updated: "Feeds refresh automatically about once an hour." },
+    fr: { intro: "Les dernières nouvelles de la communauté équestre internationale.", empty: "Aucune actualité n’est disponible pour le moment. Revenez bientôt.", source: "Source originale", updated: "Les flux sont actualisés automatiquement environ toutes les heures." },
+    ar: { intro: "أحدث الأخبار من مجتمع الفروسية الدولي.", empty: "لا توجد أخبار متاحة حاليًا. يرجى المحاولة مرة أخرى قريبًا.", source: "المصدر الأصلي", updated: "تُحدّث مصادر الأخبار تلقائيًا كل ساعة تقريبًا." }
+  }[params.locale];
 
   return (
-    <div className="mx-auto max-w-editorial px-6 py-16 lg:px-10">
+    <div className="mx-auto max-w-editorial px-5 py-12 sm:px-8 sm:py-16 lg:px-10">
       <SectionHeading eyebrow={dict.nav.news} title={dict.nav.news} />
-      <ul className="mt-12 divide-y divide-charcoal-line border-y border-charcoal-line">
+      <p className="mt-4 max-w-2xl text-sm leading-relaxed text-charcoal/60">{copy.intro}</p>
+      <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {posts.map((post) => (
-          <li key={post.title} className="flex flex-col gap-1 py-6 sm:flex-row sm:items-baseline sm:justify-between">
-            <h3 className="font-display text-xl italic text-charcoal">{post.title}</h3>
-            <time className="font-mono text-[11px] uppercase tracking-eyebrow text-charcoal/40">
-              {new Date(post.date).toLocaleDateString(params.locale, { year: "numeric", month: "long", day: "numeric" })}
-            </time>
-          </li>
+          <a key={post.url} href={post.url} target="_blank" rel="noopener noreferrer" className="group flex min-h-48 flex-col justify-between border border-charcoal/10 bg-[#f5f2eb] p-5 transition-colors hover:border-[#B08D57] sm:p-6">
+            <div>
+              <p className="font-mono text-[9px] uppercase tracking-[0.16em] text-[#9a7837]">{post.source}</p>
+              <h2 className="mt-4 font-display text-xl italic leading-snug text-charcoal group-hover:text-[#9a7837]">{post.title}</h2>
+            </div>
+            <div className="mt-6 flex items-center justify-between gap-3">
+              <time dateTime={post.date} className="font-mono text-[10px] uppercase tracking-wide text-charcoal/45">
+                {new Date(post.date).toLocaleDateString(params.locale, { day: "numeric", month: "short", year: "numeric" })}
+              </time>
+              <span className="font-mono text-[9px] uppercase tracking-wider text-charcoal/50">{copy.source} ↗</span>
+            </div>
+          </a>
         ))}
-      </ul>
+      </div>
+      {posts.length === 0 && <p className="mt-8 border-y border-charcoal-line py-8 text-sm text-charcoal/60">{copy.empty}</p>}
+      <p className="mt-6 font-mono text-[9px] uppercase tracking-wide text-charcoal/40">{copy.updated}</p>
     </div>
   );
 }
