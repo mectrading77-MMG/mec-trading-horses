@@ -30,7 +30,7 @@ export default function LanguageSwitcher({ current }: { current: Locale }) {
           router.push(`/${nextLocale}${rest}`);
           router.refresh();
         }}
-        className="h-[30px] w-[76px] appearance-none rounded-none border border-charcoal bg-ivory px-2 py-1 pr-6 font-mono text-[10px] uppercase tracking-eyebrow text-charcoal cursor-pointer transition-colors duration-400 hover:border-gold hover:text-gold sm:h-[32px] sm:w-[86px] sm:text-[10px]"
+        className="h-10 w-[54px] appearance-none rounded-none border border-charcoal bg-ivory px-1.5 py-1 pr-5 font-mono text-[9px] uppercase tracking-[0.08em] sm:text-[10px] sm:tracking-eyebrow text-charcoal cursor-pointer transition-colors duration-400 hover:border-gold hover:text-gold sm:h-[32px] sm:w-[86px] sm:text-[10px]"
         aria-label="Select language"
       >
         {locales.map((locale) => (
