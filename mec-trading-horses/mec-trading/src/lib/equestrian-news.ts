@@ -6,16 +6,8 @@ export type EquestrianNewsItem = {
 };
 
 const FEEDS = [
-  {
-    url: "https://jumpernation.com/feed/",
-    source: "Jumper Nation",
-    host: "jumpernation.com"
-  },
-  {
-    url: "https://www.fise.it/sport/salto-ostacoli/news-salto/archivio-news-salto.feed?type=rss",
-    source: "FISE · Salto Ostacoli",
-    host: "www.fise.it"
-  }
+  { url: "https://jumpernation.com/feed/", source: "Jumper Nation", host: "jumpernation.com" },
+  { url: "https://www.fise.it/sport/salto-ostacoli/news-salto/archivio-news-salto.feed?type=rss", source: "FISE · Salto Ostacoli", host: "www.fise.it" }
 ] as const;
 
 function decodeXml(value: string) {
@@ -33,7 +25,7 @@ function decodeXml(value: string) {
 }
 
 function readTag(block: string, tag: string) {
-  const match = block.match(new RegExp("<" + tag + "(?:\\s[^>]*)?>([\\s\\S]*?)<\\/" + tag + ">", "i"));
+  const match = block.match(new RegExp("<" + tag + "(?:\\s[^>]*)?>([\\s\\S]*?)</" + tag + ">", "i"));
   return match ? decodeXml(match[1]) : "";
 }
 
@@ -57,7 +49,7 @@ async function readFeed(feed: (typeof FEEDS)[number]): Promise<EquestrianNewsIte
     });
     if (!response.ok) return [];
     const xml = await response.text();
-    return [...xml.matchAll(/<item(?:\\s[^>]*)?>([\\s\\S]*?)<\\/item>/gi)]
+    return [...xml.matchAll(/<item\b[^>]*>([\s\S]*?)<\/item>/gi)]
       .map((match) => {
         const block = match[1];
         const title = readTag(block, "title");
@@ -74,7 +66,7 @@ async function readFeed(feed: (typeof FEEDS)[number]): Promise<EquestrianNewsIte
   }
 }
 
-/** Pull publisher headlines server-side. Next's data cache refreshes each feed hourly. */
+/** Publisher headlines are cached and refreshed automatically every hour. */
 export async function getEquestrianNews(limit = 9): Promise<EquestrianNewsItem[]> {
   const results = await Promise.all(FEEDS.map(readFeed));
   const unique = new Map<string, EquestrianNewsItem>();
