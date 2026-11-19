@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Locale } from "@/types/horse";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import Logo from "@/components/Logo";
+import DismissibleDetails from "@/components/DismissibleDetails";
 import { getCustomerSession } from "@/lib/customer-auth";
 
 export default async function Header({ locale, dict }: { locale: Locale; dict: any }) {
@@ -19,7 +20,7 @@ export default async function Header({ locale, dict }: { locale: Locale; dict: a
     <header className="sticky top-0 z-40 border-b border-charcoal-line bg-ivory/95 backdrop-blur">
       <div dir="ltr" className="mx-auto grid max-w-editorial grid-cols-3 items-center gap-3 px-4 py-2.5 lg:px-10">
         <div className="flex items-center justify-start">
-          <details className="group relative">
+          <DismissibleDetails className="group relative">
             <summary className="flex cursor-pointer list-none items-center gap-2 border border-charcoal/25 px-3 py-2 font-mono text-[10px] uppercase tracking-eyebrow text-charcoal transition-colors hover:border-gold hover:text-gold [&::-webkit-details-marker]:hidden">
               <span className="text-base leading-none">☰</span>
               <span className="hidden sm:inline">Menu</span>
@@ -29,7 +30,7 @@ export default async function Header({ locale, dict }: { locale: Locale; dict: a
                 <Link key={item.href} href={item.href} className="block px-4 py-3 font-mono text-[11px] uppercase tracking-eyebrow text-charcoal/75 transition-colors hover:bg-sand/15 hover:text-gold">{item.label}</Link>
               ))}
             </nav>
-          </details>
+          </DismissibleDetails>
         </div>
 
         <Link href={`/${locale}`} aria-label={dict.brand.name} className="flex flex-col items-center justify-center">
