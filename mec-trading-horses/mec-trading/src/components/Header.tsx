@@ -18,12 +18,12 @@ export default async function Header({ locale, dict }: { locale: Locale; dict: a
 
   return (
     <header className="sticky top-0 z-40 border-b border-charcoal-line bg-ivory/95 backdrop-blur">
-      <div dir="ltr" className="mx-auto grid max-w-editorial grid-cols-3 items-center gap-3 px-4 py-2.5 lg:px-10">
-        <div className="flex items-center justify-start">
+      <div dir="ltr" className="mx-auto grid max-w-editorial grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2 px-3 py-2 sm:gap-4 sm:px-5 sm:py-2.5 lg:px-10">
+        <div className="flex min-w-0 items-center justify-start">
           <DismissibleDetails className="group relative">
-            <summary className="flex cursor-pointer list-none items-center gap-2 border border-charcoal/25 px-3 py-2 font-mono text-[10px] uppercase tracking-eyebrow text-charcoal transition-colors hover:border-gold hover:text-gold [&::-webkit-details-marker]:hidden">
-              <span className="text-base leading-none">☰</span>
-              <span className="hidden sm:inline">Menu</span>
+            <summary aria-label="Open navigation menu" className="flex h-10 w-10 cursor-pointer list-none items-center justify-center border border-charcoal/25 text-charcoal transition-colors hover:border-gold hover:text-gold sm:h-11 sm:w-auto sm:gap-2 sm:px-3 [&::-webkit-details-marker]:hidden">
+              <svg aria-hidden="true" viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.6"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+              <span className="hidden font-mono text-[10px] uppercase tracking-eyebrow sm:inline">Menu</span>
             </summary>
             <nav className="absolute left-0 top-full z-50 mt-2 min-w-56 border border-charcoal/15 bg-ivory p-2 shadow-xl">
               {nav.map((item) => (
@@ -33,16 +33,20 @@ export default async function Header({ locale, dict }: { locale: Locale; dict: a
           </DismissibleDetails>
         </div>
 
-        <Link href={`/${locale}`} aria-label={dict.brand.name} className="flex flex-col items-center justify-center">
-          <Logo variant="compact" priority className="!h-[68px] lg:!h-[78px]" />
-          <span className="mt-1 flex w-max flex-nowrap items-center justify-center gap-2 whitespace-nowrap font-mono text-[8px] font-bold uppercase tracking-[0.12em] text-charcoal sm:gap-3 sm:text-[10px] sm:tracking-[0.16em]">
-            <span className="whitespace-nowrap">France</span><span className="h-px w-3 shrink-0 bg-[#B08D57] sm:w-5" /><span className="whitespace-nowrap">Europe</span><span className="h-px w-3 shrink-0 bg-[#B08D57] sm:w-5" /><span className="whitespace-nowrap">Middle East</span>
+        <Link href={`/${locale}`} aria-label={dict.brand.name} className="flex min-w-0 flex-col items-center justify-center">
+          <Logo variant="compact" priority className="!h-[48px] max-w-full sm:!h-[62px] lg:!h-[78px]" />
+          <span className="mt-0.5 flex w-max max-w-full flex-nowrap items-center justify-center gap-1.5 whitespace-nowrap font-mono text-[6px] font-bold uppercase tracking-[0.1em] text-charcoal sm:mt-1 sm:gap-3 sm:text-[9px] sm:tracking-[0.16em]">
+            <span>France</span><span className="h-px w-2 shrink-0 bg-[#B08D57] sm:w-5" /><span>Europe</span><span className="h-px w-2 shrink-0 bg-[#B08D57] sm:w-5" /><span>Middle East</span>
           </span>
         </Link>
 
-        <div className="flex items-center justify-end gap-2 sm:gap-3">
-          <details className="group relative">
-            <summary className="flex cursor-pointer list-none items-center whitespace-nowrap border border-charcoal/30 px-2.5 py-2 font-mono text-[9px] font-semibold uppercase tracking-[0.08em] text-charcoal transition-colors hover:border-gold hover:text-gold sm:px-3 sm:text-[10px] sm:tracking-eyebrow [&::-webkit-details-marker]:hidden">My Account ▾</summary>
+        <div className="flex items-center justify-end gap-1.5 sm:gap-3">
+          <DismissibleDetails className="group relative">
+            <summary aria-label="My account" className="flex h-10 w-10 cursor-pointer list-none items-center justify-center border border-charcoal/30 text-charcoal transition-colors hover:border-gold hover:text-gold sm:h-11 sm:w-auto sm:gap-2 sm:px-3 [&::-webkit-details-marker]:hidden">
+              <svg aria-hidden="true" viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="12" cy="8" r="3.2" /><path d="M5.5 20c.6-3.2 2.8-5 6.5-5s5.9 1.8 6.5 5" strokeLinecap="round" /></svg>
+              <span className="hidden whitespace-nowrap font-mono text-[10px] font-semibold uppercase tracking-eyebrow sm:inline">My Account</span>
+              <span className="hidden text-[9px] sm:inline">▾</span>
+            </summary>
             <div className="absolute right-0 top-full z-50 mt-2 min-w-48 border border-charcoal/15 bg-ivory p-2 shadow-xl">
               {customer ? (
                 <>
@@ -58,7 +62,7 @@ export default async function Header({ locale, dict }: { locale: Locale; dict: a
                 </>
               )}
             </div>
-          </details>
+          </DismissibleDetails>
           <LanguageSwitcher current={locale} />
         </div>
       </div>
