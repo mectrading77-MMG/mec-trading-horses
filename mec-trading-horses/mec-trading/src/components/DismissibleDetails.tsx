@@ -1,12 +1,13 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import type { ReactNode } from "react";
 
 export default function DismissibleDetails({
   children,
   className
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
 }) {
   const detailsRef = useRef<HTMLDetailsElement>(null);
