@@ -9,8 +9,6 @@ const copy: Record<Locale, { placeholders: string[]; label: string; button: stri
   en: { placeholders: ["Find your next champion", "Explore by age or height", "Search horses by breed", "Find horses by budget", "Discover by discipline", "Browse horses by country", "Search by competition level"], label: "Search the horse catalogue", button: "Search horses" },
   fr: { placeholders: ["Trouvez votre prochain champion", "Rechercher par âge ou taille", "Rechercher par race", "Rechercher selon votre budget", "Découvrir par discipline", "Rechercher par pays", "Rechercher par niveau de compétition"], label: "Rechercher dans le catalogue de chevaux", button: "Rechercher des chevaux" },
   ar: { placeholders: ["اعثر على بطلك القادم", "ابحث حسب العمر أو الارتفاع", "ابحث حسب السلالة", "ابحث حسب الميزانية", "اكتشف الخيول حسب التخصص", "ابحث حسب البلد", "ابحث حسب مستوى المنافسة"], label: "ابحث في كتالوج الخيول", button: "بحث عن الخيول" },
-  de: { placeholders: ["Finden Sie Ihren nächsten Champion", "Nach Alter oder Stockmaß suchen", "Nach Rasse suchen", "Nach Budget suchen", "Nach Disziplin entdecken", "Nach Land suchen", "Nach Leistungsniveau suchen"], label: "Pferdekatalog durchsuchen", button: "Pferde suchen" },
-  nl: { placeholders: ["Vind uw volgende kampioen", "Zoek op leeftijd of stokmaat", "Zoek op ras", "Zoek op budget", "Ontdek paarden per discipline", "Zoek op land", "Zoek op wedstrijdniveau"], label: "Doorzoek de paardencatalogus", button: "Paarden zoeken" }
 };
 
 export default function HeroCatalogSearch({ locale }: { locale: Locale }) {
