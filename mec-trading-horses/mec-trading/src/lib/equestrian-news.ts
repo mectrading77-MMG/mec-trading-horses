@@ -50,17 +50,23 @@ async function readFeed(feed: (typeof FEEDS)[number]): Promise<EquestrianNewsIte
     if (!response.ok) return [];
     const xml = await response.text();
     return [...xml.matchAll(/<item\b[^>]*>([\s\S]*?)<\/item>/gi)]
-      .map((match) => {
-        const block = match[1];
-        const title = readTag(block, "title");
-        const rawLink = readTag(block, "link") || block.match(/<link[^>]*href=["']([^"']+)["']/i)?.[1] || "";
+      .flatMap((match): EquestrianNewsItem[] => {
+        const itemXml = match[1];
+        const title = readTag(itemXml, "title");
+        const rawLink = readTag(itemXml, "link") || itemXml.match(/<link[^>]*href=["']([^"']+)["']/i)?.[1] || "";
         const url = safeItemUrl(rawLink, feed.host);
-        const rawDate = readTag(block, "pubDate") || readTag(block, "date");
+        const rawDate = readTag(itemXml, "pubDate") || readTag(itemXml, "date");
         const timestamp = Date.parse(rawDate);
-        if (!title || !url || !Number.isFinite(timestamp)) return null;
-        return { title, url, date: new Date(timestamp).toISOString(), source: feed.source };
-      })
-      .filter((item): item is EquestrianNewsItem => item !== null);
+
+        if (!title || !url || !Number.isFinite(timestamp)) return [];
+
+        return [{
+          title,
+          url,
+          date: new Date(timestamp).toISOString(),
+          source: feed.source
+        }];
+      });
   } catch {
     return [];
   }
