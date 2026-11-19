@@ -5,6 +5,7 @@ import type { Locale } from "@/types/horse";
 import { getDictionary } from "@/i18n/config";
 import SectionHeading from "@/components/SectionHeading";
 
+// Public site copy is maintained in Arabic, English and French only.
 const copy: Record<Locale, [string, string, string]> = {
   en: [
     "MEC Horses is a private show-horse specialist based in Brittany, France, working with professional riders, breeders and private clients across Europe and the Gulf.",
