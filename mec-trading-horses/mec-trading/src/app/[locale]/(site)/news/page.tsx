@@ -20,16 +20,7 @@ const postsByLocale: Record<Locale, { title: string; date: string }[]> = {
     { title: "MEC Horses تساعد المشترين في الخليج في مستندات التصدير", date: "2026-06-02" },
     { title: "لماذا نخضع كل حصان لفحص بيطري مستقل", date: "2026-05-10" }
   ],
-  de: [
-    { title: "Orphée des Forges platziert beim CSI3* in Deauville", date: "2026-07-18" },
-    { title: "MEC Horses unterstützt Käufer aus der Golfregion bei Exportdokumenten", date: "2026-06-02" },
-    { title: "Warum jedes Pferd unabhängig tierärztlich untersucht wird", date: "2026-05-10" }
-  ],
-  nl: [
-    { title: "Orphée des Forges geplaatst op CSI3* Deauville", date: "2026-07-18" },
-    { title: "MEC Horses helpt kopers uit de Golfregio met exportdocumenten", date: "2026-06-02" },
-    { title: "Waarom elk paard onafhankelijk veterinair wordt onderzocht", date: "2026-05-10" }
-  ]
+
 };
 
 export async function generateMetadata({ params }: { params: { locale: Locale } }): Promise<Metadata> {
@@ -37,15 +28,11 @@ export async function generateMetadata({ params }: { params: { locale: Locale } 
     en: "Equestrian News & Show Jumping Updates",
     fr: "Actualités équestres et saut d’obstacles",
     ar: "أخبار الفروسية وقفز الحواجز",
-    de: "Aktuelles aus dem Springsport",
-    nl: "Paardensportnieuws en springconcours"
   };
   const descriptions: Record<Locale, string> = {
     en: "Read news from MEC Horses, including show jumping results, sport horse sales and guidance for international buyers.",
     fr: "Suivez l’actualité de MEC Horses : résultats de saut d’obstacles, chevaux de sport et conseils aux acheteurs internationaux.",
     ar: "تابع أخبار MEC Horses ونتائج قفز الحواجز ومستجدات الخيول الرياضية وإرشادات المشترين الدوليين.",
-    de: "Lesen Sie Neuigkeiten von MEC Horses zu Springturnieren, Sportpferden und Informationen für internationale Käufer.",
-    nl: "Lees het nieuws van MEC Horses over springwedstrijden, sportpaarden en informatie voor internationale kopers."
   };
   return { title: titles[params.locale], description: descriptions[params.locale], alternates: localizedAlternates(params.locale, "/news") };
 }
