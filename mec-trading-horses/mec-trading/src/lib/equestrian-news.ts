@@ -1,3 +1,5 @@
+import { unstable_cache } from "next/cache";
+
 export type EquestrianNewsItem = {
   title: string;
   url: string;
@@ -103,21 +105,29 @@ async function readFeed(feed: (typeof FEEDS)[number]): Promise<EquestrianNewsIte
   }
 }
 
-/** Publisher headlines are revalidated every hour on demand; the daily cron is an additional cache invalidation. */
+/** Cache the complete feed result for one hour, including on force-dynamic pages. */
+const getCachedEquestrianNews = unstable_cache(
+  async (limit: number): Promise<EquestrianNewsItem[]> => {
+    const results = await Promise.all(FEEDS.map(readFeed));
+    const unique = new Map<string, EquestrianNewsItem>();
+
+    for (const item of results.flat()) {
+      if (!unique.has(item.url)) unique.set(item.url, item);
+    }
+
+    return [...unique.values()]
+      .sort((a, b) => {
+        if (!a.date && !b.date) return 0;
+        if (!a.date) return 1;
+        if (!b.date) return -1;
+        return Date.parse(b.date) - Date.parse(a.date);
+      })
+      .slice(0, limit);
+  },
+  ["equestrian-news"],
+  { revalidate: 3600, tags: ["equestrian-news"] }
+);
+
 export async function getEquestrianNews(limit = 9): Promise<EquestrianNewsItem[]> {
-  const results = await Promise.all(FEEDS.map(readFeed));
-  const unique = new Map<string, EquestrianNewsItem>();
-
-  for (const item of results.flat()) {
-    if (!unique.has(item.url)) unique.set(item.url, item);
-  }
-
-  return [...unique.values()]
-    .sort((a, b) => {
-      if (!a.date && !b.date) return 0;
-      if (!a.date) return 1;
-      if (!b.date) return -1;
-      return Date.parse(b.date) - Date.parse(a.date);
-    })
-    .slice(0, limit);
+  return getCachedEquestrianNews(limit);
 }
