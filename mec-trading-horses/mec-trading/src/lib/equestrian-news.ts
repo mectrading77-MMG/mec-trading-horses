@@ -1,7 +1,7 @@
 export type EquestrianNewsItem = {
   title: string;
   url: string;
-  date: string;
+  date: string | null;
   source: string;
 };
 
@@ -73,14 +73,14 @@ async function readFeed(feed: (typeof FEEDS)[number]): Promise<EquestrianNewsIte
         readTag(itemXml, "published") ||
         readTag(itemXml, "updated") ||
         readTag(itemXml, "date");
-      const timestamp = Date.parse(rawDate);
+      const timestamp = rawDate ? Date.parse(rawDate) : Number.NaN;
 
-      if (!title || !url || !Number.isFinite(timestamp)) return [];
+      if (!title || !url) return [];
 
       return [{
         title,
         url,
-        date: new Date(timestamp).toISOString(),
+        date: Number.isFinite(timestamp) ? new Date(timestamp).toISOString() : null,
         source: feed.source
       }];
     });
@@ -113,6 +113,10 @@ export async function getEquestrianNews(limit = 9): Promise<EquestrianNewsItem[]
   }
 
   return [...unique.values()]
-    .sort((a, b) => Date.parse(b.date) - Date.parse(a.date))
+    .sort((a, b) => {
+      if (!a.date) return 1;
+      if (!b.date) return -1;
+      return Date.parse(b.date) - Date.parse(a.date);
+    })
     .slice(0, limit);
 }
