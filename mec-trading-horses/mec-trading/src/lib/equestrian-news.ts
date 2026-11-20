@@ -178,7 +178,11 @@ async function readHorseTimesEgypt(): Promise<EquestrianNewsItem[]> {
 /** Cache the complete feed result for one hour, including on force-dynamic pages. */
 const getCachedEquestrianNews = unstable_cache(
   async (limit: number): Promise<EquestrianNewsItem[]> => {
-    const [feedResults, egyptResults] = await Promise.all([\n      Promise.all(FEEDS.map(readFeed)),\n      readHorseTimesEgypt()\n    ]);\n    const results = [...feedResults, egyptResults];
+    const [feedResults, egyptResults] = await Promise.all([
+      Promise.all(FEEDS.map(readFeed)),
+      readHorseTimesEgypt()
+    ]);
+    const results = [...feedResults, egyptResults];
     const unique = new Map<string, EquestrianNewsItem>();
 
     for (const item of results.flat()) {
