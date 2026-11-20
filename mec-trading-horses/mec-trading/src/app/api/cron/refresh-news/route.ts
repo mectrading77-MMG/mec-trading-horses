@@ -11,17 +11,12 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ ok: false, error: "Unauthorized" }, { status: 401 });
   }
 
-  const parisTime = new Intl.DateTimeFormat("en-GB", {
-    timeZone: "Europe/Paris",
-    hour: "2-digit",
-    minute: "2-digit",
-    hourCycle: "h23"
-  }).format(new Date());
-
-  if (parisTime !== "08:00") {
-    return NextResponse.json({ ok: true, skipped: true, parisTime });
-  }
-
   revalidateTag("equestrian-news");
-  return NextResponse.json({ ok: true, refreshed: true, timezone: "Europe/Paris", time: parisTime });
+  return NextResponse.json({
+    ok: true,
+    refreshed: true,
+    schedule: "daily",
+    scheduledUtc: "07:00",
+    timezone: "Europe/Paris"
+  });
 }
