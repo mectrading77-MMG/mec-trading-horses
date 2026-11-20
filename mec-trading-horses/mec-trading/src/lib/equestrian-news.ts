@@ -13,14 +13,14 @@ const FEEDS = [
 
 function decodeXml(value: string) {
   return value
-    .replace(/<!\\[CDATA\\[([\\s\\S]*?)\\]\\]>/g, "$1")
+    .replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, "$1")
     .replace(/&amp;/g, "&")
     .replace(/&quot;/g, '"')
     .replace(/&#39;|&apos;/g, "'")
     .replace(/&lt;/g, "<")
     .replace(/&gt;/g, ">")
-    .replace(/&#(\\d+);/g, (_, n) => String.fromCodePoint(Number(n)))
-    .replace(/&#x([\\da-f]+);/gi, (_, n) => String.fromCodePoint(parseInt(n, 16)))
+    .replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(Number(n)))
+    .replace(/&#x([\da-f]+);/gi, (_, n) => String.fromCodePoint(parseInt(n, 16)))
     .replace(/<[^>]+>/g, "")
     .trim();
 }
@@ -59,13 +59,13 @@ async function readFeed(feed: (typeof FEEDS)[number]): Promise<EquestrianNewsIte
 
     const xml = await response.text();
     const blocks = [
-      ...xml.matchAll(/<(item|entry)\\b[^>]*>([\\s\\S]*?)<\\/\\1>/gi)
+      ...xml.matchAll(/<(item|entry)\b[^>]*>([\s\S]*?)<\/\1>/gi)
     ];
 
     const items = blocks.flatMap((match): EquestrianNewsItem[] => {
       const itemXml = match[2];
       const title = readTag(itemXml, "title");
-      const atomLink = itemXml.match(/<link\\b[^>]*href=["']([^"']+)["'][^>]*>/i)?.[1] ?? "";
+      const atomLink = itemXml.match(/<link\b[^>]*href=["']([^"']+)["'][^>]*>/i)?.[1] ?? "";
       const rawLink = readTag(itemXml, "link") || atomLink;
       const url = safeItemUrl(rawLink, feed.host);
       const rawDate =
