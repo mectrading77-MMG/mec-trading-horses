@@ -112,7 +112,11 @@ export default async function HomePage({ params }: { params: { locale: Locale } 
                 <h3 className="mt-4 font-display text-xl italic leading-snug text-charcoal group-hover:text-[#9a7837]">{item.title}</h3>
               </div>
               <div className="mt-6 flex items-center justify-between gap-3">
-                <time className="font-mono text-[10px] uppercase tracking-wide text-charcoal/45">{new Date(item.date).toLocaleDateString(params.locale, { day: "numeric", month: "short", year: "numeric" })}</time>
+                {item.date ? (
+                  <time dateTime={item.date} className="font-mono text-[10px] uppercase tracking-wide text-charcoal/45">
+                    {new Date(item.date).toLocaleDateString(params.locale, { day: "numeric", month: "short", year: "numeric" })}
+                  </time>
+                ) : <span aria-label={params.locale === "ar" ? "التاريخ غير متاح" : params.locale === "fr" ? "Date indisponible" : "Date unavailable"} className="font-mono text-[10px] uppercase tracking-wide text-charcoal/45" />}
                 <span aria-hidden="true" className="text-lg text-[#9a7837]">↗</span>
               </div>
             </a>
