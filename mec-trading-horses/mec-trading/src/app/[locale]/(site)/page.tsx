@@ -148,15 +148,15 @@ export default async function HomePage({ params }: { params: { locale: Locale } 
         </div>
       </section>
 
-      <section aria-labelledby="news-heading" className="border-t border-charcoal-line bg-[#f5f2eb] py-16 sm:py-20">
+      <section aria-labelledby="expertise-heading" className="border-t border-charcoal-line bg-[#f5f2eb] py-16 sm:py-20">
         <div className="mx-auto max-w-editorial px-5 sm:px-6 lg:px-10">
           <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#9a7837]">
                 {({ en: "MEC Horses Journal", fr: "Journal MEC Horses", ar: "مجلة MEC Horses" } as Record<Locale, string>)[params.locale]}
               </p>
-              <h2 id="news-heading" className="mt-3 font-display text-3xl italic text-charcoal sm:text-4xl">
-                {({ en: "Equestrian News & Insights", fr: "Actualités & conseils équestres", ar: "أخبار الفروسية ورؤى الخبراء" } as Record<Locale, string>)[params.locale]}
+              <h2 id="expertise-heading" className="mt-3 font-display text-3xl italic text-charcoal sm:text-4xl">
+                "Expertise"
               </h2>
               <p className="mt-3 max-w-xl text-sm leading-relaxed text-charcoal/65">
                 {({ en: "Explore show jumping, sport horse selection and international buying guidance.", fr: "Découvrez le saut d’obstacles, la sélection de chevaux de sport et les conseils pour acheter à l’international.", ar: "اكتشف عالم قفز الحواجز واختيار الخيول الرياضية ونصائح الشراء الدولي." } as Record<Locale, string>)[params.locale]}
