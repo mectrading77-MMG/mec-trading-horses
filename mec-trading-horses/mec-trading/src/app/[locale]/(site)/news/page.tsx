@@ -27,9 +27,9 @@ export default async function NewsPage({ params }: { params: { locale: Locale } 
   const dict = await getDictionary(params.locale);
   const posts = await getEquestrianNews(18);
   const copy = {
-    en: { intro: "Fresh headlines from the international equestrian community.", empty: "No headlines are available right now. Please check again soon.", source: "Original publisher", updated: "Feeds refresh automatically every day at 08:00 (Paris time)." },
-    fr: { intro: "Les dernières nouvelles de la communauté équestre internationale.", empty: "Aucune actualité n’est disponible pour le moment. Revenez bientôt.", source: "Source originale", updated: "Les actualités sont actualisées automatiquement chaque jour à 08 h 00 (heure de Paris)." },
-    ar: { intro: "أحدث الأخبار من مجتمع الفروسية الدولي.", empty: "لا توجد أخبار متاحة حاليًا. يرجى المحاولة مرة أخرى قريبًا.", source: "المصدر الأصلي", updated: "تُحدّث الأخبار تلقائيًا يوميًا الساعة 08:00 بتوقيت باريس." }
+    en: { intro: "Fresh headlines from the international equestrian community.", empty: "No headlines are available right now. Please check again soon.", source: "Original publisher", updated: "Feeds are refreshed automatically about once an hour." },
+    fr: { intro: "Les dernières nouvelles de la communauté équestre internationale.", empty: "Aucune actualité n’est disponible pour le moment. Revenez bientôt.", source: "Source originale", updated: "Les flux sont actualisés automatiquement environ toutes les heures." },
+    ar: { intro: "أحدث الأخبار من مجتمع الفروسية الدولي.", empty: "لا توجد أخبار متاحة حاليًا. يرجى المحاولة مرة أخرى قريبًا.", source: "المصدر الأصلي", updated: "تُحدّث الأخبار تلقائيًا كل ساعة تقريبًا." }
   }[params.locale];
 
   return (
