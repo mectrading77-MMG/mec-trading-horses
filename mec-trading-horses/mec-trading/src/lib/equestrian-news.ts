@@ -6,26 +6,27 @@ export type EquestrianNewsItem = {
 };
 
 const FEEDS = [
-  { url: "https://jumpernation.com/feed/", source: "Jumper Nation", host: "jumpernation.com" },
-  { url: "https://www.fise.it/sport/salto-ostacoli/news-salto/archivio-news-salto.feed?type=rss", source: "FISE · Salto Ostacoli", host: "www.fise.it" }
+  { url: "https://grandprix.info/fr/feed/", source: "GrandPrix", host: "grandprix.info" },
+  { url: "https://www.fise.it/sport/salto-ostacoli/news-salto/archivio-news-salto.feed?type=rss", source: "FISE · Salto Ostacoli", host: "www.fise.it" },
+  { url: "https://www.franceinfo.fr/sports/equitation.rss", source: "Franceinfo · Équitation", host: "www.franceinfo.fr" }
 ] as const;
 
 function decodeXml(value: string) {
   return value
-    .replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, "$1")
+    .replace(/<!\\[CDATA\\[([\\s\\S]*?)\\]\\]>/g, "$1")
     .replace(/&amp;/g, "&")
     .replace(/&quot;/g, '"')
     .replace(/&#39;|&apos;/g, "'")
     .replace(/&lt;/g, "<")
     .replace(/&gt;/g, ">")
-    .replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(Number(n)))
-    .replace(/&#x([\da-f]+);/gi, (_, n) => String.fromCodePoint(parseInt(n, 16)))
+    .replace(/&#(\\d+);/g, (_, n) => String.fromCodePoint(Number(n)))
+    .replace(/&#x([\\da-f]+);/gi, (_, n) => String.fromCodePoint(parseInt(n, 16)))
     .replace(/<[^>]+>/g, "")
     .trim();
 }
 
 function readTag(block: string, tag: string) {
-  const match = block.match(new RegExp("<" + tag + "(?:\\s[^>]*)?>([\\s\\S]*?)</" + tag + ">", "i"));
+  const match = block.match(new RegExp("<(?:[\\w.-]+:)?" + tag + "(?:\\s[^>]*)?>([\\s\\S]*?)</(?:[\\w.-]+:)?" + tag + ">", "i"));
   return match ? decodeXml(match[1]) : "";
 }
 
@@ -43,42 +44,74 @@ function safeItemUrl(raw: string, expectedHost: string) {
 async function readFeed(feed: (typeof FEEDS)[number]): Promise<EquestrianNewsItem[]> {
   try {
     const response = await fetch(feed.url, {
-      headers: { "user-agent": "MEC-Horses-News/1.0 (+https://www.mechorses.com)" },
+      headers: {
+        accept: "application/rss+xml, application/atom+xml, application/xml, text/xml;q=0.9, */*;q=0.8",
+        "user-agent": "Mozilla/5.0 (compatible; MEC-Horses-News/1.0; +https://www.mechorses.com)"
+      },
       next: { revalidate: 86400, tags: ["equestrian-news"] },
-      signal: AbortSignal.timeout(8000)
+      signal: AbortSignal.timeout(10000)
     });
-    if (!response.ok) return [];
+
+    if (!response.ok) {
+      console.warn("[equestrian-news] Feed request failed", { source: feed.source, status: response.status });
+      return [];
+    }
+
     const xml = await response.text();
-    return [...xml.matchAll(/<item\b[^>]*>([\s\S]*?)<\/item>/gi)]
-      .flatMap((match): EquestrianNewsItem[] => {
-        const itemXml = match[1];
-        const title = readTag(itemXml, "title");
-        const rawLink = readTag(itemXml, "link") || itemXml.match(/<link[^>]*href=["']([^"']+)["']/i)?.[1] || "";
-        const url = safeItemUrl(rawLink, feed.host);
-        const rawDate = readTag(itemXml, "pubDate") || readTag(itemXml, "date");
-        const timestamp = Date.parse(rawDate);
+    const blocks = [
+      ...xml.matchAll(/<(item|entry)\\b[^>]*>([\\s\\S]*?)<\\/\\1>/gi)
+    ];
 
-        if (!title || !url || !Number.isFinite(timestamp)) return [];
+    const items = blocks.flatMap((match): EquestrianNewsItem[] => {
+      const itemXml = match[2];
+      const title = readTag(itemXml, "title");
+      const atomLink = itemXml.match(/<link\\b[^>]*href=["']([^"']+)["'][^>]*>/i)?.[1] ?? "";
+      const rawLink = readTag(itemXml, "link") || atomLink;
+      const url = safeItemUrl(rawLink, feed.host);
+      const rawDate =
+        readTag(itemXml, "pubDate") ||
+        readTag(itemXml, "published") ||
+        readTag(itemXml, "updated") ||
+        readTag(itemXml, "date");
+      const timestamp = Date.parse(rawDate);
 
-        return [{
-          title,
-          url,
-          date: new Date(timestamp).toISOString(),
-          source: feed.source
-        }];
+      if (!title || !url || !Number.isFinite(timestamp)) return [];
+
+      return [{
+        title,
+        url,
+        date: new Date(timestamp).toISOString(),
+        source: feed.source
+      }];
+    });
+
+    if (items.length === 0) {
+      console.warn("[equestrian-news] Feed returned no parseable items", {
+        source: feed.source,
+        contentType: response.headers.get("content-type"),
+        bytes: xml.length
       });
-  } catch {
+    }
+
+    return items;
+  } catch (error) {
+    console.error("[equestrian-news] Feed could not be read", {
+      source: feed.source,
+      error: error instanceof Error ? error.message : String(error)
+    });
     return [];
   }
 }
 
-/** Publisher headlines are cached and refreshed daily; the scheduled refresh invalidates this cache at 08:00 Europe/Paris. */
+/** Publisher headlines are cached for one day and refreshed by the scheduled 08:00 Paris-time cron. */
 export async function getEquestrianNews(limit = 9): Promise<EquestrianNewsItem[]> {
   const results = await Promise.all(FEEDS.map(readFeed));
   const unique = new Map<string, EquestrianNewsItem>();
+
   for (const item of results.flat()) {
     if (!unique.has(item.url)) unique.set(item.url, item);
   }
+
   return [...unique.values()]
     .sort((a, b) => Date.parse(b.date) - Date.parse(a.date))
     .slice(0, limit);
