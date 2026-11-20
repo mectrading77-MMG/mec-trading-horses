@@ -8,8 +8,6 @@ export default function StickyMobileBar({ dict, locale = "en" }: { dict: any; lo
     en: "Share",
     fr: "Partager",
     ar: "مشاركة",
-    de: "Teilen",
-    nl: "Delen"
   };
   const shareText = shareLabel[locale] ?? shareLabel.en;
 
@@ -24,7 +22,7 @@ export default function StickyMobileBar({ dict, locale = "en" }: { dict: any; lo
   };
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-3 border-t border-charcoal-line bg-ivory/95 backdrop-blur lg:hidden">
+    <div className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-3 border-t border-charcoal-line bg-ivory/95 pb-[env(safe-area-inset-bottom)] backdrop-blur lg:hidden">
       <a
         href={whatsappLink()}
         target="_blank"

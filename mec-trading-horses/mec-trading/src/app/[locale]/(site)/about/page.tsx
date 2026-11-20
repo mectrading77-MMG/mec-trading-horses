@@ -5,6 +5,7 @@ import type { Locale } from "@/types/horse";
 import { getDictionary } from "@/i18n/config";
 import SectionHeading from "@/components/SectionHeading";
 
+// Public site copy is maintained in Arabic, English and French only.
 const copy: Record<Locale, [string, string, string]> = {
   en: [
     "MEC Horses is a private show-horse specialist based in Brittany, France, working with professional riders, breeders and private clients across Europe and the Gulf.",
@@ -20,16 +21,6 @@ const copy: Record<Locale, [string, string, string]> = {
     "MEC Horses شركة متخصصة في خيول الرياضة، مقرها بريتاني في فرنسا، وتعمل مع الفرسان المحترفين والمربين والعملاء الأفراد في أوروبا ودول الخليج.",
     "نختار كل حصان بعناية وبشكل شخصي، مع تقييم بنيته ومزاجه وحركته وسلامته الصحية قبل عرضه للبيع. ونعرض الخيول التي نملكها أو نمثلها مباشرةً.",
     "نهتم خصوصًا بالمشترين الدوليين؛ فوضوح المستندات والشفافية البيطرية والتواصل الدقيق لا تقل أهمية عن الحصان نفسه. ونتولى تنسيق المعاينات والفحوص البيطرية والنقل وإجراءات التصدير."
-  ],
-  de: [
-    "MEC Horses ist ein auf Sportpferde spezialisiertes Unternehmen mit Sitz in der Bretagne, Frankreich. Wir arbeiten mit Berufsreitern, Züchtern und Privatkunden in Europa und den Golfstaaten zusammen.",
-    "Jedes Pferd wird persönlich nach Exterieur, Temperament, Bewegung und Gesundheit ausgewählt, bevor es einem Käufer vorgestellt wird. Wir bieten Pferde an, die sich in unserem Besitz befinden oder die wir direkt vertreten.",
-    "Für internationale Käufer sind vollständige Unterlagen, veterinärmedizinische Transparenz und klare Kommunikation ebenso wichtig wie das Pferd selbst. Wir koordinieren Besichtigungen, tierärztliche Untersuchungen, Transport und Exportformalitäten."
-  ],
-  nl: [
-    "MEC Horses is een specialist in sportpaarden, gevestigd in Bretagne, Frankrijk. We werken met professionele ruiters, fokkers en particuliere klanten in Europa en de Golfregio.",
-    "Elk paard wordt persoonlijk geselecteerd op bouw, temperament, beweging en gezondheid voordat het aan een koper wordt voorgesteld. We bieden paarden aan die we zelf bezitten of rechtstreeks vertegenwoordigen.",
-    "Voor internationale kopers zijn goede documentatie, veterinaire transparantie en duidelijke communicatie net zo belangrijk als het paard zelf. We coördineren bezichtigingen, dierenartskeuringen, transport en exportdocumenten."
   ]
 };
 
@@ -38,15 +29,11 @@ export async function generateMetadata({ params }: { params: { locale: Locale } 
     en: "About MEC Horses",
     fr: "À propos de MEC Horses",
     ar: "من نحن",
-    de: "Über MEC Horses",
-    nl: "Over MEC Horses"
   };
   const descriptions: Record<Locale, string> = {
     en: "Learn about MEC Horses, a France-based show jumping horse specialist supporting riders, breeders and international buyers across Europe and the Gulf.",
     fr: "Découvrez MEC Horses, spécialiste français du cheval de saut d’obstacles, au service des cavaliers, éleveurs et acheteurs internationaux.",
     ar: "تعرف على MEC Horses، شركة فرنسية متخصصة في خيول قفز الحواجز وتقديم الدعم للمشترين والفرسان دوليًا.",
-    de: "Erfahren Sie mehr über MEC Horses, Spezialist für Springpferde in Frankreich und Ansprechpartner für internationale Käufer.",
-    nl: "Maak kennis met MEC Horses, specialist in springpaarden in Frankrijk voor ruiters, fokkers en internationale kopers."
   };
   return { title: titles[params.locale], description: descriptions[params.locale], alternates: localizedAlternates(params.locale, "/about") };
 }

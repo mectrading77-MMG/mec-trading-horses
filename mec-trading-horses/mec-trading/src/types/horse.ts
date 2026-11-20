@@ -1,4 +1,4 @@
-export type Locale = "en" | "fr" | "ar" | "de" | "nl";
+export type Locale = "ar" | "en" | "fr";
 
 export type HorseStatus = "AVAILABLE" | "RESERVED" | "SOLD" | "ARCHIVED";
 export type HorseSex = "MARE" | "STALLION" | "GELDING";
@@ -98,7 +98,7 @@ export interface Horse {
     pedigreeDocs: boolean;
     transport: boolean;
   };
-  translations: Partial<Record<Locale, HorseTranslation>> & Record<"en" | "fr" | "ar", HorseTranslation>;
+  translations: Record<Locale, HorseTranslation>;
   media: MediaItem[];
   documents: DocumentItem[];
   xrays?: XraySet;

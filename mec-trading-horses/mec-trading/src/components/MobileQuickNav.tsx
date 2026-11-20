@@ -8,8 +8,6 @@ const labels: Record<Locale, { horses: string; services: string; aria: string }>
   en: { horses: "Our Horses", services: "Our Services", aria: "Show quick navigation buttons" },
   fr: { horses: "Nos chevaux", services: "Nos services", aria: "Afficher les raccourcis de navigation" },
   ar: { horses: "خيولنا", services: "خدماتنا", aria: "عرض اختصارات التنقل" },
-  de: { horses: "Unsere Pferde", services: "Unsere Leistungen", aria: "Schnellnavigation anzeigen" },
-  nl: { horses: "Onze paarden", services: "Onze diensten", aria: "Snelle navigatie tonen" }
 };
 
 export default function MobileQuickNav({ locale }: { locale: Locale }) {

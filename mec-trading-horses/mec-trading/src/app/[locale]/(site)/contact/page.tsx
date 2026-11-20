@@ -12,15 +12,11 @@ export async function generateMetadata({ params }: { params: { locale: Locale } 
     en: "Contact MEC Horses",
     fr: "Contact MEC Horses",
     ar: "تواصل مع MEC Horses",
-    de: "Kontakt MEC Horses",
-    nl: "Contact MEC Horses"
   };
   const descriptions: Record<Locale, string> = {
     en: "Contact MEC Horses in France about buying or selling a show jumping horse. We assist clients across Europe and the Middle East.",
     fr: "Contactez MEC Horses en France pour acheter ou vendre un cheval de saut d’obstacles. Nous accompagnons les clients en Europe et au Moyen-Orient.",
     ar: "تواصل مع MEC Horses في فرنسا للاستفسار عن شراء أو بيع خيول قفز الحواجز وخدماتنا للمشترين في أوروبا والشرق الأوسط.",
-    de: "Kontaktieren Sie MEC Horses in Frankreich zum Kauf oder Verkauf eines Springpferdes. Wir betreuen Kunden in Europa und im Nahen Osten.",
-    nl: "Neem contact op met MEC Horses in Frankrijk voor de aankoop of verkoop van een springpaard. We begeleiden klanten in Europa en het Midden-Oosten."
   };
   return { title: titles[params.locale], description: descriptions[params.locale], alternates: localizedAlternates(params.locale, "/contact") };
 }
@@ -37,8 +33,6 @@ export default async function ContactPage({ params, searchParams }: { params: { 
     en: { email: "Email", phone: "Phone", location: "Location" },
     fr: { email: "E-mail", phone: "Téléphone", location: "Localisation" },
     ar: { email: "البريد الإلكتروني", phone: "الهاتف", location: "الموقع" },
-    de: { email: "E-Mail", phone: "Telefon", location: "Standort" },
-    nl: { email: "E-mail", phone: "Telefoon", location: "Locatie" }
   };
   const label = labels[params.locale] ?? labels.en;
 

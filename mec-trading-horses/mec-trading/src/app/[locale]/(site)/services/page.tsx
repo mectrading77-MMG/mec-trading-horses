@@ -10,15 +10,11 @@ export async function generateMetadata({ params }: { params: { locale: Locale } 
     en: "Show Jumping Horse Sales & Buying Services",
     fr: "Services d’achat et de vente de chevaux de saut d’obstacles",
     ar: "خدمات شراء وبيع خيول قفز الحواجز",
-    de: "Dienstleistungen rund um Kauf und Verkauf von Springpferden",
-    nl: "Diensten voor aankoop en verkoop van springpaarden"
   };
   const descriptions: Record<Locale, string> = {
     en: "Explore MEC Horses services: horse sourcing and sales, pre-purchase veterinary checks, viewings, transport and export assistance from France.",
     fr: "Découvrez nos services : recherche et vente de chevaux, visite vétérinaire avant achat, essais, transport et accompagnement à l’export depuis la France.",
     ar: "اكتشف خدمات MEC Horses في البحث عن الخيول وبيعها والفحوص البيطرية قبل الشراء والمعاينة والنقل والتصدير من فرنسا.",
-    de: "Entdecken Sie unsere Leistungen: Pferdesuche und -verkauf, tierärztliche Kaufuntersuchung, Besichtigungen, Transport und Export ab Frankreich.",
-    nl: "Ontdek onze diensten: paarden zoeken en verkopen, veterinaire keuring vóór aankoop, bezichtigingen, transport en export vanuit Frankrijk."
   };
   return { title: titles[params.locale], description: descriptions[params.locale], alternates: localizedAlternates(params.locale, "/services") };
 }

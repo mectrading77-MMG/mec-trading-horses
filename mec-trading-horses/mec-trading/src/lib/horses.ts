@@ -67,9 +67,7 @@ export async function listHorses() {
         translations: {
           en: translationFor("en"),
           fr: translationFor("fr"),
-          ar: translationFor("ar"),
-          de: translationFor("de"),
-          nl: translationFor("nl")
+          ar: translationFor("ar")
         },
         media: record.media.map((item) => ({
           type: item.type,
