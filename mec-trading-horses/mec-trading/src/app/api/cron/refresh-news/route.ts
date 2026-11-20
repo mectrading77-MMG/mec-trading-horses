@@ -15,8 +15,8 @@ export async function GET(request: NextRequest) {
   return NextResponse.json({
     ok: true,
     refreshed: true,
-    schedule: "daily",
+    schedule: "daily cache invalidation; feed cache revalidates hourly on demand",
     scheduledUtc: "07:00",
-    timezone: "Europe/Paris"
+    timezone: "UTC"
   });
 }

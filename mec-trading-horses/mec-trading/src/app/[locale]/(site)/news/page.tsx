@@ -27,9 +27,9 @@ export default async function NewsPage({ params }: { params: { locale: Locale } 
   const dict = await getDictionary(params.locale);
   const posts = await getEquestrianNews(18);
   const copy = {
-    en: { intro: "Fresh headlines from the international equestrian community.", empty: "No headlines are available right now. Please check again soon.", source: "Original publisher", updated: "Feeds refresh automatically about once an hour." },
+    en: { intro: "Fresh headlines from the international equestrian community.", empty: "No headlines are available right now. Please check again soon.", source: "Original publisher", updated: "Feeds are refreshed automatically about once an hour." },
     fr: { intro: "Les dernières nouvelles de la communauté équestre internationale.", empty: "Aucune actualité n’est disponible pour le moment. Revenez bientôt.", source: "Source originale", updated: "Les flux sont actualisés automatiquement environ toutes les heures." },
-    ar: { intro: "أحدث الأخبار من مجتمع الفروسية الدولي.", empty: "لا توجد أخبار متاحة حاليًا. يرجى المحاولة مرة أخرى قريبًا.", source: "المصدر الأصلي", updated: "تُحدّث مصادر الأخبار تلقائيًا كل ساعة تقريبًا." }
+    ar: { intro: "أحدث الأخبار من مجتمع الفروسية الدولي.", empty: "لا توجد أخبار متاحة حاليًا. يرجى المحاولة مرة أخرى قريبًا.", source: "المصدر الأصلي", updated: "تُحدّث الأخبار تلقائيًا كل ساعة تقريبًا." }
   }[params.locale];
 
   return (
@@ -44,9 +44,11 @@ export default async function NewsPage({ params }: { params: { locale: Locale } 
               <h2 className="mt-4 font-display text-xl italic leading-snug text-charcoal group-hover:text-[#9a7837]">{post.title}</h2>
             </div>
             <div className="mt-6 flex items-center justify-between gap-3">
-              <time dateTime={post.date} className="font-mono text-[10px] uppercase tracking-wide text-charcoal/45">
-                {new Date(post.date).toLocaleDateString(params.locale, { day: "numeric", month: "short", year: "numeric" })}
-              </time>
+              {post.date ? (
+                <time dateTime={post.date} className="font-mono text-[10px] uppercase tracking-wide text-charcoal/45">
+                  {new Date(post.date).toLocaleDateString(params.locale, { day: "numeric", month: "short", year: "numeric" })}
+                </time>
+              ) : <span className="font-mono text-[10px] uppercase tracking-wide text-charcoal/45" />}
               <span className="font-mono text-[9px] uppercase tracking-wider text-charcoal/50">{copy.source} ↗</span>
             </div>
           </a>
