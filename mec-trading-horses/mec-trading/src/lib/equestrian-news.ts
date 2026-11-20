@@ -7,8 +7,8 @@ export type EquestrianNewsItem = {
 
 const FEEDS = [
   { url: "https://grandprix.info/fr/feed/", source: "GrandPrix", host: "grandprix.info" },
-  { url: "https://www.fise.it/sport/salto-ostacoli/news-salto/archivio-news-salto.feed?type=rss", source: "FISE · Salto Ostacoli", host: "www.fise.it" },
-  { url: "https://www.franceinfo.fr/sports/equitation.rss", source: "Franceinfo · Équitation", host: "www.franceinfo.fr" }
+  { url: "https://www.fise.it/sport/salto-ostacoli/news-salto/archivio-news-salto.feed?type=rss", source: "FISE · Salto Ostacoli", host: "fise.it" },
+  { url: "https://www.franceinfo.fr/sports/equitation.rss", source: "Franceinfo · Équitation", host: "franceinfo.fr" }
 ] as const;
 
 function decodeXml(value: string) {
@@ -114,6 +114,7 @@ export async function getEquestrianNews(limit = 9): Promise<EquestrianNewsItem[]
 
   return [...unique.values()]
     .sort((a, b) => {
+      if (!a.date && !b.date) return 0;
       if (!a.date) return 1;
       if (!b.date) return -1;
       return Date.parse(b.date) - Date.parse(a.date);
