@@ -44,7 +44,7 @@ async function readFeed(feed: (typeof FEEDS)[number]): Promise<EquestrianNewsIte
   try {
     const response = await fetch(feed.url, {
       headers: { "user-agent": "MEC-Horses-News/1.0 (+https://www.mechorses.com)" },
-      next: { revalidate: 3600 },
+      next: { revalidate: 86400, tags: ["equestrian-news"] },
       signal: AbortSignal.timeout(8000)
     });
     if (!response.ok) return [];
@@ -72,7 +72,7 @@ async function readFeed(feed: (typeof FEEDS)[number]): Promise<EquestrianNewsIte
   }
 }
 
-/** Publisher headlines are cached and refreshed automatically every hour. */
+/** Publisher headlines are cached and refreshed daily; the scheduled refresh invalidates this cache at 08:00 Europe/Paris. */
 export async function getEquestrianNews(limit = 9): Promise<EquestrianNewsItem[]> {
   const results = await Promise.all(FEEDS.map(readFeed));
   const unique = new Map<string, EquestrianNewsItem>();
