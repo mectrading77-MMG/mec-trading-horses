@@ -110,8 +110,8 @@ const HORSE_TIMES_HOME = "https://www.horsetimesegypt.com/";
 
 function stripHtml(value: string) {
   return value
-    .replace(/<script[\\s\\S]*?<\\/script>/gi, " ")
-    .replace(/<style[\\s\\S]*?<\\/style>/gi, " ")
+    .replace(/<script[\s\S]*?<\/script>/gi, " ")
+    .replace(/<style[\s\S]*?<\/style>/gi, " ")
     .replace(/<[^>]+>/g, " ")
     .replace(/&nbsp;|&#160;/gi, " ")
     .replace(/&amp;/g, "&")
@@ -119,7 +119,7 @@ function stripHtml(value: string) {
     .replace(/&#39;|&apos;/g, "'")
     .replace(/&lt;/g, "<")
     .replace(/&gt;/g, ">")
-    .replace(/\\s+/g, " ")
+    .replace(/\s+/g, " ")
     .trim();
 }
 
@@ -141,7 +141,7 @@ async function readHorseTimesEgypt(): Promise<EquestrianNewsItem[]> {
 
     const html = await response.text();
     const items: EquestrianNewsItem[] = [];
-    const links = html.matchAll(/<a\\b[^>]*href=["']([^"']*news_details\\.asp\\?id=\\d+[^"']*)["'][^>]*>([\\s\\S]*?)<\\/a>/gi);
+    const links = html.matchAll(/<a\b[^>]*href=["']([^"']*news_details\.asp\?id=\d+[^"']*)["'][^>]*>([\s\S]*?)<\/a>/gi);
 
     for (const match of links) {
       const rawUrl = new URL(match[1], HORSE_TIMES_HOME);
@@ -150,8 +150,8 @@ async function readHorseTimesEgypt(): Promise<EquestrianNewsItem[]> {
       if (!title || title.length < 12) continue;
 
       const tail = html.slice((match.index ?? 0) + match[0].length, (match.index ?? 0) + match[0].length + 700);
-      const dateText = stripHtml(tail).match(/(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday),?\\s+([A-Z][a-z]+\\s+\\d{1,2},?\\s+\\d{4}|\\d{1,2}[- ]+[A-Z][a-z]{2,8}[- ]+\\d{4})/i)?.[0] ?? "";
-      const timestamp = dateText ? Date.parse(dateText.replace(/^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday),?\\s+/i, "")) : Number.NaN;
+      const dateText = stripHtml(tail).match(/(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday),?\s+([A-Z][a-z]+\s+\d{1,2},?\s+\d{4}|\d{1,2}[- ]+[A-Z][a-z]{2,8}[- ]+\d{4})/i)?.[0] ?? "";
+      const timestamp = dateText ? Date.parse(dateText.replace(/^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday),?\s+/i, "")) : Number.NaN;
 
       items.push({
         title,
