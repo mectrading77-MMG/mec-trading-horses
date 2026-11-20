@@ -105,10 +105,80 @@ async function readFeed(feed: (typeof FEEDS)[number]): Promise<EquestrianNewsIte
   }
 }
 
+
+const HORSE_TIMES_HOME = "https://www.horsetimesegypt.com/";
+
+function stripHtml(value: string) {
+  return value
+    .replace(/<script[\\s\\S]*?<\\/script>/gi, " ")
+    .replace(/<style[\\s\\S]*?<\\/style>/gi, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&nbsp;|&#160;/gi, " ")
+    .replace(/&amp;/g, "&")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;|&apos;/g, "'")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/\\s+/g, " ")
+    .trim();
+}
+
+async function readHorseTimesEgypt(): Promise<EquestrianNewsItem[]> {
+  try {
+    const response = await fetch(HORSE_TIMES_HOME, {
+      headers: {
+        accept: "text/html,application/xhtml+xml",
+        "user-agent": "Mozilla/5.0 (compatible; MEC-Horses-News/1.0; +https://www.mechorses.com)"
+      },
+      next: { revalidate: 3600, tags: ["equestrian-news"] },
+      signal: AbortSignal.timeout(10000)
+    });
+
+    if (!response.ok) {
+      console.warn("[equestrian-news] Horse Times Egypt request failed", { status: response.status });
+      return [];
+    }
+
+    const html = await response.text();
+    const items: EquestrianNewsItem[] = [];
+    const links = html.matchAll(/<a\\b[^>]*href=["']([^"']*news_details\\.asp\\?id=\\d+[^"']*)["'][^>]*>([\\s\\S]*?)<\\/a>/gi);
+
+    for (const match of links) {
+      const rawUrl = new URL(match[1], HORSE_TIMES_HOME);
+      if (rawUrl.hostname !== "www.horsetimesegypt.com" && rawUrl.hostname !== "horsetimesegypt.com") continue;
+      const title = stripHtml(match[2]);
+      if (!title || title.length < 12) continue;
+
+      const tail = html.slice((match.index ?? 0) + match[0].length, (match.index ?? 0) + match[0].length + 700);
+      const dateText = stripHtml(tail).match(/(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday),?\\s+([A-Z][a-z]+\\s+\\d{1,2},?\\s+\\d{4}|\\d{1,2}[- ]+[A-Z][a-z]{2,8}[- ]+\\d{4})/i)?.[0] ?? "";
+      const timestamp = dateText ? Date.parse(dateText.replace(/^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday),?\\s+/i, "")) : Number.NaN;
+
+      items.push({
+        title,
+        url: rawUrl.toString(),
+        date: Number.isFinite(timestamp) ? new Date(timestamp).toISOString() : null,
+        source: "Horse Times Egypt"
+      });
+    }
+
+    const unique = new Map(items.map((item) => [item.url, item]));
+    const result = [...unique.values()];
+    if (result.length === 0) {
+      console.warn("[equestrian-news] Horse Times Egypt returned no article links", { bytes: html.length });
+    }
+    return result;
+  } catch (error) {
+    console.error("[equestrian-news] Horse Times Egypt could not be read", {
+      error: error instanceof Error ? error.message : String(error)
+    });
+    return [];
+  }
+}
+
 /** Cache the complete feed result for one hour, including on force-dynamic pages. */
 const getCachedEquestrianNews = unstable_cache(
   async (limit: number): Promise<EquestrianNewsItem[]> => {
-    const results = await Promise.all(FEEDS.map(readFeed));
+    const [feedResults, egyptResults] = await Promise.all([\n      Promise.all(FEEDS.map(readFeed)),\n      readHorseTimesEgypt()\n    ]);\n    const results = [...feedResults, egyptResults];
     const unique = new Map<string, EquestrianNewsItem>();
 
     for (const item of results.flat()) {
