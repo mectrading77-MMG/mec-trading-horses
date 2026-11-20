@@ -48,7 +48,7 @@ async function readFeed(feed: (typeof FEEDS)[number]): Promise<EquestrianNewsIte
         accept: "application/rss+xml, application/atom+xml, application/xml, text/xml;q=0.9, */*;q=0.8",
         "user-agent": "Mozilla/5.0 (compatible; MEC-Horses-News/1.0; +https://www.mechorses.com)"
       },
-      next: { revalidate: 86400, tags: ["equestrian-news"] },
+      next: { revalidate: 3600, tags: ["equestrian-news"] },
       signal: AbortSignal.timeout(10000)
     });
 
@@ -103,7 +103,7 @@ async function readFeed(feed: (typeof FEEDS)[number]): Promise<EquestrianNewsIte
   }
 }
 
-/** Publisher headlines are cached for one day and refreshed by the scheduled 08:00 Paris-time cron. */
+/** Publisher headlines are revalidated every hour on demand; the daily cron is an additional cache invalidation. */
 export async function getEquestrianNews(limit = 9): Promise<EquestrianNewsItem[]> {
   const results = await Promise.all(FEEDS.map(readFeed));
   const unique = new Map<string, EquestrianNewsItem>();
