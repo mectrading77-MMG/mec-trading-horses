@@ -44,9 +44,11 @@ export default async function NewsPage({ params }: { params: { locale: Locale } 
               <h2 className="mt-4 font-display text-xl italic leading-snug text-charcoal group-hover:text-[#9a7837]">{post.title}</h2>
             </div>
             <div className="mt-6 flex items-center justify-between gap-3">
-              <time dateTime={post.date} className="font-mono text-[10px] uppercase tracking-wide text-charcoal/45">
-                {new Date(post.date).toLocaleDateString(params.locale, { day: "numeric", month: "short", year: "numeric" })}
-              </time>
+              {post.date ? (
+                <time dateTime={post.date} className="font-mono text-[10px] uppercase tracking-wide text-charcoal/45">
+                  {new Date(post.date).toLocaleDateString(params.locale, { day: "numeric", month: "short", year: "numeric" })}
+                </time>
+              ) : <span className="font-mono text-[10px] uppercase tracking-wide text-charcoal/45" />}
               <span className="font-mono text-[9px] uppercase tracking-wider text-charcoal/50">{copy.source} ↗</span>
             </div>
           </a>
