@@ -9,6 +9,7 @@ import { listHorses } from "@/lib/horses";
 import SelectionExplorer from "@/components/SelectionExplorer";
 import HeroVideo from "@/components/HeroVideo";
 import { getEquestrianNews } from "@/lib/equestrian-news";
+import NewsSpotlight from "@/components/NewsSpotlight";
 
 
 export const dynamic = "force-dynamic";
@@ -94,36 +95,12 @@ export default async function HomePage({ params }: { params: { locale: Locale } 
         </div>
       </section>
 
-      <section className="mx-auto max-w-editorial bg-[#f5f2eb] px-5 py-16 sm:px-8 sm:py-20 lg:px-10">
-        <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#9a7837]">{({ en: "The latest from the sport", fr: "Les dernières actualités du sport", ar: "أحدث أخبار عالم الفروسية" } as Record<Locale, string>)[params.locale]}</p>
-            <h2 className="mt-3 font-display text-3xl italic text-charcoal sm:text-4xl">{({ en: "Equestrian News", fr: "Actualités équestres", ar: "أخبار الفروسية" } as Record<Locale, string>)[params.locale]}</h2>
-          </div>
-          <Link href={`/${params.locale}/news`} className="inline-flex min-h-11 items-center gap-3 border-b border-[#B08D57] pb-2 font-mono text-[10px] uppercase tracking-[0.16em] text-charcoal hover:text-[#9a7837]">
-            {({ en: "View all news", fr: "Toutes les actualités", ar: "عرض كل الأخبار" } as Record<Locale, string>)[params.locale]} <span aria-hidden="true">→</span>
-          </Link>
+      <section className="mx-auto max-w-editorial px-0 pt-8">
+        <div className="px-5 sm:px-8 lg:px-10">
+          <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#9a7837]">{({ en: "The latest from the sport", fr: "Les dernières actualités du sport", ar: "أحدث أخبار عالم الفروسية" } as Record<Locale, string>)[params.locale]}</p>
+          <h2 className="mt-2 font-display text-2xl italic text-charcoal sm:text-3xl">{({ en: "Equestrian News", fr: "Actualités équestres", ar: "أخبار الفروسية" } as Record<Locale, string>)[params.locale]}</h2>
         </div>
-        <div className="mt-8 grid gap-4 md:grid-cols-3">
-          {news.map((item) => (
-            <a key={item.url} href={item.url} target="_blank" rel="noopener noreferrer" className="group flex min-h-44 flex-col justify-between border border-charcoal/10 bg-ivory p-5 transition-colors hover:border-[#B08D57] sm:p-6">
-              <div>
-                <p className="font-mono text-[9px] uppercase tracking-[0.16em] text-[#9a7837]">{item.source}</p>
-                <h3 className="mt-4 font-display text-xl italic leading-snug text-charcoal group-hover:text-[#9a7837]">{item.title}</h3>
-              </div>
-              <div className="mt-6 flex items-center justify-between gap-3">
-                {item.date ? (
-                  <time dateTime={item.date} className="font-mono text-[10px] uppercase tracking-wide text-charcoal/45">
-                    {new Date(item.date).toLocaleDateString(params.locale, { day: "numeric", month: "short", year: "numeric" })}
-                  </time>
-                ) : <span aria-label={params.locale === "ar" ? "التاريخ غير متاح" : params.locale === "fr" ? "Date indisponible" : "Date unavailable"} className="font-mono text-[10px] uppercase tracking-wide text-charcoal/45" />}
-                <span aria-hidden="true" className="text-lg text-[#9a7837]">↗</span>
-              </div>
-            </a>
-          ))}
-          {news.length === 0 && <p className="text-sm text-charcoal/60">{({ en: "Fresh equestrian headlines will appear here as feeds update.", fr: "Les dernières actualités apparaîtront ici dès la mise à jour des flux.", ar: "ستظهر أحدث الأخبار هنا عند تحديث مصادر الأخبار." } as Record<Locale, string>)[params.locale]}</p>}
-        </div>
-        <p className="mt-5 font-mono text-[9px] uppercase tracking-wide text-charcoal/40">{({ en: "Headlines and links from independent equestrian publishers. Updated automatically.", fr: "Titres et liens de médias équestres indépendants. Mise à jour automatique.", ar: "عناوين وروابط من مصادر فروسية مستقلة، تُحدّث تلقائيًا." } as Record<Locale, string>)[params.locale]}</p>
+        <NewsSpotlight items={news} locale={params.locale} />
       </section>
 
       <section className="mx-auto max-w-editorial px-6 py-20 sm:py-24 lg:px-10">
