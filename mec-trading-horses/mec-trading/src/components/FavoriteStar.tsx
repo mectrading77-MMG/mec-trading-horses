@@ -15,7 +15,7 @@ function readFavorites(): string[] {
   }
 }
 
-export default function FavoriteStar({ horseId, label = "Add to favorites" }: { horseId: string; label?: string }) {
+export default function FavoriteStar({ horseId, label = "Add to favorites", removeLabel = "Remove from favorites", inline = false }: { horseId: string; label?: string; removeLabel?: string; inline?: boolean }) {
   const [active, setActive] = useState(false);
 
   useEffect(() => {
@@ -50,10 +50,10 @@ export default function FavoriteStar({ horseId, label = "Add to favorites" }: { 
     <button
       type="button"
       onClick={toggle}
-      aria-label={active ? "Remove from favorites" : label}
+      aria-label={active ? removeLabel : label}
       aria-pressed={active}
-      title={active ? "Remove from favorites" : label}
-      className="absolute right-3 top-3 z-10 flex h-10 w-10 items-center justify-center rounded-full border border-charcoal/15 bg-ivory/95 text-gold shadow-sm transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-gold"
+      title={active ? removeLabel : label}
+      className={`${inline ? "relative flex h-10 w-10 items-center justify-center" : "absolute right-3 top-3 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-ivory/95 shadow-sm"} rounded-full border border-charcoal/15 text-gold transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-gold`}
     >
       <svg
         viewBox="0 0 24 24"

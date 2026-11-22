@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import LeadActions from "./LeadActions";
 import { db } from "@/lib/db";
 

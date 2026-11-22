@@ -13,6 +13,8 @@ import XrayViewer from "@/components/XrayViewer";
 import { formatJumpHeight } from "@/lib/levels";
 import { localizedAlternates } from "@/lib/seo";
 import InquiryOptions from "@/components/InquiryOptions";
+import ShareHorseButton from "@/components/ShareHorseButton";
+import FavoriteStar from "@/components/FavoriteStar";
 
 export const dynamic = "force-dynamic";
 
@@ -125,6 +127,20 @@ export default async function HorseDetailPage({
                 </p>
                 <h1 className="mt-2 font-display text-4xl italic text-charcoal">{t.name}</h1>
                 <p className="mt-3 max-w-xl text-charcoal/70">{t.positioning}</p>
+                <div className="mt-5 flex flex-wrap items-center gap-3">
+                  <FavoriteStar
+                    horseId={horse.id}
+                    inline
+                    label={params.locale === "fr" ? "Ajouter aux favoris" : params.locale === "ar" ? "أضف إلى المفضلة" : "Add to favorites"}
+                    removeLabel={params.locale === "fr" ? "Retirer des favoris" : params.locale === "ar" ? "إزالة من المفضلة" : "Remove from favorites"}
+                  />
+                  <ShareHorseButton
+                    title={t.name}
+                    label={params.locale === "fr" ? "Partager" : params.locale === "ar" ? "مشاركة" : "Share"}
+                    copiedLabel={params.locale === "fr" ? "Lien copié" : params.locale === "ar" ? "تم نسخ الرابط" : "Link copied"}
+                    errorLabel={params.locale === "fr" ? "Impossible de partager" : params.locale === "ar" ? "تعذرت المشاركة" : "Unable to share"}
+                  />
+                </div>
               </div>
               <div className="text-right">
                 <p className="font-display text-2xl text-gold">{price ?? "—"}</p>

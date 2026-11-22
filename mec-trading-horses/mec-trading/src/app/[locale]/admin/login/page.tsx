@@ -9,6 +9,7 @@ export default function AdminLoginPage() {
   const locale = params?.locale ?? "en";
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -54,15 +55,26 @@ export default function AdminLoginPage() {
             onChange={(e) => setEmail(e.target.value)}
             className="w-full border border-ivory/20 bg-transparent px-4 py-3 text-sm text-ivory placeholder:text-ivory/40 focus:border-gold"
           />
-          <input
-            required
-            autoComplete="current-password"
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full border border-ivory/20 bg-transparent px-4 py-3 text-sm text-ivory placeholder:text-ivory/40 focus:border-gold"
-          />
+          <div className="relative">
+            <input
+              required
+              autoComplete="current-password"
+              type={showPassword ? "text" : "password"}
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full border border-ivory/20 bg-transparent px-4 py-3 pr-20 text-sm text-ivory placeholder:text-ivory/40 focus:border-gold"
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword((visible) => !visible)}
+              aria-label={showPassword ? "Hide password" : "Show password"}
+              aria-pressed={showPassword}
+              className="absolute inset-y-0 right-3 font-mono text-[10px] uppercase tracking-eyebrow text-gold hover:text-ivory"
+            >
+              {showPassword ? "Hide" : "Show"}
+            </button>
+          </div>
           {error && <p role="alert" aria-live="polite" className="text-sm text-red-400">{error}</p>}
           <button
             type="submit"

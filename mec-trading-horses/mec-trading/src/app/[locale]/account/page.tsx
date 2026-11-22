@@ -17,6 +17,7 @@ export default function AccountPage() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -66,7 +67,10 @@ export default function AccountPage() {
               <input maxLength={40} autoComplete="tel" placeholder="Phone (optional)" value={phone} onChange={e => setPhone(e.target.value)} className="w-full border border-ivory/20 bg-transparent px-4 py-3 text-sm outline-none placeholder:text-ivory/35 focus:border-gold"/>
             </>}
             <input required type="email" maxLength={254} autoComplete="email" placeholder="Email address" value={email} onChange={e => setEmail(e.target.value)} className="w-full border border-ivory/20 bg-transparent px-4 py-3 text-sm outline-none placeholder:text-ivory/35 focus:border-gold"/>
-            <input required type="password" minLength={mode === "register" ? 8 : 1} maxLength={128} autoComplete={mode === "register" ? "new-password" : "current-password"} placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} className="w-full border border-ivory/20 bg-transparent px-4 py-3 text-sm outline-none placeholder:text-ivory/35 focus:border-gold"/>
+            <div className="relative">
+              <input required type={showPassword ? "text" : "password"} minLength={mode === "register" ? 8 : 1} maxLength={128} autoComplete={mode === "register" ? "new-password" : "current-password"} placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} className="w-full border border-ivory/20 bg-transparent px-4 py-3 pr-20 text-sm outline-none placeholder:text-ivory/35 focus:border-gold"/>
+              <button type="button" onClick={() => setShowPassword((visible) => !visible)} aria-label={showPassword ? "Hide password" : "Show password"} aria-pressed={showPassword} className="absolute inset-y-0 right-3 font-mono text-[10px] uppercase tracking-eyebrow text-gold hover:text-ivory">{showPassword ? "Hide" : "Show"}</button>
+            </div>
             {error && <p role="alert" className="text-sm text-red-300">{error}</p>}
             <button disabled={loading} className="w-full bg-gold px-5 py-4 font-mono text-[10px] uppercase tracking-[.2em] text-charcoal transition-colors hover:bg-gold-bright disabled:opacity-60">{loading ? "Please wait…" : mode === "register" ? "Create account" : "Sign in"}</button>
           </form>
