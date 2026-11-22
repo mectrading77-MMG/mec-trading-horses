@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import Link from "next/link";
 import type { Locale } from "@/types/horse";
 import { getDictionary } from "@/i18n/config";
