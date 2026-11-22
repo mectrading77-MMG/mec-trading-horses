@@ -5,6 +5,7 @@ export type EquestrianNewsItem = {
   url: string;
   date: string | null;
   source: string;
+  image?: string;
 };
 
 const FEEDS = [
@@ -70,6 +71,12 @@ async function readFeed(feed: (typeof FEEDS)[number]): Promise<EquestrianNewsIte
       const atomLink = itemXml.match(/<link\b[^>]*href=["']([^"']+)["'][^>]*>/i)?.[1] ?? "";
       const rawLink = readTag(itemXml, "link") || atomLink;
       const url = safeItemUrl(rawLink, feed.host);
+      const rawImage = itemXml.match(/<(?:media:content|media:thumbnail|enclosure)\b[^>]*url=["']([^"']+)["'][^>]*>/i)?.[1] ?? "";
+      let image: string | undefined;
+      try {
+        const parsedImage = new URL(rawImage);
+        if (parsedImage.protocol === "https:") image = parsedImage.toString();
+      } catch { /* No publisher image available. */ }
       const rawDate =
         readTag(itemXml, "pubDate") ||
         readTag(itemXml, "published") ||
@@ -83,7 +90,8 @@ async function readFeed(feed: (typeof FEEDS)[number]): Promise<EquestrianNewsIte
         title,
         url,
         date: Number.isFinite(timestamp) ? new Date(timestamp).toISOString() : null,
-        source: feed.source
+        source: feed.source,
+        ...(image ? { image } : {})
       }];
     });
 
