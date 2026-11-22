@@ -1,56 +1,75 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import Image from "next/image";
+import { useEffect, useMemo, useState } from "react";
 import type { MediaItem } from "@/types/horse";
 import { useSwipe } from "@/lib/useSwipe";
 
-export default function HorseGallery({
-  media,
-  name
-}: {
-  media: MediaItem[];
-  name: string;
-}) {
-  const photos = media.filter((m) => m.type === "PHOTO");
+const isVideo = (item: MediaItem) => item.type.startsWith("VIDEO_");
+
+export default function HorseGallery({ media, name }: { media: MediaItem[]; name: string }) {
+  // Keep the cover first, then preserve the administrator's media ordering.
+  const gallery = useMemo(
+    () => [...media].filter((item) => item.type === "PHOTO" || isVideo(item))
+      .sort((a, b) => Number(b.isCover) - Number(a.isCover)),
+    [media]
+  );
   const [active, setActive] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const current = photos[active] ?? photos[0];
+  const [failed, setFailed] = useState<Record<string, boolean>>({});
+  const current = gallery[active] ?? gallery[0];
 
-  const showPrevious = () =>
-    setActive((a) => (a - 1 + photos.length) % photos.length);
-
-  const showNext = () =>
-    setActive((a) => (a + 1) % photos.length);
-
-  const handleSwipe = (d: number) => {
-    if (photos.length < 2) return;
-    setActive((a) => (a + d + photos.length) % photos.length);
+  const showPrevious = () => setActive((value) => (value - 1 + gallery.length) % gallery.length);
+  const showNext = () => setActive((value) => (value + 1) % gallery.length);
+  const handleSwipe = (direction: number) => {
+    if (gallery.length > 1) setActive((value) => (value + direction + gallery.length) % gallery.length);
   };
-
   const swipe = useSwipe(handleSwipe);
   const fullscreenSwipe = useSwipe(handleSwipe);
 
   useEffect(() => {
     if (!isFullscreen) return;
-
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") setIsFullscreen(false);
-      if (event.key === "ArrowLeft" && photos.length > 1) showPrevious();
-      if (event.key === "ArrowRight" && photos.length > 1) showNext();
+      if (event.key === "ArrowLeft" && gallery.length > 1) showPrevious();
+      if (event.key === "ArrowRight" && gallery.length > 1) showNext();
     };
-
-    const originalOverflow = document.body.style.overflow;
+    const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     window.addEventListener("keydown", handleKeyDown);
-
     return () => {
-      document.body.style.overflow = originalOverflow;
+      document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [isFullscreen, photos.length]);
+  }, [isFullscreen, gallery.length]);
 
   if (!current) return null;
+
+  const renderMedia = (item: MediaItem, fullscreen = false) => {
+    if (isVideo(item)) {
+      return (
+        <video
+          key={item.url}
+          src={item.url}
+          controls
+          playsInline
+          preload={fullscreen ? "auto" : "metadata"}
+          className={fullscreen ? "h-full w-full object-contain" : "h-full w-full object-cover"}
+          aria-label={item.alt ?? name}
+          onClick={(event) => event.stopPropagation()}
+        />
+      );
+    }
+    return (
+      <img
+        key={item.url}
+        src={item.url}
+        alt={item.alt ?? name}
+        loading={fullscreen ? "eager" : "lazy"}
+        className={fullscreen ? "h-full w-full object-contain" : "h-full w-full object-cover"}
+        onError={() => setFailed((value) => ({ ...value, [item.url]: true }))}
+      />
+    );
+  };
 
   return (
     <div>
@@ -60,7 +79,7 @@ export default function HorseGallery({
         onClick={() => setIsFullscreen(true)}
         role="button"
         tabIndex={0}
-        aria-label={`Open ${name} photo in fullscreen`}
+        aria-label={`Open ${name} media fullscreen`}
         onKeyDown={(event) => {
           if (event.key === "Enter" || event.key === " ") {
             event.preventDefault();
@@ -68,33 +87,32 @@ export default function HorseGallery({
           }
         }}
       >
-        <Image
-          src={current.url}
-          alt={current.alt ?? name}
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover transition-transform duration-500 group-hover:scale-[1.01]"
-        />
-        <span className="absolute right-3 top-3 bg-charcoal/70 px-3 py-2 text-ivory/90 opacity-0 backdrop-blur transition-opacity group-hover:opacity-100">
-          <span className="sr-only">Open image fullscreen</span>
-          <span aria-hidden="true" className="text-lg leading-none">⛶</span>
-        </span>
+        {renderMedia(current)}
+        {failed[current.url] && (
+          <div className="absolute inset-0 flex items-center justify-center bg-charcoal text-sm text-ivory">
+            Media could not be loaded
+          </div>
+        )}
+        <span className="absolute right-3 top-3 bg-charcoal/70 px-3 py-2 text-ivory/90 opacity-0 backdrop-blur transition-opacity group-hover:opacity-100" aria-hidden="true">⛶</span>
       </div>
 
-      {photos.length > 1 && (
+      {gallery.length > 1 && (
         <div className="mt-3 flex gap-2 overflow-x-auto px-1">
-          {photos.map((photo, i) => (
+          {gallery.map((item, index) => (
             <button
-              key={photo.url + i}
-              onClick={() => setActive(i)}
-              className={`relative h-16 w-24 shrink-0 overflow-hidden transition-opacity duration-400 ${
-                i === active ? "opacity-100 ring-1 ring-gold" : "opacity-60 hover:opacity-90"
-              }`}
-              aria-label={`View photo ${i + 1}`}
-              aria-current={i === active ? "true" : undefined}
+              key={item.url + index}
+              type="button"
+              onClick={() => setActive(index)}
+              className={`relative h-16 w-24 shrink-0 overflow-hidden bg-charcoal-soft transition-opacity ${index === active ? "opacity-100 ring-1 ring-gold" : "opacity-60 hover:opacity-90"}`}
+              aria-label={`View ${isVideo(item) ? "video" : "photo"} ${index + 1}`}
+              aria-current={index === active ? "true" : undefined}
             >
-              <Image src={photo.url} alt="" fill sizes="96px" className="object-cover" />
+              {isVideo(item) ? (
+                <video src={item.url} muted playsInline preload="metadata" className="h-full w-full object-cover" />
+              ) : (
+                <img src={item.url} alt="" loading="lazy" className="h-full w-full object-cover" />
+              )}
+              {isVideo(item) && <span className="absolute inset-0 flex items-center justify-center bg-black/30 text-xl text-white">▶</span>}
             </button>
           ))}
         </div>
@@ -105,64 +123,20 @@ export default function HorseGallery({
           className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 p-4 sm:p-8"
           role="dialog"
           aria-modal="true"
-          aria-label={`${name} photo gallery`}
+          aria-label={`${name} media gallery`}
           onClick={() => setIsFullscreen(false)}
         >
-          <button
-            type="button"
-            onClick={() => setIsFullscreen(false)}
-            className="absolute right-4 top-4 z-10 flex h-11 w-11 items-center justify-center bg-white/10 text-2xl text-white transition hover:bg-white/20"
-            aria-label="Close fullscreen gallery"
-          >
-            ×
-          </button>
-
-          {photos.length > 1 && (
+          <button type="button" onClick={() => setIsFullscreen(false)} className="absolute right-4 top-4 z-20 flex h-11 w-11 items-center justify-center bg-white/10 text-2xl text-white hover:bg-white/20" aria-label="Close fullscreen gallery">×</button>
+          {gallery.length > 1 && (
             <>
-              <button
-                type="button"
-                onClick={(event) => {
-                  event.stopPropagation();
-                  showPrevious();
-                }}
-                className="absolute left-3 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-3xl text-white transition hover:bg-white/20 sm:left-6"
-                aria-label="Previous photo"
-              >
-                ‹
-              </button>
-
-              <button
-                type="button"
-                onClick={(event) => {
-                  event.stopPropagation();
-                  showNext();
-                }}
-                className="absolute right-3 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-3xl text-white transition hover:bg-white/20 sm:right-6"
-                aria-label="Next photo"
-              >
-                ›
-              </button>
+              <button type="button" onClick={(event) => { event.stopPropagation(); showPrevious(); }} className="absolute left-3 top-1/2 z-20 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-3xl text-white sm:left-6" aria-label="Previous media">‹</button>
+              <button type="button" onClick={(event) => { event.stopPropagation(); showNext(); }} className="absolute right-3 top-1/2 z-20 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-3xl text-white sm:right-6" aria-label="Next media">›</button>
             </>
           )}
-
-          <div
-            className="relative h-full w-full"
-            onClick={(event) => event.stopPropagation()}
-            {...fullscreenSwipe}
-          >
-            <Image
-              src={current.url}
-              alt={current.alt ?? name}
-              fill
-              sizes="100vw"
-              className="object-contain"
-              priority
-            />
+          <div className="relative h-full w-full" onClick={(event) => event.stopPropagation()} {...fullscreenSwipe}>
+            {renderMedia(current, true)}
           </div>
-
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/60 px-3 py-1 font-mono text-xs text-white/80 backdrop-blur">
-            {active + 1} / {photos.length}
-          </div>
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/60 px-3 py-1 font-mono text-xs text-white/80">{active + 1} / {gallery.length}</div>
         </div>
       )}
     </div>
