@@ -36,24 +36,27 @@ export default async function NewsPage({ params }: { params: { locale: Locale } 
     <div className="mx-auto max-w-editorial px-5 py-12 sm:px-8 sm:py-16 lg:px-10">
       <SectionHeading eyebrow={dict.nav.news} title={dict.nav.news} />
       <p className="mt-4 max-w-2xl text-sm leading-relaxed text-charcoal/60">{copy.intro}</p>
-      <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {posts.map((post) => (
-          <a key={post.url} href={post.url} target="_blank" rel="noopener noreferrer" className="group flex min-h-48 flex-col justify-between border border-charcoal/10 bg-[#f5f2eb] p-5 transition-colors hover:border-[#B08D57] sm:p-6">
-            <div>
-              <p className="font-mono text-[9px] uppercase tracking-[0.16em] text-[#9a7837]">{post.source}</p>
-              <h2 className="mt-4 font-display text-xl italic leading-snug text-charcoal group-hover:text-[#9a7837]">{post.title}</h2>
-            </div>
-            <div className="mt-6 flex items-center justify-between gap-3">
-              {post.date ? (
-                <time dateTime={post.date} className="font-mono text-[10px] uppercase tracking-wide text-charcoal/45">
-                  {new Date(post.date).toLocaleDateString(params.locale, { day: "numeric", month: "short", year: "numeric" })}
-                </time>
-              ) : <span className="font-mono text-[10px] uppercase tracking-wide text-charcoal/45" />}
-              <span className="font-mono text-[9px] uppercase tracking-wider text-charcoal/50">{copy.source} ↗</span>
-            </div>
-          </a>
-        ))}
-      </div>
+      <div className="mt-10 border-y-2 border-charcoal py-3 text-center font-mono text-[9px] uppercase tracking-[0.3em] text-charcoal/55">MEC HORSES · INTERNATIONAL EQUESTRIAN JOURNAL · {new Date().toLocaleDateString(params.locale, { day: "numeric", month: "long", year: "numeric" })}</div>
+      {posts.length > 0 && (
+        <div className="mt-8 grid gap-x-8 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
+          {posts.map((post, index) => (
+            <article key={post.url} className={index === 0 ? "md:col-span-2 lg:col-span-2" : ""}>
+              <a href={post.url} target="_blank" rel="noopener noreferrer" className="group block">
+                <div className={`relative overflow-hidden bg-[#252821] ${index === 0 ? "aspect-[16/8]" : "aspect-[16/10]"}`}>
+                  {post.image ? <img src={post.image} alt="" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" /> : <div className="flex h-full w-full items-center justify-center bg-[radial-gradient(ellipse_at_center,_#68604a,_#252821_72%)]"><span className="font-display text-5xl italic text-[#c7a468]/65">MEC</span></div>}
+                  <span className="absolute bottom-3 left-3 bg-charcoal/85 px-3 py-1.5 font-mono text-[9px] uppercase tracking-[0.16em] text-[#e2c995]">{post.source}</span>
+                </div>
+                <div className="pt-4">
+                  <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-[#9a7837]">{post.date ? new Date(post.date).toLocaleDateString(params.locale, { day: "numeric", month: "short", year: "numeric" }) : copy.source}</p>
+                  <h2 className={`mt-2 font-display italic leading-tight text-charcoal transition-colors group-hover:text-[#9a7837] ${index === 0 ? "text-3xl sm:text-4xl" : "text-xl"}`}>{post.title}</h2>
+                  <p className="mt-3 font-mono text-[9px] uppercase tracking-[0.14em] text-charcoal/45">{copy.source} · {post.source} ↗</p>
+                </div>
+              </a>
+              <div className="mt-5 border-b border-charcoal/15" />
+            </article>
+          ))}
+        </div>
+      )}
       {posts.length === 0 && <p className="mt-8 border-y border-charcoal-line py-8 text-sm text-charcoal/60">{copy.empty}</p>}
       <p className="mt-6 font-mono text-[9px] uppercase tracking-wide text-charcoal/40">{copy.updated}</p>
     </div>
