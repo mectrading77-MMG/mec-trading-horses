@@ -130,6 +130,7 @@ model CompetitionResult {
 
 enum MediaType {
   PHOTO
+  XRAY
   VIDEO_GENERAL
   VIDEO_COMPETITION
   VIDEO_TRAINING
