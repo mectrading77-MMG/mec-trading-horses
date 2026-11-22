@@ -16,10 +16,11 @@ const statusStyles: Record<string, string> = {
   CLOSED: "bg-charcoal/5 text-charcoal/40"
 };
 
-export default async function AdminInquiriesPage({ searchParams }: { searchParams?: { service?: string } }) {
+export default async function AdminInquiriesPage({ searchParams }: { searchParams?: { service?: string; status?: string } }) {
   const serviceFilter = searchParams?.service;
+  const statusFilter = searchParams?.status === "NEW" ? "NEW" : undefined;
   const inquiries = await db.inquiry.findMany({
-    where: serviceFilter ? { service: serviceFilter } : undefined,
+    where: serviceFilter || statusFilter ? { service: serviceFilter, status: statusFilter } : undefined,
     include: { horse: { include: { translations: true } } },
     orderBy: { createdAt: "desc" },
     take: 200
@@ -37,7 +38,7 @@ export default async function AdminInquiriesPage({ searchParams }: { searchParam
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <p className="font-mono text-[10px] uppercase tracking-eyebrow text-gold">Customer relationship management</p>
-          <h1 className="mt-2 font-display text-2xl italic text-charcoal">{serviceFilter === "selection" ? "Horse search requests" : "CRM · Leads"}</h1>
+          <h1 className="mt-2 font-display text-2xl italic text-charcoal">{serviceFilter === "selection" ? (statusFilter ? "New horse search requests" : "Horse search requests") : "CRM · Leads"}</h1>
         </div>
         <div className="flex items-center gap-3"><p className="text-xs text-charcoal/50">Showing the latest 200 {serviceFilter === "selection" ? "horse search requests" : "leads"}</p>{serviceFilter && <a href="/en/admin/inquiries" className="text-xs text-gold underline">View all leads</a>}</div>
       </div>
