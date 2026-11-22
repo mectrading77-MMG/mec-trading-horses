@@ -34,7 +34,7 @@ export interface CompetitionResult {
 }
 
 export interface MediaItem {
-  type: "PHOTO" | "VIDEO_GENERAL" | "VIDEO_COMPETITION" | "VIDEO_TRAINING";
+  type: "PHOTO" | "XRAY" | "VIDEO_GENERAL" | "VIDEO_COMPETITION" | "VIDEO_TRAINING";
   url: string;
   alt?: string;
   isCover?: boolean;
