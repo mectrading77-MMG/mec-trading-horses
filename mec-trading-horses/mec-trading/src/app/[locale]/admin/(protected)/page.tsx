@@ -20,10 +20,10 @@ export default async function AdminDashboardPage({ params }: { params: { locale:
   };
 
   const stats = [
-    { label: "Available", value: counts.available },
-    { label: "Reserved", value: counts.reserved },
-    { label: "Sold", value: counts.sold },
-    { label: "New inquiries", value: newInquiries }
+    { label: "Available", value: counts.available, href: `/${params.locale}/admin/horses?status=AVAILABLE` },
+    { label: "Reserved", value: counts.reserved, href: `/${params.locale}/admin/horses?status=RESERVED` },
+    { label: "Sold", value: counts.sold, href: `/${params.locale}/admin/horses?status=SOLD` },
+    { label: "New inquiries", value: newInquiries, href: `/${params.locale}/admin/inquiries` }
   ];
 
   return (
@@ -32,10 +32,11 @@ export default async function AdminDashboardPage({ params }: { params: { locale:
 
       <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {stats.map((s) => (
-          <div key={s.label} className="border border-charcoal-line bg-white p-6">
+          <Link key={s.label} href={s.href} className="block min-h-32 border border-charcoal-line bg-white p-6 transition-colors hover:border-gold hover:bg-ivory-dim focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold">
             <p className="font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/40">{s.label}</p>
             <p className="mt-2 font-display text-3xl italic text-charcoal">{s.value}</p>
-          </div>
+            <p className="mt-3 text-xs text-gold">Open section →</p>
+          </Link>
         ))}
       </div>
 
