@@ -10,6 +10,7 @@ const InquirySchema = z.object({
   service: z.string().trim().min(1).max(80),
   message: z.string().trim().min(3).max(5000),
   lookingFor: z.string().trim().max(160).optional(),
+  riderVideoUrl: z.string().url().max(2000).optional().or(z.literal("")),
   hasTrainer: z.string().optional(),
   viewingDate: z.string().optional(),
   horseId: z.string().optional(),
@@ -62,6 +63,7 @@ export async function POST(request: NextRequest) {
         service: data.service,
         message: data.message,
         lookingFor: data.lookingFor || null,
+        riderVideoUrl: data.riderVideoUrl || null,
         hasTrainer: data.hasTrainer ? data.hasTrainer === "yes" : null,
         viewingDate: data.viewingDate ? new Date(data.viewingDate) : null,
         horseId: data.horseId || null,
@@ -81,6 +83,7 @@ export async function POST(request: NextRequest) {
       `Country: ${data.country || "—"}`,
       `Service: ${data.service}`,
       `Horse: ${data.lookingFor || "—"}`,
+      `Rider video: ${data.riderVideoUrl || "—"}`,
       `Message: ${data.message}`,
       `Lead ID: ${inquiry.id}`
     ].join("\n");
