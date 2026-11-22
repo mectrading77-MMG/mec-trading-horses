@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { upload } from "@vercel/blob/client";
 import { useRouter, useParams } from "next/navigation";
 import { HEIGHT_BANDS } from "@/lib/levels";
 import { HORSE_BREEDS, HORSE_COLOURS } from "@/lib/horse-options";
@@ -24,13 +25,33 @@ export default function NewHorsePage() {
   const locale = params?.locale ?? "en";
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [uploading, setUploading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setSaving(true);
     setError(null);
-    const form = new FormData(e.currentTarget);
-    const payload: Record<string, FormDataEntryValue | boolean> = Object.fromEntries(form.entries());
+    const formElement = e.currentTarget;
+    const form = new FormData(formElement);
+    const photos = Array.from((formElement.elements.namedItem("photos") as HTMLInputElement | null)?.files ?? []);
+    const videos = Array.from((formElement.elements.namedItem("videos") as HTMLInputElement | null)?.files ?? []);
+    const files = [
+      ...photos.map((file) => ({ file, type: "PHOTO" as const })),
+      ...videos.map((file) => ({ file, type: "VIDEO_GENERAL" as const }))
+    ];
+    const maxBytes = 100 * 1024 * 1024;
+    const oversized = files.find(({ file }) => file.size > maxBytes);
+    if (oversized) {
+      setSaving(false);
+      setError(`${oversized.file.name} exceeds the 100 MB per-file limit.`);
+      return;
+    }
+    const payload: Record<string, FormDataEntryValue | boolean> = Object.fromEntries(
+      Array.from(form.entries()).filter(([key, value]) =>
+        !["photos", "videos", "documents"].includes(key) && !(value instanceof File)
+      )
+    );
     const heightMeters = String(payload.heightCm ?? "").trim();
     payload.heightCm = heightMeters === "" ? "" : String(Math.round(Number(heightMeters.replace(",", ".")) * 100));
     const selectedJumpLevel = String(payload.jumpHeightCm ?? "130");
@@ -43,12 +64,55 @@ export default function NewHorsePage() {
       body: JSON.stringify(payload)
     });
 
-    setSaving(false);
-    if (res.ok) {
-      router.push(`/${locale}/admin/horses`);
-    } else {
-      setError("Could not save this horse — check the required fields and try again.");
+    if (!res.ok) {
+      setSaving(false);
+      const data = await res.json().catch(() => null);
+      setError(typeof data?.error === "string" ? data.error : "Could not save this horse — check the required fields and try again.");
+      return;
     }
+
+    const created = await res.json();
+    const horseSlug = created?.horse?.slug;
+    if (!horseSlug) {
+      setSaving(false);
+      setError("Horse was created, but its identifier was not returned. Open the horse list and edit it to add media.");
+      return;
+    }
+
+    if (files.length > 0) {
+      setUploading(true);
+      setUploadProgress(0);
+      try {
+        for (let index = 0; index < files.length; index++) {
+          const { file, type } = files[index];
+          const blob = await upload(file.name, file, {
+            access: "public",
+            handleUploadUrl: "/api/admin/horses/upload",
+            clientPayload: JSON.stringify({ horseSlug, type, alt: "" }),
+            onUploadProgress: ({ percentage }) =>
+              setUploadProgress(Math.round(((index + percentage / 100) / files.length) * 100))
+          });
+          const mediaResponse = await fetch("/api/admin/horses", {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ mediaAction: "add", horseSlug, type, url: blob.url })
+          });
+          const mediaData = await mediaResponse.json().catch(() => null);
+          if (!mediaResponse.ok) {
+            throw new Error(typeof mediaData?.error === "string" ? mediaData.error : `Could not attach ${file.name} to the horse.`);
+          }
+        }
+      } catch (uploadError) {
+        setSaving(false);
+        setUploading(false);
+        setError(`Horse created, but media upload did not finish: ${uploadError instanceof Error ? uploadError.message : "Upload failed"}. You can finish uploading from Edit Horse.`);
+        return;
+      }
+    }
+
+    setSaving(false);
+    setUploading(false);
+    router.push(`/${locale}/admin/horses`);
   }
 
   return (
@@ -134,10 +198,19 @@ export default function NewHorsePage() {
           </p>
         </section>
 
-        <section className="grid gap-5 sm:grid-cols-2">
-          <Field label="Photos"><input type="file" name="photos" multiple accept="image/*" className={inputClass} /></Field>
-          <Field label="Videos"><input type="file" name="videos" multiple accept="video/*" className={inputClass} /></Field>
-          <Field label="Documents"><input type="file" name="documents" multiple className={inputClass} /></Field>
+        <section className="border border-charcoal-line bg-white p-5">
+          <h2 className="font-display text-lg italic text-charcoal">Horse Photos & Videos</h2>
+          <p className="mt-1 text-xs text-charcoal/55">Select files directly from your device. They will upload to the media store and be attached to this horse after it is created.</p>
+          <div className="mt-4 grid gap-5 sm:grid-cols-2">
+            <Field label="Photos (JPG, PNG, WebP, AVIF)">
+              <input type="file" name="photos" multiple accept="image/jpeg,image/png,image/webp,image/avif" className={inputClass} />
+            </Field>
+            <Field label="Videos (MP4, WebM, MOV)">
+              <input type="file" name="videos" multiple accept="video/mp4,video/webm,video/quicktime" className={inputClass} />
+            </Field>
+          </div>
+          <p className="mt-3 text-xs text-charcoal/45">Maximum 100 MB per file. Keep this page open until the upload finishes.</p>
+          {(saving || uploading) && <div className="mt-4"><div className="h-1.5 overflow-hidden bg-charcoal/10"><div className="h-full bg-gold transition-all" style={{ width: `${uploadProgress}%` }} /></div><p className="mt-2 text-xs text-charcoal/55">{uploading ? `Uploading media… ${uploadProgress}%` : "Creating horse…"}</p></div>}
         </section>
 
         <section>
@@ -172,10 +245,10 @@ export default function NewHorsePage() {
 
         <button
           type="submit"
-          disabled={saving}
+          disabled={saving || uploading}
           className="bg-charcoal px-8 py-3 font-mono text-[11px] uppercase tracking-eyebrow text-ivory hover:bg-hunter disabled:opacity-60"
         >
-          {saving ? "Saving…" : "Save Horse"}
+          {uploading ? `Uploading… ${uploadProgress}%` : saving ? "Saving…" : "Save Horse"}
         </button>
       </form>
     </div>
