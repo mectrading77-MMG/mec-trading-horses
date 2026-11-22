@@ -50,6 +50,15 @@ export default async function HomePage({ params }: { params: { locale: Locale } 
           </div>
         </div>
       </section>
+      <section className="bg-charcoal py-20 text-ivory sm:py-24">
+        <div className="mx-auto max-w-editorial px-6 lg:px-10">
+          <SectionHeading eyebrow={dict.home.selectionEyebrow} title={dict.home.selectionTitle} onDark />
+          <p className="mt-3 font-mono text-[10px] uppercase tracking-eyebrow text-ivory/35">{dict.home.selectionHint}</p>
+          <SelectionExplorer horses={all} locale={params.locale} dict={dict} />
+        </div>
+      </section>
+
+
       <section aria-label="MEC Horses services" className="relative z-10 border-y border-[#d5cbb9] bg-[#e9e3d7] px-5 py-8 sm:px-8 sm:py-11 lg:px-10">
         <div className="mx-auto max-w-editorial">
           <div className="mb-5 flex flex-col gap-2 sm:mb-6 sm:flex-row sm:items-end sm:justify-between">
@@ -97,14 +106,6 @@ export default async function HomePage({ params }: { params: { locale: Locale } 
               </Link>
             ))}
           </div>
-        </div>
-      </section>
-
-      <section className="bg-charcoal py-20 text-ivory sm:py-24">
-        <div className="mx-auto max-w-editorial px-6 lg:px-10">
-          <SectionHeading eyebrow={dict.home.selectionEyebrow} title={dict.home.selectionTitle} onDark />
-          <p className="mt-3 font-mono text-[10px] uppercase tracking-eyebrow text-ivory/35">{dict.home.selectionHint}</p>
-          <SelectionExplorer horses={all} locale={params.locale} dict={dict} />
         </div>
       </section>
 
