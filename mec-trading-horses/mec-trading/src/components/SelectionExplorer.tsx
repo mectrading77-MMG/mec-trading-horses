@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Horse, Locale } from "@/types/horse";
 import { HEIGHT_BANDS, bandFor, formatJumpHeight } from "@/lib/levels";
-import { ageFromDob, formatPrice } from "@/lib/horses";
+import { ageFromDob, formatPriceRange } from "@/lib/horses";
 
 /**
  * "Find a horse by the height it jumps." The bands sit on the left; hovering
@@ -60,7 +60,7 @@ export default function SelectionExplorer({
   }, [photos.length, horse?.id]);
 
   const t = horse ? horse.translations[locale] ?? horse.translations.en : null;
-  const price = horse ? formatPrice(horse.priceAmount, horse.priceCurrency, horse.priceOnRequest, locale) : null;
+  const price = horse ? formatPriceRange(horse.priceAmount, horse.priceCurrency, horse.priceOnRequest, locale) : null;
 
   return (
     <div className="mt-12 grid gap-10 lg:grid-cols-[1fr_440px] lg:gap-16">
