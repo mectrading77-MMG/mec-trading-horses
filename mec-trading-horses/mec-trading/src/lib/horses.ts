@@ -81,7 +81,6 @@ export async function listHorses() {
           url: item.url,
           downloadable: item.downloadable
         })),
-        // X-ray viewer sets are not yet persisted as a dedicated database model.
         xrays: undefined as XraySet | undefined,
         competitionResults: record.competitionResults.map((item) => ({
           competition: item.competition,
