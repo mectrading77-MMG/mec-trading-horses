@@ -89,8 +89,7 @@ export default async function HomePage({ params }: { params: { locale: Locale } 
               <Link key={item.title.en} href={item.href} className="group relative flex min-h-[205px] flex-col justify-between overflow-hidden border border-[#d8d1c4] border-t-2 border-t-[#b08d57] bg-[#f7f4ed] p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#b08d57] hover:bg-white sm:p-7">
                 <div>
                   <div className="flex items-center justify-between">
-                    <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#9a7837]">0{index + 1} / MEC HORSES</span>
-                    <span aria-hidden="true" className="font-display text-3xl italic text-[#b08d57]/35">0{index + 1}</span>
+                    <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#9a7837]">MEC HORSES</span>
                   </div>
                   <h3 className="mt-4 font-display text-2xl italic leading-tight text-charcoal sm:text-[1.7rem]">{item.title[params.locale]}</h3>
                   <p className="mt-2 max-w-sm text-[13px] leading-relaxed text-charcoal/65 sm:text-sm">{item.text[params.locale]}</p>
