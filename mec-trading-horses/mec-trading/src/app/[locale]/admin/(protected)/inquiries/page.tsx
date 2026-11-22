@@ -17,7 +17,7 @@ const statusStyles: Record<string, string> = {
   CLOSED: "bg-charcoal/5 text-charcoal/40"
 };
 
-export default async function AdminInquiriesPage({ searchParams }: { searchParams?: { service?: string; status?: string } }) {
+export default async function AdminInquiriesPage({ params, searchParams }: { params: { locale: string }; searchParams?: { service?: string; status?: string } }) {
   const serviceFilter = searchParams?.service;
   const statusFilter = searchParams?.status === "NEW" ? "NEW" : undefined;
   const inquiries = await db.inquiry.findMany({
@@ -41,7 +41,7 @@ export default async function AdminInquiriesPage({ searchParams }: { searchParam
           <p className="font-mono text-[10px] uppercase tracking-eyebrow text-gold">Customer relationship management</p>
           <h1 className="mt-2 font-display text-2xl italic text-charcoal">{serviceFilter === "selection" ? (statusFilter ? "New horse search requests" : "Horse search requests") : "CRM · Leads"}</h1>
         </div>
-        <div className="flex items-center gap-3"><p className="text-xs text-charcoal/50">Showing the latest 200 {serviceFilter === "selection" ? "horse search requests" : "leads"}</p>{serviceFilter && <a href="/en/admin/inquiries" className="text-xs text-gold underline">View all leads</a>}</div>
+        <div className="flex items-center gap-3"><p className="text-xs text-charcoal/50">Showing the latest 200 {serviceFilter === "selection" ? "horse search requests" : "leads"}</p>{serviceFilter && <a href={`/${params.locale}/admin/inquiries`} className="text-xs text-gold underline">View all leads</a>}</div>
       </div>
 
       <div className="mt-8 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
