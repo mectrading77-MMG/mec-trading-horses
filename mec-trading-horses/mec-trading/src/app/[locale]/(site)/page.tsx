@@ -65,7 +65,7 @@ export default async function HomePage({ params }: { params: { locale: Locale } 
               {({ en: "From finding the right partner to presenting your horse internationally.", fr: "De la recherche du bon cheval à sa présentation sur la scène internationale.", ar: "من العثور على الحصان المناسب إلى تقديم خيلك للمشترين حول العالم." } as Record<Locale, string>)[params.locale]}
             </p>
           </div>
-          <div className="grid gap-2 md:grid-cols-3">
+          <div className="border-y border-[#cfc7b8] bg-[#f7f4ed]">
             {([
               {
                 title: { en: "Buy a Horse", fr: "Acheter un cheval", ar: "شراء حصان" },
@@ -81,19 +81,18 @@ export default async function HomePage({ params }: { params: { locale: Locale } 
               },
               {
                 title: { en: "Sell Your Horse", fr: "Vendre votre cheval", ar: "اعرض حصانك للبيع" },
-                text: { en: "Introduce your horse to our international network of potential buyers.", fr: "Présentez votre cheval à notre réseau international d'acheteurs.", ar: "اعرض حصانك على شبكة المشترين الدوليين لدينا." },
+                text: { en: "Introduce your horse to our international network of potential buyers.", fr: "Présentez votre cheval à notre réseau international d'acheteurs.", ar: "اعرض خيلك على شبكة المشترين الدوليين لدينا." },
                 cta: { en: "Discuss a sale", fr: "Parler d'une vente", ar: "ناقش عملية البيع" },
                 href: `/${params.locale}/contact?service=sales`
               }
             ] as const).map((item, index) => (
-              <Link key={item.title.en} href={item.href} className="group relative flex min-h-[174px] flex-col justify-between overflow-hidden border border-[#d8d1c4] border-t-2 border-t-[#b08d57] bg-[#f7f4ed] p-4 transition-all duration-300 hover:-translate-y-1 hover:border-[#b08d57] hover:bg-white sm:p-5">
-                <div>
-                  <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-[#9a7837]">{({ en: "SERVICES", fr: "SERVICES", ar: "الخدمات" } as Record<Locale, string>)[params.locale]}</span>
-                  <h3 className="mt-3 font-display text-xl italic leading-tight text-charcoal sm:text-2xl">{item.title[params.locale]}</h3>
-                  <p className="mt-1.5 max-w-sm text-xs leading-relaxed text-charcoal/65 sm:text-[13px]">{item.text[params.locale]}</p>
+              <Link key={item.title.en} href={item.href} className="group flex flex-col gap-4 border-b border-[#d8d1c4] px-5 py-6 transition-colors last:border-b-0 hover:bg-white sm:flex-row sm:items-center sm:justify-between sm:gap-8 sm:px-8 sm:py-7">
+                <div className="min-w-0 flex-1">
+                  <h3 className="font-display text-2xl italic leading-tight text-charcoal transition-colors group-hover:text-[#9a7837] sm:text-3xl">{item.title[params.locale]}</h3>
+                  <p className="mt-2 max-w-2xl text-sm leading-relaxed text-charcoal/65">{item.text[params.locale]}</p>
                 </div>
-                <span className="mt-4 inline-flex items-center gap-3 border-t border-[#d8d1c4] pt-3 font-mono text-[9px] uppercase tracking-[0.13em] text-charcoal transition-colors group-hover:text-[#9a7837]">
-                  {item.cta[params.locale]} <span aria-hidden="true" className="text-lg transition-transform group-hover:translate-x-1">→</span>
+                <span className="inline-flex shrink-0 items-center gap-4 self-start border-b border-[#b08d57] pb-2 font-mono text-[10px] uppercase tracking-[0.14em] text-charcoal transition-colors group-hover:text-[#9a7837] sm:self-center">
+                  {item.cta[params.locale]} <span aria-hidden="true" className="text-xl transition-transform group-hover:translate-x-1">→</span>
                 </span>
               </Link>
             ))}
