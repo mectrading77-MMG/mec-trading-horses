@@ -201,7 +201,7 @@ export default function NewHorsePage() {
         </section>
 
         <section className="border border-charcoal-line bg-white p-5">
-          <h2 className="font-display text-lg italic text-charcoal">Horse Photos & Videos</h2>
+          <h2 className="font-display text-lg italic text-charcoal">Horse Photos, Videos & X-rays</h2>
           <p className="mt-1 text-xs text-charcoal/55">Select files directly from your device. They will upload to the media store and be attached to this horse after it is created.</p>
           <div className="mt-4 grid gap-5 sm:grid-cols-2">
             <Field label="Photos (JPG, PNG, WebP, AVIF)">
