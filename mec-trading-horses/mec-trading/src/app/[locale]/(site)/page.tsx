@@ -65,7 +65,7 @@ export default async function HomePage({ params }: { params: { locale: Locale } 
               {({ en: "From finding the right partner to presenting your horse internationally.", fr: "De la recherche du bon cheval à sa présentation sur la scène internationale.", ar: "من العثور على الحصان المناسب إلى تقديم خيلك للمشترين حول العالم." } as Record<Locale, string>)[params.locale]}
             </p>
           </div>
-          <div className="border-y border-[#cfc7b8] bg-[#f7f4ed]">
+          <div className="space-y-3 sm:space-y-4">
             {([
               {
                 title: { en: "Buy a Horse", fr: "Acheter un cheval", ar: "شراء حصان" },
@@ -80,18 +80,18 @@ export default async function HomePage({ params }: { params: { locale: Locale } 
                 href: `/${params.locale}/contact?service=selection`
               },
               {
-                title: { en: "Sell Your Horse", fr: "Vendre votre cheval", ar: "اعرض حصانك للبيع" },
+                title: { en: "Sell Your Horse", fr: "Vendre un cheval", ar: "اعرض حصانك للبيع" },
                 text: { en: "Introduce your horse to our international network of potential buyers.", fr: "Présentez votre cheval à notre réseau international d'acheteurs.", ar: "اعرض خيلك على شبكة المشترين الدوليين لدينا." },
                 cta: { en: "Discuss a sale", fr: "Parler d'une vente", ar: "ناقش عملية البيع" },
                 href: `/${params.locale}/contact?service=sales`
               }
             ] as const).map((item, index) => (
-              <Link key={item.title.en} href={item.href} className="group flex flex-col gap-4 border-b border-[#d8d1c4] px-5 py-6 transition-colors last:border-b-0 hover:bg-white sm:flex-row sm:items-center sm:justify-between sm:gap-8 sm:px-8 sm:py-7">
+              <Link key={item.title.en} href={item.href} className={`group flex w-[94%] flex-col gap-3 rounded-full border border-[#cfc7b8] bg-[#f7f4ed] px-6 py-5 transition-all duration-300 hover:border-[#b08d57] hover:bg-white sm:w-[82%] sm:flex-row sm:items-center sm:justify-between sm:gap-8 sm:px-9 sm:py-6 ${index % 2 === 1 ? "ml-auto" : "mr-auto"}`}>
                 <div className="min-w-0 flex-1">
-                  <h3 className="font-display text-2xl italic leading-tight text-charcoal transition-colors group-hover:text-[#9a7837] sm:text-3xl">{item.title[params.locale]}</h3>
-                  <p className="mt-2 max-w-2xl text-sm leading-relaxed text-charcoal/65">{item.text[params.locale]}</p>
+                  <h3 className="font-display text-xl italic leading-tight text-charcoal transition-colors group-hover:text-[#9a7837] sm:text-2xl">{item.title[params.locale]}</h3>
+                  <p className="mt-1.5 text-xs leading-relaxed text-charcoal/65 sm:text-sm">{item.text[params.locale]}</p>
                 </div>
-                <span className="inline-flex shrink-0 items-center gap-4 self-start border-b border-[#b08d57] pb-2 font-mono text-[10px] uppercase tracking-[0.14em] text-charcoal transition-colors group-hover:text-[#9a7837] sm:self-center">
+                <span className="inline-flex shrink-0 items-center gap-3 self-start border-b border-[#b08d57] pb-1.5 font-mono text-[9px] uppercase tracking-[0.13em] text-charcoal transition-colors group-hover:text-[#9a7837] sm:self-center">
                   {item.cta[params.locale]} <span aria-hidden="true" className="text-xl transition-transform group-hover:translate-x-1">→</span>
                 </span>
               </Link>
