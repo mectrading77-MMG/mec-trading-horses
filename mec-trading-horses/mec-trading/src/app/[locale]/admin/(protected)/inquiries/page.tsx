@@ -7,6 +7,7 @@ const statusStyles: Record<string, string> = {
   NEW: "bg-gold/10 text-gold",
   CONTACTED: "bg-charcoal/10 text-charcoal/70",
   QUALIFIED: "bg-hunter/10 text-hunter",
+  SEARCHING: "bg-hunter/10 text-hunter",
   HORSES_SENT: "bg-hunter/10 text-hunter",
   NEGOTIATION: "bg-gold/10 text-gold",
   VIEWING_SCHEDULED: "bg-hunter/10 text-hunter",
@@ -29,7 +30,7 @@ export default async function AdminInquiriesPage({ searchParams }: { searchParam
   const counts = {
     total: inquiries.length,
     new: inquiries.filter((item) => item.status === "NEW").length,
-    active: inquiries.filter((item) => ["CONTACTED", "QUALIFIED", "HORSES_SENT", "NEGOTIATION", "VIEWING_SCHEDULED"].includes(item.status)).length,
+    active: inquiries.filter((item) => ["CONTACTED", "QUALIFIED", "SEARCHING", "HORSES_SENT", "NEGOTIATION", "VIEWING_SCHEDULED"].includes(item.status)).length,
     won: inquiries.filter((item) => ["WON", "SOLD"].includes(item.status)).length
   };
 
