@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { upload } from "@vercel/blob/client";
 import type { Locale } from "@/types/horse";
 
 const inputClass =
@@ -53,11 +54,13 @@ export default function ContactForm({
   const countryNames = new Intl.DisplayNames([locale], { type: "region" });
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [service, setService] = useState(initialService);
-  const [selectedHorse, setSelectedHorse] = useState("");
+  const [selectedHorse, setSelectedHorse] = useState(initialService === "selection" ? "Not listed" : "");
   const [viewingDate, setViewingDate] = useState("");
   const [phone, setPhone] = useState("");
   const [country, setCountry] = useState("");
   const [sendMethod, setSendMethod] = useState<"email" | "whatsapp" | "">("");
+  const [riderVideo, setRiderVideo] = useState<File | null>(null);
+  const [messageText, setMessageText] = useState(initialService === "selection" ? ({ en: "Thank you for sharing your horse-search requirements. Our team will review your request and contact you shortly to discuss the next steps.", fr: "Merci de nous avoir communiqué les détails de votre recherche. Notre équipe étudiera votre demande et vous contactera prochainement afin d’échanger sur les prochaines étapes.", ar: "شكرًا لمشاركتنا تفاصيل بحثك عن الحصان المناسب. سيقوم فريقنا بمراجعة طلبك والتواصل معك قريبًا لمناقشة الخطوات التالية." } as Record<Locale, string>)[locale] : "");
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -66,6 +69,13 @@ export default function ContactForm({
     const payload = Object.fromEntries(form.entries());
 
     try {
+      let riderVideoUrl = "";
+      if (riderVideo) {
+        if (!["video/mp4", "video/quicktime", "video/webm"].includes(riderVideo.type)) throw new Error("Please upload an MP4, MOV or WebM video.");
+        if (riderVideo.size > 100 * 1024 * 1024) throw new Error("Video must be 100 MB or smaller.");
+        const blob = await upload(`rider-videos/${Date.now()}-${riderVideo.name.replace(/[^a-zA-Z0-9._-]/g, "-")}`, riderVideo, { access: "public", handleUploadUrl: "/api/inquiry-video-upload" });
+        riderVideoUrl = blob.url;
+      }
       const response = await fetch("/api/inquiries", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -77,6 +87,7 @@ export default function ContactForm({
           service: payload.service,
           message: payload.message,
           lookingFor: payload.lookingFor || horseName || "",
+          riderVideoUrl,
           viewingDate: payload.viewingDate || "",
           horseId: horseId || "",
           locale,
@@ -158,7 +169,7 @@ export default function ContactForm({
         ))}
       </select>
 
-      {service === "selection" && horses.length > 0 && (
+      {service === "selection" && (
         <select
           required
           name="lookingFor"
@@ -168,14 +179,14 @@ export default function ContactForm({
           className={`${inputClass} appearance-none`}
         >
           <option value="" disabled>
-            Select a horse
+            {locale === "ar" ? "اختر حصانًا" : locale === "fr" ? "Choisissez un cheval" : "Select a horse"}
           </option>
+          <option value="Not listed">{locale === "ar" ? "الحصان غير موجود بالقائمة" : locale === "fr" ? "Cheval non répertorié" : "Not listed"}</option>
           {horses.map((horse) => (
             <option key={horse.id} value={horse.name}>
               {horse.name}
             </option>
           ))}
-          <option value="NOT_LISTED">Not listed</option>
         </select>
       )}
       {service === "viewing" && (
@@ -202,7 +213,15 @@ export default function ContactForm({
           </span>
         </div>
       )}
-      <textarea required name="message" rows={4} placeholder={dict.form.message} className={inputClass} />
+      <textarea required name="message" rows={4} value={messageText} onChange={(e) => setMessageText(e.target.value)} placeholder={dict.form.message} className={inputClass} />
+      {service === "selection" && (
+        <div className="grid gap-2">
+          <label className="text-sm font-medium text-charcoal">{locale === "ar" ? "فيديو للراكب (اختياري)" : locale === "fr" ? "Vidéo du cavalier (facultatif)" : "Rider video (optional)"}</label>
+          <input type="file" accept="video/mp4,video/quicktime,video/webm" onChange={(e) => setRiderVideo(e.target.files?.[0] ?? null)} className={`${inputClass} file:mr-4 file:border-0 file:bg-charcoal file:px-4 file:py-2 file:text-xs file:uppercase file:tracking-wider file:text-ivory`} />
+          <p className="text-xs text-charcoal/50">{locale === "ar" ? "أرفق فيديو قصيرًا يوضح مستوى الراكب وأداءه (MP4 أو MOV أو WebM، حتى 100 ميجابايت)." : locale === "fr" ? "Ajoutez une courte vidéo illustrant le niveau et la pratique du cavalier (MP4, MOV ou WebM, 100 Mo maximum)." : "Attach a short video showing the rider’s level and performance (MP4, MOV or WebM, up to 100 MB)."}</p>
+          {riderVideo && <p className="text-xs text-hunter">{riderVideo.name}</p>}
+        </div>
+      )}
 
       <div className="grid gap-3">
         <p className="font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/50">{labels.sendVia}</p>
