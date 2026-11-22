@@ -43,7 +43,7 @@ export default async function AdminLayout({
             <Link
               key={l.href}
               href={l.href}
-              className="border-t border-ivory/10 px-6 py-3 font-mono text-[11px] uppercase tracking-eyebrow text-ivory/70 hover:bg-charcoal-soft hover:text-ivory"
+              className="min-h-12 border-t border-ivory/10 px-6 py-4 font-mono text-[11px] uppercase tracking-eyebrow text-ivory/70 hover:bg-charcoal-soft hover:text-ivory focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold"
             >
               {l.label}
             </Link>
@@ -55,9 +55,9 @@ export default async function AdminLayout({
       </aside>
 
       <div className="flex-1">
-        <header className="flex items-center justify-between border-b border-charcoal-line px-6 py-4 lg:hidden">
-          <span className="font-display text-lg italic text-charcoal">MEC Horses Admin</span>
-          <SignOutButton label={dict.admin.signOut} locale={params.locale} />
+        <header className="border-b border-charcoal-line px-4 py-4 lg:hidden">
+          <div className="flex items-center justify-between"><span className="font-display text-lg italic text-charcoal">MEC Horses Admin</span><SignOutButton label={dict.admin.signOut} locale={params.locale} /></div>
+          <nav aria-label="Admin navigation" className="mt-4 grid grid-cols-3 gap-2">{links.map((l) => <Link key={l.href} href={l.href} className="rounded border border-charcoal-line bg-white px-2 py-3 text-center text-[11px] font-semibold text-charcoal hover:border-gold hover:text-gold focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold">{l.label}</Link>)}</nav>
         </header>
         <div className="p-6 lg:p-10">{children}</div>
       </div>
