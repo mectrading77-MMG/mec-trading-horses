@@ -50,11 +50,11 @@ export default async function HomePage({ params }: { params: { locale: Locale } 
           </div>
         </div>
       </section>
-      <section aria-label="MEC Horses services" className="relative z-10 border-y border-[#d8d1c4] bg-[#eae6dc] px-5 py-8 sm:px-8 sm:py-11 lg:px-10">
+      <section aria-label="MEC Horses services" className="relative z-10 border-y border-[#d5cbb9] bg-[#e9e3d7] px-5 py-8 sm:px-8 sm:py-11 lg:px-10">
         <div className="mx-auto max-w-editorial">
           <div className="mb-5 flex flex-col gap-2 sm:mb-6 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-[#9a7837]">
+              <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-[#967545]">
                 {({ en: "How we can help", fr: "Nos services", ar: "كيف نساعدك" } as Record<Locale, string>)[params.locale]}
               </p>
               <h2 className="mt-3 max-w-xl font-display text-3xl italic leading-tight text-charcoal sm:text-4xl">
@@ -86,12 +86,12 @@ export default async function HomePage({ params }: { params: { locale: Locale } 
                 href: `/${params.locale}/contact?service=sales`
               }
             ] as const).map((item, index) => (
-              <Link key={item.title.en} href={item.href} className={`group flex w-[94%] flex-col gap-3 rounded-full border border-[#cfc7b8] bg-[#f7f4ed] px-6 py-5 transition-all duration-300 hover:border-[#b08d57] hover:bg-white sm:w-[82%] sm:flex-row sm:items-center sm:justify-between sm:gap-8 sm:px-9 sm:py-6 ${index % 2 === 1 ? "ml-auto" : "mr-auto"}`}>
+              <Link key={item.title.en} href={item.href} className={`group flex w-[94%] flex-col gap-3 rounded-full border border-[#d8cdbb] bg-[#f8f5ee] px-6 py-5 transition-all duration-300 hover:border-[#b08d57] hover:bg-[#fffdf8] sm:w-[82%] sm:flex-row sm:items-center sm:justify-between sm:gap-8 sm:px-9 sm:py-6 ${index % 2 === 1 ? "ml-auto" : "mr-auto"}`}>
                 <div className="min-w-0 flex-1">
-                  <h3 className="font-display text-xl italic leading-tight text-charcoal transition-colors group-hover:text-[#9a7837] sm:text-2xl">{item.title[params.locale]}</h3>
+                  <h3 className="font-display text-xl italic leading-tight text-charcoal transition-colors group-hover:text-[#967545] sm:text-2xl">{item.title[params.locale]}</h3>
                   <p className="mt-1.5 text-xs leading-relaxed text-charcoal/65 sm:text-sm">{item.text[params.locale]}</p>
                 </div>
-                <span className="inline-flex shrink-0 items-center gap-3 self-start border-b border-[#b08d57] pb-1.5 font-mono text-[9px] uppercase tracking-[0.13em] text-charcoal transition-colors group-hover:text-[#9a7837] sm:self-center">
+                <span className="inline-flex shrink-0 items-center gap-3 self-start border-b border-[#b08d57] pb-1.5 font-mono text-[9px] uppercase tracking-[0.13em] text-charcoal transition-colors group-hover:text-[#967545] sm:self-center">
                   {item.cta[params.locale]} <span aria-hidden="true" className="text-xl transition-transform group-hover:translate-x-1">→</span>
                 </span>
               </Link>
@@ -113,7 +113,7 @@ export default async function HomePage({ params }: { params: { locale: Locale } 
         <div className="mt-10 grid gap-8 sm:mt-12 sm:grid-cols-2 lg:grid-cols-3">
           {(["selected", "evaluation", "documentation", "international", "assistance", "transport"] as const).map(
             (key) => (
-              <div key={key} className="border-t border-gold pt-5">
+              <div key={key} className="border-t border-[#c5b18b] pt-5">
                 <h3 className="font-display text-lg italic text-charcoal">{dict.why[key].title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-charcoal/60">{dict.why[key].text}</p>
               </div>
@@ -134,11 +134,11 @@ export default async function HomePage({ params }: { params: { locale: Locale } 
         </div>
       </section>
 
-      <section aria-labelledby="expertise-heading" className="border-t border-charcoal-line bg-[#f5f2eb] py-16 sm:py-20">
+      <section aria-labelledby="expertise-heading" className="border-t border-[#ddd3c2] bg-[#eee9df] py-16 sm:py-20">
         <div className="mx-auto max-w-editorial px-5 sm:px-6 lg:px-10">
           <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#9a7837]">
+              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#967545]">
                 {({ en: "MEC Horses Journal", fr: "Journal MEC Horses", ar: "مجلة MEC Horses" } as Record<Locale, string>)[params.locale]}
               </p>
               <h2 id="expertise-heading" className="mt-3 font-display text-3xl italic text-charcoal sm:text-4xl">
@@ -171,9 +171,9 @@ export default async function HomePage({ params }: { params: { locale: Locale } 
                 description: { en: "Practical guidance on veterinary checks, paperwork and transport.", fr: "Conseils pratiques sur les examens vétérinaires, les documents et le transport.", ar: "إرشادات عن الفحوص البيطرية والمستندات ونقل الخيول." }
               }
             ] as const).map((item) => (
-              <Link key={item.number} href={`/${params.locale}/news`} className="group flex min-h-[200px] flex-col justify-between border border-charcoal/10 bg-ivory p-6 transition-colors hover:border-gold sm:p-7">
+              <Link key={item.number} href={`/${params.locale}/news`} className="group flex min-h-[200px] flex-col justify-between border border-[#ddd3c2] bg-[#faf8f2] p-6 transition-colors hover:border-[#b08d57] sm:p-7">
                 <div>
-                  <span className="font-mono text-[10px] tracking-[0.2em] text-[#9a7837]">{item.number} / JOURNAL</span>
+                  <span className="font-mono text-[10px] tracking-[0.2em] text-[#967545]">{item.number} / JOURNAL</span>
                   <h3 className="mt-5 font-display text-2xl italic text-charcoal">{item.title[params.locale]}</h3>
                   <p className="mt-3 text-sm leading-relaxed text-charcoal/65">{item.description[params.locale]}</p>
                 </div>
