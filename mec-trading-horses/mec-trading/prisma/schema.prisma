@@ -195,6 +195,7 @@ model Inquiry {
   source        String        @default("website")
   preferredContact String     @default("email")
   lookingFor    String?
+  riderVideoUrl String?
   hasTrainer    Boolean?
   viewingDate   DateTime?
   notes         String?
