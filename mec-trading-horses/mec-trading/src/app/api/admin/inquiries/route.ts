@@ -3,7 +3,7 @@ import { z } from "zod";
 import { getSession } from "@/lib/auth";
 import { db } from "@/lib/db";
 
-const LeadStatus = z.enum(["NEW", "CONTACTED", "QUALIFIED", "HORSES_SENT", "NEGOTIATION", "VIEWING_SCHEDULED", "WON", "LOST"]);
+const LeadStatus = z.enum(["NEW", "CONTACTED", "QUALIFIED", "HORSES_SENT", "NEGOTIATION", "VIEWING_SCHEDULED", "WON", "LOST", "CLOSED"]);
 
 export async function GET() {
   const session = await getSession();
