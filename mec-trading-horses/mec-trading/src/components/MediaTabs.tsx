@@ -6,6 +6,7 @@ import type { MediaItem } from "@/types/horse";
 
 const TABS = [
   { key: "PHOTO", labelKey: "tabPhotos" },
+  { key: "XRAY", labelKey: "tabXrays" },
   { key: "VIDEO_GENERAL", labelKey: "tabVideos" },
   { key: "VIDEO_COMPETITION", labelKey: "tabCompetitionVideos" },
   { key: "VIDEO_TRAINING", labelKey: "tabTrainingVideos" }
@@ -35,9 +36,9 @@ export default function MediaTabs({ media, dict }: { media: MediaItem[]; dict: a
 
       <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3">
         {items.map((item, i) =>
-          item.type === "PHOTO" ? (
+          item.type === "PHOTO" || item.type === "XRAY" ? (
             <div key={i} className="relative aspect-square overflow-hidden bg-charcoal-soft">
-              <Image src={item.url} alt={item.alt ?? ""} fill sizes="33vw" className="object-cover" />
+              <Image src={item.url} alt={item.alt ?? (item.type === "XRAY" ? "Horse X-ray" : "")} fill sizes="33vw" className={item.type === "XRAY" ? "object-contain" : "object-cover"} />
             </div>
           ) : (
             <div key={i} className="flex aspect-square items-center justify-center bg-charcoal-soft text-ivory/50">
