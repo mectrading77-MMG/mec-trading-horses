@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 
 type AdminHorse = {
   id: string; slug: string; breed: string; sex: string; dateOfBirth: string;
@@ -14,6 +14,8 @@ type AdminHorse = {
 
 export default function HorseManager() {
   const params = useParams();
+  const searchParams = useSearchParams();
+  const statusFilter = searchParams.get("status");
   const locale = String(params?.locale ?? "en");
   const [horses, setHorses] = useState<AdminHorse[]>([]);
   const [loading, setLoading] = useState(true);
@@ -75,10 +77,13 @@ export default function HorseManager() {
     }
   }
 
+  const visibleHorses = statusFilter ? horses.filter((horse) => horse.status === statusFilter) : horses;
+
   return (
     <div>
+      {statusFilter && <div className="mb-4 flex items-center justify-between gap-3 border border-charcoal-line bg-white px-4 py-3 text-sm"><span>Showing {statusFilter.toLowerCase()} horses</span><Link href={`/${locale}/admin/horses`} className="font-mono text-[10px] uppercase tracking-eyebrow text-gold underline">Clear filter</Link></div>}
       {error && <p role="alert" className="mb-5 border border-red-200 bg-red-50 p-3 text-sm text-red-800">{error}</p>}
-      {loading ? <p className="py-10 text-sm text-charcoal/60">Loading horses…</p> : horses.length === 0 ? (
+      {loading ? <p className="py-10 text-sm text-charcoal/60">Loading horses…</p> : visibleHorses.length === 0 ? (
         <div className="border border-charcoal-line bg-white p-8 text-sm text-charcoal/60">No horses in the database yet. Add your first horse to get started.</div>
       ) : (
         <div className="overflow-x-auto border border-charcoal-line bg-white">
@@ -86,11 +91,11 @@ export default function HorseManager() {
             <thead><tr className="border-b border-charcoal-line bg-ivory-dim font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/50">
               <th className="px-4 py-3 text-left">Name</th><th className="px-4 py-3 text-left">Breed</th><th className="px-4 py-3 text-left">Born</th><th className="px-4 py-3 text-left">Level</th><th className="px-4 py-3 text-left">Price</th><th className="px-4 py-3 text-left">Status</th><th className="px-4 py-3 text-left">Media</th><th className="px-4 py-3 text-right">Actions</th>
             </tr></thead>
-            <tbody>{horses.map((horse) => {
+            <tbody>{visibleHorses.map((horse) => {
               const name = horse.translations.find((t) => t.locale === locale)?.name ?? horse.translations.find((t) => t.locale === "en")?.name ?? horse.slug;
               const archived = horse.status === "ARCHIVED";
               return <tr key={horse.id} className="border-b border-charcoal-line/60">
-                <td className="px-4 py-3 font-display italic text-charcoal">{name}</td>
+                <td className="px-4 py-3 font-display italic text-charcoal"><Link href={`/${locale}/admin/horses/${encodeURIComponent(horse.slug)}`} className="inline-flex min-h-10 items-center text-gold underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold">{name}</Link></td>
                 <td className="px-4 py-3 text-charcoal/70">{horse.breed}</td>
                 <td className="px-4 py-3 text-charcoal/70">{new Date(horse.dateOfBirth).getFullYear()}</td>
                 <td className="px-4 py-3 text-charcoal/70">{horse.jumpHeightCm} cm</td>
@@ -98,7 +103,7 @@ export default function HorseManager() {
                 <td className="px-4 py-3"><span className="text-xs font-medium">{archived ? "Sold Archived" : horse.status}</span></td>
                 <td className="px-4 py-3 text-charcoal/70">{horse.media.length}</td>
                 <td className="px-4 py-3"><div className="flex justify-end gap-3">
-                  <Link href={`/${locale}/admin/horses/${encodeURIComponent(horse.slug)}`} className="font-mono text-[10px] uppercase tracking-eyebrow text-gold underline underline-offset-4">Edit</Link>
+                  <Link href={`/${locale}/admin/horses/${encodeURIComponent(horse.slug)}`} className="inline-flex min-h-10 items-center px-2 font-mono text-[10px] uppercase tracking-eyebrow text-gold underline underline-offset-4">Edit</Link>
                   {archived ? (
                     <button type="button" disabled={Boolean(busy)} onClick={() => void changeStatus(horse, "AVAILABLE")} className="font-mono text-[10px] uppercase tracking-eyebrow text-hunter underline underline-offset-4 disabled:opacity-50">Restore</button>
                   ) : (
