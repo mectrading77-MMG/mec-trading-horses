@@ -16,8 +16,10 @@ const statusStyles: Record<string, string> = {
   CLOSED: "bg-charcoal/5 text-charcoal/40"
 };
 
-export default async function AdminInquiriesPage() {
+export default async function AdminInquiriesPage({ searchParams }: { searchParams?: { service?: string } }) {
+  const serviceFilter = searchParams?.service;
   const inquiries = await db.inquiry.findMany({
+    where: serviceFilter ? { service: serviceFilter } : undefined,
     include: { horse: { include: { translations: true } } },
     orderBy: { createdAt: "desc" },
     take: 200
@@ -35,9 +37,9 @@ export default async function AdminInquiriesPage() {
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <p className="font-mono text-[10px] uppercase tracking-eyebrow text-gold">Customer relationship management</p>
-          <h1 className="mt-2 font-display text-2xl italic text-charcoal">CRM · Leads</h1>
+          <h1 className="mt-2 font-display text-2xl italic text-charcoal">{serviceFilter === "selection" ? "Horse search requests" : "CRM · Leads"}</h1>
         </div>
-        <p className="text-xs text-charcoal/50">Showing the latest 200 leads</p>
+        <div className="flex items-center gap-3"><p className="text-xs text-charcoal/50">Showing the latest 200 {serviceFilter === "selection" ? "horse search requests" : "leads"}</p>{serviceFilter && <a href="/en/admin/inquiries" className="text-xs text-gold underline">View all leads</a>}</div>
       </div>
 
       <div className="mt-8 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
@@ -78,6 +80,7 @@ export default async function AdminInquiriesPage() {
                 <p><span className="text-charcoal/40">Horse:</span> {horseName ?? inq.lookingFor ?? "—"}</p>
                 <p><span className="text-charcoal/40">Preferred contact:</span> {inq.preferredContact}</p>
                 <p><span className="text-charcoal/40">Source:</span> {inq.source}</p>
+                {inq.riderVideoUrl && <p className="sm:col-span-2"><span className="text-charcoal/40">Rider video:</span> <a href={inq.riderVideoUrl} target="_blank" rel="noreferrer" className="text-gold underline">Open rider video ↗</a></p>}
               </div>
               <p className="mt-4 whitespace-pre-wrap text-sm leading-6 text-charcoal/80">{inq.message}</p>
               {inq.notes && <p className="mt-3 border-l-2 border-gold pl-3 text-sm text-charcoal/60">Notes: {inq.notes}</p>}
