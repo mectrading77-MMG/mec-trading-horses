@@ -25,7 +25,7 @@ export default async function AdminDashboardPage({ params }: { params: { locale:
     { label: "Reserved", value: counts.reserved, href: `/${params.locale}/admin/horses?status=RESERVED` },
     { label: "Sold", value: counts.sold, href: `/${params.locale}/admin/horses?status=SOLD` },
     { label: "New inquiries", value: newInquiries, href: `/${params.locale}/admin/inquiries` },
-    { label: "New horse search requests", value: newHorseSearches, href: `/${params.locale}/admin/inquiries?service=selection` }
+    { label: "New horse search requests", value: newHorseSearches, href: `/${params.locale}/admin/inquiries?service=selection&status=NEW` }
   ];
 
   return (
