@@ -50,38 +50,58 @@ export default async function HomePage({ params }: { params: { locale: Locale } 
           </div>
         </div>
       </section>
-      <section className="relative z-10 mx-auto -mt-1 grid max-w-editorial gap-px bg-charcoal-line px-6 lg:grid-cols-3 lg:px-10">
-        {([
-          {
-            title: { en: "Buy a Horse", fr: "Acheter un cheval", ar: "شراء حصان" },
-            text: { en: "Explore our current selection of carefully presented sport horses.", fr: "Découvrez notre sélection actuelle de chevaux de sport.", ar: "اكتشف الخيول الرياضية المتاحة ضمن مجموعتنا الحالية." },
-            cta: { en: "Browse horses", fr: "Voir les chevaux", ar: "تصفح الخيول" },
-            href: `/${params.locale}/horses-for-sale`
-          },
-          {
-            title: { en: "Find Your Horse", fr: "Trouver votre cheval", ar: "ابحث عن حصانك" },
-            text: { en: "Tell us your goals, level and budget. We will help source suitable horses.", fr: "Présentez-nous vos objectifs, votre niveau et votre budget.", ar: "أخبرنا بأهدافك ومستواك وميزانيتك لنساعدك في العثور على الحصان المناسب." },
-            cta: { en: "Request a search", fr: "Demander une recherche", ar: "اطلب البحث عن حصان" },
-            href: `/${params.locale}/contact?service=selection`
-          },
-          {
-            title: { en: "Sell Your Horse", fr: "Vendre votre cheval", ar: "اعرض حصانك للبيع" },
-            text: { en: "Introduce your horse to our international network of potential buyers.", fr: "Présentez votre cheval à notre réseau international d'acheteurs.", ar: "اعرض حصانك على شبكة المشترين الدوليين لدينا." },
-            cta: { en: "Discuss a sale", fr: "Parler d'une vente", ar: "ناقش عملية البيع" },
-            href: `/${params.locale}/contact?service=sales`
-          }
-        ] as const).map((item, index) => (
-          <Link key={item.title.en} href={item.href} className="group flex min-h-[220px] flex-col justify-between bg-[#f5f2eb] p-7 transition-colors duration-300 hover:bg-white sm:p-9">
+      <section aria-label="MEC Horses services" className="relative z-10 border-y border-[#d8d1c4] bg-[#eae6dc] px-5 py-12 sm:px-8 sm:py-16 lg:px-10">
+        <div className="mx-auto max-w-editorial">
+          <div className="mb-7 flex flex-col gap-3 sm:mb-9 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#9a7837]">0{index + 1} / MEC HORSES</span>
-              <h2 className="mt-4 font-display text-2xl italic text-charcoal sm:text-3xl">{item.title[params.locale]}</h2>
-              <p className="mt-3 max-w-sm text-sm leading-relaxed text-charcoal/65">{item.text[params.locale]}</p>
+              <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-[#9a7837]">
+                {({ en: "How we can help", fr: "Nos services", ar: "كيف نساعدك" } as Record<Locale, string>)[params.locale]}
+              </p>
+              <h2 className="mt-3 max-w-xl font-display text-3xl italic leading-tight text-charcoal sm:text-4xl">
+                {({ en: "Your next step in sport horses.", fr: "Votre projet équestre, notre expertise.", ar: "خطوتك القادمة في عالم الخيول الرياضية." } as Record<Locale, string>)[params.locale]}
+              </h2>
             </div>
-            <span className="mt-7 inline-flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.16em] text-charcoal transition-colors group-hover:text-[#9a7837]">
-              {item.cta[params.locale]} <span aria-hidden="true" className="text-lg transition-transform group-hover:translate-x-1">→</span>
-            </span>
-          </Link>
-        ))}
+            <p className="max-w-xs text-sm leading-relaxed text-charcoal/60">
+              {({ en: "From finding the right partner to presenting your horse internationally.", fr: "De la recherche du bon cheval à sa présentation sur la scène internationale.", ar: "من العثور على الحصان المناسب إلى تقديم خيلك للمشترين حول العالم." } as Record<Locale, string>)[params.locale]}
+            </p>
+          </div>
+          <div className="grid gap-3 md:grid-cols-3">
+            {([
+              {
+                title: { en: "Buy a Horse", fr: "Acheter un cheval", ar: "شراء حصان" },
+                text: { en: "Explore our current selection of carefully presented sport horses.", fr: "Découvrez notre sélection actuelle de chevaux de sport.", ar: "اكتشف الخيول الرياضية المتاحة ضمن مجموعتنا الحالية." },
+                cta: { en: "Browse horses", fr: "Voir les chevaux", ar: "تصفح الخيول" },
+                href: `/${params.locale}/horses-for-sale`
+              },
+              {
+                title: { en: "Find Your Horse", fr: "Trouver votre cheval", ar: "ابحث عن حصانك" },
+                text: { en: "Tell us your goals, level and budget. We will help source suitable horses.", fr: "Présentez-nous vos objectifs, votre niveau et votre budget.", ar: "أخبرنا بأهدافك ومستواك وميزانيتك لنساعدك في العثور على الحصان المناسب." },
+                cta: { en: "Request a search", fr: "Demander une recherche", ar: "اطلب البحث عن حصان" },
+                href: `/${params.locale}/contact?service=selection`
+              },
+              {
+                title: { en: "Sell Your Horse", fr: "Vendre votre cheval", ar: "اعرض حصانك للبيع" },
+                text: { en: "Introduce your horse to our international network of potential buyers.", fr: "Présentez votre cheval à notre réseau international d'acheteurs.", ar: "اعرض حصانك على شبكة المشترين الدوليين لدينا." },
+                cta: { en: "Discuss a sale", fr: "Parler d'une vente", ar: "ناقش عملية البيع" },
+                href: `/${params.locale}/contact?service=sales`
+              }
+            ] as const).map((item, index) => (
+              <Link key={item.title.en} href={item.href} className="group relative flex min-h-[205px] flex-col justify-between overflow-hidden border border-[#d8d1c4] border-t-2 border-t-[#b08d57] bg-[#f7f4ed] p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#b08d57] hover:bg-white sm:p-7">
+                <div>
+                  <div className="flex items-center justify-between">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#9a7837]">0{index + 1} / MEC HORSES</span>
+                    <span aria-hidden="true" className="font-display text-3xl italic text-[#b08d57]/35">0{index + 1}</span>
+                  </div>
+                  <h3 className="mt-4 font-display text-2xl italic leading-tight text-charcoal sm:text-[1.7rem]">{item.title[params.locale]}</h3>
+                  <p className="mt-2 max-w-sm text-[13px] leading-relaxed text-charcoal/65 sm:text-sm">{item.text[params.locale]}</p>
+                </div>
+                <span className="mt-6 inline-flex items-center gap-3 border-t border-[#d8d1c4] pt-4 font-mono text-[10px] uppercase tracking-[0.15em] text-charcoal transition-colors group-hover:text-[#9a7837]">
+                  {item.cta[params.locale]} <span aria-hidden="true" className="text-lg transition-transform group-hover:translate-x-1">→</span>
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
       </section>
 
       <section className="bg-charcoal py-20 text-ivory sm:py-24">
