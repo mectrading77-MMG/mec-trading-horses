@@ -132,6 +132,7 @@ export default async function HorseDetailPage({
                     horseId={horse.id}
                     inline
                     label={params.locale === "fr" ? "Ajouter aux favoris" : params.locale === "ar" ? "أضف إلى المفضلة" : "Add to favorites"}
+                    removeLabel={params.locale === "fr" ? "Retirer des favoris" : params.locale === "ar" ? "إزالة من المفضلة" : "Remove from favorites"}
                   />
                   <ShareHorseButton
                     title={t.name}
