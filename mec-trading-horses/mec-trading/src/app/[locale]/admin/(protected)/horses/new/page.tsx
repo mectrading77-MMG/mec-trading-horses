@@ -36,9 +36,11 @@ export default function NewHorsePage() {
     const form = new FormData(formElement);
     const photos = Array.from((formElement.elements.namedItem("photos") as HTMLInputElement | null)?.files ?? []);
     const videos = Array.from((formElement.elements.namedItem("videos") as HTMLInputElement | null)?.files ?? []);
+    const xrays = Array.from((formElement.elements.namedItem("xrays") as HTMLInputElement | null)?.files ?? []);
     const files = [
       ...photos.map((file) => ({ file, type: "PHOTO" as const })),
-      ...videos.map((file) => ({ file, type: "VIDEO_GENERAL" as const }))
+      ...videos.map((file) => ({ file, type: "VIDEO_GENERAL" as const })),
+      ...xrays.map((file) => ({ file, type: "XRAY" as const }))
     ];
     const maxBytes = 100 * 1024 * 1024;
     const oversized = files.find(({ file }) => file.size > maxBytes);
@@ -49,7 +51,7 @@ export default function NewHorsePage() {
     }
     const payload: Record<string, FormDataEntryValue | boolean> = Object.fromEntries(
       Array.from(form.entries()).filter(([key, value]) =>
-        !["photos", "videos", "documents"].includes(key) && !(value instanceof File)
+        !["photos", "videos", "xrays", "documents"].includes(key) && !(value instanceof File)
       )
     );
     const heightMeters = String(payload.heightCm ?? "").trim();
@@ -199,7 +201,7 @@ export default function NewHorsePage() {
         </section>
 
         <section className="border border-charcoal-line bg-white p-5">
-          <h2 className="font-display text-lg italic text-charcoal">Horse Photos & Videos</h2>
+          <h2 className="font-display text-lg italic text-charcoal">Horse Photos, Videos & X-rays</h2>
           <p className="mt-1 text-xs text-charcoal/55">Select files directly from your device. They will upload to the media store and be attached to this horse after it is created.</p>
           <div className="mt-4 grid gap-5 sm:grid-cols-2">
             <Field label="Photos (JPG, PNG, WebP, AVIF)">
@@ -207,6 +209,9 @@ export default function NewHorsePage() {
             </Field>
             <Field label="Videos (MP4, WebM, MOV)">
               <input type="file" name="videos" multiple accept="video/mp4,video/webm,video/quicktime" className={inputClass} />
+            </Field>
+            <Field label="X-rays (JPG, PNG, WebP, AVIF)">
+              <input type="file" name="xrays" multiple accept="image/jpeg,image/png,image/webp,image/avif" className={inputClass} />
             </Field>
           </div>
           <p className="mt-3 text-xs text-charcoal/45">Maximum 100 MB per file. Keep this page open until the upload finishes.</p>

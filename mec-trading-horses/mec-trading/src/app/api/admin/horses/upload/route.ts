@@ -6,7 +6,7 @@ import { db } from "@/lib/db";
 
 const ClientPayloadSchema = z.object({
   horseSlug: z.string().min(1).max(120),
-  type: z.enum(["PHOTO", "VIDEO_GENERAL", "VIDEO_COMPETITION", "VIDEO_TRAINING"]),
+  type: z.enum(["PHOTO", "XRAY", "VIDEO_GENERAL", "VIDEO_COMPETITION", "VIDEO_TRAINING"]),
   alt: z.string().max(300).optional()
 });
 
@@ -45,7 +45,7 @@ export async function POST(request: NextRequest) {
         if (!horse) throw new Error("Horse not found");
 
         return {
-          allowedContentTypes: parsed.data.type === "PHOTO" ? IMAGE_TYPES : VIDEO_TYPES,
+          allowedContentTypes: parsed.data.type === "PHOTO" || parsed.data.type === "XRAY" ? IMAGE_TYPES : VIDEO_TYPES,
           maximumSizeInBytes: 100 * 1024 * 1024,
           addRandomSuffix: true,
           tokenPayload: JSON.stringify({

@@ -75,7 +75,7 @@ export async function PATCH(request: NextRequest) {
     mediaAction: z.enum(["add", "delete"]),
     horseSlug: z.string().min(1),
     mediaId: z.string().optional(),
-    type: z.enum(["PHOTO", "VIDEO_GENERAL", "VIDEO_COMPETITION", "VIDEO_TRAINING"]).optional(),
+    type: z.enum(["PHOTO", "XRAY", "VIDEO_GENERAL", "VIDEO_COMPETITION", "VIDEO_TRAINING"]).optional(),
     url: z.string().url().optional(),
     alt: z.string().optional(),
     isCover: z.boolean().optional()

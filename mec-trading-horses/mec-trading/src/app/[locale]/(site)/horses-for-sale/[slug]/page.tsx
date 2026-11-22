@@ -232,6 +232,16 @@ export default async function HorseDetailPage({
             {/* Health & documents */}
             <section className="mt-14">
               <SectionHeading eyebrow={dict.detail.healthDocuments} title="" />
+              {horse.media.some((item) => item.type === "XRAY") && (
+                <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3">
+                  {horse.media.filter((item) => item.type === "XRAY").map((item, index) => (
+                    <a key={`${item.url}-${index}`} href={item.url} target="_blank" rel="noreferrer" className="group block overflow-hidden border border-charcoal-line bg-charcoal p-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold">
+                      <img src={item.url} alt={item.alt || `X-ray ${index + 1}`} className="h-44 w-full object-contain transition-transform group-hover:scale-[1.02]" />
+                      <span className="mt-2 block text-center font-mono text-[10px] uppercase tracking-eyebrow text-ivory/80">Open full size · X-ray {index + 1}</span>
+                    </a>
+                  ))}
+                </div>
+              )}
               {horse.xrays && (
                 <div className="mt-8">
                   <XrayViewer set={horse.xrays} dict={dict} locale={params.locale} />
