@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 
-const statuses = ["NEW", "CONTACTED", "QUALIFIED", "HORSES_SENT", "NEGOTIATION", "VIEWING_SCHEDULED", "WON", "LOST", "CLOSED"];
+const statuses = ["NEW", "CONTACTED", "QUALIFIED", "SEARCHING", "HORSES_SENT", "NEGOTIATION", "VIEWING_SCHEDULED", "WON", "LOST", "CLOSED"];
 const statusLabels: Record<string, string> = {
   NEW: "New · Received", CONTACTED: "Contacted", QUALIFIED: "Requirements confirmed",
-  HORSES_SENT: "Shortlist sent", NEGOTIATION: "Negotiation",
+  SEARCHING: "Horse search in progress", HORSES_SENT: "Shortlist sent", NEGOTIATION: "Negotiation",
   VIEWING_SCHEDULED: "Trial / viewing arranged", WON: "Completed · Horse found",
   LOST: "Closed · No agreement", CLOSED: "Archived"
 };
