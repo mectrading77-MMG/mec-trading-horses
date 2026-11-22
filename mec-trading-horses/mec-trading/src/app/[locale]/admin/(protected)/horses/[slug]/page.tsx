@@ -2,6 +2,7 @@
 import { useCallback, useEffect, useState, type FormEvent } from "react";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
+import { upload } from "@vercel/blob/client";
 import { HORSE_BREEDS, HORSE_COLOURS } from "@/lib/horse-options";
 import { HEIGHT_BANDS } from "@/lib/levels";
 const input="w-full border border-charcoal-line bg-white px-3 py-2.5 text-sm text-charcoal";
@@ -10,13 +11,44 @@ type Horse=any;
 function Field({label,children}:{label:string;children:React.ReactNode}){return <label className="block"><span className="mb-1.5 block font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/55">{label}</span>{children}</label>}
 export default function EditHorsePage(){
  const params=useParams(); const router=useRouter(); const locale=String(params?.locale??"en"); const slug=decodeURIComponent(String(params?.slug??""));
- const [horse,setHorse]=useState<Horse|null>(null); const [loading,setLoading]=useState(true); const [saving,setSaving]=useState(false); const [busy,setBusy]=useState(false); const [error,setError]=useState(""); const [url,setUrl]=useState(""); const [type,setType]=useState("PHOTO"); const [alt,setAlt]=useState("");
+ const [horse,setHorse]=useState<Horse|null>(null); const [loading,setLoading]=useState(true); const [saving,setSaving]=useState(false); const [busy,setBusy]=useState(false); const [error,setError]=useState(""); const [url,setUrl]=useState(""); const [type,setType]=useState("PHOTO"); const [alt,setAlt]=useState(""); const [uploading,setUploading]=useState(false); const [uploadProgress,setUploadProgress]=useState(0);
  const load=useCallback(async()=>{try{const r=await fetch("/api/admin/horses?slug="+encodeURIComponent(slug),{cache:"no-store"});const d=await r.json();if(!r.ok)throw new Error(d.error||"Could not load horse");setHorse(d.horses[0]);}catch(e){setError(e instanceof Error?e.message:"Could not load horse")}finally{setLoading(false)}},[slug]);
  useEffect(()=>{void load()},[load]);
  async function save(e:FormEvent<HTMLFormElement>){e.preventDefault();if(!horse)return;setSaving(true);setError("");const f=new FormData(e.currentTarget);const t=(k:string)=>String(f.get(k)??"").trim();const n=(k:string)=>t(k)===""?null:Number(t(k));const b=(k:string)=>f.get(k)==="on";
  const heightMetres=n("heightCm");
  const payload={horseSlug:horse.slug,nameEn:t("nameEn"),breed:t("breed"),sex:t("sex"),dateOfBirth:t("dateOfBirth"),heightCm:heightMetres===null?null:Math.round(heightMetres*100),color:t("color"),jumpHeightCm:t("jumpHeightCm")==="YOUNG_HORSE"?80:n("jumpHeightCm"),isYoungHorse:t("jumpHeightCm")==="YOUNG_HORSE",maxHeightJumpedCm:n("maxHeightJumpedCm"),competitionLevel:t("competitionLevel"),priceAmount:n("priceAmount"),priceCurrency:t("priceCurrency"),priceOnRequest:b("priceOnRequest"),status:t("status"),locationLabel:t("locationLabel"),registrationNo:t("registrationNo"),passportNo:t("passportNo"),sireName:t("sireName"),damName:t("damName"),sireSireName:t("sireSireName"),damSireName:t("damSireName"),positioning:t("positioning"),personality:t("personality"),training:t("training"),strengths:t("strengths"),experience:t("experience"),suitability:t("suitability"),potential:t("potential"),idealRider:t("idealRider"),featuredOnHome:b("featuredOnHome"),documentsPublic:b("documentsPublic"),trustVetDocs:b("trustVetDocs"),trustXrays:b("trustXrays"),trustPedigreeDocs:b("trustPedigreeDocs"),trustTransport:b("trustTransport")};
  try{const r=await fetch("/api/admin/horses",{method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});const d=await r.json();if(!r.ok)throw new Error(typeof d.error==="string"?d.error:"Could not save");router.push(`/${locale}/admin/horses`);router.refresh()}catch(e){setError(e instanceof Error?e.message:"Could not save")}finally{setSaving(false)}}
+ async function uploadLocalFiles(e:FormEvent<HTMLFormElement>){
+  e.preventDefault();
+  if(!horse||uploading)return;
+  const form=e.currentTarget;
+  const picker=form.elements.namedItem("localFiles") as HTMLInputElement|null;
+  const files=Array.from(picker?.files??[]);
+  if(files.length===0){setError("Choose at least one file to upload.");return;}
+  const maxBytes=100*1024*1024;
+  const invalid=files.find(file=>file.size>maxBytes);
+  if(invalid){setError(`${invalid.name} exceeds the 100 MB per-file limit.`);return;}
+  setUploading(true);setUploadProgress(0);setError("");
+  try{
+   for(let index=0;index<files.length;index++){
+    const file=files[index];
+    const blob=await upload(file.name,file,{
+     access:"public",
+     handleUploadUrl:"/api/admin/horses/upload",
+     clientPayload:JSON.stringify({horseSlug:horse.slug,type,alt:alt.trim()}),
+     onUploadProgress:({percentage})=>setUploadProgress(Math.round(((index+percentage/100)/files.length)*100))
+    });
+    const response=await fetch("/api/admin/horses",{
+     method:"PATCH",headers:{"Content-Type":"application/json"},
+     body:JSON.stringify({mediaAction:"add",horseSlug:horse.slug,type,url:blob.url,alt:alt.trim()||undefined})
+    });
+    const data=await response.json();
+    if(!response.ok)throw new Error(typeof data.error==="string"?data.error:`Could not save ${file.name} to this horse`);
+   }
+   form.reset();setAlt("");await load();setUploadProgress(100);
+  }catch(error){setError(error instanceof Error?error.message:"File upload failed");}
+  finally{setUploading(false);}
+ }
  async function mediaAction(action:"add"|"delete",item?:Media){if(!horse)return;if(action==="delete"&&!window.confirm("Remove this media item?"))return;setBusy(true);setError("");try{const r=await fetch("/api/admin/horses",{method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify(action==="add"?{mediaAction:"add",horseSlug:horse.slug,type,url:url.trim(),alt:alt.trim()||undefined}:{mediaAction:"delete",horseSlug:horse.slug,mediaId:item?.id})});const d=await r.json();if(!r.ok)throw new Error(d.error||"Media update failed");setUrl("");setAlt("");await load()}catch(e){setError(e instanceof Error?e.message:"Media update failed")}finally{setBusy(false)}}
  if(loading)return <p className="py-10">Loading horse…</p>;
  if(!horse)return <div><p className="text-red-700">{error||"Horse not found"}</p><Link href={`/${locale}/admin/horses`}>Back to horses</Link></div>;
@@ -40,8 +72,15 @@ export default function EditHorsePage(){
  </div></section>
  <section className="border border-charcoal-line bg-white p-5"><h2 className="mb-4 font-display text-lg italic">English description</h2><div className="grid gap-4 sm:grid-cols-2">{[["positioning","Positioning"],["personality","Personality"],["training","Training"],["strengths","Strengths"],["experience","Experience"],["suitability","Suitability"],["potential","Potential"],["idealRider","Ideal rider"]].map(([k,label])=><Field key={k} label={label}><textarea name={k} rows={3} defaultValue={en?.[k]??""} className={input}/></Field>)}</div></section>
  <button disabled={saving} className="bg-charcoal px-8 py-3 font-mono text-[11px] uppercase tracking-eyebrow text-ivory disabled:opacity-50">{saving?"Saving…":"Save changes"}</button></form>
- <section className="mt-10 border border-charcoal-line bg-white p-5"><h2 className="font-display text-xl italic">Photos & videos</h2><p className="mt-2 text-sm text-charcoal/60">Add media using a direct, publicly accessible URL; remove existing items below. Local-file upload is not configured yet.</p>
- <form onSubmit={e=>{e.preventDefault();void mediaAction("add")}} className="mt-4 grid gap-3 sm:grid-cols-2"><Field label="Media URL"><input required type="url" value={url} onChange={e=>setUrl(e.target.value)} placeholder="https://…" className={input}/></Field><Field label="Type"><select value={type} onChange={e=>setType(e.target.value)} className={input}><option value="PHOTO">Photo</option><option value="VIDEO_GENERAL">General video</option><option value="VIDEO_COMPETITION">Competition video</option><option value="VIDEO_TRAINING">Training video</option></select></Field><Field label="Alt text"><input value={alt} onChange={e=>setAlt(e.target.value)} className={input}/></Field><div className="flex items-end"><button disabled={busy} className="bg-charcoal px-5 py-2.5 text-xs text-ivory disabled:opacity-50">{busy?"Working…":"Add media"}</button></div></form>
+ <section className="mt-10 border border-charcoal-line bg-white p-5"><h2 className="font-display text-xl italic">Photos & videos</h2><p className="mt-2 text-sm text-charcoal/60">Upload photos and videos directly from your device. Files are stored in MEC HORSES media storage and linked to this horse.</p>
+ <form onSubmit={uploadLocalFiles} className="mt-4 grid gap-3 border border-charcoal-line bg-ivory-dim p-4 sm:grid-cols-2">
+ <Field label="Choose files from your device"><input required multiple name="localFiles" type="file" accept={type==="PHOTO"?"image/jpeg,image/png,image/webp,image/avif":"video/mp4,video/webm,video/quicktime"} className={input}/></Field>
+ <Field label="Media type"><select value={type} onChange={e=>setType(e.target.value)} className={input}><option value="PHOTO">Photo</option><option value="VIDEO_GENERAL">General video</option><option value="VIDEO_COMPETITION">Competition video</option><option value="VIDEO_TRAINING">Training video</option></select></Field>
+ <Field label="Alt text (optional)"><input value={alt} onChange={e=>setAlt(e.target.value)} className={input}/></Field>
+ <div className="flex items-end"><button disabled={uploading} className="bg-charcoal px-5 py-2.5 text-xs text-ivory disabled:opacity-50">{uploading?`Uploading ${uploadProgress}%…`:"Upload selected files"}</button></div>
+ {uploading&&<div className="sm:col-span-2"><div className="h-2 overflow-hidden bg-charcoal/10"><div className="h-full bg-[#B08D57] transition-all" style={{width:`${uploadProgress}%`}}/></div><p className="mt-1 text-xs text-charcoal/55">{uploadProgress}% uploaded</p></div>}
+ <p className="sm:col-span-2 text-xs text-charcoal/45">Images: JPG, PNG, WebP, AVIF. Videos: MP4, WebM, MOV. Maximum 100 MB per file.</p>
+ </form>
  <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">{horse.media.map((m:Media)=><div key={m.id} className="border border-charcoal-line p-3">{m.type==="PHOTO"?<img src={m.url} alt={m.alt??""} className="h-36 w-full object-cover"/>:<div className="flex h-36 items-center justify-center bg-ivory-dim text-sm">{m.type.replaceAll("_"," ")}</div>}<p className="mt-2 truncate text-xs text-charcoal/60">{m.url}</p><button type="button" disabled={busy} onClick={()=>void mediaAction("delete",m)} className="mt-2 text-xs text-red-700 underline">Remove</button></div>)}</div>
  </section></div>
 }
