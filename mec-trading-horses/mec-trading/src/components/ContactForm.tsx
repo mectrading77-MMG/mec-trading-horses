@@ -57,7 +57,8 @@ export default function ContactForm({
   };
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [draftLoaded, setDraftLoaded] = useState(false);
-  const [messageEdited, setMessageEdited] = useState(false);\n  const [handoffMethod, setHandoffMethod] = useState<"email" | "whatsapp" | "">("");
+  const [messageEdited, setMessageEdited] = useState(false);
+  const [handoffMethod, setHandoffMethod] = useState<"email" | "whatsapp" | "">("");
   const [service, setService] = useState(initialService);
   useEffect(() => {
     if (initialService) {
@@ -142,8 +143,33 @@ export default function ContactForm({
         })
       });
       if (!response.ok) throw new Error("Could not save inquiry");
+
+      const contactMessage = [
+        "MEC HORSES — Horse search request",
+        `Name: ${payload.name}`,
+        `Email: ${payload.email}`,
+        `Phone: ${payload.phone}`,
+        `Country: ${countryLabel(String(payload.country ?? ""))}`,
+        `Service: ${payload.service}`,
+        `Horse: ${payload.lookingFor || "Not listed"}`,
+        `Requirements: ${payload.message}`,
+        riderVideoUrl ? `Rider video: ${riderVideoUrl}` : ""
+      ].filter(Boolean).join("\\n");
+
+      // A saved lead is not a sent message. Open the chosen app for the user to send.
+      if (sendMethod === "whatsapp") {
+        window.location.href = `https://wa.me/33618313530?text=${encodeURIComponent(contactMessage)}`;
+        return;
+      }
+      if (sendMethod === "email") {
+        window.location.href = `mailto:sales@mechorses.com?subject=${encodeURIComponent("MEC HORSES — Horse search request")}&body=${encodeURIComponent(contactMessage)}`;
+        setHandoffMethod("email");
+        setStatus("sent");
+        return;
+      }
       setStatus("sent");
-    } catch {
+    } catch (error) {
+      console.error("Horse search request submission failed:", error);
       setStatus("error");
     }
   }
