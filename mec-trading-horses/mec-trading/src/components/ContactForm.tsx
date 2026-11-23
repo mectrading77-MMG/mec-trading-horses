@@ -154,7 +154,7 @@ export default function ContactForm({
         `Horse: ${payload.lookingFor || "Not listed"}`,
         `Requirements: ${payload.message}`,
         riderVideoUrl ? `Rider video: ${riderVideoUrl}` : ""
-      ].filter(Boolean).join("\\n");
+      ].filter(Boolean).join(String.fromCharCode(10));
 
       // A saved lead is not a sent message. Open the chosen app for the user to send.
       if (sendMethod === "whatsapp") {
@@ -294,9 +294,7 @@ export default function ContactForm({
           </span>
         </div>
       )}
-      <textarea required name="message" rows={4} value={messageText} onFocus={() => {
-        if (service === "selection" && messageText.trim()) setMessageText("");
-      }} onChange={(e) => setMessageText(e.target.value)} placeholder={dict.form.message} className={inputClass} />
+      <textarea required name="message" rows={4} value={messageText} onChange={(e) => { setMessageEdited(true); setMessageText(e.target.value); }} placeholder={dict.form.message} className={inputClass} />
       {service === "selection" && (
         <div className="grid gap-2">
           <label className="text-sm font-medium text-charcoal">{locale === "ar" ? "فيديو للراكب (موصى به)" : locale === "fr" ? "Vidéo du cavalier (recommandée)" : "Rider video (Recommended)"}</label>
