@@ -60,17 +60,6 @@ export default function ContactForm({
   const [messageEdited, setMessageEdited] = useState(false);
   const [handoffMethod, setHandoffMethod] = useState<"email" | "whatsapp" | "">("");
   const [service, setService] = useState(initialService);
-  useEffect(() => {
-    if (initialService) {
-      window.localStorage.setItem("mec-contact-service", initialService);
-      setService(initialService);
-      return;
-    }
-    const savedService = window.localStorage.getItem("mec-contact-service");
-    if (savedService && SERVICE_KEYS.includes(savedService as (typeof SERVICE_KEYS)[number])) {
-      setService(savedService);
-    }
-  }, [initialService]);
   const [selectedHorse, setSelectedHorse] = useState(initialService === "selection" ? "Not listed" : "");
   const [viewingDate, setViewingDate] = useState("");
   const [phone, setPhone] = useState("");
@@ -108,6 +97,12 @@ export default function ContactForm({
       service, selectedHorse, country, phone, sendMethod, messageText, messageEdited
     }));
   }, [draftLoaded, service, selectedHorse, country, phone, sendMethod, messageText, messageEdited]);
+
+  useEffect(() => {
+    if (draftLoaded && service === "selection" && !messageEdited) {
+      setMessageText(defaultSelectionMessage[locale]);
+    }
+  }, [locale, service, messageEdited, draftLoaded]);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -294,7 +289,19 @@ export default function ContactForm({
           </span>
         </div>
       )}
-      <textarea required name="message" rows={4} value={messageText} onChange={(e) => { setMessageEdited(true); setMessageText(e.target.value); }} placeholder={dict.form.message} className={inputClass} />
+      <div className="grid gap-2">
+        <textarea required name="message" rows={4} value={messageText} onFocus={() => {
+          if (service === "selection" && !messageEdited && messageText === defaultSelectionMessage[locale]) {
+            setMessageText("");
+            setMessageEdited(true);
+          }
+        }} onChange={(e) => { setMessageEdited(true); setMessageText(e.target.value); }} placeholder={dict.form.message} className={inputClass} />
+        {service === "selection" && messageEdited && (
+          <button type="button" onClick={() => { setMessageEdited(false); setMessageText(defaultSelectionMessage[locale]); }} className="justify-self-start text-xs text-gold underline">
+            {locale === "ar" ? "استعادة الرسالة التلقائية" : locale === "fr" ? "Rétablir le message automatique" : "Restore automatic message"}
+          </button>
+        )}
+      </div>
       {service === "selection" && (
         <div className="grid gap-2">
           <label className="text-sm font-medium text-charcoal">{locale === "ar" ? "فيديو للراكب (موصى به)" : locale === "fr" ? "Vidéo du cavalier (recommandée)" : "Rider video (Recommended)"}</label>
