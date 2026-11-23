@@ -36,26 +36,18 @@ export default async function ContactPage({ params, searchParams }: { params: { 
   };
   const label = labels[params.locale] ?? labels.en;
 
+  const serviceKeys = ["selection", "sales", "prePurchase", "vetCoordination", "documentation", "transport", "export", "viewing", "afterSale", "trainingCamp", "valorization"] as const;
   const requestedService = searchParams?.service;
-  const initialService = requestedService && [
-    "selection",
-    "sales",
-    "prePurchase",
-    "vetCoordination",
-    "documentation",
-    "transport",
-    "export",
-    "viewing",
-    "afterSale"
-  ].includes(requestedService) ? requestedService : "";
+  const initialService = requestedService && serviceKeys.includes(requestedService as (typeof serviceKeys)[number]) ? requestedService : "";
+  const selectedService = initialService ? dict.services.list[initialService as keyof typeof dict.services.list] : null;
 
   return (
     <div className="mx-auto max-w-editorial px-6 py-16 lg:px-10">
-      <SectionHeading eyebrow={dict.contact.eyebrow} title={dict.contact.title} />
-      <p className="mt-4 max-w-lg text-charcoal/70">{dict.contact.text}</p>
+      <SectionHeading eyebrow={selectedService ? dict.services.eyebrow : dict.contact.eyebrow} title={selectedService ? selectedService.title : dict.contact.title} />
+      <p className="mt-4 max-w-2xl text-charcoal/70">{selectedService ? selectedService.text : dict.contact.text}</p>
 
-      <div className="mt-12 grid gap-12 lg:grid-cols-[1fr_1.2fr]">
-        <div className="space-y-6">
+      <div className={`mt-12 grid gap-12 ${selectedService ? "lg:grid-cols-1" : "lg:grid-cols-[1fr_1.2fr]"}`}>
+        {!selectedService && <div className="space-y-6">
           <div>
             <p className="font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/40">{label.email}</p>
             <a href="mailto:sales@mechorses.com" className="text-charcoal">sales@mechorses.com</a>
@@ -69,8 +61,8 @@ export default async function ContactPage({ params, searchParams }: { params: { 
             <p className="text-charcoal">La Chapelle-des-Fougeretz, Brittany, France</p>
           </div>
           <WhatsAppButton label={dict.detail.whatsapp} />
-        </div>
-        <div className="border border-charcoal-line p-6">
+        </div>}
+        <div className={`border border-charcoal-line p-6 ${selectedService ? "max-w-3xl" : ""}`}>
           <ContactForm locale={params.locale} dict={dict} horses={horseOptions} initialService={initialService} />
         </div>
       </div>
