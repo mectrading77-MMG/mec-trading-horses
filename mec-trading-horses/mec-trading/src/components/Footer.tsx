@@ -17,13 +17,13 @@ export default function Footer({ locale, dict }: { locale: Locale; dict: any }) 
       <div className="mx-auto grid max-w-editorial gap-10 px-6 py-14 sm:grid-cols-2 lg:grid-cols-[1.35fr_0.8fr_1fr_0.9fr] lg:gap-12 lg:px-10 lg:py-16">
         <div>
           <Logo variant="full" onDark className="!h-24" />
-          <p className="mt-4 max-w-sm text-sm leading-7 text-ivory/60">{dict.brand.tagline}</p>
+          <p className="mt-3 max-w-sm text-[11px] leading-5 text-ivory/60">{dict.brand.tagline}</p>
           <p className="mt-3 max-w-sm text-xs leading-6 text-ivory/40">{labels.company}</p>
         </div>
 
         <div>
           <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-[#c5a875]">{labels.explore}</p>
-          <ul className="mt-5 space-y-3 text-sm text-ivory/75">
+          <ul className="mt-4 space-y-2.5 text-xs text-ivory/75">
             <li><Link className="transition-colors hover:text-[#d8bd8d]" href={`/${locale}/horses-for-sale`}>{dict.nav.horses}</Link></li>
             <li><Link className="transition-colors hover:text-[#d8bd8d]" href={`/${locale}/services`}>{dict.nav.services}</Link></li>
             <li><Link className="transition-colors hover:text-[#d8bd8d]" href={`/${locale}/about`}>{dict.nav.about}</Link></li>
@@ -32,7 +32,7 @@ export default function Footer({ locale, dict }: { locale: Locale; dict: any }) 
 
         <div>
           <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-[#c5a875]">{labels.contactTitle}</p>
-          <ul className="mt-5 space-y-3 text-sm leading-6 text-ivory/70">
+          <ul className="mt-4 space-y-2.5 text-xs leading-6 text-ivory/70">
             <li>{labels.location}</li>
             <li><a className="transition-colors hover:text-[#d8bd8d]" href="mailto:sales@mechorses.com">sales@mechorses.com</a></li>
             <li><a className="transition-colors hover:text-[#d8bd8d]" href="tel:+33618313530">+33 6 18 31 35 30</a></li>
@@ -41,7 +41,7 @@ export default function Footer({ locale, dict }: { locale: Locale; dict: any }) 
 
         <div>
           <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-[#c5a875]">{labels.social}</p>
-          <p className="mt-5 text-sm text-ivory/55">{labels.follow}</p>
+          <p className="mt-4 text-xs text-ivory/55">{labels.follow}</p>
           <div className="mt-4 flex items-center gap-3">
             <a
               aria-label="Instagram"
@@ -72,12 +72,12 @@ export default function Footer({ locale, dict }: { locale: Locale; dict: any }) 
           <p className="whitespace-nowrap text-[10px] leading-5 text-ivory/40">
             MEC Trading SAS · SIRET : 108 537 549 00017 · La Chapelle-des-Fougeretz · 35520 · France
           </p>
-          <nav aria-label={labels.legal} className="flex flex-nowrap items-center gap-x-4 whitespace-nowrap text-[11px] text-ivory/55">
+          <nav aria-label={labels.legal} className="flex flex-nowrap items-center gap-x-4 whitespace-nowrap text-[10px] text-ivory/55">
             <Link className="transition-colors hover:text-[#d8bd8d]" href={`/${locale}/legal/mentions-legales`}>{labels.mentions}</Link>
             <Link className="transition-colors hover:text-[#d8bd8d]" href={`/${locale}/legal/confidentialite`}>{labels.privacy}</Link>
             <Link className="transition-colors hover:text-[#d8bd8d]" href={`/${locale}/legal/cookies`}>{labels.cookies}</Link>
           </nav>
-          <p className="whitespace-nowrap text-[10px] text-ivory/35">© {year} MEC Horses. {dict.footer.rights}</p>
+          <p className="whitespace-nowrap text-[9px] text-ivory/35">© {year} MEC Horses. {dict.footer.rights}</p>
         </div>
       </div>
     </footer>
