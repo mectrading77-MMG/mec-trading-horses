@@ -19,16 +19,17 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // Redirect legacy German and Dutch routes to the English equivalent.
-  if (/^\/(de|nl)(?=\/|$)/.test(pathname)) {
+  const firstSegment = pathname.split("/").filter(Boolean)[0] ?? "";
+  const hasLocale = locales.includes(firstSegment as (typeof locales)[number]);
+
+  // Never expose unsupported language prefixes as page roots.
+  // Drop an unsupported two-letter language prefix and serve the English route.
+  if (!hasLocale && /^[a-z]{2}$/i.test(firstSegment)) {
     const url = request.nextUrl.clone();
-    url.pathname = pathname.replace(/^\/(de|nl)(?=\/|$)/, "/en");
+    const remainingPath = pathname.replace(/^\/[a-z]{2}(?=\/|$)/i, "");
+    url.pathname = `/${defaultLocale}${remainingPath}`;
     return NextResponse.redirect(url, 308);
   }
-
-  const hasLocale = locales.some(
-    (locale) => pathname === "/" + locale || pathname.startsWith("/" + locale + "/")
-  );
 
   if (!hasLocale) {
     const url = request.nextUrl.clone();
