@@ -197,43 +197,6 @@
         "title": "Vente de chevaux",
         "text": "Chaque cheval de notre sélection est proposé directement, sans intermédiaire de type marketplace."
       },
-      "prePurchase": {
-        "title": "Accompagnement pré-achat",
-        "text": "Nous coordonnons la visite vétérinaire indépendante et en expliquons clairement les résultats."
-      },
-      "vetCoordination": {
-        "title": "Coordination vétérinaire",
-        "text": "Cliniques, calendrier et déplacements organisés autour de votre emploi du temps."
-      },
-      "documentation": {
-        "title": "Documentation",
-        "text": "Passeports, immatriculation et changement de propriétaire traités correctement dès la première fois."
-      },
-      "transport": {
-        "title": "Transport international",
-        "text": "Transport routier et aérien organisé de porte à porte."
-      },
-      "export": {
-        "title": "Assistance export",
-        "text": "Douanes, certificats sanitaires et réglementations d'importation gérés pour vous."
-      },
-      "viewing": {
-        "title": "Rendez-vous de visite",
-        "text": "En personne ou par appel vidéo en direct, au moment qui vous convient."
-      },
-      "afterSale": {
-        "title": "Suivi après-vente",
-        "text": "Nous restons disponibles longtemps après l'arrivée du cheval."
-      },
-      "trainingCamp": {
-        "title": "Stage d’entraînement",
-        "text": "Des stages structurés pour développer les capacités, la condition physique et la préparation à la compétition de votre cheval."
-      },
-      "valorization": {
-        "title": "Valorisation du cheval",
-        "text": "Nous vous aidons à révéler et développer le potentiel sportif de votre cheval afin de mieux le présenter et valoriser."
-      }
-    }
   },
   "contact": {
     "title": "Contact",
