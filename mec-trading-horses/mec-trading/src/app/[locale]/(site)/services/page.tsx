@@ -12,9 +12,9 @@ export async function generateMetadata({ params }: { params: { locale: Locale } 
     ar: "خدمات شراء وبيع خيول قفز الحواجز",
   };
   const descriptions: Record<Locale, string> = {
-    en: "Explore MEC Horses services: horse sourcing and sales, pre-purchase veterinary checks, viewings, transport and export assistance from France.",
-    fr: "Découvrez nos services : recherche et vente de chevaux, visite vétérinaire avant achat, essais, transport et accompagnement à l’export depuis la France.",
-    ar: "اكتشف خدمات MEC Horses في البحث عن الخيول وبيعها والفحوص البيطرية قبل الشراء والمعاينة والنقل والتصدير من فرنسا.",
+    en: "Explore MEC HORSES services: horse sourcing and sales, veterinary coordination, training, horse valorization and international transport from France.",
+    fr: "Découvrez nos services : recherche et vente de chevaux, coordination vétérinaire, stages d’entraînement, valorisation et transport international depuis la France.",
+    ar: "اكتشف خدمات MEC HORSES في البحث عن الخيول وبيعها والتنسيق البيطري والتدريب وتطوير الخيل والنقل الدولي من فرنسا.",
   };
   return { title: titles[params.locale], description: descriptions[params.locale], alternates: localizedAlternates(params.locale, "/services") };
 }
