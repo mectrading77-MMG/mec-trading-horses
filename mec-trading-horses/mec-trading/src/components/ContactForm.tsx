@@ -15,7 +15,9 @@ const SERVICE_KEYS = [
   "transport",
   "export",
   "viewing",
-  "afterSale"
+  "afterSale",
+  "trainingCamp",
+  "valorization"
 ] as const;
 
 const COUNTRY_CODES = [
