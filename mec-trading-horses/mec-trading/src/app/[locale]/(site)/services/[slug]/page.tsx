@@ -78,7 +78,7 @@ export default async function ServiceDetailPage({params}:{params:{locale:Locale;
  return <main className="mx-auto max-w-editorial px-6 py-14 lg:px-10" dir={params.locale==="ar"?"rtl":"ltr"}>
   <Link href={`/${params.locale}/services`} className="font-mono text-[10px] uppercase tracking-[.18em] text-charcoal/50 hover:text-gold">← {dict.services.title}</Link>
   <section className="mt-8 border-y border-charcoal-line py-12 lg:py-16">
-   <p className="font-mono text-[10px] uppercase tracking-[.2em] text-gold">MEC HORSES · {dict.services.eyebrow??dict.services.title}</p>
+   <p className="font-mono text-[10px] uppercase tracking-[.2em] text-gold">MEC HORSES · {dict.services.title}</p>
    <h1 className="mt-4 max-w-3xl font-display text-4xl italic leading-tight text-charcoal md:text-6xl">{item.title}</h1>
    <p className="mt-5 max-w-2xl text-lg text-charcoal/70">{item.intro}</p>
    <p className="mt-7 max-w-3xl leading-8 text-charcoal/70">{item.description}</p>
