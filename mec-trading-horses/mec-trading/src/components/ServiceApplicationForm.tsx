@@ -12,12 +12,9 @@ const copy: Record<Locale, Record<string,string>> = {
 const fieldSets: Record<string,string[]> = {
   selection:["budget","level","rider","goals"],
   sales:["horse","age","breed","sex","height","pedigree","level","history","price","location","photos","videos","xray","currentOwner"],
-  prePurchase:["horse","location","dates","details"],
   vetCoordination:["horse","location","dates","details"],
   documentation:["horse","location","destination","details"],
   transport:["horse","location","destination","dates","details"],
-  export:["horse","location","destination","dates","details"],
-  viewing:["horse","location","dates","details"],
   afterSale:["horse","destination","details"],
   trainingCamp:["horse","age","level","rider","dates","goals"],
   valorization:["horse","age","breed","sex","height","pedigree","level","history","goals","photos","videos"]
