@@ -12,7 +12,6 @@ export default async function Header({ locale, dict }: { locale: Locale; dict: a
     { href: `/${locale}/horses-for-sale`, label: dict.nav.horses },
     { href: `/${locale}/about`, label: dict.nav.about },
     { href: `/${locale}/services`, label: dict.nav.services },
-    { href: `/${locale}/news`, label: dict.nav.news },
     { href: `/${locale}/contact`, label: dict.nav.contact }
   ];
 
