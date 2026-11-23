@@ -135,56 +135,6 @@ export default async function HomePage({ params }: { params: { locale: Locale } 
         </div>
       </section>
 
-      <section aria-labelledby="expertise-heading" className="border-t border-[#ddd3c2] bg-[#eee9df] py-16 sm:py-20">
-        <div className="mx-auto max-w-editorial px-5 sm:px-6 lg:px-10">
-          <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#967545]">
-                {({ en: "MEC Horses Journal", fr: "Journal MEC Horses", ar: "مجلة MEC Horses" } as Record<Locale, string>)[params.locale]}
-              </p>
-              <h2 id="expertise-heading" className="mt-3 font-display text-3xl italic text-charcoal sm:text-4xl">
-                "Expertise"
-              </h2>
-              <p className="mt-3 max-w-xl text-sm leading-relaxed text-charcoal/65">
-                {({ en: "Explore show jumping, sport horse selection and international buying guidance.", fr: "Découvrez le saut d’obstacles, la sélection de chevaux de sport et les conseils pour acheter à l’international.", ar: "اكتشف عالم قفز الحواجز واختيار الخيول الرياضية ونصائح الشراء الدولي." } as Record<Locale, string>)[params.locale]}
-              </p>
-            </div>
-            <Link href={`/${params.locale}/news`} className="inline-flex min-h-11 shrink-0 items-center gap-3 self-start border-b border-gold pb-1 font-mono text-[10px] uppercase tracking-[0.15em] text-charcoal transition-colors hover:text-gold sm:self-auto">
-              {({ en: "View all news", fr: "Toutes les actualités", ar: "عرض كل الأخبار" } as Record<Locale, string>)[params.locale]}
-              <span aria-hidden="true">→</span>
-            </Link>
-          </div>
-          <div className="mt-9 grid gap-4 md:grid-cols-3">
-            {([
-              {
-                number: "01",
-                title: { en: "Show Jumping", fr: "Saut d’obstacles", ar: "قفز الحواجز" },
-                description: { en: "Competition updates and perspectives from the equestrian world.", fr: "Actualités des compétitions et regards sur le monde équestre.", ar: "مستجدات البطولات وأخبار عالم الفروسية." }
-              },
-              {
-                number: "02",
-                title: { en: "Sport Horse Market", fr: "Marché des chevaux de sport", ar: "سوق الخيول الرياضية" },
-                description: { en: "Understand the selection process and what matters when evaluating a horse.", fr: "Comprendre la sélection et les critères essentiels pour évaluer un cheval.", ar: "تعرّف على معايير اختيار الخيل وتقييمه قبل الشراء." }
-              },
-              {
-                number: "03",
-                title: { en: "Buying Internationally", fr: "Acheter à l’international", ar: "الشراء الدولي" },
-                description: { en: "Practical guidance on veterinary checks, paperwork and transport.", fr: "Conseils pratiques sur les examens vétérinaires, les documents et le transport.", ar: "إرشادات عن الفحوص البيطرية والمستندات ونقل الخيول." }
-              }
-            ] as const).map((item) => (
-              <Link key={item.number} href={`/${params.locale}/news`} className="group flex min-h-[200px] flex-col justify-between border border-[#ddd3c2] bg-[#faf8f2] p-6 transition-colors hover:border-[#b08d57] sm:p-7">
-                <div>
-                  <span className="font-mono text-[10px] tracking-[0.2em] text-[#967545]">{item.number} / JOURNAL</span>
-                  <h3 className="mt-5 font-display text-2xl italic text-charcoal">{item.title[params.locale]}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-charcoal/65">{item.description[params.locale]}</p>
-                </div>
-                <span aria-hidden="true" className="mt-6 self-end text-xl text-gold transition-transform group-hover:translate-x-1">→</span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section className="mx-auto max-w-editorial px-6 py-12 text-center sm:py-16 lg:px-10">
         <h2 className="font-display text-3xl italic text-charcoal sm:text-4xl">{dict.home.closingTitle}</h2>
         <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
