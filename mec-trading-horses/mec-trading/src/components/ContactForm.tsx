@@ -45,7 +45,7 @@ export default function ContactForm({
   initialService?: string;
 }) {
   const ui: Record<Locale, { selectService: string; selectHorse: string; viewingDate: string; sendVia: string; email: string; whatsapp: string; error: string; name: string; country: string; phone: string; service: string; horse: string; message: string }> = {
-    en: { selectService: "{labels.selectService}", selectHorse: "{labels.selectHorse}", viewingDate: "{labels.viewingDate}", sendVia: "Send inquiry via", email: "Email", whatsapp: "WhatsApp", error: "Something went wrong — please try again or contact us directly.", name: "Name", country: "Country", phone: "Phone", service: "Service", horse: "Horse", message: "Message" },
+    en: { selectService: "Select a service", selectHorse: "Select a horse", viewingDate: "Select a viewing date", sendVia: "Send inquiry via", email: "Email", whatsapp: "WhatsApp", error: "Something went wrong — please try again or contact us directly.", name: "Name", country: "Country", phone: "Phone", service: "Service", horse: "Horse", message: "Message" },
     fr: { selectService: "Choisissez un service", selectHorse: "Choisissez un cheval", viewingDate: "Choisissez une date de visite", sendVia: "Envoyer la demande via", email: "E-mail", whatsapp: "WhatsApp", error: "Une erreur s’est produite. Réessayez ou contactez-nous directement.", name: "Nom", country: "Pays", phone: "Téléphone", service: "Service", horse: "Cheval", message: "Message" },
     ar: { selectService: "اختر الخدمة", selectHorse: "اختر حصانًا", viewingDate: "اختر موعد المعاينة", sendVia: "إرسال الاستفسار عبر", email: "البريد الإلكتروني", whatsapp: "واتساب", error: "حدث خطأ. يُرجى المحاولة مجددًا أو التواصل معنا مباشرةً.", name: "الاسم", country: "الدولة", phone: "الهاتف", service: "الخدمة", horse: "الحصان", message: "الرسالة" },
   };
@@ -149,7 +149,7 @@ export default function ContactForm({
         className={`${inputClass} appearance-none`}
       >
         <option value="" disabled>
-          Select a service
+          {labels.selectService}
         </option>
         {SERVICE_KEYS.map((key) => (
           <option key={key} value={key}>
@@ -168,7 +168,7 @@ export default function ContactForm({
           className={`${inputClass} appearance-none`}
         >
           <option value="" disabled>
-            Select a horse
+            {labels.selectHorse}
           </option>
           {horses.map((horse) => (
             <option key={horse.id} value={horse.name}>
@@ -191,7 +191,7 @@ export default function ContactForm({
           />
           {!viewingDate && (
             <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-sm text-charcoal/40">
-              Select your viewing date
+              {labels.viewingDate}
             </span>
           )}
           <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-charcoal/60">
