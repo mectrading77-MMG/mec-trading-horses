@@ -12,8 +12,8 @@ export default function Footer({ locale, dict }: { locale: Locale; dict: any }) 
   const labels = footerLabels[locale] ?? footerLabels.en;
 
   return (
-    <footer className="mt-24 border-t border-charcoal-line bg-charcoal text-ivory">
-      <div className="mx-auto grid max-w-editorial gap-10 px-6 py-16 lg:grid-cols-5 lg:px-10">
+    <footer className="mt-10 border-t border-charcoal-line bg-charcoal text-ivory">
+      <div className="mx-auto grid max-w-editorial gap-6 px-6 py-10 lg:grid-cols-5 lg:gap-8 lg:px-10">
         <div>
           <Logo variant="full" onDark className="!h-28" />
           <p className="mt-5 max-w-xs text-sm text-ivory/60">{dict.brand.tagline}</p>
@@ -21,7 +21,7 @@ export default function Footer({ locale, dict }: { locale: Locale; dict: any }) 
 
         <div>
           <p className="eyebrow">{dict.nav.horses}</p>
-          <ul className="mt-4 space-y-2 text-sm text-ivory/80">
+          <ul className="mt-3 space-y-1.5 text-sm text-ivory/80">
             <li><Link href={`/${locale}/horses-for-sale`}>{dict.nav.horses}</Link></li>
             <li><Link href={`/${locale}/services`}>{dict.nav.services}</Link></li>
             <li><Link href={`/${locale}/about`}>{dict.nav.about}</Link></li>
@@ -30,7 +30,7 @@ export default function Footer({ locale, dict }: { locale: Locale; dict: any }) 
 
         <div>
           <p className="eyebrow">{dict.nav.contact}</p>
-          <ul className="mt-4 space-y-2 text-sm text-ivory/80">
+          <ul className="mt-3 space-y-1.5 text-sm text-ivory/80">
             <li>{labels.location}</li>
             <li><a href="mailto:sales@mechorses.com">sales@mechorses.com</a></li>
             <li><a href="tel:+33618313530">+33 6 18 31 35 30</a></li>
@@ -39,7 +39,7 @@ export default function Footer({ locale, dict }: { locale: Locale; dict: any }) 
 
         <div>
           <p className="eyebrow">{labels.legal}</p>
-          <ul className="mt-4 space-y-2 text-sm text-ivory/80">
+          <ul className="mt-3 space-y-1.5 text-sm text-ivory/80">
             <li><Link href={`/${locale}/legal/mentions-legales`}>{labels.mentions}</Link></li>
             <li><Link href={`/${locale}/legal/confidentialite`}>{labels.privacy}</Link></li>
             <li><Link href={`/${locale}/legal/cookies`}>{labels.cookies}</Link></li>
@@ -48,16 +48,16 @@ export default function Footer({ locale, dict }: { locale: Locale; dict: any }) 
 
         <div>
           <p className="eyebrow">{labels.social}</p>
-          <ul className="mt-4 space-y-2 text-sm text-ivory/80">
+          <ul className="mt-3 space-y-1.5 text-sm text-ivory/80">
             <li><a href="https://instagram.com/m.e.c_horses" target="_blank" rel="noopener noreferrer">Instagram · @m.e.c_horses</a></li>
             <li><a href="https://facebook.com/MecHorses" target="_blank" rel="noopener noreferrer">Facebook · @MecHorses</a></li>
           </ul>
         </div>
       </div>
 
-      <div className="border-t border-ivory/10 px-6 py-6 lg:px-10">
-        <p className="mx-auto mt-2 max-w-editorial text-xs text-ivory/35">MEC Trading SAS · SIRET : 108 537 549 00017 · La Chapelle-des-Fougeretz, 35520, France</p>
-        <p className="mx-auto mt-2 max-w-editorial text-xs text-ivory/30">
+      <div className="border-t border-ivory/10 px-6 py-4 lg:px-10">
+        <p className="mx-auto max-w-editorial text-xs text-ivory/35">MEC Trading SAS · SIRET : 108 537 549 00017 · La Chapelle-des-Fougeretz, 35520, France</p>
+        <p className="mx-auto max-w-editorial text-xs text-ivory/30">
           © {year} MEC Horses. {dict.footer.rights}
         </p>
       </div>
