@@ -29,7 +29,8 @@ export default function ServiceApplicationForm({locale,service,serviceTitle}:Pro
   const rtl=locale==="ar";
   async function submit(e:React.FormEvent<HTMLFormElement>) {
     e.preventDefault(); setStatus("sending");
-    const form=new FormData(e.currentTarget);
+    const formElement=e.currentTarget;
+    const form=new FormData(formElement);
     const entries=Array.from(form.entries()).filter(([k])=>!["name","email","phone","country","preferredContact"].includes(k));
     const detailText=entries.map(([k,v])=>`${k}: ${String(v)}`).join("\n");
     const message=[`Service: ${serviceTitle}`,detailText].filter(Boolean).join("\n\n");
@@ -40,7 +41,7 @@ export default function ServiceApplicationForm({locale,service,serviceTitle}:Pro
         preferredContact:String(form.get("preferredContact")??"email")
       })});
       if(!res.ok) throw new Error("Submission failed");
-      setStatus("sent"); e.currentTarget.reset();
+      setStatus("sent"); formElement.reset();
     } catch { setStatus("error"); }
   }
   if(status==="sent") return <div role="status" className="border border-hunter bg-hunter/5 p-7 text-center text-sm text-hunter">{t.success}</div>;
