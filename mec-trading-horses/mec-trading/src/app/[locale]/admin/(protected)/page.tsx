@@ -11,7 +11,13 @@ export default async function AdminDashboardPage({ params }: { params: { locale:
   const [horses, newInquiries, newHorseSearches, recentHorseSearches] = await Promise.all([
     listHorses(),
     db.inquiry.count({ where: { status: "NEW" } }),
-    db.inquiry.count({ where: { service: "selection", status: "NEW" } })
+    db.inquiry.count({ where: { service: "selection", status: "NEW" } }),
+    db.inquiry.findMany({
+      where: { service: "selection" },
+      orderBy: { createdAt: "desc" },
+      take: 5,
+      select: { id: true, name: true, country: true, status: true, createdAt: true }
+    })
   ]);
 
   const counts = {
