@@ -75,18 +75,38 @@ export default async function ServiceDetailPage({params}:{params:{locale:Locale;
  const item=CONTENT[params.slug]?.[params.locale]??CONTENT[params.slug]?.en;
  if(!item) notFound();
  const dict=await getDictionary(params.locale);
- return <main className="mx-auto max-w-editorial px-6 py-14 lg:px-10" dir={params.locale==="ar"?"rtl":"ltr"}>
-  <Link href={`/${params.locale}/services`} className="font-mono text-[10px] uppercase tracking-[.18em] text-charcoal/50 hover:text-gold">← {dict.services.title}</Link>
-  <section className="mt-8 border-y border-charcoal-line py-12 lg:py-16">
-   <p className="font-mono text-[10px] uppercase tracking-[.2em] text-gold">MEC HORSES · {dict.services.title}</p>
-   <h1 className="mt-4 max-w-3xl font-display text-4xl italic leading-tight text-charcoal md:text-6xl">{item.title}</h1>
-   <p className="mt-5 max-w-2xl text-lg text-charcoal/70">{item.intro}</p>
-   <p className="mt-7 max-w-3xl leading-8 text-charcoal/70">{item.description}</p>
-   <ul className="mt-8 grid gap-3 md:grid-cols-3">{item.benefits.map((benefit)=><li key={benefit} className="border-t border-charcoal-line pt-4 text-sm leading-6 text-charcoal/75">— {benefit}</li>)}</ul>
+ return <main className="service-detail-shell" dir={params.locale==="ar"?"rtl":"ltr"}>
+  <div className="service-detail-top"><Link href={`/${params.locale}/services`} className="service-back">← {dict.services.title}</Link></div>
+  <section className="service-detail-hero">
+   <div className="service-detail-copy">
+    <p className="service-eyebrow">MEC HORSES · {dict.services.title}</p>
+    <h1>{item.title}</h1>
+    <p className="service-detail-intro">{item.intro}</p>
+    <p className="service-detail-description">{item.description}</p>
+   </div>
+   <div className="detail-arena" aria-hidden="true">
+    <div className="detail-arena-light"/>
+    <svg viewBox="0 0 560 340" className="detail-horse">
+     <g fill="currentColor" className="horse-motion">
+      <path d="M120 192 C145 158 185 142 228 145 C259 147 277 163 302 169 L347 157 L372 131 L401 126 L418 139 L405 154 L383 158 L365 185 C351 207 331 220 303 224 L280 270 L260 270 L269 218 L223 215 L194 264 L174 263 L190 205 C161 211 140 207 120 192Z"/>
+      <path d="M363 157 C350 132 344 105 356 83 C369 60 392 53 410 64 L430 82 L420 94 L402 83 C390 79 379 90 381 106 L390 137Z"/>
+      <path d="M403 65 L416 43 L422 69 M389 66 L390 42 L400 65 M147 176 L105 148 L96 157 L126 194Z M220 211 L212 282 L229 282 L248 215 M300 215 L324 278 L341 275 L330 205"/>
+     </g>
+    </svg>
+    <div className="detail-rails"><i/><i/><i/></div>
+    <span className="detail-arena-caption">WHERE CHAMPIONS CHANGE HANDS</span>
+   </div>
   </section>
-  <section id="application" className="grid gap-10 py-14 lg:grid-cols-[.8fr_1.2fr]">
-   <div><p className="font-mono text-[10px] uppercase tracking-[.2em] text-gold">{params.locale==="ar"?"طلب الخدمة":params.locale==="fr"?"Demande de service":"Service application"}</p><h2 className="mt-3 font-display text-3xl italic text-charcoal">{params.locale==="ar"?"أخبرنا بتفاصيل طلبك":params.locale==="fr"?"Parlez-nous de votre projet":"Tell us about your requirements"}</h2><p className="mt-4 text-sm leading-7 text-charcoal/60">{params.locale==="ar"?"املأ النموذج التالي وسيتواصل معك فريق MEC HORSES.":params.locale==="fr"?"Remplissez le formulaire ; l’équipe MEC HORSES vous recontactera.":"Complete the form and the MEC HORSES team will get back to you."}</p></div>
-   <div className="border border-charcoal-line p-6 md:p-8"><ServiceApplicationForm locale={params.locale} service={params.slug} serviceTitle={item.title}/></div>
+  <section className="service-benefits">
+   {item.benefits.map((benefit,i)=><div key={benefit}><span>0{i+1}</span><p>{benefit}</p></div>)}
+  </section>
+  <section id="application" className="service-application">
+   <div className="service-application-intro">
+    <p className="service-eyebrow">{params.locale==="ar"?"طلب الخدمة":params.locale==="fr"?"Demande de service":"SERVICE APPLICATION"}</p>
+    <h2>{params.locale==="ar"?"أخبرنا بتفاصيل طلبك":params.locale==="fr"?"Parlez-nous de votre projet":"Let’s plan your next move"}</h2>
+    <p>{params.locale==="ar"?"املأ النموذج التالي وسيتواصل معك فريق MEC HORSES.":params.locale==="fr"?"Remplissez le formulaire ; l’équipe MEC HORSES vous recontactera.":"Tell us what you have in mind. Our team will review your request and get back to you."}</p>
+   </div>
+   <div className="service-form-panel"><ServiceApplicationForm locale={params.locale} service={params.slug} serviceTitle={item.title}/></div>
   </section>
  </main>;
 }
