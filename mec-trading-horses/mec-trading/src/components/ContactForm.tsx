@@ -5,7 +5,7 @@ import { upload } from "@vercel/blob/client";
 import type { Locale } from "@/types/horse";
 
 const inputClass =
-  "w-full border border-charcoal-line bg-transparent px-4 py-3 text-sm text-charcoal placeholder:text-charcoal/40 focus:border-gold";
+  "w-full rounded-xl border border-charcoal-line bg-white/35 px-4 py-3 text-sm text-charcoal placeholder:text-charcoal/55 focus:border-gold";
 
 const SERVICE_KEYS = [
   "selection",
@@ -68,7 +68,7 @@ export default function ContactForm({
   const [viewingDate, setViewingDate] = useState("");
   const [phone, setPhone] = useState("");
   const [country, setCountry] = useState("");
-  const [sendMethod, setSendMethod] = useState<"email" | "whatsapp" | "">("");
+  const [sendMethod, setSendMethod] = useState<"email" | "whatsapp" | "">(initialService === "trainingCamp" ? "email" : "");
   const [riderVideo, setRiderVideo] = useState<File | null>(null);
   const [messageText, setMessageText] = useState(initialService === "selection" ? defaultSelectionMessage[locale] : "");
 
@@ -132,7 +132,7 @@ export default function ContactForm({
           phone: payload.phone,
           country: payload.country,
           service: payload.service,
-          message: payload.message,
+          message: [payload.message, payload.riderLevel ? `Rider level: ${payload.riderLevel}` : "", payload.trainingPeriod ? `Preferred period: ${payload.trainingPeriod}` : ""].filter(Boolean).join("\n\n"),
           lookingFor: payload.lookingFor || horseName || "",
           riderVideoUrl,
           viewingDate: payload.viewingDate || "",
@@ -295,6 +295,15 @@ export default function ContactForm({
           </span>
         </div>
       )}
+      {service === "trainingCamp" && (
+        <div className="grid gap-4 sm:grid-cols-2">
+          <select name="riderLevel" aria-label={locale === "fr" ? "Niveau du cavalier" : locale === "ar" ? "مستوى الفارس" : "Rider level"} className={`${inputClass} appearance-none`}>
+            <option value="">{locale === "fr" ? "Niveau du cavalier" : locale === "ar" ? "مستوى الفارس" : "Rider level"}</option>
+            {(locale === "fr" ? ["Débutant", "Intermédiaire", "Confirmé", "Professionnel"] : locale === "ar" ? ["مبتدئ", "متوسط", "متقدم", "محترف"] : ["Beginner", "Intermediate", "Advanced", "Professional"]).map((level) => <option key={level} value={level}>{level}</option>)}
+          </select>
+          <input name="trainingPeriod" placeholder={locale === "fr" ? "Période souhaitée" : locale === "ar" ? "الفترة المطلوبة" : "Preferred period"} className={inputClass} />
+        </div>
+      )}
       <div className="grid gap-2">
         <textarea required name="message" rows={4} value={messageText} onFocus={() => {
           if (service === "selection" && !messageEdited && messageText === defaultSelectionMessage[locale]) {
@@ -317,7 +326,7 @@ export default function ContactForm({
         </div>
       )}
 
-      <div className="grid gap-3">
+      {service !== "trainingCamp" && <div className="grid gap-3">
         <p className="font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/50">{labels.sendVia}</p>
         <div className="grid gap-3 sm:grid-cols-2">
           <label className="flex cursor-pointer items-center gap-3 border border-charcoal-line px-4 py-3 text-sm">
@@ -329,12 +338,12 @@ export default function ContactForm({
             <span>{labels.whatsapp} — +33 6 18 31 35 30</span>
           </label>
         </div>
-      </div>
+      </div>}
 
       <button
         type="submit"
         disabled={status === "sending"}
-        className="mt-2 bg-charcoal px-6 py-3 font-mono text-[11px] uppercase tracking-eyebrow text-ivory transition-colors duration-400 hover:bg-hunter disabled:opacity-60"
+        className="mt-2 rounded-xl bg-hunter px-6 py-4 font-display text-base font-semibold text-ivory transition-colors duration-300 hover:bg-charcoal disabled:opacity-60"
       >
         {status === "sending" ? "…" : dict.form.send}
       </button>
