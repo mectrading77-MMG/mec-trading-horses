@@ -213,6 +213,18 @@
         "title": "Suivi après-vente",
         "text": "Nous restons disponibles longtemps après l'arrivée du cheval."
       },
+            "prePurchase": {
+        "title": "Visite vétérinaire avant achat",
+        "text": "Nous coordonnons les examens vétérinaires indépendants et vous aidons à examiner les informations avant l’achat."
+      },
+      "export": {
+        "title": "Accompagnement à l’export",
+        "text": "Nous coordonnons les documents d’exportation et les démarches pratiques d’une vente internationale."
+      },
+      "viewing": {
+        "title": "Visite du cheval",
+        "text": "Nous organisons un rendez-vous et les modalités pratiques pour voir le cheval."
+      },
       "trainingCamp": {
         "title": "Stage d’entraînement",
         "text": "Des stages structurés pour développer les capacités, la condition physique et la préparation à la compétition de votre cheval."
