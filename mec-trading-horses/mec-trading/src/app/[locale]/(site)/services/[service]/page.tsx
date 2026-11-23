@@ -47,7 +47,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: service ? `${service.title} | MEC Horses` : "MEC Horses Services",
     description: service?.text ?? dict.services.title,
-    alternates: { canonical: `/${params.locale}/services/${params.service}` }
+    alternates: localizedAlternates(params.locale, `/services/${params.service}`)
   };
 }
 
