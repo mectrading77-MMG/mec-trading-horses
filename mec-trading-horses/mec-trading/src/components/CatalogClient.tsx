@@ -145,7 +145,7 @@ export default function CatalogClient({
     <div>
       {/* Collapsible filter panel, styled with the existing MEC HORSES palette */}
       <section className="border-y border-charcoal-line py-5">
-        <div className="flex justify-end">
+        <div className="flex justify-start">
           <button type="button" onClick={() => setFiltersOpen((open) => !open)} aria-expanded={filtersOpen} aria-controls="horse-filter-panel" className="inline-flex min-h-11 items-center gap-3 border border-gold bg-charcoal px-5 py-3 font-mono text-[10px] uppercase tracking-eyebrow text-ivory transition-colors hover:bg-gold hover:text-charcoal">
             <span aria-hidden="true">☷</span>{filtersOpen ? (locale === "fr" ? "Masquer les filtres" : locale === "ar" ? "إخفاء الفلاتر" : "Hide Filters") : (locale === "fr" ? "Afficher les filtres" : locale === "ar" ? "إظهار الفلاتر" : "Show Filters")}<span aria-hidden="true">{filtersOpen ? "⌃" : "⌄"}</span>
           </button>
