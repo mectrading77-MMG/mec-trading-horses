@@ -4,7 +4,6 @@ import type { Locale } from "@/types/horse";
 import { getDictionary } from "@/i18n/config";
 import { listHorses } from "@/lib/horses";
 import CatalogClient from "@/components/CatalogClient";
-import SectionHeading from "@/components/SectionHeading";
 
 export const dynamic = "force-dynamic";
 
@@ -33,9 +32,8 @@ export default async function HorsesForSalePage({
   const horses = await listHorses();
 
   return (
-    <div className="mx-auto max-w-editorial px-6 py-16 lg:px-10">
-      <SectionHeading eyebrow={dict.catalog.title} title={dict.catalog.subtitle} />
-      <div className="mt-8">
+    <div className="mx-auto max-w-editorial px-6 pb-16 pt-4 lg:px-10 lg:pt-6">
+      <div>
         <CatalogClient
           horses={horses}
           locale={params.locale}
