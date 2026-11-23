@@ -18,11 +18,6 @@ const CONTENT: Record<string, Record<Locale,{title:string;intro:string;descripti
   fr:{title:"Vendez votre cheval",intro:"Votre cheval mérite une visibilité adaptée.",description:"MEC HORSES accompagne les propriétaires dans la présentation et la promotion de leurs chevaux de sport auprès d’un public international pertinent. Nous étudions chaque dossier, préparons une présentation professionnelle et transmettons les demandes adaptées au propriétaire. L’envoi du formulaire constitue une demande d’étude, sans publication automatique ni garantie de vente.",benefits:["Création d’un profil professionnel à partir de vos informations et médias","Visibilité ciblée via les canaux MEC HORSES et notre réseau équestre","Gestion des demandes et coordination des visites et échanges de vente"]},
   ar:{title:"اعرض حصانك للبيع",intro:"حصانك يستحق الظهور أمام المشترين المناسبين.",description:"تساعد MEC HORSES الملاك على تقديم خيولهم الرياضية والترويج لها أمام جمهور دولي مناسب. نراجع كل طلب، ونجهز عرضًا احترافيًا، ونتواصل مع المهتمين المناسبين بالتنسيق مع المالك. إرسال النموذج هو طلب للمراجعة وليس نشرًا تلقائيًا أو ضمانًا للبيع.",benefits:["إعداد ملف احترافي للحصان باستخدام المعلومات والوسائط المقدمة","ترويج موجه عبر قنوات MEC HORSES وشبكتنا في مجال الفروسية","متابعة الاستفسارات وتنسيق المعاينات ومناقشات البيع"]}
  },
- prePurchase:{
-  en:{title:"Pre-Purchase Assistance",intro:"Make an informed decision before you buy.",description:"We help coordinate the independent pre-purchase process, including veterinary appointments and the practical information needed to assess a horse before a commitment.",benefits:["Coordination with an independent veterinary practice","Scheduling and document collection","Clear communication of the process and next steps"]},
-  fr:{title:"Accompagnement pré-achat",intro:"Décidez en connaissance de cause avant l’achat.",description:"Nous vous aidons à organiser les étapes indépendantes précédant l’achat, notamment les rendez-vous vétérinaires et les informations pratiques nécessaires à l’évaluation du cheval.",benefits:["Coordination avec un vétérinaire indépendant","Organisation des rendez-vous et collecte des documents","Communication claire sur le déroulement et les prochaines étapes"]},
-  ar:{title:"مرافقة ما قبل الشراء",intro:"اتخذ قرارك بثقة قبل الشراء.",description:"نساعدك في تنسيق إجراءات ما قبل الشراء بشكل مستقل، بما في ذلك المواعيد البيطرية والمعلومات اللازمة لتقييم الحصان قبل إتمام الصفقة.",benefits:["التنسيق مع طبيب بيطري مستقل","تنظيم المواعيد وجمع المستندات","شرح واضح للإجراءات والخطوات التالية"]}
- },
  vetCoordination:{
   en:{title:"Veterinary Coordination",intro:"Keep the veterinary process organised.",description:"We coordinate clinic communication, appointments, travel arrangements and the exchange of relevant veterinary documents around your schedule.",benefits:["Clinic and practitioner coordination","Appointment and travel planning","Organised document exchange"]},
   fr:{title:"Coordination vétérinaire",intro:"Un suivi vétérinaire organisé.",description:"Nous coordonnons les échanges avec les cliniques, les rendez-vous, les déplacements et la transmission des documents vétérinaires selon votre planning.",benefits:["Coordination avec les cliniques et praticiens","Planification des rendez-vous et déplacements","Transmission organisée des documents"]},
@@ -37,13 +32,7 @@ const CONTENT: Record<string, Record<Locale,{title:string;intro:string;descripti
   en:{title:"International Transport",intro:"Plan your horse’s journey with care.",description:"We help coordinate suitable road or air transport options, timing and communication with transport providers for domestic and international journeys.",benefits:["Transport requirements and route planning","Coordination with transport providers","Updates on timing and required documents"]},
   fr:{title:"Transport international",intro:"Organisez le déplacement de votre cheval avec soin.",description:"Nous vous aidons à coordonner des solutions de transport routier ou aérien, les délais et les échanges avec les transporteurs pour les trajets nationaux et internationaux.",benefits:["Définition des besoins et itinéraires","Coordination avec les transporteurs","Suivi des délais et documents nécessaires"]},
   ar:{title:"النقل الدولي",intro:"خطط لرحلة حصانك بعناية.",description:"نساعدك في تنسيق خيارات النقل البري أو الجوي المناسبة والمواعيد والتواصل مع شركات النقل للرحلات المحلية والدولية.",benefits:["تحديد متطلبات النقل والمسار","التنسيق مع شركات النقل","متابعة المواعيد والمستندات المطلوبة"]}
- },
- export:{
-  en:{title:"Export Assistance",intro:"Navigate the export process with support.",description:"We help organise the practical steps involved in an international horse movement, including coordination around customs, health certificates and destination-country requirements. Official decisions remain with the relevant authorities.",benefits:["Checklist of destination requirements","Coordination of health and export documents","Communication with relevant service providers"]},
-  fr:{title:"Assistance export",intro:"Avancez dans les formalités d’export avec un accompagnement.",description:"Nous aidons à organiser les étapes pratiques d’un déplacement international de cheval : coordination des formalités douanières, certificats sanitaires et exigences du pays de destination. Les décisions officielles relèvent des autorités compétentes.",benefits:["Liste des exigences du pays de destination","Coordination des documents sanitaires et d’export","Échanges avec les prestataires concernés"]},
-  ar:{title:"مساعدة التصدير",intro:"أتمم إجراءات التصدير بمرافقة منظمة.",description:"نساعد في تنظيم الخطوات العملية لنقل الحصان دوليًا، بما في ذلك التنسيق بشأن الجمارك والشهادات الصحية ومتطلبات بلد الوصول. تظل القرارات الرسمية من اختصاص الجهات المعنية.",benefits:["قائمة بمتطلبات بلد الوصول","تنسيق الشهادات الصحية ومستندات التصدير","التواصل مع مقدمي الخدمات المعنيين"]}
- },
- viewing:{
+ },:{
   en:{title:"Viewing Appointments",intro:"Arrange a viewing that works for you.",description:"Request an in-person appointment or a live video viewing. We coordinate availability and share the practical details before the appointment.",benefits:["In-person or live video viewing requests","Appointment coordination","Relevant viewing information in advance"]},
   fr:{title:"Rendez-vous de visite",intro:"Organisez une visite selon vos disponibilités.",description:"Demandez un rendez-vous en personne ou une présentation vidéo en direct. Nous coordonnons les disponibilités et partageons les informations pratiques avant le rendez-vous.",benefits:["Demandes de visite sur place ou en vidéo","Coordination du rendez-vous","Informations utiles communiquées à l’avance"]},
   ar:{title:"مواعيد المعاينة",intro:"حدد موعد المعاينة الذي يناسبك.",description:"اطلب معاينة شخصية أو مشاهدة مباشرة عبر الفيديو. ننسق المواعيد ونشارك التفاصيل العملية قبل الموعد.",benefits:["طلبات معاينة شخصية أو عبر الفيديو","تنسيق الموعد","مشاركة المعلومات المهمة مسبقًا"]}
@@ -75,38 +64,18 @@ export default async function ServiceDetailPage({params}:{params:{locale:Locale;
  const item=CONTENT[params.slug]?.[params.locale]??CONTENT[params.slug]?.en;
  if(!item) notFound();
  const dict=await getDictionary(params.locale);
- return <main className="service-detail-shell" dir={params.locale==="ar"?"rtl":"ltr"}>
-  <div className="service-detail-top"><Link href={`/${params.locale}/services`} className="service-back">← {dict.services.title}</Link></div>
-  <section className="service-detail-hero">
-   <div className="service-detail-copy">
-    <p className="service-eyebrow">MEC HORSES · {dict.services.title}</p>
-    <h1>{item.title}</h1>
-    <p className="service-detail-intro">{item.intro}</p>
-    <p className="service-detail-description">{item.description}</p>
-   </div>
-   <div className="detail-arena" aria-hidden="true">
-    <div className="detail-arena-light"/>
-    <svg viewBox="0 0 560 340" className="detail-horse">
-     <g fill="currentColor" className="horse-motion">
-      <path d="M120 192 C145 158 185 142 228 145 C259 147 277 163 302 169 L347 157 L372 131 L401 126 L418 139 L405 154 L383 158 L365 185 C351 207 331 220 303 224 L280 270 L260 270 L269 218 L223 215 L194 264 L174 263 L190 205 C161 211 140 207 120 192Z"/>
-      <path d="M363 157 C350 132 344 105 356 83 C369 60 392 53 410 64 L430 82 L420 94 L402 83 C390 79 379 90 381 106 L390 137Z"/>
-      <path d="M403 65 L416 43 L422 69 M389 66 L390 42 L400 65 M147 176 L105 148 L96 157 L126 194Z M220 211 L212 282 L229 282 L248 215 M300 215 L324 278 L341 275 L330 205"/>
-     </g>
-    </svg>
-    <div className="detail-rails"><i/><i/><i/></div>
-    <span className="detail-arena-caption">WHERE CHAMPIONS CHANGE HANDS</span>
-   </div>
+ return <main className="mx-auto max-w-editorial px-6 py-14 lg:px-10" dir={params.locale==="ar"?"rtl":"ltr"}>
+  <Link href={`/${params.locale}/services`} className="font-mono text-[10px] uppercase tracking-[.18em] text-charcoal/50 hover:text-gold">← {dict.services.title}</Link>
+  <section className="mt-8 border-y border-charcoal-line py-12 lg:py-16">
+   <p className="font-mono text-[10px] uppercase tracking-[.2em] text-gold">MEC HORSES · {dict.services.title}</p>
+   <h1 className="mt-4 max-w-3xl font-display text-4xl italic leading-tight text-charcoal md:text-6xl">{item.title}</h1>
+   <p className="mt-5 max-w-2xl text-lg text-charcoal/70">{item.intro}</p>
+   <p className="mt-7 max-w-3xl leading-8 text-charcoal/70">{item.description}</p>
+   <ul className="mt-8 grid gap-3 md:grid-cols-3">{item.benefits.map((benefit)=><li key={benefit} className="border-t border-charcoal-line pt-4 text-sm leading-6 text-charcoal/75">— {benefit}</li>)}</ul>
   </section>
-  <section className="service-benefits">
-   {item.benefits.map((benefit,i)=><div key={benefit}><span>0{i+1}</span><p>{benefit}</p></div>)}
-  </section>
-  <section id="application" className="service-application">
-   <div className="service-application-intro">
-    <p className="service-eyebrow">{params.locale==="ar"?"طلب الخدمة":params.locale==="fr"?"Demande de service":"SERVICE APPLICATION"}</p>
-    <h2>{params.locale==="ar"?"أخبرنا بتفاصيل طلبك":params.locale==="fr"?"Parlez-nous de votre projet":"Let’s plan your next move"}</h2>
-    <p>{params.locale==="ar"?"املأ النموذج التالي وسيتواصل معك فريق MEC HORSES.":params.locale==="fr"?"Remplissez le formulaire ; l’équipe MEC HORSES vous recontactera.":"Tell us what you have in mind. Our team will review your request and get back to you."}</p>
-   </div>
-   <div className="service-form-panel"><ServiceApplicationForm locale={params.locale} service={params.slug} serviceTitle={item.title}/></div>
+  <section id="application" className="grid gap-10 py-14 lg:grid-cols-[.8fr_1.2fr]">
+   <div><p className="font-mono text-[10px] uppercase tracking-[.2em] text-gold">{params.locale==="ar"?"طلب الخدمة":params.locale==="fr"?"Demande de service":"Service application"}</p><h2 className="mt-3 font-display text-3xl italic text-charcoal">{params.locale==="ar"?"أخبرنا بتفاصيل طلبك":params.locale==="fr"?"Parlez-nous de votre projet":"Tell us about your requirements"}</h2><p className="mt-4 text-sm leading-7 text-charcoal/60">{params.locale==="ar"?"املأ النموذج التالي وسيتواصل معك فريق MEC HORSES.":params.locale==="fr"?"Remplissez le formulaire ; l’équipe MEC HORSES vous recontactera.":"Complete the form and the MEC HORSES team will get back to you."}</p></div>
+   <div className="border border-charcoal-line p-6 md:p-8"><ServiceApplicationForm locale={params.locale} service={params.slug} serviceTitle={item.title}/></div>
   </section>
  </main>;
 }
