@@ -33,7 +33,6 @@ export default function Footer({ locale, dict }: { locale: Locale; dict: any }) 
         <div>
           <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-[#c5a875]">{labels.contactTitle}</p>
           <ul className="mt-4 space-y-2.5 text-xs leading-6 text-ivory/70">
-            <li>{labels.location}</li>
             <li><a className="transition-colors hover:text-[#d8bd8d]" href="mailto:sales@mechorses.com">sales@mechorses.com</a></li>
             <li><a className="transition-colors hover:text-[#d8bd8d]" href="tel:+33618313530">+33 6 18 31 35 30</a></li>
           </ul>
