@@ -22,12 +22,9 @@ export async function generateMetadata({ params }: { params: { locale: Locale } 
 const KEYS = [
   "selection",
   "sales",
-  "prePurchase",
   "vetCoordination",
   "documentation",
   "transport",
-  "export",
-  "viewing",
   "afterSale",
   "trainingCamp",
   "valorization"
@@ -43,7 +40,7 @@ export default async function ServicesPage({ params }: { params: { locale: Local
         {KEYS.map((key, i) => (
           <Link
             key={key}
-            href={`/${params.locale}/contact?service=${key}`}
+            href={`/${params.locale}/services/${key}`}
             className="group border-t border-charcoal-line pt-5 transition-colors duration-300 hover:border-gold"
           >
             <span className="font-mono text-[10px] text-charcoal/30">{String(i + 1).padStart(2, "0")}</span>
