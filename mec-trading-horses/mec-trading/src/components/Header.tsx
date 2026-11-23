@@ -40,7 +40,7 @@ export default async function Header({ locale, dict }: { locale: Locale; dict: a
 
         <Link href={`/${locale}`} aria-label={dict.brand.name} className="flex min-w-0 flex-col items-center justify-center">
           <Logo variant="compact" priority className="!h-[48px] max-w-full sm:!h-[62px] lg:!h-[78px]" />
-          <span className="mt-0.5 flex w-max max-w-full flex-nowrap items-center justify-center gap-1.5 whitespace-nowrap font-mono text-[6px] font-bold uppercase tracking-[0.1em] text-charcoal sm:mt-1 sm:gap-3 sm:text-[9px] sm:tracking-[0.16em]">
+          <span className="mt-1 flex w-max max-w-full flex-nowrap items-center justify-center gap-2 whitespace-nowrap font-mono text-[8px] font-extrabold uppercase tracking-[0.12em] text-charcoal sm:mt-1.5 sm:gap-4 sm:text-[12px] sm:tracking-[0.18em] lg:text-[13px]">
             <span>France</span><span className="h-px w-2 shrink-0 bg-[#B08D57] sm:w-5" /><span>Europe</span><span className="h-px w-2 shrink-0 bg-[#B08D57] sm:w-5" /><span>Middle East</span>
           </span>
         </Link>
