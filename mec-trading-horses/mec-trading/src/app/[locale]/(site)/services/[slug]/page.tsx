@@ -4,7 +4,6 @@ import { notFound } from "next/navigation";
 import type { Locale } from "@/types/horse";
 import { getDictionary } from "@/i18n/config";
 import { localizedAlternates } from "@/lib/seo";
-import SectionHeading from "@/components/SectionHeading";
 import ServiceApplicationForm from "@/components/ServiceApplicationForm";
 
 const CONTENT: Record<string, Record<Locale,{title:string;intro:string;description:string;benefits:string[]}>> = {
@@ -32,10 +31,6 @@ const CONTENT: Record<string, Record<Locale,{title:string;intro:string;descripti
   en:{title:"International Transport",intro:"Plan your horse’s journey with care.",description:"We help coordinate suitable road or air transport options, timing and communication with transport providers for domestic and international journeys.",benefits:["Transport requirements and route planning","Coordination with transport providers","Updates on timing and required documents"]},
   fr:{title:"Transport international",intro:"Organisez le déplacement de votre cheval avec soin.",description:"Nous vous aidons à coordonner des solutions de transport routier ou aérien, les délais et les échanges avec les transporteurs pour les trajets nationaux et internationaux.",benefits:["Définition des besoins et itinéraires","Coordination avec les transporteurs","Suivi des délais et documents nécessaires"]},
   ar:{title:"النقل الدولي",intro:"خطط لرحلة حصانك بعناية.",description:"نساعدك في تنسيق خيارات النقل البري أو الجوي المناسبة والمواعيد والتواصل مع شركات النقل للرحلات المحلية والدولية.",benefits:["تحديد متطلبات النقل والمسار","التنسيق مع شركات النقل","متابعة المواعيد والمستندات المطلوبة"]}
- },:{
-  en:{title:"Viewing Appointments",intro:"Arrange a viewing that works for you.",description:"Request an in-person appointment or a live video viewing. We coordinate availability and share the practical details before the appointment.",benefits:["In-person or live video viewing requests","Appointment coordination","Relevant viewing information in advance"]},
-  fr:{title:"Rendez-vous de visite",intro:"Organisez une visite selon vos disponibilités.",description:"Demandez un rendez-vous en personne ou une présentation vidéo en direct. Nous coordonnons les disponibilités et partageons les informations pratiques avant le rendez-vous.",benefits:["Demandes de visite sur place ou en vidéo","Coordination du rendez-vous","Informations utiles communiquées à l’avance"]},
-  ar:{title:"مواعيد المعاينة",intro:"حدد موعد المعاينة الذي يناسبك.",description:"اطلب معاينة شخصية أو مشاهدة مباشرة عبر الفيديو. ننسق المواعيد ونشارك التفاصيل العملية قبل الموعد.",benefits:["طلبات معاينة شخصية أو عبر الفيديو","تنسيق الموعد","مشاركة المعلومات المهمة مسبقًا"]}
  },
  afterSale:{
   en:{title:"After-Sale Support",intro:"Our assistance continues after the sale.",description:"We remain available after the horse changes hands to help coordinate follow-up questions and practical arrangements connected with the transaction.",benefits:["A point of contact after completion","Help coordinating follow-up arrangements","Support with practical questions"]},
