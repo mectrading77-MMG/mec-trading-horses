@@ -8,7 +8,7 @@ import { db } from "@/lib/db";
 
 export default async function AdminDashboardPage({ params }: { params: { locale: Locale } }) {
   const dict = await getDictionary(params.locale);
-  const [horses, newInquiries, newHorseSearches] = await Promise.all([
+  const [horses, newInquiries, newHorseSearches, recentHorseSearches] = await Promise.all([
     listHorses(),
     db.inquiry.count({ where: { status: "NEW" } }),
     db.inquiry.count({ where: { service: "selection", status: "NEW" } })
@@ -41,6 +41,31 @@ export default async function AdminDashboardPage({ params }: { params: { locale:
           </Link>
         ))}
       </div>
+
+      <section className="mt-10 border border-charcoal-line bg-white p-6">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <p className="font-mono text-[10px] uppercase tracking-eyebrow text-gold">Dedicated service pipeline</p>
+            <h2 className="mt-1 font-display text-xl italic text-charcoal">Find Your Horse · Requests</h2>
+            <p className="mt-1 text-sm text-charcoal/50">{newHorseSearches} new requests awaiting review</p>
+          </div>
+          <Link href={`/${params.locale}/admin/inquiries?service=selection`} className="bg-charcoal px-5 py-3 font-mono text-[10px] uppercase tracking-eyebrow text-ivory hover:bg-hunter">
+            Open horse search requests →
+          </Link>
+        </div>
+        {recentHorseSearches.length === 0 ? (
+          <p className="mt-5 border-t border-charcoal-line pt-4 text-sm text-charcoal/50">No Find Your Horse requests have been recorded yet.</p>
+        ) : (
+          <div className="mt-5 divide-y divide-charcoal-line border-t border-charcoal-line">
+            {recentHorseSearches.map((request) => (
+              <Link key={request.id} href={`/${params.locale}/admin/inquiries?service=selection`} className="flex flex-wrap items-center justify-between gap-2 py-3 text-sm hover:text-gold">
+                <span className="font-medium text-charcoal">{request.name} <span className="font-normal text-charcoal/45">· {request.country ?? "Country not specified"}</span></span>
+                <span className="font-mono text-[10px] uppercase tracking-wider text-charcoal/50">{request.status.replaceAll("_", " ")} · {request.createdAt.toLocaleDateString("en-GB")}</span>
+              </Link>
+            ))}
+          </div>
+        )}
+      </section>
 
       <div className="mt-10 flex gap-4">
         <Link
