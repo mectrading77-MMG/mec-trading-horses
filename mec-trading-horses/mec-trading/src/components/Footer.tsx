@@ -68,17 +68,16 @@ export default function Footer({ locale, dict }: { locale: Locale; dict: any }) 
       </div>
 
       <div className="border-t border-ivory/10">
-        <div className="mx-auto flex max-w-editorial flex-col gap-5 px-6 py-6 lg:flex-row lg:items-center lg:justify-between lg:px-10">
-          <div className="space-y-1.5 text-[11px] leading-5 text-ivory/40">
-            <p>MEC Trading SAS · SIRET : 108 537 549 00017</p>
-            <p>La Chapelle-des-Fougeretz · 35520 · France</p>
-          </div>
-          <nav aria-label={labels.legal} className="flex flex-wrap gap-x-5 gap-y-2 text-xs text-ivory/55">
+        <div className="mx-auto flex max-w-editorial flex-col gap-4 px-6 py-6 lg:flex-row lg:flex-nowrap lg:items-center lg:justify-between lg:gap-5 lg:px-10">
+          <p className="whitespace-nowrap text-[10px] leading-5 text-ivory/40">
+            MEC Trading SAS · SIRET : 108 537 549 00017 · La Chapelle-des-Fougeretz · 35520 · France
+          </p>
+          <nav aria-label={labels.legal} className="flex flex-nowrap items-center gap-x-4 whitespace-nowrap text-[11px] text-ivory/55">
             <Link className="transition-colors hover:text-[#d8bd8d]" href={`/${locale}/legal/mentions-legales`}>{labels.mentions}</Link>
             <Link className="transition-colors hover:text-[#d8bd8d]" href={`/${locale}/legal/confidentialite`}>{labels.privacy}</Link>
             <Link className="transition-colors hover:text-[#d8bd8d]" href={`/${locale}/legal/cookies`}>{labels.cookies}</Link>
           </nav>
-          <p className="text-[11px] text-ivory/35">© {year} MEC Horses. {dict.footer.rights}</p>
+          <p className="whitespace-nowrap text-[10px] text-ivory/35">© {year} MEC Horses. {dict.footer.rights}</p>
         </div>
       </div>
     </footer>
