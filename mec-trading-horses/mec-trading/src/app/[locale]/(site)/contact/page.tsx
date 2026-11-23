@@ -43,7 +43,7 @@ export default async function ContactPage({ params, searchParams }: { params: { 
 
   return (
     <div className="mx-auto max-w-editorial px-6 py-16 lg:px-10">
-      <SectionHeading eyebrow={selectedService ? dict.services.eyebrow : dict.contact.eyebrow} title={selectedService ? selectedService.title : dict.contact.title} />
+      <SectionHeading eyebrow={selectedService ? dict.services.title : dict.contact.eyebrow} title={selectedService ? selectedService.title : dict.contact.title} />
       <p className="mt-4 max-w-2xl text-charcoal/70">{selectedService ? selectedService.text : dict.contact.text}</p>
 
       <div className={`mt-12 grid gap-12 ${selectedService ? "lg:grid-cols-1" : "lg:grid-cols-[1fr_1.2fr]"}`}>
