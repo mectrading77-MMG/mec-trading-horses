@@ -49,7 +49,15 @@ export default function ContactForm({
   };
   const labels = ui[locale] ?? ui.en;
   const countryNames = new Intl.DisplayNames([locale], { type: "region" });
+  const countryLabel = (code: string) => code === "EG" && locale === "ar" ? "مصر" : countryNames.of(code) ?? code;
+  const defaultSelectionMessage: Record<Locale, string> = {
+    en: "Thank you for sharing your horse-search requirements. Our team will review your request and contact you shortly to discuss the next steps.",
+    fr: "Merci de nous avoir communiqué les détails de votre recherche. Notre équipe étudiera votre demande et vous contactera prochainement afin d’échanger sur les prochaines étapes.",
+    ar: "شكرًا لمشاركتنا تفاصيل بحثك عن الحصان المناسب. سيقوم فريقنا بمراجعة طلبك والتواصل معك قريبًا لمناقشة الخطوات التالية."
+  };
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [draftLoaded, setDraftLoaded] = useState(false);
+  const [messageEdited, setMessageEdited] = useState(false);
   const [service, setService] = useState(initialService);
   useEffect(() => {
     if (initialService) {
@@ -68,7 +76,37 @@ export default function ContactForm({
   const [country, setCountry] = useState("");
   const [sendMethod, setSendMethod] = useState<"email" | "whatsapp" | "">("");
   const [riderVideo, setRiderVideo] = useState<File | null>(null);
-  const [messageText, setMessageText] = useState(initialService === "selection" ? ({ en: "Thank you for sharing your horse-search requirements. Our team will review your request and contact you shortly to discuss the next steps.", fr: "Merci de nous avoir communiqué les détails de votre recherche. Notre équipe étudiera votre demande et vous contactera prochainement afin d’échanger sur les prochaines étapes.", ar: "شكرًا لمشاركتنا تفاصيل بحثك عن الحصان المناسب. سيقوم فريقنا بمراجعة طلبك والتواصل معك قريبًا لمناقشة الخطوات التالية." } as Record<Locale, string>)[locale] : "");
+  const [messageText, setMessageText] = useState(initialService === "selection" ? defaultSelectionMessage[locale] : "");
+
+  // Keep the horse-search draft when the user switches EN / FR / AR.
+  useEffect(() => {
+    try {
+      const raw = window.localStorage.getItem("mec-horse-search-draft");
+      if (raw) {
+        const draft = JSON.parse(raw) as { service?: string; selectedHorse?: string; country?: string; phone?: string; sendMethod?: "email" | "whatsapp" | ""; messageText?: string; messageEdited?: boolean };
+        if (draft.service && SERVICE_KEYS.includes(draft.service as (typeof SERVICE_KEYS)[number])) setService(draft.service);
+        if (draft.selectedHorse) setSelectedHorse(draft.selectedHorse);
+        if (draft.country) setCountry(draft.country);
+        if (draft.phone) setPhone(draft.phone);
+        if (draft.sendMethod) setSendMethod(draft.sendMethod);
+        const wasEdited = Boolean(draft.messageEdited);
+        setMessageEdited(wasEdited);
+        if (wasEdited && draft.messageText) setMessageText(draft.messageText);
+        else if ((draft.service ?? initialService) === "selection") setMessageText(defaultSelectionMessage[locale]);
+      }
+    } catch {
+      window.localStorage.removeItem("mec-horse-search-draft");
+    }
+    setDraftLoaded(true);
+  // The locale is intentional: an untouched automatic message follows it.
+  }, [locale, initialService]);
+
+  useEffect(() => {
+    if (!draftLoaded) return;
+    window.localStorage.setItem("mec-horse-search-draft", JSON.stringify({
+      service, selectedHorse, country, phone, sendMethod, messageText, messageEdited
+    }));
+  }, [draftLoaded, service, selectedHorse, country, phone, sendMethod, messageText, messageEdited]);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -144,7 +182,7 @@ export default function ContactForm({
           </option>
           {COUNTRY_CODES.map((code) => (
             <option key={code} value={code}>
-              {countryNames.of(code)}
+              {countryLabel(code)}
             </option>
           ))}
         </select>
@@ -163,7 +201,12 @@ export default function ContactForm({
         required
         name="service"
         value={service}
-        onChange={(e) => { setService(e.target.value); window.localStorage.setItem("mec-contact-service", e.target.value); }}
+        onChange={(e) => {
+          const nextService = e.target.value;
+          setService(nextService);
+          window.localStorage.setItem("mec-contact-service", nextService);
+          if (nextService === "selection" && !messageEdited) setMessageText(defaultSelectionMessage[locale]);
+        }}
         aria-label={labels.service}
         className={`${inputClass} appearance-none`}
       >
