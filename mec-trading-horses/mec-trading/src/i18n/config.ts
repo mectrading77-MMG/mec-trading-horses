@@ -16,5 +16,9 @@ const dictionaries = {
 };
 
 export async function getDictionary(locale: Locale) {
-  return dictionaries[locale]();
+  // Routes can receive an unexpected locale segment at runtime even though
+  // the TypeScript type is constrained. Never invoke an undefined loader:
+  // fall back to English so the public page can still render.
+  const loader = dictionaries[locale as keyof typeof dictionaries] ?? dictionaries[defaultLocale];
+  return loader();
 }

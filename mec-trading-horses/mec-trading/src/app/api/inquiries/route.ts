@@ -10,6 +10,7 @@ const InquirySchema = z.object({
   service: z.string().trim().min(1).max(80),
   message: z.string().trim().min(3).max(5000),
   lookingFor: z.string().trim().max(160).optional(),
+  riderVideoUrl: z.string().url().max(2000).optional().or(z.literal("")),
   hasTrainer: z.string().optional(),
   viewingDate: z.string().optional(),
   horseId: z.string().optional(),
@@ -62,6 +63,7 @@ export async function POST(request: NextRequest) {
         service: data.service,
         message: data.message,
         lookingFor: data.lookingFor || null,
+        riderVideoUrl: data.riderVideoUrl || null,
         hasTrainer: data.hasTrainer ? data.hasTrainer === "yes" : null,
         viewingDate: data.viewingDate ? new Date(data.viewingDate) : null,
         horseId: data.horseId || null,
@@ -81,18 +83,24 @@ export async function POST(request: NextRequest) {
       `Country: ${data.country || "—"}`,
       `Service: ${data.service}`,
       `Horse: ${data.lookingFor || "—"}`,
+      `Rider video: ${data.riderVideoUrl || "—"}`,
       `Message: ${data.message}`,
       `Lead ID: ${inquiry.id}`
     ].join("\n");
 
     // Persistence is the source of truth. Notifications are best-effort and
     // can be activated by adding the provider credentials to deployment env.
-    await Promise.allSettled([
+    const [emailResult, whatsappResult] = await Promise.allSettled([
       notifyByEmail("New MEC HORSES lead", notification),
       notifyByWhatsApp(notification)
     ]);
+    const notifications = {
+      email: emailResult.status === "fulfilled" && emailResult.value,
+      whatsapp: whatsappResult.status === "fulfilled" && whatsappResult.value
+    };
 
-    return NextResponse.json({ ok: true, id: inquiry.id }, { status: 201 });
+    // The CRM record is saved even when optional provider notifications are not configured.
+    return NextResponse.json({ ok: true, id: inquiry.id, notifications }, { status: 201 });
   } catch (error) {
     console.error("Inquiry persistence failed:", error);
     return NextResponse.json({ error: "Could not save inquiry. Please contact MEC HORSES directly." }, { status: 500 });

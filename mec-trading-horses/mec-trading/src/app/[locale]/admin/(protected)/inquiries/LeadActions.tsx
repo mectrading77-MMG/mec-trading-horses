@@ -2,7 +2,13 @@
 
 import { useState } from "react";
 
-const statuses = ["NEW", "CONTACTED", "QUALIFIED", "HORSES_SENT", "NEGOTIATION", "VIEWING_SCHEDULED", "WON", "LOST"];
+const statuses = ["NEW", "CONTACTED", "QUALIFIED", "SEARCHING", "HORSES_SENT", "NEGOTIATION", "VIEWING_SCHEDULED", "WON", "LOST", "CLOSED"];
+const statusLabels: Record<string, string> = {
+  NEW: "New · Received", CONTACTED: "Contacted", QUALIFIED: "Requirements confirmed",
+  SEARCHING: "Horse search in progress", HORSES_SENT: "Shortlist sent", NEGOTIATION: "Negotiation",
+  VIEWING_SCHEDULED: "Trial / viewing arranged", WON: "Completed · Horse found",
+  LOST: "Closed · No agreement", CLOSED: "Archived"
+};
 
 export default function LeadActions({ id, initialStatus, initialNotes }: { id: string; initialStatus: string; initialNotes: string | null }) {
   const [status, setStatus] = useState(initialStatus);
@@ -34,7 +40,7 @@ export default function LeadActions({ id, initialStatus, initialNotes }: { id: s
         <label className="grid gap-1 text-xs text-charcoal/50">
           Pipeline stage
           <select value={status} onChange={(event) => setStatus(event.target.value)} className="border border-charcoal-line bg-white px-3 py-2 text-sm text-charcoal">
-            {statuses.map((item) => <option key={item} value={item}>{item.replaceAll("_", " ")}</option>)}
+            {statuses.map((item) => <option key={item} value={item}>{statusLabels[item]}</option>)}
           </select>
         </label>
         <label className="grid gap-1 text-xs text-charcoal/50">

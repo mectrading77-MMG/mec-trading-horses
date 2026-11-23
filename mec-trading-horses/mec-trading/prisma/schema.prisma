@@ -27,6 +27,7 @@ enum InquiryStatus {
   NEW
   CONTACTED
   QUALIFIED
+  SEARCHING
   HORSES_SENT
   NEGOTIATION
   VIEWING_SCHEDULED
@@ -195,6 +196,7 @@ model Inquiry {
   source        String        @default("website")
   preferredContact String     @default("email")
   lookingFor    String?
+  riderVideoUrl String?
   hasTrainer    Boolean?
   viewingDate   DateTime?
   notes         String?
