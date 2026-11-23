@@ -22,12 +22,9 @@ export async function generateMetadata({ params }: { params: { locale: Locale } 
 const KEYS = [
   "selection",
   "sales",
-  "prePurchase",
   "vetCoordination",
   "documentation",
   "transport",
-  "export",
-  "viewing",
   "afterSale",
   "trainingCamp",
   "valorization"
