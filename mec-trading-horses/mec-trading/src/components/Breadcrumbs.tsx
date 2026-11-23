@@ -71,7 +71,7 @@ export default function Breadcrumbs({ locale }: { locale: Locale }) {
             <li key={crumb.href} className="flex min-w-0 items-center gap-2">
               {index > 0 && <span aria-hidden="true" className="text-gold/80">/</span>}
               {current ? (
-                <span aria-current="page" className="max-w-[ min(65vw, 24rem)] truncate font-semibold uppercase tracking-[0.12em] text-charcoal">
+                <span aria-current="page" className="max-w-[65vw] truncate font-semibold uppercase tracking-[0.12em] text-charcoal">
                   {crumb.label}
                 </span>
               ) : (
