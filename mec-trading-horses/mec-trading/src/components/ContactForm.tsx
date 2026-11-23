@@ -13,7 +13,9 @@ const SERVICE_KEYS = [
   "vetCoordination",
   "documentation",
   "transport",
-  "afterSale"
+  "afterSale",
+  "trainingCamp",
+  "valorization"
 ] as const;
 
 const COUNTRY_CODES = [
