@@ -35,7 +35,8 @@ export default function ContactForm({
   horseId,
   horseName,
   horses = [],
-  initialService = ""
+  initialService = "",
+  hideServiceSelect = false
 }: {
   dict: any;
   locale?: Locale;
@@ -43,6 +44,7 @@ export default function ContactForm({
   horseName?: string;
   horses?: { id: string; name: string }[];
   initialService?: string;
+  hideServiceSelect?: boolean;
 }) {
   const ui: Record<Locale, { selectService: string; selectHorse: string; viewingDate: string; sendVia: string; email: string; whatsapp: string; error: string; name: string; country: string; phone: string; service: string; horse: string; message: string }> = {
     en: { selectService: "{labels.selectService}", selectHorse: "{labels.selectHorse}", viewingDate: "{labels.viewingDate}", sendVia: "Send inquiry via", email: "Email", whatsapp: "WhatsApp", error: "Something went wrong — please try again or contact us directly.", name: "Name", country: "Country", phone: "Phone", service: "Service", horse: "Horse", message: "Message" },
@@ -76,7 +78,7 @@ export default function ContactForm({
       const raw = window.localStorage.getItem("mec-horse-search-draft");
       if (raw) {
         const draft = JSON.parse(raw) as { service?: string; selectedHorse?: string; country?: string; phone?: string; sendMethod?: "email" | "whatsapp" | ""; messageText?: string; messageEdited?: boolean };
-        if (draft.service && SERVICE_KEYS.includes(draft.service as (typeof SERVICE_KEYS)[number])) setService(draft.service);
+        if (!initialService && draft.service && SERVICE_KEYS.includes(draft.service as (typeof SERVICE_KEYS)[number])) setService(draft.service);
         if (draft.selectedHorse) setSelectedHorse(draft.selectedHorse);
         if (draft.country) setCountry(draft.country);
         if (draft.phone) setPhone(draft.phone);
@@ -89,6 +91,7 @@ export default function ContactForm({
     } catch {
       window.localStorage.removeItem("mec-horse-search-draft");
     }
+    if (initialService) setService(initialService);
     setDraftLoaded(true);
   // The locale is intentional: an untouched automatic message follows it.
   }, [locale, initialService]);
@@ -222,7 +225,7 @@ export default function ContactForm({
         />
       </div>
 
-      <select
+      {!hideServiceSelect && <select
         required
         name="service"
         value={service}
@@ -245,7 +248,8 @@ export default function ContactForm({
             : dict.services.list[key].title}
           </option>
         ))}
-      </select>
+      </select>}
+      {hideServiceSelect && <input type="hidden" name="service" value={service || initialService} />}
 
       {service === "selection" && (
         <select
@@ -280,7 +284,7 @@ export default function ContactForm({
           />
           {!viewingDate && (
             <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-sm text-charcoal/40">
-              Select your viewing date
+              {locale === "ar" ? "اختر تاريخ المعاينة" : locale === "fr" ? "Choisissez la date de visite" : "Select your viewing date"}
             </span>
           )}
           <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-charcoal/60">
