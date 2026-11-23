@@ -36,7 +36,7 @@ export default function DismissibleDetails({
   }, []);
 
   return (
-    <details ref={detailsRef} className={className}>
+    <details ref={detailsRef} className={className} onClick={(event) => {\n      const target = event.target as HTMLElement;\n      if (target.closest("a, button") && !target.closest("summary")) {\n        detailsRef.current?.removeAttribute("open");\n      }\n    }}>
       {children}
     </details>
   );
