@@ -90,12 +90,17 @@ export async function POST(request: NextRequest) {
 
     // Persistence is the source of truth. Notifications are best-effort and
     // can be activated by adding the provider credentials to deployment env.
-    await Promise.allSettled([
+    const [emailResult, whatsappResult] = await Promise.allSettled([
       notifyByEmail("New MEC HORSES lead", notification),
       notifyByWhatsApp(notification)
     ]);
+    const notifications = {
+      email: emailResult.status === "fulfilled" && emailResult.value,
+      whatsapp: whatsappResult.status === "fulfilled" && whatsappResult.value
+    };
 
-    return NextResponse.json({ ok: true, id: inquiry.id }, { status: 201 });
+    // The CRM record is saved even when optional provider notifications are not configured.
+    return NextResponse.json({ ok: true, id: inquiry.id, notifications }, { status: 201 });
   } catch (error) {
     console.error("Inquiry persistence failed:", error);
     return NextResponse.json({ error: "Could not save inquiry. Please contact MEC HORSES directly." }, { status: 500 });
