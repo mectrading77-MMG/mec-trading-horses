@@ -38,6 +38,40 @@ const COPY: Record<Locale, {
   }
 };
 
+
+const SERVICE_DETAILS: Record<Locale, Record<(typeof SERVICE_KEYS)[number], string>> = {
+  en: {
+    selection: "A tailored horse search built around your riding level, sporting ambitions, preferred type and budget. We identify suitable prospects, review their profiles and help coordinate viewings so you can make a confident, informed choice.",
+    sales: "We present your horse to a relevant international audience through carefully prepared profiles, verified information and direct enquiries. Our team helps organise the presentation and buyer communication from first interest through the sale.",
+    vetCoordination: "We help arrange independent veterinary examinations, coordinate appointments with the relevant clinic and collect the available reports and imaging. You stay informed throughout the process and can discuss the findings before deciding how to proceed.",
+    documentation: "We assist with the practical paperwork involved in a horse transaction, including passport and registration details, ownership-transfer steps and the supporting documents needed for a clear handover.",
+    transport: "We coordinate suitable road or air transport according to the horse’s destination and requirements, helping organise timing, collection, delivery and communication with the transport provider.",
+    afterSale: "Our support continues after the transaction. We remain available to help with follow-up questions and practical coordination as your horse settles into its new home.",
+    trainingCamp: "Individual and intensive training stays for riders and horses, shaped around your current level and sporting goals. Sessions can focus on technique, confidence, fitness, course work and preparation for competition, with professional guidance in a high-standard environment.",
+    valorization: "A tailored programme to develop and showcase your horse’s sporting qualities. We help plan its training and presentation, document its progress and position it appropriately for prospective buyers or future sporting opportunities."
+  },
+  fr: {
+    selection: "Une recherche de cheval construite autour de votre niveau, de vos objectifs sportifs, du type de cheval souhaité et de votre budget. Nous identifions les profils pertinents, étudions leurs informations et organisons les étapes de découverte afin de vous aider à choisir en toute confiance.",
+    sales: "Nous présentons votre cheval à un réseau international d’acheteurs grâce à une fiche soignée, des informations vérifiées et des demandes directes. Notre équipe vous accompagne dans sa présentation et les échanges avec les acheteurs, de la première prise de contact jusqu’à la vente.",
+    vetCoordination: "Nous vous aidons à organiser les examens vétérinaires indépendants, à coordonner les rendez-vous avec la clinique et à réunir les comptes rendus et imageries disponibles. Vous restez informé à chaque étape pour prendre votre décision en connaissance de cause.",
+    documentation: "Nous vous accompagnons dans les formalités liées à la transaction : vérification des informations du passeport et de l’enregistrement, étapes du changement de propriétaire et documents nécessaires à une transmission claire.",
+    transport: "Nous coordonnons un transport routier ou aérien adapté à la destination et aux besoins du cheval, en facilitant la planification, l’enlèvement, la livraison et les échanges avec le transporteur.",
+    afterSale: "Notre accompagnement se poursuit après la transaction. Nous restons disponibles pour vos questions et pour faciliter les démarches pratiques pendant l’installation du cheval dans son nouvel environnement.",
+    trainingCamp: "Des stages intensifs et sur mesure pour les cavaliers et leurs chevaux, définis selon votre niveau et vos objectifs sportifs. Les séances peuvent porter sur la technique, la confiance, la condition physique, le travail de parcours et la préparation aux compétitions, avec un encadrement professionnel dans un environnement de haut niveau.",
+    valorization: "Un programme personnalisé pour développer et présenter les qualités sportives de votre cheval. Nous vous aidons à définir son travail, à valoriser sa progression et à préparer une présentation cohérente auprès d’acheteurs potentiels ou pour ses prochains objectifs sportifs."
+  },
+  ar: {
+    selection: "نضع خطة بحث مخصصة وفق مستوى الفارس وأهدافه الرياضية ونوع الحصان المطلوب والميزانية. نساعد في تحديد الخيارات المناسبة ومراجعة بياناتها وتنظيم المعاينات حتى تتمكن من اتخاذ قرار واضح ومدروس.",
+    sales: "نعمل على تقديم حصانك إلى شبكة مناسبة من المشترين الدوليين من خلال ملف احترافي ومعلومات موثقة واستفسارات مباشرة. نرافقك في تجهيز العرض والتواصل مع المهتمين من أول اتصال وحتى إتمام البيع.",
+    vetCoordination: "نساعد في ترتيب الفحوص البيطرية المستقلة وتنسيق المواعيد مع العيادات وجمع التقارير والصور المتاحة. ونحرص على إبقائك على اطلاع بكل خطوة لتتمكن من اتخاذ قرارك بناءً على المعلومات.",
+    documentation: "نرافقك في تجهيز ومراجعة المستندات اللازمة لإتمام المعاملة، بما في ذلك بيانات جواز الحصان والتسجيل وإجراءات نقل الملكية والوثائق المطلوبة لتسليم واضح ومنظم.",
+    transport: "ننسق وسيلة النقل البري أو الجوي المناسبة لوجهة الحصان واحتياجاته، مع المساعدة في ترتيب المواعيد والاستلام والتسليم والتواصل مع شركة النقل.",
+    afterSale: "لا ينتهي دورنا بإتمام البيع؛ نظل متاحين للإجابة عن استفساراتك والمساعدة في الترتيبات العملية خلال تأقلم الحصان في مكانه الجديد.",
+    trainingCamp: "معسكرات تدريب مكثفة ومخصصة للفرسان وخيولهم، وفق المستوى الحالي والأهداف الرياضية. يمكن أن تركز التدريبات على التقنية والثقة واللياقة والعمل على المسارات والاستعداد للمنافسات، بإشراف متخصصين وفي بيئة تدريب عالية المستوى.",
+    valorization: "برنامج مخصص لتطوير وإبراز الإمكانات الرياضية لحصانك. نساعد في وضع خطة التدريب وتوثيق التقدم وتجهيز عرض احترافي مناسب للمشترين المحتملين أو للخطوات الرياضية القادمة."
+  }
+};
+
 type PageProps = { params: { locale: Locale; service: string } };
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -81,7 +115,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
           <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-gold">{isTraining ? (params.locale === "fr" ? "NOS SERVICES" : params.locale === "ar" ? "خدماتنا" : "OUR SERVICES") : copy.eyebrow}</p>
           <h1 className="mt-4 max-w-3xl font-display text-4xl italic leading-tight text-charcoal sm:text-5xl lg:text-6xl">{service.title}</h1>
           <div className="mt-6 h-px w-20 bg-gold" />
-          <p className="mt-7 max-w-3xl text-base leading-8 text-charcoal/80 sm:text-lg">{isTraining && params.locale === "fr" ? "Des stages d’entraînement intensifs et sur mesure pour cavaliers et chevaux, encadrés par des professionnels expérimentés, dans un environnement de haut niveau." : service.text}</p>
+          <p className="mt-7 max-w-3xl text-base leading-8 text-charcoal/80 sm:text-lg">{SERVICE_DETAILS[params.locale][key]}</p>
         </div>
         <div className="relative mt-9 grid gap-5 sm:grid-cols-3">
           {(isTraining ? training.benefits : copy.benefits).map((benefit, index) => (
