@@ -20,6 +20,7 @@ export default function CatalogClient({
   initialSearch?: string;
 }) {
   const [level, setLevel] = useState(HEIGHT_BANDS.some((b) => b.id === initialLevel) ? (initialLevel as string) : "");
+  const [filtersOpen, setFiltersOpen] = useState(false);
   const [search, setSearch] = useState(initialSearch ?? "");
   const [breed, setBreed] = useState("");
   const [sex, setSex] = useState("");
@@ -142,76 +143,27 @@ export default function CatalogClient({
 
   return (
     <div>
-      {/* Filters driven by the horse's General Information */}
-      <div className="border-y border-charcoal-line py-5">
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          <label className="flex flex-col gap-2">
-            <span className="font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/50">{dict.catalog.filterLevel}</span>
-            <select value={level} onChange={(e) => setLevel(e.target.value)} className={selectClass}>
-              <option value="">{dict.catalog.allLevels} ({horses.length})</option>
-              {HEIGHT_BANDS.map((b) => (
-                <option key={b.id} value={b.id}>
-                  {b.label} — {counts[b.id] ?? 0}
-                </option>
-              ))}
-            </select>
-          </label>
-
-          <label className="flex flex-col gap-2">
-            <span className="font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/50">{dict.catalog.priceRange}</span>
-            <select value={priceRange} onChange={(e) => setPriceRange(e.target.value)} className={selectClass}>
-              <option value="">{dict.catalog.allPriceRanges} ({horses.length})</option>
-              {PRICE_RANGES.map((range) => <option key={range.id} value={range.id}>{range.label} ({horses.filter((h) => h.priceAmount != null && h.priceAmount >= range.min && (range.max === Infinity || h.priceAmount < range.max)).length})</option>)}
-            </select>
-          </label>
-
-
-          <label className="flex flex-col gap-2">
-            <span className="font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/50">{dict.horse.breed}</span>
-            <select value={breed} onChange={(e) => setBreed(e.target.value)} className={selectClass}>
-              <option value="">{dict.catalog.allBreeds} ({horses.length})</option>
-              {generalOptions.breeds.map((value) => <option key={value} value={value}>{value} ({horses.filter((h) => h.breed === value).length})</option>)}
-            </select>
-          </label>
-
-          <label className="flex flex-col gap-2">
-            <span className="font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/50">{dict.horse.sex}</span>
-            <select value={sex} onChange={(e) => setSex(e.target.value)} className={selectClass}>
-              <option value="">{dict.catalog.allSexes} ({horses.length})</option>
-              <option value="MARE">{dict.horse.sexLabel.MARE} ({horses.filter((h) => h.sex === "MARE").length})</option>
-              <option value="STALLION">{dict.horse.sexLabel.STALLION} ({horses.filter((h) => h.sex === "STALLION").length})</option>
-              <option value="GELDING">{dict.horse.sexLabel.GELDING} ({horses.filter((h) => h.sex === "GELDING").length})</option>
-            </select>
-          </label>
-
-          <label className="flex flex-col gap-2">
-            <span className="font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/50">{dict.detail.color}</span>
-            <select value={color} onChange={(e) => setColor(e.target.value)} className={selectClass}>
-              <option value="">{dict.catalog.allColors} ({horses.length})</option>
-              {generalOptions.colors.map((value) => <option key={value} value={value}>{value} ({horses.filter((h) => h.color === value).length})</option>)}
-            </select>
-          </label>
-
-          {generalOptions.competitionLevels.length > 0 && (
-            <label className="flex flex-col gap-2">
-              <span className="font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/50">{dict.detail.competitionLevel}</span>
-              <select value={competitionLevel} onChange={(e) => setCompetitionLevel(e.target.value)} className={selectClass}>
-                <option value="">{dict.catalog.allCompetitionLevels} ({horses.length})</option>
-                {generalOptions.competitionLevels.map((value) => <option key={value} value={value}>{value} ({horses.filter((h) => h.competitionLevel === value).length})</option>)}
-              </select>
-            </label>
-          )}
-
-          <label className="flex flex-col gap-2">
-            <span className="font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/50">{dict.horse.location}</span>
-            <select value={location} onChange={(e) => setLocation(e.target.value)} className={selectClass}>
-              <option value="">{dict.catalog.allLocations} ({horses.length})</option>
-              {generalOptions.locations.map((value) => <option key={value} value={value}>{value} ({horses.filter((h) => h.locationLabel === value).length})</option>)}
-            </select>
-          </label>
+      {/* Collapsible filter panel, styled with the existing MEC HORSES palette */}
+      <section className="border-y border-charcoal-line py-5">
+        <div className="flex justify-start">
+          <button type="button" onClick={() => setFiltersOpen((open) => !open)} aria-expanded={filtersOpen} aria-controls="horse-filter-panel" className="inline-flex min-h-11 items-center gap-3 border border-gold bg-charcoal px-5 py-3 font-mono text-[10px] uppercase tracking-eyebrow text-ivory transition-colors hover:bg-gold hover:text-charcoal">
+            <span aria-hidden="true">☷</span>{filtersOpen ? (locale === "fr" ? "Masquer les filtres" : locale === "ar" ? "إخفاء الفلاتر" : "Hide Filters") : (locale === "fr" ? "Afficher les filtres" : locale === "ar" ? "إظهار الفلاتر" : "Show Filters")}<span aria-hidden="true">{filtersOpen ? "⌃" : "⌄"}</span>
+          </button>
         </div>
-      </div>
-
+        {filtersOpen && <div id="horse-filter-panel" className="mt-5 border border-charcoal-line bg-ivory/60 p-4 sm:p-6">
+          <div className="mb-5 flex items-center justify-between border-b border-charcoal-line pb-3"><h2 className="font-serif text-xl text-charcoal">{locale === "fr" ? "Filtres des chevaux" : locale === "ar" ? "فلاتر الخيول" : "Horse Filters"}</h2><button type="button" onClick={() => { setLevel(""); setSearch(""); setBreed(""); setSex(""); setColor(""); setCompetitionLevel(""); setLocation(""); setPriceRange(""); }} className="font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/60 underline decoration-gold underline-offset-4">{locale === "fr" ? "Tout réinitialiser" : locale === "ar" ? "إعادة ضبط الكل" : "Reset All"}</button></div>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <label className="flex flex-col gap-2"><span className="font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/50">{dict.catalog.filterLevel}</span><select value={level} onChange={(e) => setLevel(e.target.value)} className={selectClass}><option value="">{dict.catalog.allLevels}</option>{HEIGHT_BANDS.map((b) => <option key={b.id} value={b.id}>{b.label} ({counts[b.id] ?? 0})</option>)}</select></label>
+            <label className="flex flex-col gap-2"><span className="font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/50">{dict.catalog.priceRange}</span><select value={priceRange} onChange={(e) => setPriceRange(e.target.value)} className={selectClass}><option value="">{dict.catalog.allPriceRanges}</option>{PRICE_RANGES.map((r) => <option key={r.id} value={r.id}>{r.label}</option>)}</select></label>
+            <label className="flex flex-col gap-2"><span className="font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/50">{dict.horse.breed}</span><select value={breed} onChange={(e) => setBreed(e.target.value)} className={selectClass}><option value="">{dict.catalog.allBreeds}</option>{generalOptions.breeds.map((v) => <option key={v} value={v}>{v}</option>)}</select></label>
+            <label className="flex flex-col gap-2"><span className="font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/50">{dict.horse.sex}</span><select value={sex} onChange={(e) => setSex(e.target.value)} className={selectClass}><option value="">{dict.catalog.allSexes}</option><option value="MARE">{dict.horse.sexLabel.MARE}</option><option value="STALLION">{dict.horse.sexLabel.STALLION}</option><option value="GELDING">{dict.horse.sexLabel.GELDING}</option></select></label>
+            <label className="flex flex-col gap-2"><span className="font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/50">{dict.detail.color}</span><select value={color} onChange={(e) => setColor(e.target.value)} className={selectClass}><option value="">{dict.catalog.allColors}</option>{generalOptions.colors.map((v) => <option key={v} value={v}>{v}</option>)}</select></label>
+            <label className="flex flex-col gap-2"><span className="font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/50">{dict.horse.location}</span><select value={location} onChange={(e) => setLocation(e.target.value)} className={selectClass}><option value="">{dict.catalog.allLocations}</option>{generalOptions.locations.map((v) => <option key={v} value={v}>{v}</option>)}</select></label>
+            {generalOptions.competitionLevels.length > 0 && <label className="flex flex-col gap-2"><span className="font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/50">{dict.detail.competitionLevel}</span><select value={competitionLevel} onChange={(e) => setCompetitionLevel(e.target.value)} className={selectClass}><option value="">{dict.catalog.allCompetitionLevels}</option>{generalOptions.competitionLevels.map((v) => <option key={v} value={v}>{v}</option>)}</select></label>}
+          </div>
+          <div className="mt-5 flex items-center justify-between border-t border-charcoal-line pt-4"><p className="font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/60">{filtered.length} {locale === "fr" ? "chevaux trouvés" : locale === "ar" ? "حصان" : "horses found"}</p><button type="button" onClick={() => setFiltersOpen(false)} className="border border-gold bg-gold px-5 py-3 font-mono text-[10px] uppercase tracking-eyebrow text-charcoal hover:bg-charcoal hover:text-ivory">{locale === "fr" ? "Voir les résultats" : locale === "ar" ? "عرض النتائج" : "View Results"}</button></div>
+        </div>}
+      </section>
       {/* Sort + result count */}
       <div className="flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:py-4">
         <button type="button" onClick={() => setFavoritesOnly((value) => !value)} aria-pressed={favoritesOnly} className={`flex items-center gap-2 border px-4 py-2 font-mono text-[10px] uppercase tracking-eyebrow transition-colors ${favoritesOnly ? "border-gold bg-gold/10 text-gold" : "border-charcoal-line text-charcoal/70 hover:border-gold hover:text-gold"}`}>

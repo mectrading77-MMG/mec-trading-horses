@@ -1,0 +1,2 @@
+ALTER TABLE "Inquiry" ADD COLUMN "riderVideoUrl" TEXT;
+ALTER TYPE "InquiryStatus" ADD VALUE 'SEARCHING';

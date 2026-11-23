@@ -1,25 +1,25 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { upload } from "@vercel/blob/client";
 import type { Locale } from "@/types/horse";
 
 const inputClass =
-  "w-full border border-charcoal-line bg-transparent px-4 py-3 text-sm text-charcoal placeholder:text-charcoal/40 focus:border-gold";
+  "w-full rounded-xl border border-charcoal-line bg-white/35 px-4 py-3 text-sm text-charcoal placeholder:text-charcoal/55 focus:border-gold";
 
 const SERVICE_KEYS = [
   "selection",
   "sales",
-  "prePurchase",
   "vetCoordination",
   "documentation",
   "transport",
-  "export",
-  "viewing",
-  "afterSale"
+  "afterSale",
+  "trainingCamp",
+  "valorization"
 ] as const;
 
 const COUNTRY_CODES = [
-  "AF","AL","DZ","AD","AO","AG","AR","AM","AU","AT","AZ","BS","BH","BD","BB","BY","BE","BZ","BJ","BT","BO","BA","BW","BR","BN","BG","BF","BI","CV","KH","CM","CA","CF","TD","CL","CN","CO","KM","CG","CD","CR","CI","HR","CU","CY","CZ","DK","DJ","DM","DO","EC","EG","SV","GQ","ER","EE","SZ","ET","FJ","FI","FR","GA","GM","GE","DE","GH","GR","GD","GT","GN","GW","GY","HT","HN","HU","IS","IN","ID","IR","IQ","IE","IL","IT","JM","JP","JO","KZ","KE","KI","KP","KR","KW","KG","LA","LV","LB","LS","LR","LY","LI","LT","LU","MG","MW","MY","MV","ML","MT","MH","MR","MU","MX","FM","MD","MC","MN","ME","MA","MZ","MM","NA","NR","NP","NL","NZ","NI","NE","NG","MK","NO","OM","PK","PW","PA","PG","PY","PE","PH","PL","PT","QA","RO","RU","RW","KN","LC","VC","WS","SM","ST","SA","SN","RS","SC","SL","SG","SK","SI","SB","SO","ZA","SS","ES","LK","SD","SR","SE","CH","SY","TJ","TZ","TH","TL","TG","TO","TT","TN","TR","TM","TV","UG","UA","AE","GB","US","UY","UZ","VU","VA","VE","VN","YE","ZM","ZW"
+  "EG","AF","AL","DZ","AD","AO","AG","AR","AM","AU","AT","AZ","BS","BH","BD","BB","BY","BE","BZ","BJ","BT","BO","BA","BW","BR","BN","BG","BF","BI","CV","KH","CM","CA","CF","TD","CL","CN","CO","KM","CG","CD","CR","CI","HR","CU","CY","CZ","DK","DJ","DM","DO","EC","SV","GQ","ER","EE","SZ","ET","FJ","FI","FR","GA","GM","GE","DE","GH","GR","GD","GT","GN","GW","GY","HT","HN","HU","IS","IN","ID","IR","IQ","IE","IL","IT","JM","JP","JO","KZ","KE","KI","KP","KR","KW","KG","LA","LV","LB","LS","LR","LY","LI","LT","LU","MG","MW","MY","MV","ML","MT","MH","MR","MU","MX","FM","MD","MC","MN","ME","MA","MZ","MM","NA","NR","NP","NL","NZ","NI","NE","NG","MK","NO","OM","PK","PW","PA","PG","PY","PE","PH","PL","PT","QA","RO","RU","RW","KN","LC","VC","WS","SM","ST","SA","SN","RS","SC","SL","SG","SK","SI","SB","SO","ZA","SS","ES","LK","SD","SR","SE","CH","SY","TJ","TZ","TH","TL","TG","TO","TT","TN","TR","TM","TV","UG","UA","AE","GB","US","UY","UZ","VU","VA","VE","VN","YE","ZM","ZW"
 ] as const;
 
 
@@ -35,7 +35,8 @@ export default function ContactForm({
   horseId,
   horseName,
   horses = [],
-  initialService = ""
+  initialService = "",
+  hideServiceSelect = false
 }: {
   dict: any;
   locale?: Locale;
@@ -43,6 +44,7 @@ export default function ContactForm({
   horseName?: string;
   horses?: { id: string; name: string }[];
   initialService?: string;
+  hideServiceSelect?: boolean;
 }) {
   const ui: Record<Locale, { selectService: string; selectHorse: string; viewingDate: string; sendVia: string; email: string; whatsapp: string; error: string; name: string; country: string; phone: string; service: string; horse: string; message: string }> = {
     en: { selectService: "{labels.selectService}", selectHorse: "{labels.selectHorse}", viewingDate: "{labels.viewingDate}", sendVia: "Send inquiry via", email: "Email", whatsapp: "WhatsApp", error: "Something went wrong — please try again or contact us directly.", name: "Name", country: "Country", phone: "Phone", service: "Service", horse: "Horse", message: "Message" },
@@ -51,13 +53,61 @@ export default function ContactForm({
   };
   const labels = ui[locale] ?? ui.en;
   const countryNames = new Intl.DisplayNames([locale], { type: "region" });
+  const countryLabel = (code: string) => code === "EG" && locale === "ar" ? "مصر" : countryNames.of(code) ?? code;
+  const defaultSelectionMessage: Record<Locale, string> = {
+    en: "Thank you for sharing your horse-search requirements. Our team will review your request and contact you shortly to discuss the next steps.",
+    fr: "Merci de nous avoir communiqué les détails de votre recherche. Notre équipe étudiera votre demande et vous contactera prochainement afin d’échanger sur les prochaines étapes.",
+    ar: "شكرًا لمشاركتنا تفاصيل بحثك عن الحصان المناسب. سيقوم فريقنا بمراجعة طلبك والتواصل معك قريبًا لمناقشة الخطوات التالية."
+  };
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [draftLoaded, setDraftLoaded] = useState(false);
+  const [messageEdited, setMessageEdited] = useState(false);
+  const [handoffMethod, setHandoffMethod] = useState<"email" | "whatsapp" | "">("");
   const [service, setService] = useState(initialService);
-  const [selectedHorse, setSelectedHorse] = useState("");
+  const [selectedHorse, setSelectedHorse] = useState(initialService === "selection" ? "Not listed" : "");
   const [viewingDate, setViewingDate] = useState("");
   const [phone, setPhone] = useState("");
   const [country, setCountry] = useState("");
-  const [sendMethod, setSendMethod] = useState<"email" | "whatsapp" | "">("");
+  const [sendMethod, setSendMethod] = useState<"email" | "whatsapp" | "">(initialService === "trainingCamp" ? "email" : "");
+  const [riderVideo, setRiderVideo] = useState<File | null>(null);
+  const [messageText, setMessageText] = useState(initialService === "selection" ? defaultSelectionMessage[locale] : "");
+
+  // Keep the horse-search draft when the user switches EN / FR / AR.
+  useEffect(() => {
+    try {
+      const raw = window.localStorage.getItem("mec-horse-search-draft");
+      if (raw) {
+        const draft = JSON.parse(raw) as { service?: string; selectedHorse?: string; country?: string; phone?: string; sendMethod?: "email" | "whatsapp" | ""; messageText?: string; messageEdited?: boolean };
+        if (!initialService && draft.service && SERVICE_KEYS.includes(draft.service as (typeof SERVICE_KEYS)[number])) setService(draft.service);
+        if (draft.selectedHorse) setSelectedHorse(draft.selectedHorse);
+        if (draft.country) setCountry(draft.country);
+        if (draft.phone) setPhone(draft.phone);
+        if (draft.sendMethod) setSendMethod(draft.sendMethod);
+        const wasEdited = Boolean(draft.messageEdited);
+        setMessageEdited(wasEdited);
+        if (wasEdited && draft.messageText) setMessageText(draft.messageText);
+        else if ((draft.service ?? initialService) === "selection") setMessageText(defaultSelectionMessage[locale]);
+      }
+    } catch {
+      window.localStorage.removeItem("mec-horse-search-draft");
+    }
+    if (initialService) setService(initialService);
+    setDraftLoaded(true);
+  // The locale is intentional: an untouched automatic message follows it.
+  }, [locale, initialService]);
+
+  useEffect(() => {
+    if (!draftLoaded) return;
+    window.localStorage.setItem("mec-horse-search-draft", JSON.stringify({
+      service, selectedHorse, country, phone, sendMethod, messageText, messageEdited
+    }));
+  }, [draftLoaded, service, selectedHorse, country, phone, sendMethod, messageText, messageEdited]);
+
+  useEffect(() => {
+    if (draftLoaded && service === "selection" && !messageEdited) {
+      setMessageText(defaultSelectionMessage[locale]);
+    }
+  }, [locale, service, messageEdited, draftLoaded]);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -66,6 +116,13 @@ export default function ContactForm({
     const payload = Object.fromEntries(form.entries());
 
     try {
+      let riderVideoUrl = "";
+      if (riderVideo) {
+        if (!["video/mp4", "video/quicktime", "video/webm"].includes(riderVideo.type)) throw new Error("Please upload an MP4, MOV or WebM video.");
+        if (riderVideo.size > 100 * 1024 * 1024) throw new Error("Video must be 100 MB or smaller.");
+        const blob = await upload(`rider-videos/${Date.now()}-${riderVideo.name.replace(/[^a-zA-Z0-9._-]/g, "-")}`, riderVideo, { access: "public", handleUploadUrl: "/api/inquiry-video-upload" });
+        riderVideoUrl = blob.url;
+      }
       const response = await fetch("/api/inquiries", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -75,8 +132,9 @@ export default function ContactForm({
           phone: payload.phone,
           country: payload.country,
           service: payload.service,
-          message: payload.message,
+          message: [payload.message, payload.riderLevel ? `Rider level: ${payload.riderLevel}` : "", payload.trainingPeriod ? `Preferred period: ${payload.trainingPeriod}` : ""].filter(Boolean).join("\n\n"),
           lookingFor: payload.lookingFor || horseName || "",
+          riderVideoUrl,
           viewingDate: payload.viewingDate || "",
           horseId: horseId || "",
           locale,
@@ -85,8 +143,33 @@ export default function ContactForm({
         })
       });
       if (!response.ok) throw new Error("Could not save inquiry");
+
+      const contactMessage = [
+        "MEC HORSES — Horse search request",
+        `Name: ${payload.name}`,
+        `Email: ${payload.email}`,
+        `Phone: ${payload.phone}`,
+        `Country: ${countryLabel(String(payload.country ?? ""))}`,
+        `Service: ${payload.service}`,
+        `Horse: ${payload.lookingFor || "Not listed"}`,
+        `Requirements: ${payload.message}`,
+        riderVideoUrl ? `Rider video: ${riderVideoUrl}` : ""
+      ].filter(Boolean).join(String.fromCharCode(10));
+
+      // A saved lead is not a sent message. Open the chosen app for the user to send.
+      if (sendMethod === "whatsapp") {
+        window.location.href = `https://wa.me/33618313530?text=${encodeURIComponent(contactMessage)}`;
+        return;
+      }
+      if (sendMethod === "email") {
+        window.location.href = `mailto:sales@mechorses.com?subject=${encodeURIComponent("MEC HORSES — Horse search request")}&body=${encodeURIComponent(contactMessage)}`;
+        setHandoffMethod("email");
+        setStatus("sent");
+        return;
+      }
       setStatus("sent");
-    } catch {
+    } catch (error) {
+      console.error("Horse search request submission failed:", error);
       setStatus("error");
     }
   }
@@ -95,7 +178,9 @@ export default function ContactForm({
     return (
       <div className="border border-hunter bg-hunter/5 p-8 text-center">
         <p className="font-display text-xl italic text-hunter">{dict.form.sentTitle}</p>
-        <p className="mt-2 text-sm text-charcoal/60">{dict.form.sentText}</p>
+        <p className="mt-2 text-sm text-charcoal/60">{handoffMethod === "email"
+          ? (locale === "ar" ? "تم حفظ طلبك. أكمل إرسال الرسالة من تطبيق البريد الإلكتروني." : locale === "fr" ? "Votre demande est enregistrée. Veuillez confirmer l’envoi depuis votre application e-mail." : "Your request is saved. Please complete sending from your email app.")
+          : dict.form.sentText}</p>
       </div>
     );
   }
@@ -125,7 +210,7 @@ export default function ContactForm({
           </option>
           {COUNTRY_CODES.map((code) => (
             <option key={code} value={code}>
-              {countryNames.of(code)}
+              {countryLabel(code)}
             </option>
           ))}
         </select>
@@ -140,11 +225,16 @@ export default function ContactForm({
         />
       </div>
 
-      <select
+      {!hideServiceSelect && <select
         required
         name="service"
         value={service}
-        onChange={(e) => setService(e.target.value)}
+        onChange={(e) => {
+          const nextService = e.target.value;
+          setService(nextService);
+          window.localStorage.setItem("mec-contact-service", nextService);
+          if (nextService === "selection" && !messageEdited) setMessageText(defaultSelectionMessage[locale]);
+        }}
         aria-label={labels.service}
         className={`${inputClass} appearance-none`}
       >
@@ -153,12 +243,15 @@ export default function ContactForm({
         </option>
         {SERVICE_KEYS.map((key) => (
           <option key={key} value={key}>
-            {dict.services.list[key].title}
+            {key === "selection"
+            ? (locale === "ar" ? "البحث عن حصان" : locale === "fr" ? "Recherche d’un cheval" : "Search for a horse")
+            : dict.services.list[key].title}
           </option>
         ))}
-      </select>
+      </select>}
+      {hideServiceSelect && <input type="hidden" name="service" value={service || initialService} />}
 
-      {service === "selection" && horses.length > 0 && (
+      {service === "selection" && (
         <select
           required
           name="lookingFor"
@@ -168,14 +261,14 @@ export default function ContactForm({
           className={`${inputClass} appearance-none`}
         >
           <option value="" disabled>
-            Select a horse
+            {locale === "ar" ? "اختر حصانًا" : locale === "fr" ? "Choisissez un cheval" : "Select a horse"}
           </option>
+          <option value="Not listed">{locale === "ar" ? "الحصان غير موجود بالقائمة" : locale === "fr" ? "Cheval non répertorié" : "Not listed"}</option>
           {horses.map((horse) => (
             <option key={horse.id} value={horse.name}>
               {horse.name}
             </option>
           ))}
-          <option value="NOT_LISTED">Not listed</option>
         </select>
       )}
       {service === "viewing" && (
@@ -191,7 +284,7 @@ export default function ContactForm({
           />
           {!viewingDate && (
             <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-sm text-charcoal/40">
-              Select your viewing date
+              {locale === "ar" ? "اختر تاريخ المعاينة" : locale === "fr" ? "Choisissez la date de visite" : "Select your viewing date"}
             </span>
           )}
           <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-charcoal/60">
@@ -202,9 +295,38 @@ export default function ContactForm({
           </span>
         </div>
       )}
-      <textarea required name="message" rows={4} placeholder={dict.form.message} className={inputClass} />
+      {service === "trainingCamp" && (
+        <div className="grid gap-4 sm:grid-cols-2">
+          <select name="riderLevel" aria-label={locale === "fr" ? "Niveau du cavalier" : locale === "ar" ? "مستوى الفارس" : "Rider level"} className={`${inputClass} appearance-none`}>
+            <option value="">{locale === "fr" ? "Niveau du cavalier" : locale === "ar" ? "مستوى الفارس" : "Rider level"}</option>
+            {(locale === "fr" ? ["Débutant", "Intermédiaire", "Confirmé", "Professionnel"] : locale === "ar" ? ["مبتدئ", "متوسط", "متقدم", "محترف"] : ["Beginner", "Intermediate", "Advanced", "Professional"]).map((level) => <option key={level} value={level}>{level}</option>)}
+          </select>
+          <input name="trainingPeriod" placeholder={locale === "fr" ? "Période souhaitée" : locale === "ar" ? "الفترة المطلوبة" : "Preferred period"} className={inputClass} />
+        </div>
+      )}
+      <div className="grid gap-2">
+        <textarea required name="message" rows={4} value={messageText} onFocus={() => {
+          if (service === "selection" && !messageEdited && messageText === defaultSelectionMessage[locale]) {
+            setMessageText("");
+            setMessageEdited(true);
+          }
+        }} onChange={(e) => { setMessageEdited(true); setMessageText(e.target.value); }} placeholder={dict.form.message} className={inputClass} />
+        {service === "selection" && messageEdited && (
+          <button type="button" onClick={() => { setMessageEdited(false); setMessageText(defaultSelectionMessage[locale]); }} className="justify-self-start text-xs text-gold underline">
+            {locale === "ar" ? "استعادة الرسالة التلقائية" : locale === "fr" ? "Rétablir le message automatique" : "Restore automatic message"}
+          </button>
+        )}
+      </div>
+      {service === "selection" && (
+        <div className="grid gap-2">
+          <label className="text-sm font-medium text-charcoal">{locale === "ar" ? "فيديو للراكب (موصى به)" : locale === "fr" ? "Vidéo du cavalier (recommandée)" : "Rider video (Recommended)"}</label>
+          <input type="file" accept="video/mp4,video/quicktime,video/webm" onChange={(e) => setRiderVideo(e.target.files?.[0] ?? null)} className={`${inputClass} file:mr-4 file:border-0 file:bg-charcoal file:px-4 file:py-2 file:text-xs file:uppercase file:tracking-wider file:text-ivory`} />
+          <p className="text-xs text-charcoal/50">{locale === "ar" ? "أرفق فيديو قصيرًا يوضح مستوى الراكب وأداءه (MP4 أو MOV أو WebM، حتى 100 ميجابايت)." : locale === "fr" ? "Ajoutez une courte vidéo illustrant le niveau et la pratique du cavalier (MP4, MOV ou WebM, 100 Mo maximum)." : "Attach a short video showing the rider’s level and performance (MP4, MOV or WebM, up to 100 MB)."}</p>
+          {riderVideo && <p className="text-xs text-hunter">{riderVideo.name}</p>}
+        </div>
+      )}
 
-      <div className="grid gap-3">
+      {service !== "trainingCamp" && <div className="grid gap-3">
         <p className="font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/50">{labels.sendVia}</p>
         <div className="grid gap-3 sm:grid-cols-2">
           <label className="flex cursor-pointer items-center gap-3 border border-charcoal-line px-4 py-3 text-sm">
@@ -216,12 +338,12 @@ export default function ContactForm({
             <span>{labels.whatsapp} — +33 6 18 31 35 30</span>
           </label>
         </div>
-      </div>
+      </div>}
 
       <button
         type="submit"
         disabled={status === "sending"}
-        className="mt-2 bg-charcoal px-6 py-3 font-mono text-[11px] uppercase tracking-eyebrow text-ivory transition-colors duration-400 hover:bg-hunter disabled:opacity-60"
+        className="mt-2 rounded-xl bg-hunter px-6 py-4 font-display text-base font-semibold text-ivory transition-colors duration-300 hover:bg-charcoal disabled:opacity-60"
       >
         {status === "sending" ? "…" : dict.form.send}
       </button>
