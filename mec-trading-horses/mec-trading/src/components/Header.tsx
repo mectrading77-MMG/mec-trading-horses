@@ -7,6 +7,12 @@ import { getCustomerSession } from "@/lib/customer-auth";
 
 export default async function Header({ locale, dict }: { locale: Locale; dict: any }) {
   const customer = await getCustomerSession();
+  const accountLabels = {
+    en: { account: "My Account", dashboard: "My Dashboard", signIn: "Sign in", signUp: "Sign up", signOut: "Sign out" },
+    fr: { account: "Mon compte", dashboard: "Mon espace", signIn: "Se connecter", signUp: "Créer un compte", signOut: "Se déconnecter" },
+    ar: { account: "حسابي", dashboard: "لوحة حسابي", signIn: "تسجيل الدخول", signUp: "إنشاء حساب", signOut: "تسجيل الخروج" }
+  } as const;
+  const accountText = accountLabels[locale] ?? accountLabels.en;
   const nav = [
     { href: `/${locale}`, label: dict.nav.home },
     { href: `/${locale}/horses-for-sale`, label: dict.nav.horses },
@@ -43,21 +49,21 @@ export default async function Header({ locale, dict }: { locale: Locale; dict: a
           <DismissibleDetails className="group relative">
             <summary aria-label="My account" className="flex h-10 w-10 cursor-pointer list-none items-center justify-center border border-charcoal/30 text-charcoal transition-colors hover:border-gold hover:text-gold sm:h-11 sm:w-auto sm:gap-2 sm:px-3 [&::-webkit-details-marker]:hidden">
               <svg aria-hidden="true" viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="12" cy="8" r="3.2" /><path d="M5.5 20c.6-3.2 2.8-5 6.5-5s5.9 1.8 6.5 5" strokeLinecap="round" /></svg>
-              <span className="hidden whitespace-nowrap font-mono text-[10px] font-semibold uppercase tracking-eyebrow sm:inline">My Account</span>
+              <span className="hidden whitespace-nowrap font-mono text-[10px] font-semibold uppercase tracking-eyebrow sm:inline">{accountText.account}</span>
               <span className="hidden text-[9px] sm:inline">▾</span>
             </summary>
             <div className="absolute right-0 top-full z-50 mt-2 min-w-48 border border-charcoal/15 bg-ivory p-2 shadow-xl">
               {customer ? (
                 <>
-                  <Link href={`/${locale}/account/dashboard`} className="block px-4 py-3 font-mono text-[11px] uppercase tracking-eyebrow text-charcoal hover:bg-sand/15 hover:text-gold">My Dashboard</Link>
-                  <form action="/api/account/logout" method="post">
-                    <button type="submit" className="block w-full px-4 py-3 text-left font-mono text-[11px] uppercase tracking-eyebrow text-charcoal hover:bg-sand/15 hover:text-gold">Sign out</button>
+                  <Link href={`/${locale}/account/dashboard`} className="block px-4 py-3 font-mono text-[11px] uppercase tracking-eyebrow text-charcoal hover:bg-sand/15 hover:text-gold">{accountText.dashboard}</Link>
+                  <form action={`/api/account/logout?locale=${locale}`} method="post">
+                    <button type="submit" className="block w-full px-4 py-3 text-left font-mono text-[11px] uppercase tracking-eyebrow text-charcoal hover:bg-sand/15 hover:text-gold">{accountText.signOut}</button>
                   </form>
                 </>
               ) : (
                 <>
-                  <Link href={`/${locale}/account?mode=login`} className="block px-4 py-3 font-mono text-[11px] uppercase tracking-eyebrow text-charcoal hover:bg-sand/15 hover:text-gold">Sign in</Link>
-                  <Link href={`/${locale}/account?mode=register`} className="block px-4 py-3 font-mono text-[11px] uppercase tracking-eyebrow text-charcoal hover:bg-sand/15 hover:text-gold">Sign up</Link>
+                  <Link href={`/${locale}/account?mode=login`} className="block px-4 py-3 font-mono text-[11px] uppercase tracking-eyebrow text-charcoal hover:bg-sand/15 hover:text-gold">{accountText.signIn}</Link>
+                  <Link href={`/${locale}/account?mode=register`} className="block px-4 py-3 font-mono text-[11px] uppercase tracking-eyebrow text-charcoal hover:bg-sand/15 hover:text-gold">{accountText.signUp}</Link>
                 </>
               )}
             </div>
