@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { upload } from "@vercel/blob/client";
 import type { Locale } from "@/types/horse";
 
@@ -10,12 +10,9 @@ const inputClass =
 const SERVICE_KEYS = [
   "selection",
   "sales",
-  "prePurchase",
   "vetCoordination",
   "documentation",
   "transport",
-  "export",
-  "viewing",
   "afterSale"
 ] as const;
 
@@ -54,6 +51,17 @@ export default function ContactForm({
   const countryNames = new Intl.DisplayNames([locale], { type: "region" });
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [service, setService] = useState(initialService);
+  useEffect(() => {
+    if (initialService) {
+      window.localStorage.setItem("mec-contact-service", initialService);
+      setService(initialService);
+      return;
+    }
+    const savedService = window.localStorage.getItem("mec-contact-service");
+    if (savedService && SERVICE_KEYS.includes(savedService as (typeof SERVICE_KEYS)[number])) {
+      setService(savedService);
+    }
+  }, [initialService]);
   const [selectedHorse, setSelectedHorse] = useState(initialService === "selection" ? "Not listed" : "");
   const [viewingDate, setViewingDate] = useState("");
   const [phone, setPhone] = useState("");
@@ -155,7 +163,7 @@ export default function ContactForm({
         required
         name="service"
         value={service}
-        onChange={(e) => setService(e.target.value)}
+        onChange={(e) => { setService(e.target.value); window.localStorage.setItem("mec-contact-service", e.target.value); }}
         aria-label={labels.service}
         className={`${inputClass} appearance-none`}
       >
@@ -164,7 +172,9 @@ export default function ContactForm({
         </option>
         {SERVICE_KEYS.map((key) => (
           <option key={key} value={key}>
-            {dict.services.list[key].title}
+            {key === "selection"
+            ? (locale === "ar" ? "البحث عن حصان" : locale === "fr" ? "Recherche d’un cheval" : "Search for a horse")
+            : dict.services.list[key].title}
           </option>
         ))}
       </select>
@@ -213,10 +223,12 @@ export default function ContactForm({
           </span>
         </div>
       )}
-      <textarea required name="message" rows={4} value={messageText} onChange={(e) => setMessageText(e.target.value)} placeholder={dict.form.message} className={inputClass} />
+      <textarea required name="message" rows={4} value={messageText} onFocus={() => {
+        if (service === "selection" && messageText.trim()) setMessageText("");
+      }} onChange={(e) => setMessageText(e.target.value)} placeholder={dict.form.message} className={inputClass} />
       {service === "selection" && (
         <div className="grid gap-2">
-          <label className="text-sm font-medium text-charcoal">{locale === "ar" ? "فيديو للراكب (اختياري)" : locale === "fr" ? "Vidéo du cavalier (facultatif)" : "Rider video (optional)"}</label>
+          <label className="text-sm font-medium text-charcoal">{locale === "ar" ? "فيديو للراكب (موصى به)" : locale === "fr" ? "Vidéo du cavalier (recommandée)" : "Rider video (Recommended)"}</label>
           <input type="file" accept="video/mp4,video/quicktime,video/webm" onChange={(e) => setRiderVideo(e.target.files?.[0] ?? null)} className={`${inputClass} file:mr-4 file:border-0 file:bg-charcoal file:px-4 file:py-2 file:text-xs file:uppercase file:tracking-wider file:text-ivory`} />
           <p className="text-xs text-charcoal/50">{locale === "ar" ? "أرفق فيديو قصيرًا يوضح مستوى الراكب وأداءه (MP4 أو MOV أو WebM، حتى 100 ميجابايت)." : locale === "fr" ? "Ajoutez une courte vidéo illustrant le niveau et la pratique du cavalier (MP4, MOV ou WebM, 100 Mo maximum)." : "Attach a short video showing the rider’s level and performance (MP4, MOV or WebM, up to 100 MB)."}</p>
           {riderVideo && <p className="text-xs text-hunter">{riderVideo.name}</p>}
