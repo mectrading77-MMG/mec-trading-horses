@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Facebook, Instagram } from "lucide-react";
 import type { Locale } from "@/types/horse";
 import Logo from "@/components/Logo";
 
@@ -42,10 +43,28 @@ export default function Footer({ locale, dict }: { locale: Locale; dict: any }) 
         <div>
           <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-[#c5a875]">{labels.social}</p>
           <p className="mt-5 text-sm text-ivory/55">{labels.follow}</p>
-          <ul className="mt-3 space-y-3 text-sm text-ivory/75">
-            <li><a className="transition-colors hover:text-[#d8bd8d]" href="https://instagram.com/m.e.c_horses" target="_blank" rel="noopener noreferrer">Instagram <span className="text-ivory/35">↗</span></a></li>
-            <li><a className="transition-colors hover:text-[#d8bd8d]" href="https://facebook.com/MecHorses" target="_blank" rel="noopener noreferrer">Facebook <span className="text-ivory/35">↗</span></a></li>
-          </ul>
+          <div className="mt-4 flex items-center gap-3">
+            <a
+              aria-label="Instagram"
+              title="Instagram"
+              className="group inline-flex h-11 w-11 items-center justify-center rounded-full border border-ivory/20 text-ivory/75 transition-all duration-200 hover:-translate-y-0.5 hover:border-[#c5a875] hover:bg-[#c5a875]/10 hover:text-[#d8bd8d] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c5a875]"
+              href="https://instagram.com/m.e.c_horses"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Instagram size={19} strokeWidth={1.7} />
+            </a>
+            <a
+              aria-label="Facebook"
+              title="Facebook"
+              className="group inline-flex h-11 w-11 items-center justify-center rounded-full border border-ivory/20 text-ivory/75 transition-all duration-200 hover:-translate-y-0.5 hover:border-[#c5a875] hover:bg-[#c5a875]/10 hover:text-[#d8bd8d] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c5a875]"
+              href="https://facebook.com/MecHorses"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Facebook size={19} strokeWidth={1.7} />
+            </a>
+          </div>
         </div>
       </div>
 
