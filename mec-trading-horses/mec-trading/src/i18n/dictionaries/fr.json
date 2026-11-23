@@ -197,10 +197,6 @@
         "title": "Vente de chevaux",
         "text": "Chaque cheval de notre sélection est proposé directement, sans intermédiaire de type marketplace."
       },
-      "prePurchase": {
-        "title": "Accompagnement pré-achat",
-        "text": "Nous coordonnons la visite vétérinaire indépendante et en expliquons clairement les résultats."
-      },
       "vetCoordination": {
         "title": "Coordination vétérinaire",
         "text": "Cliniques, calendrier et déplacements organisés autour de votre emploi du temps."
@@ -212,14 +208,6 @@
       "transport": {
         "title": "Transport international",
         "text": "Transport routier et aérien organisé de porte à porte."
-      },
-      "export": {
-        "title": "Assistance export",
-        "text": "Douanes, certificats sanitaires et réglementations d'importation gérés pour vous."
-      },
-      "viewing": {
-        "title": "Rendez-vous de visite",
-        "text": "En personne ou par appel vidéo en direct, au moment qui vous convient."
       },
       "afterSale": {
         "title": "Suivi après-vente",

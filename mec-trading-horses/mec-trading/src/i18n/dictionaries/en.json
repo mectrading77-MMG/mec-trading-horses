@@ -196,10 +196,6 @@
         "title": "Horse Sales",
         "text": "Every horse in our selection is offered directly, with no intermediary marketplace."
       },
-      "prePurchase": {
-        "title": "Pre-Purchase Assistance",
-        "text": "We coordinate independent vetting and interpret the results plainly."
-      },
       "vetCoordination": {
         "title": "Veterinary Coordination",
         "text": "Clinics, timing and travel arranged around your schedule."
@@ -211,14 +207,6 @@
       "transport": {
         "title": "International Transport",
         "text": "Ground and air transport organised door to door."
-      },
-      "export": {
-        "title": "Export Assistance",
-        "text": "Customs, health certificates and country-specific import rules managed for you."
-      },
-      "viewing": {
-        "title": "Viewing Appointments",
-        "text": "In person or by live video call, at a time that suits you."
       },
       "afterSale": {
         "title": "After-Sale Support",
