@@ -145,8 +145,7 @@ export default function CatalogClient({
     <div>
       {/* Collapsible filter panel, styled with the existing MEC HORSES palette */}
       <section className="border-y border-charcoal-line py-5">
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <div><p className="font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/50">{locale === "fr" ? "Affiner la sélection" : locale === "ar" ? "تصفية النتائج" : "Refine your selection"}</p><p className="mt-1 text-sm text-charcoal/65">{locale === "fr" ? "Trouvez le cheval idéal" : locale === "ar" ? "اعثر على الحصان المناسب" : "Find your ideal horse"}</p></div>
+        <div className="flex flex-wrap items-center justify-start gap-3">
           <button type="button" onClick={() => setFiltersOpen((open) => !open)} aria-expanded={filtersOpen} aria-controls="horse-filter-panel" className="inline-flex min-h-11 items-center gap-3 border border-gold bg-charcoal px-5 py-3 font-mono text-[10px] uppercase tracking-eyebrow text-ivory transition-colors hover:bg-gold hover:text-charcoal">
             <span aria-hidden="true">☷</span>{filtersOpen ? (locale === "fr" ? "Masquer les filtres" : locale === "ar" ? "إخفاء الفلاتر" : "Hide Filters") : (locale === "fr" ? "Afficher les filtres" : locale === "ar" ? "إظهار الفلاتر" : "Show Filters")}<span aria-hidden="true">{filtersOpen ? "⌃" : "⌄"}</span>
           </button>
