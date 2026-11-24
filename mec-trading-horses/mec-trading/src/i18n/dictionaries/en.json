@@ -105,6 +105,7 @@
     "noResults": "No horses match these filters right now — contact us and we'll let you know when one does.",
     "allLevels": "All heights",
     "filterLevel": "Height",
+    "youngHorses": "Young Horses",
     "sortHeight": "Height jumped",
     "showing": "{count} horses",
     "generalInfo": "General Information",
@@ -262,6 +263,7 @@
   },
   "bands": {
     "eyebrow": "Show jumping",
+    "youngHorses": "Young Horses",
     "count": "{count} horses",
     "empty": "No horses at this height right now — contact us and we'll let you know when one arrives.",
     "countOne": "{count} horse"
