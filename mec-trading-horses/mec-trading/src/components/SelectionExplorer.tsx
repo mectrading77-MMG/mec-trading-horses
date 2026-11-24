@@ -38,7 +38,7 @@ export default function SelectionExplorer({
 
   const list = byBand.get(active) ?? [];
   const horse = list[horseIdx % Math.max(1, list.length)];
-  const photos = horse?.media.filter((m) => m.type === "PHOTO") ?? [];
+  const photos = horse?.media.filter((m) => m.type === "PHOTO").sort((a, b) => Number(Boolean(b.isCover)) - Number(Boolean(a.isCover))) ?? [];
 
   // Rotate horses within the band; rotate photos within the horse.
   useEffect(() => {
@@ -50,12 +50,12 @@ export default function SelectionExplorer({
     const id = setInterval(() => {
       setHorseIdx((n) => (n + 1) % list.length);
       setPhotoIdx(0);
-    }, 3600);
+    }, 2000);
     return () => clearInterval(id);
   }, [list.length, active]);
   useEffect(() => {
     if (photos.length < 2) return;
-    const id = setInterval(() => setPhotoIdx((n) => (n + 1) % photos.length), 1200);
+    const id = setInterval(() => setPhotoIdx((n) => (n + 1) % photos.length), 2000);
     return () => clearInterval(id);
   }, [photos.length, horse?.id]);
 
