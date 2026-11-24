@@ -84,7 +84,7 @@ export default function SelectionExplorer({
                     isActive ? "text-gold" : "text-ivory/55 group-hover:text-ivory"
                   }`}
                 >
-                  {b.label}
+                  {b.id === "young-horses" ? dict.bands.youngHorses : b.label}
                 </span>
                 <span className="ms-auto font-mono text-[10px] uppercase tracking-eyebrow text-ivory/35">
                   {(count === 1 ? dict.bands.countOne : dict.bands.count).replace("{count}", String(count))}
