@@ -105,6 +105,7 @@
     "noResults": "Aucun cheval ne correspond à ces filtres pour le moment — contactez-nous, nous vous préviendrons.",
     "allLevels": "Toutes hauteurs",
     "filterLevel": "Hauteur",
+    "youngHorses": "Jeunes chevaux",
     "sortHeight": "Hauteur sautée",
     "showing": "{count} chevaux",
     "generalInfo": "Informations générales",
@@ -263,6 +264,7 @@
   },
   "bands": {
     "eyebrow": "Saut d'obstacles",
+    "youngHorses": "Jeunes chevaux",
     "count": "{count} chevaux",
     "empty": "Aucun cheval à cette hauteur pour le moment — contactez-nous et nous vous préviendrons.",
     "countOne": "{count} cheval"
