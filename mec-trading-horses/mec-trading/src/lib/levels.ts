@@ -9,11 +9,7 @@ export interface HeightBand {
 }
 
 export const HEIGHT_BANDS: HeightBand[] = [
-  { id: "80", minCm: 80, maxCm: 84, label: "80 cm" },
-  { id: "90", minCm: 85, maxCm: 94, label: "90 cm" },
-  { id: "100", minCm: 95, maxCm: 104, label: "1.00 m" },
-  { id: "110", minCm: 105, maxCm: 112, label: "1.10 m" },
-  { id: "115", minCm: 113, maxCm: 117, label: "1.15 m" },
+  { id: "young-horses", minCm: 80, maxCm: 117, label: "Young Horses" },
   { id: "120", minCm: 118, maxCm: 125, label: "1.20 m" },
   { id: "130", minCm: 126, maxCm: 132, label: "1.30 m" },
   { id: "135", minCm: 133, maxCm: 137, label: "1.35 m" },
