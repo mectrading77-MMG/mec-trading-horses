@@ -77,20 +77,18 @@ export default function HorseCard({ horse, locale, dict }: { horse: Horse; local
           </span>
         </div>
 
-        <div className="mt-4 flex items-start justify-between gap-2">
-          <div>
+        <div className="mt-4 grid min-w-0 grid-cols-1 gap-3 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-start sm:gap-4">
+          <div className="min-w-0">
             <h3 className="font-display text-xl italic text-charcoal">{t.name}</h3>
-            <p className="mt-1 text-sm text-charcoal/60">
+            <p className="mt-1 text-sm leading-relaxed text-charcoal/60">
               {horse.breed} · {dict.horse.sexLabel[horse.sex]} · {ageFromDob(horse.dateOfBirth)} {dict.horse.years}
             </p>
-            {horse.highlights[0] && <p className="mt-1 text-sm text-charcoal/60">{horse.highlights[0]}</p>}
-            <p className="mt-1 font-mono text-[11px] uppercase tracking-eyebrow text-charcoal/40">{horse.locationLabel}</p>
+            {horse.highlights[0] && <p className="mt-1 text-sm leading-relaxed text-charcoal/60">{horse.highlights[0]}</p>}
+            <p className="mt-1 break-words font-mono text-[11px] uppercase tracking-eyebrow text-charcoal/40">{horse.locationLabel}</p>
           </div>
-          <div className="shrink-0 text-right">
-            <div>
-              <p className="font-display text-lg text-gold">{price ?? "—"}</p>
-              <InquiryOptions horseName={t.name} label={dict.horse.inquireHorse} />
-            </div>
+          <div className="flex min-w-0 flex-col items-start text-left sm:items-end sm:text-right">
+            <p className="font-display text-lg text-gold">{price ?? "—"}</p>
+            <InquiryOptions horseName={t.name} label={dict.horse.inquireHorse} />
           </div>
         </div>
       </Link>
