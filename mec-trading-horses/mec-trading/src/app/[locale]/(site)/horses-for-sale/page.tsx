@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { Metadata } from "next";
 import { localizedAlternates } from "@/lib/seo";
 import type { Locale } from "@/types/horse";
@@ -30,8 +31,22 @@ export default async function HorsesForSalePage({
 }) {
   const dict = await getDictionary(params.locale);
   const horses = await listHorses();
+  const breadcrumb = {
+    home: ({ en: "Home", fr: "Accueil", ar: "الرئيسية" } as Record<Locale, string>)[params.locale],
+    current: ({ en: "Horses for Sale", fr: "Chevaux à vendre", ar: "خيول للبيع" } as Record<Locale, string>)[params.locale],
+  };
   return (
     <div className="mx-auto max-w-editorial px-6 py-10 lg:px-10 lg:py-12">
+      <nav aria-label={params.locale === "ar" ? "مسار التنقل" : params.locale === "fr" ? "Fil d’Ariane" : "Breadcrumb"} dir={params.locale === "ar" ? "rtl" : "ltr"} className="mb-5">
+        <ol className="flex flex-wrap items-center gap-2 font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/50">
+          <li><Link href={`/${params.locale}`} className="transition-colors hover:text-gold">{breadcrumb.home}</Link></li>
+          <li aria-hidden="true" className="text-gold">/</li>
+          <li aria-current="page" className="text-charcoal">{breadcrumb.current}</li>
+        </ol>
+      </nav>
+      <h1 className="mb-8 font-serif text-4xl leading-tight text-charcoal sm:text-5xl lg:mb-10">
+        {breadcrumb.current}
+      </h1>
       <CatalogClient
         horses={horses}
         locale={params.locale}
