@@ -22,7 +22,7 @@ export default function HorsePreview({
   locale,
   dict,
   anchor,
-  interval = 1500
+  interval = 2000
 }: {
   horse: Horse;
   locale: Locale;
@@ -31,7 +31,7 @@ export default function HorsePreview({
   interval?: number;
 }) {
   const t = horse.translations[locale] ?? horse.translations.en;
-  const photos = horse.media.filter((m) => m.type === "PHOTO");
+  const photos = horse.media.filter((m) => m.type === "PHOTO").sort((a, b) => Number(Boolean(b.isCover)) - Number(Boolean(a.isCover)));
   const [i, setI] = useState(0);
   const price = formatPriceRange(horse.priceAmount, horse.priceCurrency, horse.priceOnRequest, locale);
 
