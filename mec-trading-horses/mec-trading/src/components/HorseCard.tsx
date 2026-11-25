@@ -77,18 +77,34 @@ export default function HorseCard({ horse, locale, dict }: { horse: Horse; local
           </span>
         </div>
 
-        <div className="mt-4 grid min-w-0 grid-cols-1 gap-3 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-start sm:gap-4">
+        <div className="mt-4 grid min-w-0 grid-cols-1 gap-4 sm:grid-cols-[minmax(0,1fr)_minmax(220px,0.9fr)] sm:items-start sm:gap-6 lg:gap-8">
           <div className="min-w-0">
-            <h3 className="font-display text-xl italic text-charcoal">{t.name}</h3>
-            <p className="mt-1 text-sm leading-relaxed text-charcoal/60">
-              {horse.breed} · {dict.horse.sexLabel[horse.sex]} · {ageFromDob(horse.dateOfBirth)} {dict.horse.years}
+            <h3 className="min-h-[2.25em] break-words font-display text-[clamp(1.45rem,2vw,1.9rem)] italic leading-[1.12] text-charcoal">
+              {t.name}
+            </h3>
+            <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm leading-relaxed text-charcoal/65">
+              <span>{horse.breed}</span>
+              <span aria-hidden="true" className="text-gold/70">·</span>
+              <span>{dict.horse.sexLabel[horse.sex]}</span>
+              <span aria-hidden="true" className="text-gold/70">·</span>
+              <span>{ageFromDob(horse.dateOfBirth)} {dict.horse.years}</span>
+            </div>
+            {horse.highlights[0] && (
+              <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-charcoal/60">
+                {horse.highlights[0]}
+              </p>
+            )}
+            <p className="mt-3 break-words font-mono text-[11px] uppercase leading-relaxed tracking-[0.18em] text-charcoal/45">
+              {horse.locationLabel}
             </p>
-            {horse.highlights[0] && <p className="mt-1 text-sm leading-relaxed text-charcoal/60">{horse.highlights[0]}</p>}
-            <p className="mt-1 break-words font-mono text-[11px] uppercase tracking-eyebrow text-charcoal/40">{horse.locationLabel}</p>
           </div>
-          <div className="flex min-w-0 flex-col items-start text-left sm:items-end sm:text-right">
-            <p className="font-display text-lg text-gold">{price ?? "—"}</p>
-            <InquiryOptions horseName={t.name} label={dict.horse.inquireHorse} />
+          <div className="flex min-w-0 flex-col items-stretch border-t border-charcoal-line/70 pt-3 text-left sm:items-end sm:border-l sm:border-t-0 sm:pt-0 sm:pl-5 sm:text-right">
+            <p className="whitespace-nowrap font-display text-xl leading-tight tabular-nums text-gold sm:text-2xl">
+              {price ?? "—"}
+            </p>
+            <div className="mt-2 w-full sm:flex sm:justify-end">
+              <InquiryOptions horseName={t.name} label={dict.horse.inquireHorse} />
+            </div>
           </div>
         </div>
       </Link>
