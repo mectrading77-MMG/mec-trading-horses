@@ -33,7 +33,7 @@ export default function InquiryOptions({ horseName, label }: { horseName: string
         aria-haspopup="menu"
         aria-expanded={open}
         onClick={(event) => { event.preventDefault(); setOpen((value) => !value); }}
-        className="mt-2 inline-block border border-gold px-3 py-1.5 font-mono text-[9px] uppercase tracking-eyebrow text-gold transition-colors hover:bg-gold hover:text-charcoal"
+        className="mt-3 inline-flex w-full max-w-[340px] items-center justify-center border border-gold px-4 py-3 text-center font-mono text-[10px] uppercase leading-relaxed tracking-[0.18em] text-gold transition-colors duration-200 hover:bg-gold hover:text-charcoal focus-visible:bg-gold focus-visible:text-charcoal"
       >
         {label}
       </button>
