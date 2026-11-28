@@ -13,7 +13,7 @@ const InquirySchema = z.object({
   hasTrainer: z.string().optional(),
   viewingDate: z.string().optional(),
   horseId: z.string().optional(),
-  locale: z.enum(["en", "fr", "ar", "de", "nl"]).default("en"),
+  locale: z.enum(["en", "fr", "ar"]).default("en"),
   source: z.string().max(120).optional().default("website"),
   preferredContact: z.enum(["email", "whatsapp"]).default("email")
 });
