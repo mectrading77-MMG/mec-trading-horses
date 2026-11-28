@@ -24,14 +24,25 @@ export default function SelectionExplorer({
   locale: Locale;
   dict: any;
 }) {
+  const YOUNG_HORSES_ID = "young-horses";
+  const displayBands = [
+    { id: YOUNG_HORSES_ID, minCm: 80, maxCm: 115, label: "Young Horses" },
+    ...HEIGHT_BANDS.filter((band) => band.minCm > 115)
+  ];
+
   const byBand = useMemo(() => {
     const map = new Map<string, Horse[]>();
-    for (const b of HEIGHT_BANDS) map.set(b.id, []);
-    for (const h of horses) map.get(bandFor(h.jumpHeightCm).id)?.push(h);
+    for (const band of displayBands) map.set(band.id, []);
+    for (const horse of horses) {
+      const bandId = horse.jumpHeightCm >= 80 && horse.jumpHeightCm <= 115
+        ? YOUNG_HORSES_ID
+        : bandFor(horse.jumpHeightCm).id;
+      map.get(bandId)?.push(horse);
+    }
     return map;
   }, [horses]);
 
-  const firstWithHorses = HEIGHT_BANDS.find((b) => (byBand.get(b.id)?.length ?? 0) > 0)?.id ?? HEIGHT_BANDS[0].id;
+  const firstWithHorses = displayBands.find((band) => (byBand.get(band.id)?.length ?? 0) > 0)?.id ?? displayBands[0].id;
   const [active, setActive] = useState(firstWithHorses);
   const [horseIdx, setHorseIdx] = useState(0);
   const [photoIdx, setPhotoIdx] = useState(0);
@@ -66,7 +77,7 @@ export default function SelectionExplorer({
     <div className="mt-12 grid gap-10 lg:grid-cols-[1fr_440px] lg:gap-16">
       {/* Bands */}
       <ul className="divide-y divide-ivory/10 border-y border-ivory/10">
-        {HEIGHT_BANDS.map((b, i) => {
+        {displayBands.map((b, i) => {
           const count = byBand.get(b.id)?.length ?? 0;
           const isActive = active === b.id;
           return (
@@ -84,7 +95,7 @@ export default function SelectionExplorer({
                     isActive ? "text-gold" : "text-ivory/55 group-hover:text-ivory"
                   }`}
                 >
-                  {b.label}
+                  {b.id === YOUNG_HORSES_ID ? ({ en: "Young Horses · 0.80–1.15 m", fr: "Jeunes chevaux · 0,80–1,15 m", ar: "الخيول الصغيرة · 0.80–1.15 م" } as Record<Locale, string>)[locale] : b.label}
                 </span>
                 <span className="ms-auto font-mono text-[10px] uppercase tracking-eyebrow text-ivory/35">
                   {(count === 1 ? dict.bands.countOne : dict.bands.count).replace("{count}", String(count))}
