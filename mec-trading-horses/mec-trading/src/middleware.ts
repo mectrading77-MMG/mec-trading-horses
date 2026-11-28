@@ -19,10 +19,11 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // Redirect legacy German and Dutch routes to the English equivalent.
-  if (/^\/(de|nl)(?=\/|$)/.test(pathname)) {
+  // Any unsupported two-letter locale prefix falls back to English.
+  const localePrefix = pathname.match(/^\/([a-z]{2})(?=\/|$)/i)?.[1]?.toLowerCase();
+  if (localePrefix && !locales.includes(localePrefix as (typeof locales)[number])) {
     const url = request.nextUrl.clone();
-    url.pathname = pathname.replace(/^\/(de|nl)(?=\/|$)/, "/en");
+    url.pathname = pathname.replace(/^\/[a-z]{2}(?=\/|$)/i, "/en");
     return NextResponse.redirect(url, 308);
   }
 
