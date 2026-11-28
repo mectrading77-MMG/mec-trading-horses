@@ -73,57 +73,90 @@ body {
 
 
 /* -----------------------------------------------------------------------
-   Readability system — consistent across public pages and account screens.
-   Keep the editorial identity, but prevent micro-copy from becoming unreadable.
+   MEC HORSES typography system
+   Premium equestrian editorial style with clear hierarchy and accessible sizing.
 ------------------------------------------------------------------------ */
 :root {
-  color-scheme: light;
+  --font-display: Georgia, "Times New Roman", serif;
+  --font-body: "Aptos", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --type-body: 1rem;
+  --type-small: 0.875rem;
+  --type-caption: 0.8125rem;
+  --type-h1: clamp(2.35rem, 5.2vw, 4.75rem);
+  --type-h2: clamp(1.9rem, 3.7vw, 3.25rem);
+  --type-h3: clamp(1.45rem, 2.4vw, 2rem);
+}
+
+html {
+  font-size: 16px;
+  font-synthesis: none;
   text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
 }
 
 body {
-  font-size: 16px;
-  line-height: 1.65;
+  font-family: var(--font-body);
+  font-size: var(--type-body);
+  line-height: 1.7;
+  font-weight: 400;
+  letter-spacing: 0.005em;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 [dir="rtl"] body {
-  font-family: Tahoma, Arial, Helvetica, sans-serif;
-  line-height: 1.85;
+  font-family: Tahoma, "Segoe UI", Arial, sans-serif;
+  line-height: 1.9;
+  letter-spacing: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+
+h1, h2 {
+  font-family: var(--font-display);
+  font-weight: 500;
+}
+
+h1 { font-size: var(--type-h1); }
+h2 { font-size: var(--type-h2); }
+h3 { font-size: var(--type-h3); }
+
+[dir="rtl"] h1,
+[dir="rtl"] h2,
+[dir="rtl"] h3,
+[dir="rtl"] h4,
+[dir="rtl"] h5,
+[dir="rtl"] h6 {
+  font-family: Tahoma, "Segoe UI", Arial, sans-serif;
+  letter-spacing: 0;
+  line-height: 1.45;
+  font-weight: 700;
 }
 
 p, li {
+  font-size: 1rem;
+  line-height: 1.7;
   text-wrap: pretty;
 }
 
-h1, h2, h3, h4 {
-  text-wrap: balance;
-  line-height: 1.18;
+small, .text-caption {
+  font-size: var(--type-caption);
+  line-height: 1.55;
 }
-
-button, a, input, select, textarea {
-  -webkit-tap-highlight-color: transparent;
-}
-
-button, [role="button"], a {
-  touch-action: manipulation;
-}
-
-/* Small utility text was frequently rendered at 9–11px. Raise the floor
-   without changing the display scale of headings or horse names. */
-[class~="text-[9px]"] { font-size: 11px !important; }
-[class~="text-[10px]"] { font-size: 12px !important; }
-[class~="text-[11px]"] { font-size: 13px !important; }
-[class~="text-[12px]"] { font-size: 14px !important; }
-[class~="text-[13px]"] { font-size: 15px !important; }
 
 .eyebrow {
-  font-size: 12px;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
   line-height: 1.5;
-  letter-spacing: 0.16em;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
 }
 
 [dir="rtl"] .eyebrow {
@@ -131,24 +164,57 @@ button, [role="button"], a {
   line-height: 1.8;
 }
 
-/* Give controls comfortable, consistent reading and touch dimensions. */
 button, [role="button"], input, select, textarea {
-  font-size: max(14px, 1em);
+  font: inherit;
   line-height: 1.45;
+  -webkit-tap-highlight-color: transparent;
 }
 
-a:focus-visible, button:focus-visible, input:focus-visible,
-select:focus-visible, textarea:focus-visible {
+button, [role="button"], a {
+  touch-action: manipulation;
+}
+
+input, select, textarea {
+  min-height: 44px;
+  font-size: max(0.9375rem, 1em);
+}
+
+::placeholder {
+  opacity: 0.72;
+}
+
+*:focus-visible {
+  outline: 2px solid theme("colors.gold.DEFAULT");
   outline-offset: 4px;
 }
 
+/* Prevent tiny Tailwind utility text from undermining legibility. */
+[class~="text-[8px]"],
+[class~="text-[9px]"] { font-size: 0.75rem !important; line-height: 1.5 !important; }
+[class~="text-[10px]"] { font-size: 0.8125rem !important; line-height: 1.5 !important; }
+[class~="text-[11px]"] { font-size: 0.8125rem !important; line-height: 1.55 !important; }
+[class~="text-[12px]"] { font-size: 0.875rem !important; line-height: 1.55 !important; }
+[class~="text-[13px]"] { font-size: 0.9375rem !important; line-height: 1.6 !important; }
+
 @media (max-width: 640px) {
-  body { font-size: 16px; }
-  p, li { line-height: 1.7; }
-  .eyebrow { letter-spacing: 0.12em; }
+  body { font-size: 1rem; line-height: 1.72; }
+  p, li { line-height: 1.75; }
+  h1 { line-height: 1.12; }
+  h2 { line-height: 1.18; }
+  .eyebrow { letter-spacing: 0.1em; }
   [dir="rtl"] .eyebrow { letter-spacing: 0; }
+  input, select, textarea { font-size: 1rem; }
 }
 
 @media (min-width: 1024px) {
-  body { font-size: 16px; }
+  body { font-size: 1rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }
