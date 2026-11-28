@@ -19,7 +19,8 @@ export default function CatalogClient({
   initialLevel?: string;
   initialSearch?: string;
 }) {
-  const [level, setLevel] = useState(HEIGHT_BANDS.some((b) => b.id === initialLevel) ? (initialLevel as string) : "");
+  const YOUNG_HORSES_LEVEL_ID = "young-horses";
+  const [level, setLevel] = useState(initialLevel === YOUNG_HORSES_LEVEL_ID || HEIGHT_BANDS.some((b) => b.id === initialLevel) ? (initialLevel as string) : "");
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [search, setSearch] = useState(initialSearch ?? "");
   const [breed, setBreed] = useState("");
@@ -64,7 +65,7 @@ export default function CatalogClient({
   const counts = useMemo(() => {
     const c: Record<string, number> = {};
     for (const h of horses) {
-      const id = bandFor(h.jumpHeightCm).id;
+      const id = h.jumpHeightCm >= 80 && h.jumpHeightCm <= 115 ? YOUNG_HORSES_LEVEL_ID : bandFor(h.jumpHeightCm).id;
       c[id] = (c[id] ?? 0) + 1;
     }
     return c;
@@ -97,7 +98,11 @@ export default function CatalogClient({
       });
     }
     if (favoritesOnly) list = list.filter((h) => favoriteIds.includes(h.id));
-    if (level) list = list.filter((h) => bandFor(h.jumpHeightCm).id === level);
+    if (level === YOUNG_HORSES_LEVEL_ID) {
+      list = list.filter((h) => h.jumpHeightCm >= 80 && h.jumpHeightCm <= 115);
+    } else if (level) {
+      list = list.filter((h) => bandFor(h.jumpHeightCm).id === level);
+    }
     if (breed) list = list.filter((h) => h.breed === breed);
     if (sex) list = list.filter((h) => h.sex === sex);
     if (color) list = list.filter((h) => h.color === color);
@@ -153,7 +158,7 @@ export default function CatalogClient({
         {filtersOpen && <div id="horse-filter-panel" className="mt-5 border border-charcoal-line bg-ivory/60 p-4 sm:p-6">
           <div className="mb-5 flex items-center justify-between border-b border-charcoal-line pb-3"><h2 className="font-serif text-xl text-charcoal">{locale === "fr" ? "Filtres des chevaux" : locale === "ar" ? "فلاتر الخيول" : "Horse Filters"}</h2><button type="button" onClick={() => { setLevel(""); setSearch(""); setBreed(""); setSex(""); setColor(""); setCompetitionLevel(""); setLocation(""); setPriceRange(""); }} className="font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/60 underline decoration-gold underline-offset-4">{locale === "fr" ? "Tout réinitialiser" : locale === "ar" ? "إعادة ضبط الكل" : "Reset All"}</button></div>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <label className="flex flex-col gap-2"><span className="font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/50">{dict.catalog.filterLevel}</span><select value={level} onChange={(e) => setLevel(e.target.value)} className={selectClass}><option value="">{dict.catalog.allLevels}</option>{HEIGHT_BANDS.map((b) => <option key={b.id} value={b.id}>{b.label} ({counts[b.id] ?? 0})</option>)}</select></label>
+            <label className="flex flex-col gap-2"><span className="font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/50">{dict.catalog.filterLevel}</span><select value={level} onChange={(e) => setLevel(e.target.value)} className={selectClass}><option value="">{dict.catalog.allLevels}</option><option value={YOUNG_HORSES_LEVEL_ID}>{locale === "fr" ? "Jeunes chevaux · 0,80–1,15 m" : locale === "ar" ? "الخيول الصغيرة · 0.80–1.15 م" : "Young Horses · 0.80–1.15 m"} ({counts[YOUNG_HORSES_LEVEL_ID] ?? 0})</option>{HEIGHT_BANDS.filter((b) => b.minCm > 115).map((b) => <option key={b.id} value={b.id}>{b.label} ({counts[b.id] ?? 0})</option>)}</select></label>
             <label className="flex flex-col gap-2"><span className="font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/50">{dict.catalog.priceRange}</span><select value={priceRange} onChange={(e) => setPriceRange(e.target.value)} className={selectClass}><option value="">{dict.catalog.allPriceRanges}</option>{PRICE_RANGES.map((r) => <option key={r.id} value={r.id}>{r.label}</option>)}</select></label>
             <label className="flex flex-col gap-2"><span className="font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/50">{dict.horse.breed}</span><select value={breed} onChange={(e) => setBreed(e.target.value)} className={selectClass}><option value="">{dict.catalog.allBreeds}</option>{generalOptions.breeds.map((v) => <option key={v} value={v}>{v}</option>)}</select></label>
             <label className="flex flex-col gap-2"><span className="font-mono text-[10px] uppercase tracking-eyebrow text-charcoal/50">{dict.horse.sex}</span><select value={sex} onChange={(e) => setSex(e.target.value)} className={selectClass}><option value="">{dict.catalog.allSexes}</option><option value="MARE">{dict.horse.sexLabel.MARE}</option><option value="STALLION">{dict.horse.sexLabel.STALLION}</option><option value="GELDING">{dict.horse.sexLabel.GELDING}</option></select></label>
